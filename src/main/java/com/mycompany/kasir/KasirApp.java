@@ -1,4 +1,4 @@
-package main.java.com.mycompany.kasir;
+package com.mycompany.kasir;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
