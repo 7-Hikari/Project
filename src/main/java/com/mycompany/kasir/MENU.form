@@ -44,11 +44,13 @@
                       <Group type="102" attributes="0">
                           <Component id="biru_kiri" min="-2" max="-2" attributes="0"/>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                              <Component id="tombol" max="32767" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Group type="102" attributes="0">
+                                  <Component id="tombol" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace min="0" pref="102" max="32767" attributes="0"/>
+                              </Group>
                               <Component id="scroll" max="32767" attributes="0"/>
                           </Group>
-                          <EmptySpace min="0" pref="102" max="32767" attributes="0"/>
                       </Group>
                       <Component id="panelmenu" max="32767" attributes="0"/>
                   </Group>

@@ -1,6 +1,9 @@
 package com.mycompany.kasir;
 
+import DAO.*;
+import java.awt.Dimension;
 import javax.swing.*;
+import java.util.*;
 
 public class MENU extends JFrame {
     public MENU() {
@@ -9,14 +12,17 @@ public class MENU extends JFrame {
     }
     
     public void loadproduk(){
+        scroll.setPreferredSize(new Dimension(600, 500));
         scroll.setViewportView(flowpanel);
         scroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
 
         flowpanel.removeAll();
         
-        for (int i = 0; i<=8;i++) {
-            panelProduk produk = new panelProduk();
-            flowpanel.add(produk);
+        List<produkData> daftarProduk = produkObjek.getAllProduk();
+        
+        for (produkData data : daftarProduk) {
+            panelProduk produkP = new panelProduk(data);
+            flowpanel.add(produkP);
         }
         flowpanel.revalidate();
         flowpanel.repaint();
@@ -218,10 +224,11 @@ public class MENU extends JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(biru_kiri, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(tombol, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(scroll))
-                        .addGap(0, 102, Short.MAX_VALUE))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(tombol, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 102, Short.MAX_VALUE))
+                            .addComponent(scroll)))
                     .addComponent(panelmenu, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 45, Short.MAX_VALUE)
                 .addComponent(struk, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -285,9 +292,6 @@ public class MENU extends JFrame {
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(MENU.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-        //</editor-fold>
-        
-        //</editor-fold>
 
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
