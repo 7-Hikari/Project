@@ -1,4 +1,4 @@
-package com.mycompany.kasir.koneksi;
+package koneksi;
 
 import java.sql.*;
 public class koneksi {

@@ -1,6 +1,5 @@
 package com.mycompany.kasir;
-import com.mycompany.kasir.koneksi.koneksi;
-import java.sql.*;
+
 import javax.swing.*;
 
 public class MENU extends JFrame {
