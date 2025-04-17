@@ -7,7 +7,6 @@ public class produkData {
     private String nama;
     private int harga;
     
-    public produkData(){}
     
     public produkData(byte id, byte foto[], String nama, int harga) {
         this.id = id;
