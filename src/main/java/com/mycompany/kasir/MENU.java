@@ -15,6 +15,7 @@ public class MENU extends JFrame {
         int height = (int) (screenSize.height * 0.96);
         setSize(width, height);
         
+        
         loadproduk();
     }
     
