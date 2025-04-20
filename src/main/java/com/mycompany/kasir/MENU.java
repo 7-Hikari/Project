@@ -1,13 +1,20 @@
-package main.java.com.mycompany.kasir;
+package com.mycompany.kasir;
 
 import DAO.*;
 import java.awt.Dimension;
+import java.awt.Toolkit;
 import javax.swing.*;
 import java.util.*;
 
 public class MENU extends JFrame {
     public MENU() {
         initComponents();
+        
+        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        int width = (int) (screenSize.width * 0.96);
+        int height = (int) (screenSize.height * 0.96);
+        setSize(width, height);
+        
         loadproduk();
     }
     
@@ -55,6 +62,7 @@ public class MENU extends JFrame {
         setUndecorated(true);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.setPreferredSize(new java.awt.Dimension(1340, 800));
 
         biru_kiri.setBackground(new java.awt.Color(0, 204, 204));
 
