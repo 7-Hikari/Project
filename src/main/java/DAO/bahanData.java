@@ -7,7 +7,7 @@ public class bahanData {
     private bahanObjek.kategori kateg;
     private short jumlah;
     
-    public bahanData(byte id, String nama, bahanObjek.kategori kateg, short jumlah) {
+    bahanData(byte id, String nama, bahanObjek.kategori kateg, short jumlah) {
         this.id_b = id;
         this.nama_b = nama;
         this.kateg = kateg;

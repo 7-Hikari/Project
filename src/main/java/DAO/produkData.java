@@ -8,7 +8,7 @@ public class produkData {
     private int harga;
     
     
-    public produkData(byte id, byte foto[], String nama, int harga) {
+    produkData(byte id, byte foto[], String nama, int harga) {
         this.id = id;
         this.foto = foto;
         this.nama = nama;
