@@ -58,7 +58,6 @@ public class MENU extends JFrame {
         flowpanel = new JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setUndecorated(false);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setPreferredSize(new java.awt.Dimension(1340, 800));
@@ -77,6 +76,7 @@ public class MENU extends JFrame {
         );
 
         panelmenu.setBackground(new java.awt.Color(0, 204, 204));
+        panelmenu.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         jLabel1.setFont(new java.awt.Font("Eras Bold ITC", 1, 24)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -234,7 +234,7 @@ public class MENU extends JFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(biru_kiri, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 266, Short.MAX_VALUE))
+                                .addGap(0, 260, Short.MAX_VALUE))
                             .addComponent(scroll)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addContainerGap()
