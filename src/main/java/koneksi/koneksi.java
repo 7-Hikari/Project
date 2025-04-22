@@ -1,4 +1,4 @@
-package com.mycompany.kasir.koneksi;
+package koneksi;
 
 import java.sql.*;
 public class koneksi {
@@ -16,5 +16,17 @@ public class koneksi {
         }
         }
         return connection;
+    }
+    public static void closeCon(Connection conn) {
+        if (connection !=null){
+            try {
+                connection.close();
+                System.out.println("Koneksi berhasil diputus!");
+            } catch (SQLException e) {
+                System.err.println("Gagal memutus koneksi" + e.getMessage());
+            }
+        } else {
+            System.out.println("Tidak ada koneksi untuk diputus");
+        }
     }
     }
