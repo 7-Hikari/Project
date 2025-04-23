@@ -2,6 +2,7 @@ package com.mycompany.kasir;
 
 import DAO.*;
 import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.Toolkit;
 import javax.swing.*;
 import java.util.*;
@@ -15,12 +16,11 @@ public class MENU extends JFrame {
         int height = (int) (screenSize.height * 0.96);
         setSize(width, height);
         
-        
         loadproduk();
     }
     
     public void loadproduk(){
-        scroll.setPreferredSize(new Dimension(600, 500));
+        scroll.setPreferredSize(new Dimension(800, 700));
         scroll.setViewportView(flowpanel);
         scroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
 
@@ -31,6 +31,9 @@ public class MENU extends JFrame {
         for (produkData data : daftarProduk) {
             panelProduk produkP = new panelProduk(data);
             flowpanel.add(produkP);
+            
+            flowpanel.setLayout(new FlowLayout(FlowLayout.LEFT,10,10));
+            
         }
         flowpanel.revalidate();
         flowpanel.repaint();
