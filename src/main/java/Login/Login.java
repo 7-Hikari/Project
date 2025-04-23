@@ -26,30 +26,71 @@ public class Login extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        Loginbackground = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
+        LOGIN = new java.awt.Button();
+        email = new java.awt.TextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/mycompany/komponen/Tema login.jpg"))); // NOI18N
+        Loginbackground.setBackground(new java.awt.Color(255, 255, 255));
+
+        jLabel1.setIcon(new javax.swing.ImageIcon("D:\\B\\Login(1).png")); // NOI18N
         jLabel1.setLabelFor(this);
-        jLabel1.setMaximumSize(new java.awt.Dimension(2000, 1440));
-        jLabel1.setPreferredSize(new java.awt.Dimension(1080, 1440));
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(0, 0, Short.MAX_VALUE))
+        LOGIN.setActionCommand("LOGIN\n");
+        LOGIN.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        LOGIN.setLabel("Login");
+        LOGIN.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                LOGINActionPerformed(evt);
+            }
+        });
+
+        email.setText("textField1");
+
+        javax.swing.GroupLayout LoginbackgroundLayout = new javax.swing.GroupLayout(Loginbackground);
+        Loginbackground.setLayout(LoginbackgroundLayout);
+        LoginbackgroundLayout.setHorizontalGroup(
+            LoginbackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(LoginbackgroundLayout.createSequentialGroup()
+                .addGap(512, 512, 512)
+                .addGroup(LoginbackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(email, javax.swing.GroupLayout.PREFERRED_SIZE, 420, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(LOGIN, javax.swing.GroupLayout.PREFERRED_SIZE, 449, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(908, Short.MAX_VALUE))
+            .addGroup(LoginbackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(LoginbackgroundLayout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 1869, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 0, Short.MAX_VALUE)))
         );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+        LoginbackgroundLayout.setVerticalGroup(
+            LoginbackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, LoginbackgroundLayout.createSequentialGroup()
+                .addContainerGap(359, Short.MAX_VALUE)
+                .addComponent(email, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(197, 197, 197)
+                .addComponent(LOGIN, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(251, 251, 251))
+            .addGroup(LoginbackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(LoginbackgroundLayout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(jLabel1)
+                    .addGap(0, 0, Short.MAX_VALUE)))
         );
+
+        email.getAccessibleContext().setAccessibleName("email");
+
+        getContentPane().add(Loginbackground, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1480, 900));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void LOGINActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LOGINActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_LOGINActionPerformed
 
     /**
      * @param args the command line arguments
@@ -87,6 +128,9 @@ public class Login extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private java.awt.Button LOGIN;
+    private javax.swing.JPanel Loginbackground;
+    private java.awt.TextField email;
     private javax.swing.JLabel jLabel1;
     // End of variables declaration//GEN-END:variables
 }
