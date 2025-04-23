@@ -1,6 +1,7 @@
 package com.mycompany.kasir;
 
 import javax.swing.*;
+import java.net.*;
 public class Dashboard extends JFrame {
 
     public Dashboard() {
@@ -15,9 +16,9 @@ public class Dashboard extends JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(2026, 1440));
-        setPreferredSize(new java.awt.Dimension(2026, 1440));
 
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/mycompany/kasir/komponen/Tampilan.png"))); // NOI18N
+        URL url = getClass().getResource("komponen/Main.png");
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Main.png"))); // NOI18N
         jLabel2.setText("jLabel2");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
