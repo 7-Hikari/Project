@@ -8,7 +8,7 @@ public class Dashboard extends JFrame {
     public Dashboard() {
         initComponents();
         panelbulat2.setDiameter(70);
-        panelbulat2.setBackground(new Color(158,158,158));
+        panelbulat2.setBackground(new Color(0xC6C6C6));
         
         tombol_dashb.setContentAreaFilled(false);
     }
