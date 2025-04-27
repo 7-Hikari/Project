@@ -30,7 +30,6 @@ public class Dashboard extends JFrame {
         jButton8 = new javax.swing.JButton();
         tombol_penjualan = new javax.swing.JButton();
         tombol_dashb = new javax.swing.JButton();
-        bulatan = new com.mycompany.kasir.panelbulat();
         foto = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -97,7 +96,6 @@ public class Dashboard extends JFrame {
         tombol_dashb.setFocusPainted(false);
         tombol_dashb.setFocusable(false);
         tombol_dashb.setRequestFocusEnabled(false);
-        tombol_dashb.setRolloverEnabled(false);
         tombol_dashb.setVerifyInputWhenFocusTarget(false);
         tombol_dashb.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -105,22 +103,6 @@ public class Dashboard extends JFrame {
             }
         });
         getContentPane().add(tombol_dashb, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 230, 50, 50));
-
-        bulatan.setBackground(new java.awt.Color(255, 255, 255));
-        bulatan.setForeground(new java.awt.Color(255, 255, 255));
-
-        javax.swing.GroupLayout bulatanLayout = new javax.swing.GroupLayout(bulatan);
-        bulatan.setLayout(bulatanLayout);
-        bulatanLayout.setHorizontalGroup(
-            bulatanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 70, Short.MAX_VALUE)
-        );
-        bulatanLayout.setVerticalGroup(
-            bulatanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 70, Short.MAX_VALUE)
-        );
-
-        getContentPane().add(bulatan, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 220, 70, 70));
 
         URL url = getClass().getResource("komponen/Main.png");
         foto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Main.png"))); // NOI18N
@@ -200,7 +182,6 @@ public class Dashboard extends JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private com.mycompany.kasir.panelbulat bulatan;
     private javax.swing.JLabel foto;
     private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton7;
