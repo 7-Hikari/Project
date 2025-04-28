@@ -30,6 +30,7 @@ public class MENU extends JFrame {
         
         for (produkData data : daftarProduk) {
             panelProduk produkP = new panelProduk(data);
+            
             flowpanel.add(produkP);
             
             flowpanel.setLayout(new FlowLayout(FlowLayout.LEFT,10,10));
