@@ -111,7 +111,7 @@
         <Container class="javax.swing.JPanel" name="left">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="3c" green="4c" red="e7" type="rgb"/>
+              <Color blue="ff" green="99" red="99" type="rgb"/>
             </Property>
           </Properties>
 
@@ -122,7 +122,7 @@
             <Component class="javax.swing.JLabel" name="animationLogin">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/red login form.gif"/>
+                  <Image iconType="3" name="/animasi.gif"/>
                 </Property>
               </Properties>
               <Constraints>
