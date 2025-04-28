@@ -46,10 +46,10 @@ public class LoginForm extends javax.swing.JFrame {
 
         Body.setBackground(new java.awt.Color(255, 255, 255));
 
-        left.setBackground(new java.awt.Color(231, 76, 60));
+        left.setBackground(new java.awt.Color(153, 153, 255));
         left.setLayout(null);
 
-        animationLogin.setIcon(new javax.swing.ImageIcon(getClass().getResource("/red login form.gif"))); // NOI18N
+        animationLogin.setIcon(new javax.swing.ImageIcon(getClass().getResource("/animasi.gif"))); // NOI18N
         left.add(animationLogin);
         animationLogin.setBounds(-170, 40, 620, 398);
 
