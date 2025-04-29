@@ -35,7 +35,7 @@ public class LoginIndex extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
 
-        body.setBackground(new java.awt.Color(231, 76, 60));
+        body.setBackground(new java.awt.Color(9, 167, 255));
 
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/papoy logo asiq(1)_waifu2x_photo_noise3.png"))); // NOI18N
@@ -103,7 +103,7 @@ public class LoginIndex extends javax.swing.JFrame {
 
     private void jLabel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseClicked
         //Instantiate your login form 
-        LoginForm loginform = new LoginForm ();
+        ForgotPassword loginform = new ForgotPassword ();
                              
          
                                loginform.setVisible(true);
