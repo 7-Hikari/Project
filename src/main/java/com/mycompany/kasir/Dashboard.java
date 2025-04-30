@@ -31,7 +31,7 @@ public class Dashboard extends JFrame {
         jButton8 = new javax.swing.JButton();
         tombol_penjualan = new javax.swing.JButton();
         tombol_dashb = new javax.swing.JButton();
-        bulatan = new com.mycompany.kasir.panelbulat();
+        bulatan = new komponenpanel.panelbulat();
         panelubah = new javax.swing.JPanel();
         foto = new javax.swing.JLabel();
 
@@ -88,6 +88,11 @@ public class Dashboard extends JFrame {
         tombol_penjualan.setText("jButton2");
         tombol_penjualan.setMinimumSize(new java.awt.Dimension(50, 50));
         tombol_penjualan.setPreferredSize(new java.awt.Dimension(50, 50));
+        tombol_penjualan.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tombol_penjualanActionPerformed(evt);
+            }
+        });
         getContentPane().add(tombol_penjualan, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 360, -1, -1));
 
         tombol_dashb.setBackground(new java.awt.Color(255, 255, 255));
@@ -119,7 +124,7 @@ public class Dashboard extends JFrame {
         );
 
         getContentPane().add(bulatan, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 220, 70, 70));
-        getContentPane().add(panelubah, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 200, 1260, 620));
+        getContentPane().add(panelubah, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 150, 1330, 620));
 
         URL url = getClass().getResource("komponen/Main.png");
         foto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Main.png"))); // NOI18N
@@ -150,10 +155,17 @@ public class Dashboard extends JFrame {
     private void tombol_rekapanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tombol_rekapanActionPerformed
         interaksipanel(tombol_rekapan);
         panelubah.removeAll();
-        panelubah.add(rekap);
         panelubah.revalidate();
         panelubah.repaint();
     }//GEN-LAST:event_tombol_rekapanActionPerformed
+
+    private void tombol_penjualanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tombol_penjualanActionPerformed
+        interaksipanel(tombol_penjualan);
+        panelubah.removeAll();
+        panelubah.add(new MENU());
+        panelubah.revalidate();
+        panelubah.repaint();
+    }//GEN-LAST:event_tombol_penjualanActionPerformed
 
     private void interaksipanel(JButton ba_en) {
         ba_en.setContentAreaFilled(false);
@@ -209,7 +221,7 @@ public class Dashboard extends JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private com.mycompany.kasir.panelbulat bulatan;
+    private komponenpanel.panelbulat bulatan;
     private javax.swing.JLabel foto;
     private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton7;
