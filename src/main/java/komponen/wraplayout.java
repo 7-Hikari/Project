@@ -1,4 +1,4 @@
-package komponenpanel;
+package komponen;
 
 import java.awt.*;
 import javax.swing.JScrollPane;

@@ -1,14 +1,14 @@
 package com.mycompany.kasir;
 
+import java.awt.BorderLayout;
 import java.awt.event.*;
 import javax.swing.*;
 import javax.swing.border.*;
 import java.net.*;
-import java.awt.*;
 
 public class Dashboard extends JFrame {
     
-    komponenpanel.koordinat rekap = new komponenpanel.koordinat();
+    komponen.koordinat rekap = new komponen.koordinat();
     private JButton tombol = null;
     private Border asbor;
 
@@ -31,7 +31,7 @@ public class Dashboard extends JFrame {
         jButton8 = new javax.swing.JButton();
         tombol_penjualan = new javax.swing.JButton();
         tombol_dashb = new javax.swing.JButton();
-        bulatan = new komponenpanel.panelbulat();
+        bulatan = new komponen.panelbulat();
         panelubah = new javax.swing.JPanel();
         foto = new javax.swing.JLabel();
 
@@ -124,7 +124,10 @@ public class Dashboard extends JFrame {
         );
 
         getContentPane().add(bulatan, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 220, 70, 70));
-        getContentPane().add(panelubah, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 150, 1330, 620));
+
+        panelubah.setMaximumSize(new java.awt.Dimension(1250, 32767));
+        panelubah.setLayout(new java.awt.BorderLayout());
+        getContentPane().add(panelubah, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 150, 1200, 620));
 
         URL url = getClass().getResource("komponen/Main.png");
         foto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Main.png"))); // NOI18N
@@ -162,7 +165,7 @@ public class Dashboard extends JFrame {
     private void tombol_penjualanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tombol_penjualanActionPerformed
         interaksipanel(tombol_penjualan);
         panelubah.removeAll();
-        panelubah.add(new MENU());
+        panelubah.add(new Penjualan(), BorderLayout.CENTER);
         panelubah.revalidate();
         panelubah.repaint();
     }//GEN-LAST:event_tombol_penjualanActionPerformed
@@ -221,7 +224,7 @@ public class Dashboard extends JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private komponenpanel.panelbulat bulatan;
+    private komponen.panelbulat bulatan;
     private javax.swing.JLabel foto;
     private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton7;

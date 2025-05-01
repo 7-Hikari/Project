@@ -2,7 +2,7 @@ package Rekapan;
 
 public class Rekapan extends javax.swing.JPanel {
 
-    komponenpanel.koordinat koor = new komponenpanel.koordinat();
+    komponen.koordinat koor = new komponen.koordinat();
     
     public Rekapan() {
         initComponents();

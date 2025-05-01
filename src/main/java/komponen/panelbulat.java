@@ -1,4 +1,4 @@
-package komponenpanel;
+package komponen;
 
 import javax.swing.*;
 import java.awt.*;
