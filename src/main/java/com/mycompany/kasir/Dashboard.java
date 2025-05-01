@@ -6,6 +6,7 @@ import javax.swing.*;
 import javax.swing.border.*;
 import java.net.*;
 import DataMaster.Dataprodukproduk;
+import java.awt.Color;
 
 public class Dashboard extends JFrame {
     
@@ -16,7 +17,7 @@ public class Dashboard extends JFrame {
     public Dashboard() {
         initComponents();
         
-        asbor = tombol_dashb.getBorder();
+        bulatan.setBackground(Color.WHITE);
     }
 
     @SuppressWarnings("unchecked")
