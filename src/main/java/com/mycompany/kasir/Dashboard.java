@@ -31,7 +31,7 @@ public class Dashboard extends JFrame {
         jButton8 = new javax.swing.JButton();
         tombol_penjualan = new javax.swing.JButton();
         tombol_dashb = new javax.swing.JButton();
-        bulatan = new javax.swing.JPanel();
+        bulatan = new komponen.panelbulat();
         panelubah = new javax.swing.JPanel();
         foto = new javax.swing.JLabel();
 
