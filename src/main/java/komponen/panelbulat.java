@@ -5,7 +5,7 @@ import java.awt.*;
 import java.awt.geom.Ellipse2D;
 
 public class panelbulat extends JPanel{
-    private int d;
+    private int d = 70;
     
     
     public panelbulat (int x) {

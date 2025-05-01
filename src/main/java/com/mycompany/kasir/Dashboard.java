@@ -5,6 +5,7 @@ import java.awt.event.*;
 import javax.swing.*;
 import javax.swing.border.*;
 import java.net.*;
+import DataMaster.Dataprodukproduk;
 
 public class Dashboard extends JFrame {
     
@@ -15,7 +16,6 @@ public class Dashboard extends JFrame {
     public Dashboard() {
         initComponents();
         
-        bulatan.setDiameter(70);
         asbor = tombol_dashb.getBorder();
     }
 
@@ -31,7 +31,7 @@ public class Dashboard extends JFrame {
         jButton8 = new javax.swing.JButton();
         tombol_penjualan = new javax.swing.JButton();
         tombol_dashb = new javax.swing.JButton();
-        bulatan = new komponen.panelbulat();
+        bulatan = new javax.swing.JPanel();
         panelubah = new javax.swing.JPanel();
         foto = new javax.swing.JLabel();
 
@@ -140,6 +140,7 @@ public class Dashboard extends JFrame {
     private void tombol_produkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tombol_produkActionPerformed
         interaksipanel(tombol_produk);
         panelubah.removeAll();
+        panelubah.add(new Dataprodukproduk());
         panelubah.revalidate();
         panelubah.repaint();
     }//GEN-LAST:event_tombol_produkActionPerformed
@@ -224,7 +225,7 @@ public class Dashboard extends JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private komponen.panelbulat bulatan;
+    private javax.swing.JPanel bulatan;
     private javax.swing.JLabel foto;
     private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton7;
