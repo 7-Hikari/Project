@@ -5,7 +5,6 @@ import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import komponen.wraplayout;
-import java.awt.Color;
 import java.awt.event.*;
 import javax.swing.*;
 import java.util.*;
@@ -15,7 +14,7 @@ import javax.swing.table.*;
 public class Penjualan extends JPanel {
     
     private int no = 1;
-    private NumberFormat Rp = NumberFormat.getCurrencyInstance(new Locale("id", "ID"));
+    private final NumberFormat Rp = NumberFormat.getCurrencyInstance(new Locale("id", "ID"));
     
     public Penjualan() {
         initComponents();
@@ -36,7 +35,7 @@ public class Penjualan extends JPanel {
         flowpanel.removeAll();
 
         List<produkData> daftarProduk = produkObjek.getAllProduk();
-
+        
         for (produkData data : daftarProduk) {
             panelProduk produkP = new panelProduk(data);
 
@@ -74,9 +73,9 @@ public class Penjualan extends JPanel {
         DefaultTableModel model = (DefaultTableModel) Tabelpesanan.getModel();
 
         for (int i = 0; i < model.getRowCount(); i++) {
-            if (model.getValueAt(i, 1).equals(produk.get_nama())) {
-                model.setValueAt(jumlahBaru, i, 3);
-                model.setValueAt(jumlahBaru * produk.get_harga(), i, 4);
+            if (model.getValueAt(i, 2).equals(produk.get_nama())) {
+                model.setValueAt(jumlahBaru, i, 4);
+                model.setValueAt(jumlahBaru * produk.get_harga(), i, 5);
                 upTotal();
                 break;
             }
@@ -88,16 +87,16 @@ public class Penjualan extends JPanel {
         boolean ada = false;
 
         for (int i = 0; i < model.getRowCount(); i++) {
-            String namaProdukDiTabel = model.getValueAt(i, 1).toString();
+            String namaProdukDiTabel = model.getValueAt(i, 2).toString();
 
             if (namaProdukDiTabel.equals(data.get_nama())) {
                 // Produk sudah ada → update jumlah dan total
-                int jumlahLama = (int) model.getValueAt(i, 3);
+                int jumlahLama = (int) model.getValueAt(i, 4);
                 int jumlahBaruFinal = jumlahLama + jumlahBaru;
-
-                model.setValueAt(jumlahBaruFinal, i, 3); // Jumlah
-                model.setValueAt(jumlahBaruFinal * data.get_harga(), i, 4); // Total
-
+                
+                model.setValueAt(jumlahBaruFinal, i, 4); // Jumlah
+                model.setValueAt(jumlahBaruFinal * data.get_harga(), i, 5); // Total
+                
                 ada = true;
                 break;
             }
@@ -106,6 +105,7 @@ public class Penjualan extends JPanel {
         if (!ada) {
             model.addRow(new Object[]{
                 no++,
+                data.get_id(),
                 data.get_nama(),
                 data.get_harga(),
                 jumlahBaru,
@@ -118,7 +118,7 @@ public class Penjualan extends JPanel {
     private void upTotal(){
         int total = 0;
         for(int row =0; row < Tabelpesanan.getRowCount(); row++) {
-            Object nilai = Tabelpesanan.getValueAt(row, 4);
+            Object nilai = Tabelpesanan.getValueAt(row, 5);
             if (nilai !=null) {
                 total += Integer.parseInt(nilai.toString());
             }
@@ -132,6 +132,12 @@ public class Penjualan extends JPanel {
             Tabelpesanan.setValueAt(no, no - 1, 0);
         }
     }
+    
+    private void simpan(){
+        for(no = 0; no < Tabelpesanan.getRowCount(); no++){
+            
+        }
+    }
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -141,7 +147,7 @@ public class Penjualan extends JPanel {
         struk = new javax.swing.JPanel();
         fieldtotal = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
-        jScrollPane2 = new javax.swing.JScrollPane();
+        jScrollPane1 = new javax.swing.JScrollPane();
         Tabelpesanan = new komponen.Tabel_c();
         tmbl_hapus = new javax.swing.JButton();
         scroll = new JScrollPane();
@@ -175,14 +181,14 @@ public class Penjualan extends JPanel {
 
             },
             new String [] {
-                "No.", "Nama", "Harga", "Jumlah", "Total"
+                "No", "id", "Nama", "Harga", "Jumlah", "Total"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.Integer.class, java.lang.Short.class, java.lang.Integer.class
+                java.lang.Integer.class, java.lang.Byte.class, java.lang.String.class, java.lang.Integer.class, java.lang.Short.class, java.lang.Integer.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false
+                false, false, true, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -193,15 +199,18 @@ public class Penjualan extends JPanel {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane2.setViewportView(Tabelpesanan);
+        jScrollPane1.setViewportView(Tabelpesanan);
         if (Tabelpesanan.getColumnModel().getColumnCount() > 0) {
             Tabelpesanan.getColumnModel().getColumn(0).setResizable(false);
             Tabelpesanan.getColumnModel().getColumn(0).setPreferredWidth(15);
-            Tabelpesanan.getColumnModel().getColumn(3).setPreferredWidth(25);
-            Tabelpesanan.getColumnModel().getColumn(4).setResizable(false);
+            Tabelpesanan.getColumnModel().getColumn(1).setMinWidth(0);
+            Tabelpesanan.getColumnModel().getColumn(1).setPreferredWidth(0);
+            Tabelpesanan.getColumnModel().getColumn(1).setMaxWidth(0);
+            Tabelpesanan.getColumnModel().getColumn(4).setPreferredWidth(25);
+            Tabelpesanan.getColumnModel().getColumn(5).setResizable(false);
         }
 
-        struk.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 80, 403, 404));
+        struk.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 80, 400, 390));
 
         tmbl_hapus.setBackground(new java.awt.Color(255, 0, 0));
         tmbl_hapus.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
@@ -263,7 +272,7 @@ public class Penjualan extends JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
+        simpan();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void fieldtotalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fieldtotalActionPerformed
@@ -280,13 +289,13 @@ public class Penjualan extends JPanel {
     
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTable Tabelpesanan;
+    private komponen.Tabel_c Tabelpesanan;
     private javax.swing.JTextField fieldtotal;
     private javax.swing.JPanel flowpanel;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane scroll;
     private javax.swing.JPanel struk;
     private javax.swing.JButton tmbl_hapus;

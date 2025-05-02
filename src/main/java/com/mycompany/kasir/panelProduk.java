@@ -51,7 +51,7 @@ public class panelProduk extends JPanel {
     }
     
     public interface ProdukListen {
-        void onJumlahChanged(produkData produk, int jumlahBaru);
+            void onJumlahChanged(produkData produk, int jumlahBaru);
     }
     
     @SuppressWarnings("unchecked")

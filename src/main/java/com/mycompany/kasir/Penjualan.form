@@ -112,24 +112,25 @@
                 </Constraint>
               </Constraints>
             </Component>
-            <Container class="javax.swing.JScrollPane" name="jScrollPane2">
+            <Container class="javax.swing.JScrollPane" name="jScrollPane1">
               <AuxValues>
                 <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
               </AuxValues>
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                  <AbsoluteConstraints x="10" y="80" width="403" height="404"/>
+                  <AbsoluteConstraints x="10" y="80" width="400" height="390"/>
                 </Constraint>
               </Constraints>
 
               <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
               <SubComponents>
-                <Component class="javax.swing.JTable" name="Tabelpesanan">
+                <Component class="komponen.Tabel_c" name="Tabelpesanan">
                   <Properties>
                     <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                      <Table columnCount="5" rowCount="0">
-                        <Column editable="false" title="No." type="java.lang.Integer"/>
-                        <Column editable="false" title="Nama" type="java.lang.String"/>
+                      <Table columnCount="6" rowCount="0">
+                        <Column editable="false" title="No" type="java.lang.Integer"/>
+                        <Column editable="false" title="id" type="java.lang.Byte"/>
+                        <Column editable="true" title="Nama" type="java.lang.String"/>
                         <Column editable="false" title="Harga" type="java.lang.Integer"/>
                         <Column editable="false" title="Jumlah" type="java.lang.Short"/>
                         <Column editable="false" title="Total" type="java.lang.Integer"/>
@@ -138,6 +139,11 @@
                     <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
                       <TableColumnModel selectionModel="0">
                         <Column maxWidth="-1" minWidth="-1" prefWidth="15" resizable="false">
+                          <Title/>
+                          <Editor/>
+                          <Renderer/>
+                        </Column>
+                        <Column maxWidth="0" minWidth="0" prefWidth="0" resizable="true">
                           <Title/>
                           <Editor/>
                           <Renderer/>
