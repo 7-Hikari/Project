@@ -58,7 +58,7 @@ public class Penjualan extends JPanel {
         }
 
         int jumlahItem = flowpanel.getComponentCount();
-        int tinggiPerBaris = 300;
+        int tinggiPerBaris = 350;
         int kolom = 3;
         int baris = (int) Math.ceil(jumlahItem / (double) kolom);
         int tinggiTotal = baris * tinggiPerBaris + 50;

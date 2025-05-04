@@ -37,10 +37,11 @@ public class produkData {
         this.harga = harga;
     }
     
-    public void setProdukData(byte id, byte foto[], String nama, short harga){
+    public void setProdukData(byte id, byte foto[], String nama, short harga, short stok){
         this.id = id;
         this.foto = foto;
         this.nama = nama;
         this.harga = harga;
+        this.stok = stok;
     }
 }
