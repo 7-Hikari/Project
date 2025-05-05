@@ -4,6 +4,7 @@ import DAO.*;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.Color;
 import komponen.wraplayout;
 import java.awt.event.*;
 import javax.swing.*;
@@ -58,7 +59,7 @@ public class Penjualan extends JPanel {
         }
 
         int jumlahItem = flowpanel.getComponentCount();
-        int tinggiPerBaris = 350;
+        int tinggiPerBaris = 320;
         int kolom = 3;
         int baris = (int) Math.ceil(jumlahItem / (double) kolom);
         int tinggiTotal = baris * tinggiPerBaris + 50;
@@ -134,7 +135,7 @@ public class Penjualan extends JPanel {
     }
     
     private void simpan(){
-        for(no = 0; no < Tabelpesanan.getRowCount(); no++){
+        for(no = 0; no <= Tabelpesanan.getRowCount(); no++){
             
         }
     }
@@ -152,7 +153,7 @@ public class Penjualan extends JPanel {
         tmbl_hapus = new javax.swing.JButton();
         scroll = new JScrollPane();
         flowpanel = new JPanel();
-        jButton1 = new javax.swing.JButton();
+        Pesan = new javax.swing.JButton();
 
         setMaximumSize(new java.awt.Dimension(1100, 800));
         setPreferredSize(new java.awt.Dimension(1100, 800));
@@ -225,18 +226,19 @@ public class Penjualan extends JPanel {
         scroll.setMinimumSize(new java.awt.Dimension(600, 25));
         scroll.setPreferredSize(new java.awt.Dimension(600, 8));
 
+        flowpanel.setBackground(new Color (0x2dbdc7));
         flowpanel.setMaximumSize(new java.awt.Dimension(600, 800));
         flowpanel.setMinimumSize(new java.awt.Dimension(600, 8));
         flowpanel.setPreferredSize(new java.awt.Dimension(600, 8));
         flowpanel.setLayout(new java.awt.GridLayout(5, 4, 2, 2));
         scroll.setViewportView(flowpanel);
 
-        jButton1.setBackground(new java.awt.Color(0, 255, 51));
-        jButton1.setFont(new java.awt.Font("Times New Roman", 1, 20)); // NOI18N
-        jButton1.setText("Pesan");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        Pesan.setBackground(new java.awt.Color(0, 255, 51));
+        Pesan.setFont(new java.awt.Font("Times New Roman", 1, 20)); // NOI18N
+        Pesan.setText("Pesan");
+        Pesan.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                PesanActionPerformed(evt);
             }
         });
 
@@ -248,7 +250,7 @@ public class Penjualan extends JPanel {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(496, 496, 496)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(Pesan, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(23, 23, 23)
                         .addComponent(scroll, javax.swing.GroupLayout.PREFERRED_SIZE, 660, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -264,16 +266,16 @@ public class Penjualan extends JPanel {
                     .addComponent(struk, javax.swing.GroupLayout.PREFERRED_SIZE, 531, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(scroll, javax.swing.GroupLayout.PREFERRED_SIZE, 534, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(29, 29, 29)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(Pesan, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(195, Short.MAX_VALUE))
         );
 
         add(jPanel1, java.awt.BorderLayout.PAGE_START);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void PesanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PesanActionPerformed
         simpan();
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_PesanActionPerformed
 
     private void fieldtotalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fieldtotalActionPerformed
         
@@ -289,10 +291,10 @@ public class Penjualan extends JPanel {
     
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton Pesan;
     private komponen.Tabel_c Tabelpesanan;
     private javax.swing.JTextField fieldtotal;
     private javax.swing.JPanel flowpanel;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;

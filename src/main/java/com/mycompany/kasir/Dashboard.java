@@ -1,12 +1,12 @@
 package com.mycompany.kasir;
 
+import DataMaster.*;
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.event.*;
 import javax.swing.*;
 import javax.swing.border.*;
 import java.net.*;
-import DataMaster.Dataprodukproduk;
-import java.awt.Color;
 
 public class Dashboard extends JFrame {
     
@@ -23,36 +23,18 @@ public class Dashboard extends JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        panelubah = new komponen.PanelRound();
         tombol_karyawan = new javax.swing.JButton();
         tombol_produk = new javax.swing.JButton();
         tombol_rekapan = new javax.swing.JButton();
         tombol_penjualan = new javax.swing.JButton();
         tombol_dashb = new javax.swing.JButton();
-        bulatan = new javax.swing.JPanel();
+        bulatan = new komponen.PanelBulat();
+        panelubah = new komponen.PanelRound();
         foto = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(2026, 1440));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        panelubah.setRoundBottomLeft(100);
-        panelubah.setRoundBottomRight(100);
-        panelubah.setRoundTopLeft(100);
-        panelubah.setRoundTopRight(100);
-
-        javax.swing.GroupLayout panelubahLayout = new javax.swing.GroupLayout(panelubah);
-        panelubah.setLayout(panelubahLayout);
-        panelubahLayout.setHorizontalGroup(
-            panelubahLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1300, Short.MAX_VALUE)
-        );
-        panelubahLayout.setVerticalGroup(
-            panelubahLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 670, Short.MAX_VALUE)
-        );
-
-        getContentPane().add(panelubah, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 150, 1300, 670));
 
         tombol_karyawan.setText("jButton2");
         tombol_karyawan.setMinimumSize(new java.awt.Dimension(50, 50));
@@ -123,7 +105,20 @@ public class Dashboard extends JFrame {
             .addGap(0, 70, Short.MAX_VALUE)
         );
 
-        getContentPane().add(bulatan, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 220, 70, 70));
+        getContentPane().add(bulatan, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 220, -1, -1));
+
+        javax.swing.GroupLayout panelubahLayout = new javax.swing.GroupLayout(panelubah);
+        panelubah.setLayout(panelubahLayout);
+        panelubahLayout.setHorizontalGroup(
+            panelubahLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 1040, Short.MAX_VALUE)
+        );
+        panelubahLayout.setVerticalGroup(
+            panelubahLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 640, Short.MAX_VALUE)
+        );
+
+        getContentPane().add(panelubah, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 190, 1040, 640));
 
         URL url = getClass().getResource("komponen/Main.png");
         foto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Main.png"))); // NOI18N
@@ -221,7 +216,7 @@ public class Dashboard extends JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JPanel bulatan;
+    private komponen.PanelBulat bulatan;
     private javax.swing.JLabel foto;
     private komponen.PanelRound panelubah;
     private javax.swing.JButton tombol_dashb;

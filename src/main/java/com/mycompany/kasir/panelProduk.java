@@ -3,20 +3,22 @@ package com.mycompany.kasir;
 import javax.swing.*;
 import java.awt.*;
 import DAO.produkData;
+import java.text.NumberFormat;
+import java.util.Locale;
 
 public class panelProduk extends JPanel {
     
     private ProdukListen listenerUpdateTabel;
     private produkData produkdat;
+    private final NumberFormat Rp = NumberFormat.getCurrencyInstance(new Locale("id", "ID"));
    
-    
     public void setproduklisten(ProdukListen pl) {
         this.listenerUpdateTabel = pl;
     }
     
     public panelProduk(produkData data) {
         initComponents();
-        this.setPreferredSize(new Dimension(200, 350));
+        this.setPreferredSize(new Dimension(200, 320));
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         
         spin.setModel(new SpinnerNumberModel(1, 1, 250, 1));
@@ -31,7 +33,6 @@ public class panelProduk extends JPanel {
         
         foto.setPreferredSize(new Dimension(50,50));
         foto.setMaximumSize(new Dimension(50,50));
-        foto.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
         byte[] datFoto = data.get_foto();
         
         if (datFoto != null && datFoto.length > 0) {
@@ -43,7 +44,8 @@ public class panelProduk extends JPanel {
         }
         
         Nama.setText(produkdat.get_nama());
-        Harga.setText(String.valueOf(produkdat.get_harga()));
+        String harga = Rp.format(produkdat.get_harga());
+        Harga.setText(harga);
     }
     
     public int getJumlah(){
@@ -59,14 +61,16 @@ public class panelProduk extends JPanel {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        spin = new javax.swing.JSpinner();
-        foto = new javax.swing.JLabel();
-        Nama = new javax.swing.JLabel();
+        panelDeskripsi = new javax.swing.JPanel();
         Harga = new javax.swing.JLabel();
-        EdibleBahan = new javax.swing.JPanel();
+        Nama = new javax.swing.JLabel();
+        stok = new javax.swing.JLabel();
+        LabelHarga = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        spin = new javax.swing.JSpinner();
+        panelFoto = new javax.swing.JPanel();
+        foto = new javax.swing.JLabel();
 
         setMaximumSize(new java.awt.Dimension(200, 300));
         setLayout(new java.awt.BorderLayout());
@@ -75,34 +79,96 @@ public class panelProduk extends JPanel {
         jPanel1.setMaximumSize(new java.awt.Dimension(300, 500));
         jPanel1.setName(""); // NOI18N
 
-        jLabel1.setFont(new java.awt.Font("Times New Roman", 0, 12)); // NOI18N
-        jLabel1.setText("Nama:");
+        panelDeskripsi.setBackground(new java.awt.Color(255, 255, 255));
 
-        jLabel2.setFont(new java.awt.Font("Times New Roman", 0, 12)); // NOI18N
-        jLabel2.setText("Harga:");
+        Harga.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        Harga.setText("jLabel6");
+        Harga.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
 
-        jLabel3.setFont(new java.awt.Font("Times New Roman", 0, 12)); // NOI18N
+        Nama.setFont(new java.awt.Font("Roboto Slab", 1, 14)); // NOI18N
+        Nama.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        Nama.setText("jLabel5");
+
+        stok.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        stok.setText("Stok");
+
+        LabelHarga.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        LabelHarga.setText("Harga:");
+        LabelHarga.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
+
+        jLabel3.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
         jLabel3.setText("Jumlah");
+
+        jLabel5.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        jLabel5.setText("jLabel5");
 
         spin.setMaximumSize(new java.awt.Dimension(40, 30));
 
-        foto.setPreferredSize(null);
-
-        Nama.setFont(new java.awt.Font("Times New Roman", 0, 12)); // NOI18N
-        Nama.setText("jLabel5");
-
-        Harga.setFont(new java.awt.Font("Times New Roman", 0, 12)); // NOI18N
-        Harga.setText("jLabel6");
-
-        javax.swing.GroupLayout EdibleBahanLayout = new javax.swing.GroupLayout(EdibleBahan);
-        EdibleBahan.setLayout(EdibleBahanLayout);
-        EdibleBahanLayout.setHorizontalGroup(
-            EdibleBahanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 147, Short.MAX_VALUE)
+        javax.swing.GroupLayout panelDeskripsiLayout = new javax.swing.GroupLayout(panelDeskripsi);
+        panelDeskripsi.setLayout(panelDeskripsiLayout);
+        panelDeskripsiLayout.setHorizontalGroup(
+            panelDeskripsiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelDeskripsiLayout.createSequentialGroup()
+                .addComponent(LabelHarga, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(Harga, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(panelDeskripsiLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(Nama, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(21, 21, 21))
+            .addGroup(panelDeskripsiLayout.createSequentialGroup()
+                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(spin, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(15, 15, 15))
+            .addGroup(panelDeskripsiLayout.createSequentialGroup()
+                .addComponent(stok, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 84, Short.MAX_VALUE)
+                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
-        EdibleBahanLayout.setVerticalGroup(
-            EdibleBahanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 62, Short.MAX_VALUE)
+        panelDeskripsiLayout.setVerticalGroup(
+            panelDeskripsiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelDeskripsiLayout.createSequentialGroup()
+                .addComponent(Nama, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(panelDeskripsiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(LabelHarga)
+                    .addComponent(Harga))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(panelDeskripsiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(stok)
+                    .addComponent(jLabel5))
+                .addGap(11, 11, 11)
+                .addGroup(panelDeskripsiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(spin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        panelFoto.setPreferredSize(new java.awt.Dimension(170, 147));
+
+        foto.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        foto.setBorder(null);
+
+        javax.swing.GroupLayout panelFotoLayout = new javax.swing.GroupLayout(panelFoto);
+        panelFoto.setLayout(panelFotoLayout);
+        panelFotoLayout.setHorizontalGroup(
+            panelFotoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+            .addGroup(panelFotoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelFotoLayout.createSequentialGroup()
+                    .addContainerGap()
+                    .addComponent(foto, javax.swing.GroupLayout.DEFAULT_SIZE, 176, Short.MAX_VALUE)
+                    .addContainerGap()))
+        );
+        panelFotoLayout.setVerticalGroup(
+            panelFotoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 153, Short.MAX_VALUE)
+            .addGroup(panelFotoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(panelFotoLayout.createSequentialGroup()
+                    .addContainerGap()
+                    .addComponent(foto, javax.swing.GroupLayout.DEFAULT_SIZE, 141, Short.MAX_VALUE)
+                    .addContainerGap()))
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -112,41 +178,17 @@ public class panelProduk extends JPanel {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(foto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(EdibleBahan, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(Nama))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(Harga))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(spin, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(panelDeskripsi, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(panelFoto, javax.swing.GroupLayout.DEFAULT_SIZE, 209, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(foto, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(Nama))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(Harga)
-                    .addComponent(jLabel2))
+                .addComponent(panelFoto, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(spin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(EdibleBahan, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(panelDeskripsi, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -159,14 +201,16 @@ public class panelProduk extends JPanel {
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JPanel EdibleBahan;
     private javax.swing.JLabel Harga;
+    private javax.swing.JLabel LabelHarga;
     private javax.swing.JLabel Nama;
     private javax.swing.JLabel foto;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel panelDeskripsi;
+    private javax.swing.JPanel panelFoto;
     private javax.swing.JSpinner spin;
+    private javax.swing.JLabel stok;
     // End of variables declaration//GEN-END:variables
 }

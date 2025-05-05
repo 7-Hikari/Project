@@ -33,8 +33,7 @@ public class produkObjek {
         List<detailProdukData> listBahan = new ArrayList<>();
         try{
             Connection conn = koneksi.connect();
-            String sql = "select id_bahan, nama_bahan from detail_m_detailp dp join m_bahan on dp.id_bahan = bahan.id_bahan"
-                    + "where dp.id_produk = ?";
+            String sql = "select dp.id_bahan, nama_bahan from m_detailp dp join m_bahan on dp.id_bahan = m_bahan.id_bahan where dp.id_produk = ?";
             PreparedStatement pst = conn.prepareStatement(sql);
             pst.setByte(1, id_produk);
             ResultSet rs = pst.executeQuery();
@@ -94,12 +93,13 @@ public class produkObjek {
     
     public static void deleteProduk(produkData data){
         Connection conn = koneksi.connect();
+        byte id_produk = data.get_id();
         String sql = "delete from m_produk where id_produk = ?;"
                 + "delete form m_detailp where id_produk = ?";
         
         try (PreparedStatement pst = conn.prepareStatement(sql)){
-            pst.setByte(1, data.get_id());
-            pst.setByte(2, data.get_id());
+            pst.setByte(1, id_produk);
+            pst.setByte(2, id_produk);
             pst.executeUpdate();
         } catch(Exception e){
             e.printStackTrace();
