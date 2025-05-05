@@ -11,6 +11,11 @@ public class userData {
         this.password = password;
     }
     
+     public userData(String username, String password){
+        this.username = username;
+        this.password = password;
+    }
+    
     public byte getId_User(){
         return idUser;
     }
@@ -20,7 +25,7 @@ public class userData {
     public userObjek.Status getStatus(){
         return status;
     }
-    String getPassword(){
+    public String getPassword(){
         return password;
     }
     
