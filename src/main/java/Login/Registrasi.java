@@ -55,7 +55,7 @@ public class Registrasi extends javax.swing.JFrame {
         left.setBackground(new java.awt.Color(9, 167, 255));
         left.setLayout(null);
 
-        animationLogin.setIcon(new javax.swing.ImageIcon(getClass().getResource("/animasi.gif"))); // NOI18N
+        animationLogin.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Gambar1.gif"))); // NOI18N
         left.add(animationLogin);
         animationLogin.setBounds(-170, 40, 620, 398);
 
