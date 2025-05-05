@@ -16,7 +16,7 @@ public class Dashboard extends JFrame {
 
     public Dashboard() {
         initComponents();
-//        bulatan.setBackground(Color.WHITE);
+        bulatan.setBackground(Color.WHITE);
     }
 
     @SuppressWarnings("unchecked")
@@ -28,6 +28,7 @@ public class Dashboard extends JFrame {
         tombol_rekapan = new javax.swing.JButton();
         tombol_penjualan = new javax.swing.JButton();
         tombol_dashb = new javax.swing.JButton();
+        bulatan = new komponen.PanelBulat();
         panelubah = new komponen.PanelRound();
         foto = new javax.swing.JLabel();
 
@@ -93,6 +94,24 @@ public class Dashboard extends JFrame {
         });
         getContentPane().add(tombol_dashb, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 230, 50, 50));
 
+        javax.swing.GroupLayout bulatanLayout = new javax.swing.GroupLayout(bulatan);
+        bulatan.setLayout(bulatanLayout);
+        bulatanLayout.setHorizontalGroup(
+            bulatanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 70, Short.MAX_VALUE)
+        );
+        bulatanLayout.setVerticalGroup(
+            bulatanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 70, Short.MAX_VALUE)
+        );
+
+        getContentPane().add(bulatan, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 220, -1, -1));
+
+        panelubah.setRoundBottomLeft(100);
+        panelubah.setRoundBottomRight(100);
+        panelubah.setRoundTopLeft(100);
+        panelubah.setRoundTopRight(100);
+
         javax.swing.GroupLayout panelubahLayout = new javax.swing.GroupLayout(panelubah);
         panelubah.setLayout(panelubahLayout);
         panelubahLayout.setHorizontalGroup(
@@ -115,73 +134,73 @@ public class Dashboard extends JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void tombol_produkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tombol_produkActionPerformed
-//        interaksipanel(tombol_produk);
-//        panelubah.removeAll();
-//        panelubah.add(new Dataprodukproduk());
-//        panelubah.revalidate();
-//        panelubah.repaint();
+        interaksipanel(tombol_produk);
+        panelubah.removeAll();
+        panelubah.add(new Dataprodukproduk());
+        panelubah.revalidate();
+        panelubah.repaint();
     }//GEN-LAST:event_tombol_produkActionPerformed
 
     private void tombol_karyawanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tombol_karyawanActionPerformed
-//        interaksipanel(tombol_karyawan);
+        interaksipanel(tombol_karyawan);
     }//GEN-LAST:event_tombol_karyawanActionPerformed
 
     private void tombol_dashbActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tombol_dashbActionPerformed
-//        interaksipanel(tombol_dashb);
-//        panelubah.removeAll();
-//        panelubah.revalidate();
-//        panelubah.repaint();
+        interaksipanel(tombol_dashb);
+        panelubah.removeAll();
+        panelubah.revalidate();
+        panelubah.repaint();
     }//GEN-LAST:event_tombol_dashbActionPerformed
 
     private void tombol_rekapanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tombol_rekapanActionPerformed
-//        interaksipanel(tombol_rekapan);
-//        panelubah.removeAll();
-//        panelubah.revalidate();
-//        panelubah.repaint();
+        interaksipanel(tombol_rekapan);
+        panelubah.removeAll();
+        panelubah.revalidate();
+        panelubah.repaint();
     }//GEN-LAST:event_tombol_rekapanActionPerformed
 
     private void tombol_penjualanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tombol_penjualanActionPerformed
-//        interaksipanel(tombol_penjualan);
-//        panelubah.removeAll();
-//        panelubah.add(new Penjualan(), BorderLayout.CENTER);
-//        panelubah.revalidate();
-//        panelubah.repaint();
+        interaksipanel(tombol_penjualan);
+        panelubah.removeAll();
+        panelubah.add(new Penjualan(), BorderLayout.CENTER);
+        panelubah.revalidate();
+        panelubah.repaint();
     }//GEN-LAST:event_tombol_penjualanActionPerformed
 
-//    private void interaksipanel(JButton ba_en) {
-//        ba_en.setContentAreaFilled(false);
-//
-//        int targetY = ba_en.getY() + (ba_en.getHeight() - bulatan.getHeight()) / 2;
-//        int startY = bulatan.getY();
-//        int selisih = Math.abs(targetY - startY);
-//        int langkah_a = Math.max(2, selisih / 15);
-//        int langkah = langkah_a * ((targetY > startY) ? 1 : -1);
-//
-//        Timer waktu = new Timer(10, null);
-//        waktu.addActionListener(new ActionListener() {
-//            int y = startY;
-//
-//            @Override
-//            public void actionPerformed(ActionEvent e) {
-//                if ((langkah > 0 && y < targetY) || (langkah < 0 && y > targetY)) {
-//                    y += langkah;
-//                    bulatan.setLocation(bulatan.getX(), y);
-//                    bulatan.repaint();
-//                } else {
-//                    bulatan.setLocation(bulatan.getX(), targetY);
-//                    waktu.stop();
-//                }
-//            }
-//        });
-//        waktu.start();
-//        if (tombol != null) {
-//            tombol.setContentAreaFilled(true);
-//            tombol.setBorder(asbor);
-//        }
-//        ba_en.setContentAreaFilled(false);
-//        ba_en.setBorder(asbor);
-//        tombol = ba_en;
-//    }
+    private void interaksipanel(JButton ba_en) {
+        ba_en.setContentAreaFilled(false);
+
+        int targetY = ba_en.getY() + (ba_en.getHeight() - bulatan.getHeight()) / 2;
+        int startY = bulatan.getY();
+        int selisih = Math.abs(targetY - startY);
+        int langkah_a = Math.max(2, selisih / 15);
+        int langkah = langkah_a * ((targetY > startY) ? 1 : -1);
+
+        Timer waktu = new Timer(10, null);
+        waktu.addActionListener(new ActionListener() {
+            int y = startY;
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if ((langkah > 0 && y < targetY) || (langkah < 0 && y > targetY)) {
+                    y += langkah;
+                    bulatan.setLocation(bulatan.getX(), y);
+                    bulatan.repaint();
+                } else {
+                    bulatan.setLocation(bulatan.getX(), targetY);
+                    waktu.stop();
+                }
+            }
+        });
+        waktu.start();
+        if (tombol != null) {
+            tombol.setContentAreaFilled(true);
+            tombol.setBorder(asbor);
+        }
+        ba_en.setContentAreaFilled(false);
+        ba_en.setBorder(asbor);
+        tombol = ba_en;
+    }
 
     public static void main(String args[]) {
         try {
@@ -202,6 +221,7 @@ public class Dashboard extends JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private komponen.PanelBulat bulatan;
     private javax.swing.JLabel foto;
     private komponen.PanelRound panelubah;
     private javax.swing.JButton tombol_dashb;
