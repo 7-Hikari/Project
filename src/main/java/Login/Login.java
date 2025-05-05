@@ -38,7 +38,7 @@ public class Login extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
-        username1 = new javax.swing.JTextField();
+        password = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         lms_icon1 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
@@ -52,7 +52,7 @@ public class Login extends javax.swing.JFrame {
         left.setBackground(new java.awt.Color(9, 167, 255));
         left.setLayout(null);
 
-        animationLogin.setIcon(new javax.swing.ImageIcon(getClass().getResource("/animasi.gif"))); // NOI18N
+        animationLogin.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Gambar1.gif"))); // NOI18N
         left.add(animationLogin);
         animationLogin.setBounds(-170, 40, 620, 398);
 
@@ -105,22 +105,22 @@ public class Login extends javax.swing.JFrame {
             }
         });
 
-        username1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        username1.setForeground(new java.awt.Color(169, 169, 169));
-        username1.setText("Password");
-        username1.setToolTipText("Email or Username");
-        username1.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 0, 1, 0, new java.awt.Color(204, 204, 204)));
-        username1.addFocusListener(new java.awt.event.FocusAdapter() {
+        password.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        password.setForeground(new java.awt.Color(169, 169, 169));
+        password.setText("Password");
+        password.setToolTipText("Email or Username");
+        password.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 0, 1, 0, new java.awt.Color(204, 204, 204)));
+        password.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
-                username1FocusGained(evt);
+                passwordFocusGained(evt);
             }
             public void focusLost(java.awt.event.FocusEvent evt) {
-                username1FocusLost(evt);
+                passwordFocusLost(evt);
             }
         });
-        username1.addActionListener(new java.awt.event.ActionListener() {
+        password.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                username1ActionPerformed(evt);
+                passwordActionPerformed(evt);
             }
         });
 
@@ -157,7 +157,7 @@ public class Login extends javax.swing.JFrame {
                             .addGroup(BodyLayout.createSequentialGroup()
                                 .addComponent(lms_icon1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(0, 0, 0)
-                                .addComponent(username1, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(password, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(0, 0, 0)
                                 .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addContainerGap())
@@ -180,10 +180,13 @@ public class Login extends javax.swing.JFrame {
                                         .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addContainerGap())))))
                     .addGroup(BodyLayout.createSequentialGroup()
-                        .addGap(145, 145, 145)
-                        .addGroup(BodyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel2))
+                        .addGroup(BodyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(BodyLayout.createSequentialGroup()
+                                .addGap(152, 152, 152)
+                                .addComponent(jLabel2))
+                            .addGroup(BodyLayout.createSequentialGroup()
+                                .addGap(65, 65, 65)
+                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(0, 0, Short.MAX_VALUE))))
         );
         BodyLayout.setVerticalGroup(
@@ -203,9 +206,9 @@ public class Login extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(BodyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lms_icon1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(username1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(password, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 73, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 74, Short.MAX_VALUE)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -260,7 +263,10 @@ public class Login extends javax.swing.JFrame {
     }//GEN-LAST:event_jLabel8MouseClicked
 
     private void usernameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_usernameActionPerformed
-
+        if(username.getText().equals("")) {
+            username.setText("Username");
+        }
+        
     }//GEN-LAST:event_usernameActionPerformed
 
     private void usernameFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_usernameFocusLost
@@ -285,17 +291,6 @@ public class Login extends javax.swing.JFrame {
             //        }
     }//GEN-LAST:event_usernameFocusGained
 
-    private void username1FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_username1FocusGained
-        // TODO add your handling code here:
-    }//GEN-LAST:event_username1FocusGained
-
-    private void username1FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_username1FocusLost
-        // TODO add your handling code here:
-    }//GEN-LAST:event_username1FocusLost
-
-    private void username1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_username1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_username1ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
@@ -364,7 +359,7 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JPanel left;
     private javax.swing.JLabel lms_icon;
     private javax.swing.JLabel lms_icon1;
+    public static javax.swing.JTextField password;
     public static javax.swing.JTextField username;
-    public static javax.swing.JTextField username1;
     // End of variables declaration//GEN-END:variables
 }
