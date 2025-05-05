@@ -39,6 +39,7 @@ public class bahanObjek {
             PreparedStatement pst = conn.prepareStatement(sql);
             pst.setString(1, bahdat.get_nama_b());
             pst.setString(2, bahdat.get_kategori().name());
+            pst.executeUpdate();
         } catch (Exception e){
             e.printStackTrace();
         }
