@@ -116,14 +116,14 @@ public class Dashboard extends JFrame {
         panelubah.setLayout(panelubahLayout);
         panelubahLayout.setHorizontalGroup(
             panelubahLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1040, Short.MAX_VALUE)
+            .addGap(0, 1240, Short.MAX_VALUE)
         );
         panelubahLayout.setVerticalGroup(
             panelubahLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 640, Short.MAX_VALUE)
         );
 
-        getContentPane().add(panelubah, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 190, 1040, 640));
+        getContentPane().add(panelubah, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 190, 1240, 640));
 
         URL url = getClass().getResource("komponen/Main.png");
         foto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Main.png"))); // NOI18N
