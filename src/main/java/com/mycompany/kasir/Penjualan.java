@@ -43,6 +43,7 @@ public class Penjualan extends komponen.PanelRound {
         scroll.setPreferredSize(new Dimension(650, 800));
         scroll.setViewportView(flowpanel);
         scroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
+        scroll.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
 
         flowpanel.removeAll();
 
@@ -297,6 +298,7 @@ public class Penjualan extends komponen.PanelRound {
             m_pesanan.removeRow(barisPilih);
             no_urut();
             ProdukIdList.remove(barisPilih);
+            upTotal();
         }
     }//GEN-LAST:event_tmbl_hapusActionPerformed
     
