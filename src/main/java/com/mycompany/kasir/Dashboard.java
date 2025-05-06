@@ -111,18 +111,7 @@ public class Dashboard extends JFrame {
         panelubah.setRoundBottomRight(100);
         panelubah.setRoundTopLeft(100);
         panelubah.setRoundTopRight(100);
-
-        javax.swing.GroupLayout panelubahLayout = new javax.swing.GroupLayout(panelubah);
-        panelubah.setLayout(panelubahLayout);
-        panelubahLayout.setHorizontalGroup(
-            panelubahLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1240, Short.MAX_VALUE)
-        );
-        panelubahLayout.setVerticalGroup(
-            panelubahLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 640, Short.MAX_VALUE)
-        );
-
+        panelubah.setLayout(new java.awt.BorderLayout());
         getContentPane().add(panelubah, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 190, 1240, 640));
 
         URL url = getClass().getResource("komponen/Main.png");

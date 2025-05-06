@@ -10,8 +10,8 @@ public class produkObjek {
         try {
             Connection conn = koneksi.connect();
             String sql = "SELECT * FROM m_produk";
-            Statement stmt = conn.createStatement();
-            ResultSet rs = stmt.executeQuery(sql);
+            PreparedStatement pst = conn.prepareStatement(sql);
+            ResultSet rs = pst.executeQuery();
 
             while (rs.next()) {
                 byte[] foto = rs.getBytes("Foto");
