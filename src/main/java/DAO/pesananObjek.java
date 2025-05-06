@@ -7,12 +7,11 @@ import koneksi.koneksi;
 public class pesananObjek {
     public static List<pesananData> getAllTrJual() {
         List<pesananData> listPesanan = new ArrayList<>();
+        Connection conn = koneksi.connect(); 
+        String sql = "SELECT * FROM transaksi_jual";
         try {
-            Connection conn = koneksi.connect();
-            String sql = "SELECT * FROM transaksi_jual";
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery(sql);
-
             while (rs.next()) {
                 int id_jual = rs.getInt("id_jual");
                 String tanggal = rs.getString("waktu");
@@ -34,16 +33,19 @@ public class pesananObjek {
         List<pesananDetailData> detailList = new ArrayList<>();
 
         String sql = "SELECT * FROM detail_transaksi_jual WHERE id_transaksi = ?";
-        PreparedStatement pst = conn.prepareStatement(sql);
-        pst.setInt(1, idTransaksi);
-        ResultSet rs = pst.executeQuery();
+        try (PreparedStatement pst = conn.prepareStatement(sql);) {
+            pst.setInt(1, idTransaksi);
 
-        while (rs.next()) {
-            byte idProduk = rs.getByte("id_produk");
-            short jumlah = rs.getShort("jumlah");
-            short harga = rs.getShort("harga_satuan");
+            try (ResultSet rs = pst.executeQuery();) {
 
-            detailList.add(new pesananDetailData(idProduk, jumlah, harga));
+                while (rs.next()) {
+                    byte idProduk = rs.getByte("id_produk");
+                    short jumlah = rs.getShort("jumlah");
+                    short harga = rs.getShort("harga_satuan");
+
+                    detailList.add(new pesananDetailData(idProduk, jumlah, harga));
+                }
+            }
         }
         return detailList;
     }
@@ -51,30 +53,43 @@ public class pesananObjek {
     public static void simpanTransaksi(pesananData trDat, List<pesananDetailData> trDetDat) {
         String Tr = "INSERT INTO transaksi_jual(tagihan) VALUES (?)";
         String trDet = "INSERT INTO detail_jual(id_jual, id_produk, jumlah, harga_satuan) VALUES (?, ?, ?, ?)";
-
-        try (Connection conn = koneksi.connect();
-                PreparedStatement pstTransaksi = conn.prepareStatement(Tr, Statement.RETURN_GENERATED_KEYS);
-                PreparedStatement pstDetail = conn.prepareStatement(trDet)) {
+        Connection conn = koneksi.connect();
+        try {
+            PreparedStatement pstTransaksi = conn.prepareStatement(Tr, Statement.RETURN_GENERATED_KEYS);
+            PreparedStatement pstDetail = conn.prepareStatement(trDet);
 
             pstTransaksi.setInt(1, trDat.get_tagihan());
             pstTransaksi.executeUpdate();
 
-            ResultSet rs = pstTransaksi.getGeneratedKeys();
-            int idTransaksi = -1;
-            if (rs.next()) {
-                idTransaksi = rs.getInt(1);
-            }
+            try (ResultSet rs = pstTransaksi.getGeneratedKeys();) {
+                int idTransaksi = -1;
+                if (rs.next()) {
+                    idTransaksi = rs.getInt(1);
+                }
 
-            for (pesananDetailData detail : trDetDat) {
-                pstDetail.setInt(1, idTransaksi);
-                pstDetail.setByte(2, detail.get_produkId());
-                pstDetail.setShort(3, detail.get_jumlah());
-                pstDetail.setShort(4, detail.get_harga());
-                pstDetail.addBatch();
+                for (pesananDetailData detail : trDetDat) {
+                    pstDetail.setInt(1, idTransaksi);
+                    pstDetail.setByte(2, detail.get_produkId());
+                    pstDetail.setShort(3, detail.get_jumlah());
+                    pstDetail.setShort(4, detail.get_harga());
+                    pstDetail.addBatch();
+                }
+                pstDetail.executeBatch();
             }
-            pstDetail.executeBatch();
-
         } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+    
+    public static void updateTr(pesananData trDat, byte userId){
+        String sql = "update transaksi_jual set Lunas = ?, id_user = ? where id_jual = ?";
+        Connection conn = koneksi.connect(); 
+        try{
+            PreparedStatement pst = conn.prepareStatement(sql);
+            pst.setBoolean(1, trDat.get_lunas());
+            pst.setByte(2, userId);
+            pst.setInt(3, trDat.get_idJual());
+        } catch (SQLException e){
             e.printStackTrace();
         }
     }

@@ -158,20 +158,63 @@
         </DimensionLayout>
       </Layout>
     </Container>
-    <Container class="komponen.PanelRound" name="panelubah">
+    <Container class="komponen.PanelRound" name="panelnyaPanel">
       <Properties>
-        <Property name="roundBottomLeft" type="int" value="100"/>
-        <Property name="roundBottomRight" type="int" value="100"/>
-        <Property name="roundTopLeft" type="int" value="100"/>
-        <Property name="roundTopRight" type="int" value="100"/>
+        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="ff" green="ff" red="33" type="rgb"/>
+        </Property>
+        <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+          <Dimension value="[1270, 670]"/>
+        </Property>
+        <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+          <Dimension value="[1270, 670]"/>
+        </Property>
+        <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+          <Dimension value="[1270, 670]"/>
+        </Property>
+        <Property name="roundBottomLeft" type="int" value="80"/>
+        <Property name="roundBottomRight" type="int" value="80"/>
+        <Property name="roundTopLeft" type="int" value="80"/>
+        <Property name="roundTopRight" type="int" value="80"/>
       </Properties>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="120" y="190" width="1240" height="640"/>
+          <AbsoluteConstraints x="102" y="150" width="1270" height="670"/>
         </Constraint>
       </Constraints>
 
-      <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout"/>
+      <Layout>
+        <DimensionLayout dim="0">
+          <Group type="103" groupAlignment="0" attributes="0">
+              <Group type="102" alignment="1" attributes="0">
+                  <EmptySpace max="32767" attributes="0"/>
+                  <Component id="panelubah" min="-2" pref="1260" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
+              </Group>
+          </Group>
+        </DimensionLayout>
+        <DimensionLayout dim="1">
+          <Group type="103" groupAlignment="0" attributes="0">
+              <Group type="102" alignment="1" attributes="0">
+                  <EmptySpace max="32767" attributes="0"/>
+                  <Component id="panelubah" min="-2" pref="660" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
+              </Group>
+          </Group>
+        </DimensionLayout>
+      </Layout>
+      <SubComponents>
+        <Container class="komponen.PanelRound" name="panelubah">
+          <Properties>
+            <Property name="roundBottomLeft" type="int" value="100"/>
+            <Property name="roundBottomRight" type="int" value="100"/>
+            <Property name="roundTopLeft" type="int" value="100"/>
+            <Property name="roundTopRight" type="int" value="100"/>
+          </Properties>
+
+          <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout"/>
+        </Container>
+      </SubComponents>
     </Container>
     <Component class="javax.swing.JLabel" name="foto">
       <Properties>

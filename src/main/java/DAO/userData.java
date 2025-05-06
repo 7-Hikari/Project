@@ -5,10 +5,9 @@ public class userData {
     private String username, password;
     private userObjek.Status status;
     
-    userData(byte idUser, userObjek.Status status, String username, String password){
+    userData(byte idUser, userObjek.Status status, String username){
         this.idUser = idUser;
         this.username = username;
-        this.password = password;
     }
     
      public userData(String username, String password){

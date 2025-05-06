@@ -7,9 +7,9 @@ import koneksi.koneksi;
 public class produkObjek {
     public static List<produkData> getAllProduk() {
         List<produkData> listProduk = new ArrayList<>();
+            String sql = "SELECT * FROM m_produk";
         try {
             Connection conn = koneksi.connect();
-            String sql = "SELECT * FROM m_produk";
             PreparedStatement pst = conn.prepareStatement(sql);
             ResultSet rs = pst.executeQuery();
 

@@ -32,13 +32,13 @@ public class Penjualan extends komponen.PanelRound {
         add(panelRound1, BorderLayout.CENTER);
 
         setPreferredSize(new Dimension(1240, 640));
-
-        loadproduk();
         
         DefaultTableModel tabel = (DefaultTableModel) Tabelpesanan.getModel();
         m_pesanan = tabel;
+        
+        loadproduk();
     }
-
+    
     public void loadproduk() {
         scroll.setPreferredSize(new Dimension(650, 800));
         scroll.setViewportView(flowpanel);
@@ -193,6 +193,7 @@ public class Penjualan extends komponen.PanelRound {
         struk.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         fieldtotal.setFont(new java.awt.Font("Times New Roman", 1, 20)); // NOI18N
+        fieldtotal.setText("Rp0,00");
         fieldtotal.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 fieldtotalActionPerformed(evt);
@@ -283,7 +284,7 @@ public class Penjualan extends komponen.PanelRound {
                 "Pesanan Berhasil", JOptionPane.INFORMATION_MESSAGE);
         m_pesanan.setRowCount(0);
         no_urut();
-        fieldtotal.setText("");
+        fieldtotal.setText("Rp0,00");
         ProdukIdList.clear();
         
     }//GEN-LAST:event_PesanActionPerformed
