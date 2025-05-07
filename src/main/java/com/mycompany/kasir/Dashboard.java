@@ -179,7 +179,7 @@ public class Dashboard extends JFrame {
     private void tombol_penjualanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tombol_penjualanActionPerformed
         interaksipanel(tombol_penjualan);
         panelubah.removeAll();
-        panelubah.add(new Penjualan(), BorderLayout.CENTER);
+        panelubah.add(new KasirPenjualan(), BorderLayout.CENTER);
         panelubah.revalidate();
         panelubah.repaint();
     }//GEN-LAST:event_tombol_penjualanActionPerformed

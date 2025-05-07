@@ -20,7 +20,7 @@ public class pesananObjek {
                 byte user = rs.getByte("id_user");
 
                 pesananData pesanan = new pesananData(id_jual, tanggal, tagihan, lunas, user);
-                pesanan.setListDetail(ambilDetailTransaksi(conn, id_jual));
+                pesanan.setListDetail(ambilDetailTransaksi(id_jual));
                 listPesanan.add(pesanan);
             }
         } catch (SQLException e) {
@@ -29,10 +29,42 @@ public class pesananObjek {
         return listPesanan;
     }
     
-    private static List<pesananDetailData> ambilDetailTransaksi(Connection conn, int idTransaksi) throws SQLException {
+//    public static pesananData ambilTrJ (int idTr){
+//         Connection conn = koneksi.connect(); 
+//        String sql = "SELECT * FROM transaksi_jual where id_jual = ?";
+//        pesananData pesanan = null;
+//        
+//        try {
+//            PreparedStatement pst = conn.prepareStatement(sql);
+//            pst.setInt(1, idTr);
+//                    
+//            try (ResultSet rs = pst.executeQuery();) {
+//            
+//            while (rs.next()) {
+//                int id_jual = rs.getInt("id_jual");
+//                String tanggal = rs.getString("waktu");
+//                int tagihan = rs.getInt("tagihan");
+//                boolean lunas = rs.getBoolean("lunas");
+//                byte user = rs.getByte("id_user");
+//
+//                pesanan = new pesananData(id_jual, tanggal, tagihan, lunas, user);
+//                pesanan.setListDetail(ambilDetailTransaksi(conn, id_jual));
+//    }
+//            } catch(SQLException e){
+//                
+//            }
+//        } catch (SQLException e){
+//            e.printStackTrace();
+//        }
+//        return pesanan;
+//    }
+    
+    public static List<pesananDetailData> ambilDetailTransaksi(int idTransaksi){
         List<pesananDetailData> detailList = new ArrayList<>();
 
-        String sql = "SELECT * FROM detail_transaksi_jual WHERE id_transaksi = ?";
+        String sql = "SELECT * FROM detail_jual WHERE id_jual = ?";
+        Connection conn = koneksi.connect();
+        
         try (PreparedStatement pst = conn.prepareStatement(sql);) {
             pst.setInt(1, idTransaksi);
 
@@ -45,7 +77,13 @@ public class pesananObjek {
 
                     detailList.add(new pesananDetailData(idProduk, jumlah, harga));
                 }
+            } catch (SQLException e){
+                e.printStackTrace();
+                System.out.println("hh");
             }
+        } catch (SQLException e){
+            e.printStackTrace();
+            System.out.println("aa");
         }
         return detailList;
     }
