@@ -55,16 +55,22 @@ public class pesananObjek {
         String trDet = "INSERT INTO detail_jual(id_jual, id_produk, jumlah, harga_satuan) VALUES (?, ?, ?, ?)";
         Connection conn = koneksi.connect();
         try {
-            PreparedStatement pstTransaksi = conn.prepareStatement(Tr, Statement.RETURN_GENERATED_KEYS);
-            PreparedStatement pstDetail = conn.prepareStatement(trDet);
+            conn.setAutoCommit(false);
 
-            pstTransaksi.setInt(1, trDat.get_tagihan());
-            pstTransaksi.executeUpdate();
+            try (PreparedStatement pstTransaksi = conn.prepareStatement(Tr, Statement.RETURN_GENERATED_KEYS);
+                    PreparedStatement pstDetail = conn.prepareStatement(trDet);) {
 
-            try (ResultSet rs = pstTransaksi.getGeneratedKeys();) {
+                pstTransaksi.setInt(1, trDat.get_tagihan());
+                pstTransaksi.executeUpdate();
+
                 int idTransaksi = -1;
-                if (rs.next()) {
-                    idTransaksi = rs.getInt(1);
+                try (ResultSet rs = pstTransaksi.getGeneratedKeys();) {
+                    if (rs.next()) {
+                        idTransaksi = rs.getInt(1);
+                        trDat.setTransaksi_J(idTransaksi);
+                    } else {
+                        throw new SQLException("Gagal mendapatkan ID Transaksi");
+                    }
                 }
 
                 for (pesananDetailData detail : trDetDat) {
@@ -75,9 +81,25 @@ public class pesananObjek {
                     pstDetail.addBatch();
                 }
                 pstDetail.executeBatch();
+                conn.commit();
             }
         } catch (SQLException e) {
+            try {
+                if (conn != null) {
+                    conn.rollback();
+                }
+            } catch (SQLException rollbackEx) {
+                rollbackEx.printStackTrace();
+            }
             e.printStackTrace();
+        } finally {
+            try {
+                if (conn != null) {
+                    conn.setAutoCommit(true);
+                }
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            }
         }
     }
     

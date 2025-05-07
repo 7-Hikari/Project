@@ -9,8 +9,12 @@ import komponen.wraplayout;
 import java.awt.event.*;
 import javax.swing.*;
 import java.util.*;
-import java.text.NumberFormat;
-import javax.swing.table.*;
+import com.google.zxing.*;
+import com.google.zxing.client.j2se.MatrixToImageWriter;
+import com.google.zxing.common.BitMatrix;
+import java.text.*;
+import java.nio.file.Path;
+import javax.swing.table.DefaultTableModel;
 
 public class Penjualan extends komponen.PanelRound {
     
@@ -18,6 +22,7 @@ public class Penjualan extends komponen.PanelRound {
     private List<Byte> ProdukIdList = new ArrayList<>();
     private final NumberFormat Rp = NumberFormat.getCurrencyInstance(new Locale("id", "ID"));
     int total = 0;
+    
     DefaultTableModel m_pesanan = null;
     
     public Penjualan() {
@@ -158,6 +163,27 @@ public class Penjualan extends komponen.PanelRound {
             listDetail.add(PDetDat);
         }
         pesananObjek.simpanTransaksi(pesDat, listDetail);
+        int id_tr = pesDat.get_idJual();
+        cetakBC(id_tr);
+    }
+    
+    private void cetakBC(int id){
+        String tgl = new SimpleDateFormat("yyMMdd").format(new Date());
+        String kode = tgl + id;
+        
+        try{
+            Hashtable<EncodeHintType, Object> hints = new Hashtable<>();
+            hints.put(EncodeHintType.CHARACTER_SET, "UTF-8");
+            
+            BitMatrix matrix = new MultiFormatWriter().encode(
+                    kode, BarcodeFormat.CODE_128, 300, 100, hints);
+            Path jalur = Path.of("barcode.png");
+            MatrixToImageWriter.writeToPath(matrix, "PNG", jalur);
+            
+            System.out.println("barcode");
+        } catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
     @SuppressWarnings("unchecked")

@@ -41,11 +41,12 @@ public class pesananData {
     public void setListDetail(List<pesananDetailData> listDetail) {
         this.listDetail = listDetail;
     }
-    public void setTransaksi_J(int id_jual, String tanggal, int tagihan, Boolean lunas, Byte user){
+    public void setTransaksi_J(int id_jual, Boolean lunas, Byte user){
         this.id_jual = id_jual;
-        this.tanggal = tanggal;
-        this.tagihan = tagihan;
         this.Lunas = lunas;
         this.user = user;
+    }
+    void setTransaksi_J(int id_jual){
+        this.id_jual = id_jual;
     }
 }
