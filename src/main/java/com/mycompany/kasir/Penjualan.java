@@ -1,25 +1,25 @@
 package com.mycompany.kasir;
 
 import DAO.*;
-import java.awt.BorderLayout;
-import java.awt.Dimension;
-import java.awt.FlowLayout;
-import java.awt.Color;
+import java.awt.*;
 import komponen.wraplayout;
 import java.awt.event.*;
 import javax.swing.*;
+import javax.imageio.ImageIO;
 import java.util.*;
 import com.google.zxing.*;
 import com.google.zxing.client.j2se.MatrixToImageWriter;
 import com.google.zxing.common.BitMatrix;
+import java.awt.image.BufferedImage;
 import java.text.*;
 import java.nio.file.Path;
+import javax.imageio.stream.ImageOutputStream;
 import javax.swing.table.DefaultTableModel;
 
 public class Penjualan extends komponen.PanelRound {
     
     private int no = 1;
-    private List<Byte> ProdukIdList = new ArrayList<>();
+    private java.util.List<Byte> ProdukIdList = new ArrayList<>();
     private final NumberFormat Rp = NumberFormat.getCurrencyInstance(new Locale("id", "ID"));
     int total = 0;
     
@@ -36,7 +36,7 @@ public class Penjualan extends komponen.PanelRound {
         setLayout(new BorderLayout());
         add(panelRound1, BorderLayout.CENTER);
 
-        setPreferredSize(new Dimension(1240, 640));
+        setPreferredSize(new java.awt.Dimension(1240, 640));
         
         DefaultTableModel tabel = (DefaultTableModel) Tabelpesanan.getModel();
         m_pesanan = tabel;
@@ -45,14 +45,14 @@ public class Penjualan extends komponen.PanelRound {
     }
     
     public void loadproduk() {
-        scroll.setPreferredSize(new Dimension(650, 800));
+        scroll.setPreferredSize(new java.awt.Dimension(650, 800));
         scroll.setViewportView(flowpanel);
         scroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
         scroll.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
 
         flowpanel.removeAll();
 
-        List<produkData> daftarProduk = produkObjek.getAllProduk();
+        java.util.List<produkData> daftarProduk = produkObjek.getAllProduk();
         
         for (produkData data : daftarProduk) {
             panelProduk produkP = new panelProduk(data);
@@ -81,7 +81,7 @@ public class Penjualan extends komponen.PanelRound {
         int baris = (int) Math.ceil(jumlahItem / (double) kolom);
         int tinggiTotal = baris * tinggiPerBaris + 50;
 
-        flowpanel.setPreferredSize(new Dimension(640, tinggiTotal));
+        flowpanel.setPreferredSize(new java.awt.Dimension(640, tinggiTotal));
         flowpanel.revalidate();
         flowpanel.repaint();
 
@@ -152,7 +152,7 @@ public class Penjualan extends komponen.PanelRound {
     
     private void simpan(int total) {
         pesananData pesDat = new pesananData(total);
-        List<pesananDetailData> listDetail = new ArrayList<>();
+        java.util.List<pesananDetailData> listDetail = new ArrayList<>();
         
         for (no = 0; no < Tabelpesanan.getRowCount(); no++) {
             byte idProduk = (byte) ProdukIdList.get(no);
@@ -170,15 +170,35 @@ public class Penjualan extends komponen.PanelRound {
     private void cetakBC(int id){
         String tgl = new SimpleDateFormat("yyMMdd").format(new Date());
         String kode = tgl + id;
+
+        int width = 300;
+        int height = 100;
+        int hH = 20;
         
         try{
             Hashtable<EncodeHintType, Object> hints = new Hashtable<>();
             hints.put(EncodeHintType.CHARACTER_SET, "UTF-8");
             
             BitMatrix matrix = new MultiFormatWriter().encode(
-                    kode, BarcodeFormat.CODE_128, 300, 100, hints);
+                    kode, BarcodeFormat.CODE_128, width, height, hints);
+            
+            BufferedImage bcImg = MatrixToImageWriter.toBufferedImage(matrix);
+            BufferedImage finalImg = new BufferedImage(width, height + hH, BufferedImage.TYPE_INT_RGB);
+            
+            Graphics2D g = finalImg.createGraphics();
+            g.setColor(Color.WHITE);
+            g.fillRect(0, 0, width, height + hH);
+            g.drawImage(bcImg, 0, 0, null);
+            g.setColor(Color.BLACK);
+            g.setFont(new Font("Arial", Font.PLAIN, 14));
+            FontMetrics fm = g.getFontMetrics();
+            int textWidth = fm.stringWidth(kode);
+            g.drawString(kode,(width - textWidth) / 2, height + (hH + fm.getAscent()) / 2 - 2);
+            
+            g.dispose();
+            
             Path jalur = Path.of("barcode.png");
-            MatrixToImageWriter.writeToPath(matrix, "PNG", jalur);
+            ImageIO.write(bcImg, "png", (ImageOutputStream) jalur);
             
             System.out.println("barcode");
         } catch (Exception e){
@@ -299,7 +319,7 @@ public class Penjualan extends komponen.PanelRound {
                 PesanActionPerformed(evt);
             }
         });
-        panelRound1.add(Pesan, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 560, 107, -1));
+        panelRound1.add(Pesan, new org.netbeans.lib.awtextra.AbsoluteConstraints(940, 560, 107, -1));
 
         add(panelRound1, java.awt.BorderLayout.CENTER);
     }// </editor-fold>//GEN-END:initComponents

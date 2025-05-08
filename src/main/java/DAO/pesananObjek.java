@@ -28,41 +28,16 @@ public class pesananObjek {
         }
         return listPesanan;
     }
-    
-//    public static pesananData ambilTrJ (int idTr){
-//         Connection conn = koneksi.connect(); 
-//        String sql = "SELECT * FROM transaksi_jual where id_jual = ?";
-//        pesananData pesanan = null;
-//        
-//        try {
-//            PreparedStatement pst = conn.prepareStatement(sql);
-//            pst.setInt(1, idTr);
-//                    
-//            try (ResultSet rs = pst.executeQuery();) {
-//            
-//            while (rs.next()) {
-//                int id_jual = rs.getInt("id_jual");
-//                String tanggal = rs.getString("waktu");
-//                int tagihan = rs.getInt("tagihan");
-//                boolean lunas = rs.getBoolean("lunas");
-//                byte user = rs.getByte("id_user");
-//
-//                pesanan = new pesananData(id_jual, tanggal, tagihan, lunas, user);
-//                pesanan.setListDetail(ambilDetailTransaksi(conn, id_jual));
-//    }
-//            } catch(SQLException e){
-//                
-//            }
-//        } catch (SQLException e){
-//            e.printStackTrace();
-//        }
-//        return pesanan;
-//    }
+
     
     public static List<pesananDetailData> ambilDetailTransaksi(int idTransaksi){
         List<pesananDetailData> detailList = new ArrayList<>();
-
-        String sql = "SELECT * FROM detail_jual WHERE id_jual = ?";
+        
+        String sql = """
+                     SELECT dt.id_produk as id_p, nama_produk, dt.harga_satuan, dt.jumlah, tr.Lunas 
+                     FROM detail_jual dt JOIN m_produk ON dt.id_produk = m_produk.id_produk 
+                     join transaksi_jual tr on dt.id_jual = tr.id_jual 
+                     WHERE dt.id_jual = ?""";
         Connection conn = koneksi.connect();
         
         try (PreparedStatement pst = conn.prepareStatement(sql);) {
@@ -71,15 +46,14 @@ public class pesananObjek {
             try (ResultSet rs = pst.executeQuery();) {
 
                 while (rs.next()) {
-                    byte idProduk = rs.getByte("id_produk");
+                    byte idProduk = rs.getByte("id_p");
+                    String nama = rs.getString("nama_produk");
                     short jumlah = rs.getShort("jumlah");
+                    boolean stts = rs.getBoolean("Lunas");
                     short harga = rs.getShort("harga_satuan");
 
-                    detailList.add(new pesananDetailData(idProduk, jumlah, harga));
+                    detailList.add(new pesananDetailData(idProduk, nama, jumlah, harga, stts));
                 }
-            } catch (SQLException e){
-                e.printStackTrace();
-                System.out.println("hh");
             }
         } catch (SQLException e){
             e.printStackTrace();
@@ -142,6 +116,7 @@ public class pesananObjek {
     }
     
     public static void updateTr(pesananData trDat, byte userId){
+        
         String sql = "update transaksi_jual set Lunas = ?, id_user = ? where id_jual = ?";
         Connection conn = koneksi.connect(); 
         try{
@@ -149,6 +124,7 @@ public class pesananObjek {
             pst.setBoolean(1, trDat.get_lunas());
             pst.setByte(2, userId);
             pst.setInt(3, trDat.get_idJual());
+            pst.executeUpdate();
         } catch (SQLException e){
             e.printStackTrace();
         }

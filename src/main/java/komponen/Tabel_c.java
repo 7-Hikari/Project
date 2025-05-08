@@ -10,6 +10,12 @@ import javax.swing.table.*;
 public class Tabel_c extends JTable {
 
     private int selectedRow = -1;
+    private Color headerBackgroundColor = new Color(0, 102, 0);
+    
+    public void setHeaderBackgroundColor(Color color) {
+    this.headerBackgroundColor = color;
+    getTableHeader().repaint();
+}
 
     public Tabel_c() {
         setRowHeight(20); // tinggi baris isi data
@@ -52,7 +58,7 @@ public class Tabel_c extends JTable {
 
             JLabel label = new JLabel(value.toString(), CENTER);
             label.setOpaque(true);
-            label.setBackground(new Color(0, 102, 0)); // hijau gelap
+            label.setBackground(headerBackgroundColor); // hijau gelap
             label.setForeground(Color.WHITE);
             label.setFont(new Font("Tw Cen MT", Font.BOLD, 14));
             label.setBorder(new MatteBorder(1, 1, 1, 1, Color.BLACK)); // semua sisi hitam
