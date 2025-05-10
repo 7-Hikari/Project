@@ -5,25 +5,35 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.event.*;
 import javax.swing.*;
-import javax.swing.border.*;
 import java.net.*;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Dashboard extends JFrame {
     
-    komponen.koordinat rekap = new komponen.koordinat();
-    private JButton tombol = null;
-    private Border asbor;
+    private int yBulatan = -1;
+    private Map<JButton, ImageIcon[]> iconMap = new HashMap<>();
 
     public Dashboard() {
         initComponents();
         bulatan.setBackground(Color.WHITE);
+        
+        
+        
+        iconMap.put(tombol_dashb, new ImageIcon[]{new ImageIcon(getClass().getResource("/Dashb.png")), new ImageIcon(getClass().getResource("/imgdb.png"))});
+        iconMap.put(tombol_Pembelian, new ImageIcon[]{new ImageIcon(getClass().getResource("/Pembelian.png")), new ImageIcon(getClass().getResource("/Pembelian_on.png"))});
+//        iconMap.put(tombol_penjualan, new ImageIcon[]{iconNormal3, iconAktif3});
+        iconMap.put(tombol_produk, new ImageIcon[]{new ImageIcon(getClass().getResource("/Produk.png")), new ImageIcon(getClass().getResource("/Produk_on.png"))});
+        iconMap.put(tombol_rekapan, new ImageIcon[]{new ImageIcon(getClass().getResource("/Rekap.png")), new ImageIcon(getClass().getResource("/Rekap_on.png"))});
+        yBulatan = bulatan.getY();
     }
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        tombol_karyawan = new javax.swing.JButton();
+        panelNavigasi = new javax.swing.JPanel();
+        tombol_Pembelian = new javax.swing.JButton();
         tombol_produk = new javax.swing.JButton();
         tombol_rekapan = new javax.swing.JButton();
         tombol_penjualan = new javax.swing.JButton();
@@ -41,26 +51,35 @@ public class Dashboard extends JFrame {
         setMinimumSize(new java.awt.Dimension(1440, 900));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        tombol_karyawan.setText("jButton2");
-        tombol_karyawan.setMinimumSize(new java.awt.Dimension(50, 50));
-        tombol_karyawan.setPreferredSize(new java.awt.Dimension(50, 50));
-        tombol_karyawan.addActionListener(new java.awt.event.ActionListener() {
+        panelNavigasi.setMaximumSize(new java.awt.Dimension(110, 650));
+        panelNavigasi.setOpaque(false);
+        panelNavigasi.setLayout(null);
+
+        tombol_Pembelian.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Pembelian.png"))); // NOI18N
+        tombol_Pembelian.setContentAreaFilled(false);
+        tombol_Pembelian.setMinimumSize(new java.awt.Dimension(50, 50));
+        tombol_Pembelian.setPreferredSize(new java.awt.Dimension(50, 50));
+        tombol_Pembelian.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tombol_karyawanActionPerformed(evt);
+                tombol_PembelianActionPerformed(evt);
             }
         });
-        getContentPane().add(tombol_karyawan, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 660, -1, -1));
+        panelNavigasi.add(tombol_Pembelian);
+        tombol_Pembelian.setBounds(20, 410, 50, 50);
 
         tombol_produk.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Produk.png"))); // NOI18N
+        tombol_produk.setContentAreaFilled(false);
         tombol_produk.setPreferredSize(new java.awt.Dimension(50, 50));
         tombol_produk.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 tombol_produkActionPerformed(evt);
             }
         });
-        getContentPane().add(tombol_produk, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 340, -1, -1));
+        panelNavigasi.add(tombol_produk);
+        tombol_produk.setBounds(20, 130, 50, 50);
 
-        tombol_rekapan.setText("jButton2");
+        tombol_rekapan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Rekap.png"))); // NOI18N
+        tombol_rekapan.setContentAreaFilled(false);
         tombol_rekapan.setMinimumSize(new java.awt.Dimension(50, 50));
         tombol_rekapan.setPreferredSize(new java.awt.Dimension(50, 50));
         tombol_rekapan.addActionListener(new java.awt.event.ActionListener() {
@@ -68,10 +87,13 @@ public class Dashboard extends JFrame {
                 tombol_rekapanActionPerformed(evt);
             }
         });
-        getContentPane().add(tombol_rekapan, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 550, -1, -1));
+        panelNavigasi.add(tombol_rekapan);
+        tombol_rekapan.setBounds(20, 540, 50, 50);
 
         tombol_penjualan.setBackground(new java.awt.Color(158, 158, 158));
         tombol_penjualan.setForeground(new java.awt.Color(153, 153, 153));
+        tombol_penjualan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Penjualan.png"))); // NOI18N
+        tombol_penjualan.setContentAreaFilled(false);
         tombol_penjualan.setMinimumSize(new java.awt.Dimension(50, 50));
         tombol_penjualan.setPreferredSize(new java.awt.Dimension(50, 50));
         tombol_penjualan.addActionListener(new java.awt.event.ActionListener() {
@@ -79,7 +101,8 @@ public class Dashboard extends JFrame {
                 tombol_penjualanActionPerformed(evt);
             }
         });
-        getContentPane().add(tombol_penjualan, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 440, -1, -1));
+        panelNavigasi.add(tombol_penjualan);
+        tombol_penjualan.setBounds(20, 240, 50, 50);
 
         tombol_dashb.setBackground(new java.awt.Color(255, 255, 255));
         tombol_dashb.setForeground(null);
@@ -96,7 +119,8 @@ public class Dashboard extends JFrame {
                 tombol_dashbActionPerformed(evt);
             }
         });
-        getContentPane().add(tombol_dashb, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 230, 50, 50));
+        panelNavigasi.add(tombol_dashb);
+        tombol_dashb.setBounds(20, 30, 50, 50);
 
         bulatan.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -111,7 +135,10 @@ public class Dashboard extends JFrame {
             .addGap(0, 70, Short.MAX_VALUE)
         );
 
-        getContentPane().add(bulatan, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 220, -1, -1));
+        panelNavigasi.add(bulatan);
+        bulatan.setBounds(10, 20, 70, 70);
+
+        getContentPane().add(panelNavigasi, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 190, 110, 630));
 
         panelRound1.setBackground(new java.awt.Color(255, 255, 255));
         panelRound1.setRequestFocusEnabled(false);
@@ -203,9 +230,9 @@ public class Dashboard extends JFrame {
         panelubah.repaint();
     }//GEN-LAST:event_tombol_produkActionPerformed
 
-    private void tombol_karyawanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tombol_karyawanActionPerformed
-        interaksipanel(tombol_karyawan);
-    }//GEN-LAST:event_tombol_karyawanActionPerformed
+    private void tombol_PembelianActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tombol_PembelianActionPerformed
+        interaksipanel(tombol_Pembelian);
+    }//GEN-LAST:event_tombol_PembelianActionPerformed
 
     private void tombol_dashbActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tombol_dashbActionPerformed
         interaksipanel(tombol_dashb);
@@ -230,14 +257,18 @@ public class Dashboard extends JFrame {
     }//GEN-LAST:event_tombol_penjualanActionPerformed
 
     private void interaksipanel(JButton ba_en) {
-        ba_en.setContentAreaFilled(false);
-
+        
         int targetY = ba_en.getY() + (ba_en.getHeight() - bulatan.getHeight()) / 2;
-        int startY = bulatan.getY();
+        
+        if (targetY == yBulatan) {
+        updateTombolAktif(ba_en);
+        return;
+    }
+        int startY = yBulatan;
         int selisih = Math.abs(targetY - startY);
         int langkah_a = Math.max(2, selisih / 15);
         int langkah = langkah_a * ((targetY > startY) ? 1 : -1);
-
+        
         Timer waktu = new Timer(10, null);
         waktu.addActionListener(new ActionListener() {
             int y = startY;
@@ -250,18 +281,30 @@ public class Dashboard extends JFrame {
                     bulatan.repaint();
                 } else {
                     bulatan.setLocation(bulatan.getX(), targetY);
+                    yBulatan = targetY;
                     waktu.stop();
+                    updateTombolAktif(ba_en);
                 }
             }
         });
         waktu.start();
-        if (tombol != null) {
-            tombol.setContentAreaFilled(true);
-            tombol.setBorder(asbor);
+        updateTombolNonAktif(ba_en);
+    }
+    
+    private void updateTombolAktif(JButton aktif) {
+        ImageIcon[] icons = iconMap.get(aktif);
+        if (icons != null) {
+            aktif.setIcon(icons[1]);
         }
-        ba_en.setContentAreaFilled(false);
-        ba_en.setBorder(asbor);
-        tombol = ba_en;
+    }
+
+    private void updateTombolNonAktif(JButton aktif) {
+        for (Map.Entry<JButton, ImageIcon[]> entry : iconMap.entrySet()) {
+            JButton btn = entry.getKey();
+            if (btn != aktif) {
+                btn.setIcon(entry.getValue()[0]);
+            }
+        }
     }
 
     public static void main(String args[]) {
@@ -287,11 +330,12 @@ public class Dashboard extends JFrame {
     private javax.swing.JLabel Toko;
     private komponen.PanelBulat bulatan;
     private javax.swing.JLabel foto;
+    private javax.swing.JPanel panelNavigasi;
     private komponen.PanelRound panelRound1;
     private komponen.PanelRound panelnyaPanel;
     private komponen.PanelRound panelubah;
+    private javax.swing.JButton tombol_Pembelian;
     private javax.swing.JButton tombol_dashb;
-    private javax.swing.JButton tombol_karyawan;
     private javax.swing.JButton tombol_penjualan;
     private javax.swing.JButton tombol_produk;
     private javax.swing.JButton tombol_rekapan;
