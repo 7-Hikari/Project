@@ -13,7 +13,6 @@ import com.google.zxing.common.BitMatrix;
 import java.awt.image.BufferedImage;
 import java.text.*;
 import java.nio.file.Path;
-import javax.imageio.stream.ImageOutputStream;
 import javax.swing.table.DefaultTableModel;
 
 public class Penjualan extends komponen.PanelRound {
@@ -173,7 +172,6 @@ public class Penjualan extends komponen.PanelRound {
 
         int width = 300;
         int height = 100;
-        int hH = 20;
         
         try{
             Hashtable<EncodeHintType, Object> hints = new Hashtable<>();
@@ -183,29 +181,36 @@ public class Penjualan extends komponen.PanelRound {
                     kode, BarcodeFormat.CODE_128, width, height, hints);
             
             BufferedImage bcImg = MatrixToImageWriter.toBufferedImage(matrix);
-            BufferedImage finalImg = new BufferedImage(width, height + hH, BufferedImage.TYPE_INT_RGB);
-            
-            Graphics2D g = finalImg.createGraphics();
-            g.setColor(Color.WHITE);
-            g.fillRect(0, 0, width, height + hH);
-            g.drawImage(bcImg, 0, 0, null);
-            g.setColor(Color.BLACK);
-            g.setFont(new Font("Arial", Font.PLAIN, 14));
-            FontMetrics fm = g.getFontMetrics();
-            int textWidth = fm.stringWidth(kode);
-            g.drawString(kode,(width - textWidth) / 2, height + (hH + fm.getAscent()) / 2 - 2);
-            
-            g.dispose();
             
             Path jalur = Path.of("barcode.png");
-            ImageIO.write(bcImg, "png", (ImageOutputStream) jalur);
+
+            ImageIO.write(bcImg, "png", jalur.toFile());
+            
+            Print cetak = new Print();
+            
+            java.util.List<Object[]> tabelDat = new ArrayList<>();
+            for(no = 0; no < m_pesanan.getRowCount();no++){
+                Object[] baris = {
+                m_pesanan.getValueAt(no, 2), //nama
+                m_pesanan.getValueAt(no, 4), //jumlah
+                m_pesanan.getValueAt(no, 3), //harga
+};
+                tabelDat.add(baris);
+            }
+//            cetak.cetakStruk(kode, tabelDat, jalur);
+            BufferedImage barcode = ImageIO.read(Path.of("barcode.png").toFile());
+            Path output = Path.of("preview_struk.png");
+
+            cetak.previewStrukKePng(kode, tabelDat, barcode, output);
+
+            
             
             System.out.println("barcode");
         } catch (Exception e){
             e.printStackTrace();
         }
     }
-
+  
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {

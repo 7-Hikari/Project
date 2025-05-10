@@ -33,10 +33,12 @@ public class Dashboard extends JFrame {
         LabelJudul = new javax.swing.JLabel();
         panelnyaPanel = new komponen.PanelRound();
         panelubah = new komponen.PanelRound();
+        Toko = new javax.swing.JLabel();
         foto = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setMinimumSize(new java.awt.Dimension(2026, 1440));
+        setMaximumSize(new java.awt.Dimension(1440, 900));
+        setMinimumSize(new java.awt.Dimension(1440, 900));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         tombol_karyawan.setText("jButton2");
@@ -70,7 +72,6 @@ public class Dashboard extends JFrame {
 
         tombol_penjualan.setBackground(new java.awt.Color(158, 158, 158));
         tombol_penjualan.setForeground(new java.awt.Color(153, 153, 153));
-        tombol_penjualan.setText("jButton2");
         tombol_penjualan.setMinimumSize(new java.awt.Dimension(50, 50));
         tombol_penjualan.setPreferredSize(new java.awt.Dimension(50, 50));
         tombol_penjualan.addActionListener(new java.awt.event.ActionListener() {
@@ -96,6 +97,8 @@ public class Dashboard extends JFrame {
             }
         });
         getContentPane().add(tombol_dashb, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 230, 50, 50));
+
+        bulatan.setBackground(new java.awt.Color(255, 255, 255));
 
         javax.swing.GroupLayout bulatanLayout = new javax.swing.GroupLayout(bulatan);
         bulatan.setLayout(bulatanLayout);
@@ -133,11 +136,11 @@ public class Dashboard extends JFrame {
             panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRound1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(LabelJudul, javax.swing.GroupLayout.DEFAULT_SIZE, 58, Short.MAX_VALUE)
+                .addComponent(LabelJudul, javax.swing.GroupLayout.DEFAULT_SIZE, 78, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
-        getContentPane().add(panelRound1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 50, 900, 70));
+        getContentPane().add(panelRound1, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 40, 900, 90));
 
         panelnyaPanel.setBackground(new java.awt.Color(51, 255, 255));
         panelnyaPanel.setMaximumSize(new java.awt.Dimension(1270, 670));
@@ -148,6 +151,9 @@ public class Dashboard extends JFrame {
         panelnyaPanel.setRoundTopLeft(80);
         panelnyaPanel.setRoundTopRight(80);
 
+        panelubah.setMaximumSize(new java.awt.Dimension(1250, 650));
+        panelubah.setMinimumSize(new java.awt.Dimension(1250, 650));
+        panelubah.setPreferredSize(new java.awt.Dimension(1250, 650));
         panelubah.setRoundBottomLeft(100);
         panelubah.setRoundBottomRight(100);
         panelubah.setRoundTopLeft(100);
@@ -158,25 +164,33 @@ public class Dashboard extends JFrame {
         panelnyaPanel.setLayout(panelnyaPanelLayout);
         panelnyaPanelLayout.setHorizontalGroup(
             panelnyaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelnyaPanelLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(panelubah, javax.swing.GroupLayout.PREFERRED_SIZE, 1260, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+            .addGap(0, 1270, Short.MAX_VALUE)
+            .addGroup(panelnyaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(panelnyaPanelLayout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(panelubah, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 0, Short.MAX_VALUE)))
         );
         panelnyaPanelLayout.setVerticalGroup(
             panelnyaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelnyaPanelLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(panelubah, javax.swing.GroupLayout.PREFERRED_SIZE, 660, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+            .addGap(0, 670, Short.MAX_VALUE)
+            .addGroup(panelnyaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(panelnyaPanelLayout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(panelubah, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 0, Short.MAX_VALUE)))
         );
 
-        getContentPane().add(panelnyaPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(102, 150, 1270, 670));
+        getContentPane().add(panelnyaPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 170, 1270, 670));
+
+        Toko.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        Toko.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Papoy.png"))); // NOI18N
+        getContentPane().add(Toko, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 20, 160, 130));
 
         URL url = getClass().getResource("komponen/Main.png");
-        foto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Main.png"))); // NOI18N
-        foto.setText("jLabel2");
-        getContentPane().add(foto, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1733, -1));
+        foto.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        foto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Desktop.png"))); // NOI18N
+        getContentPane().add(foto, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1440, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -210,7 +224,7 @@ public class Dashboard extends JFrame {
     private void tombol_penjualanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tombol_penjualanActionPerformed
         interaksipanel(tombol_penjualan);
         panelubah.removeAll();
-        panelubah.add(new KasirPenjualan(), BorderLayout.CENTER);
+        panelubah.add(new Penjualan(), BorderLayout.CENTER);
         panelubah.revalidate();
         panelubah.repaint();
     }//GEN-LAST:event_tombol_penjualanActionPerformed
@@ -270,6 +284,7 @@ public class Dashboard extends JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel LabelJudul;
+    private javax.swing.JLabel Toko;
     private komponen.PanelBulat bulatan;
     private javax.swing.JLabel foto;
     private komponen.PanelRound panelRound1;
