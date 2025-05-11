@@ -1,5 +1,7 @@
 package com.mycompany.kasir;
 
+import DAO.userData;
+import DAO.userObjek;
 import DataMaster.*;
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -13,7 +15,27 @@ public class Dashboard extends JFrame {
     
     private int yBulatan = -1;
     private Map<JButton, ImageIcon[]> iconMap = new HashMap<>();
+    private userData loginUser;
 
+    private void aturAksesBerdasarkanStatus() {
+        switch (loginUser.getStatus()) {
+            case SuperAdmin:
+                // Semua tombol aktif
+                break;
+
+            case Pemilik:
+                tombol_Kasir.setVisible(false);
+                break;
+
+            case Karyawan:
+                tombol_produk.setVisible(false);
+                tombol_Pembelian.setVisible(false);
+                tombol_dashb.setVisible(false);
+                tombol_rekapan.setVisible(false);
+                tombol_Penjualan.setVisible(false);
+                break;
+        }
+    }
     public Dashboard() {
         initComponents();
         bulatan.setBackground(Color.WHITE);

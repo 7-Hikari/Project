@@ -7,6 +7,7 @@ public class userData {
     
     userData(byte idUser, userObjek.Status status, String username){
         this.idUser = idUser;
+        this.status = status;
         this.username = username;
     }
     
