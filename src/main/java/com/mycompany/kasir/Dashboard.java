@@ -1,7 +1,6 @@
 package com.mycompany.kasir;
 
-import DAO.userData;
-import DAO.userObjek;
+import DAO.*;
 import DataMaster.*;
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -10,37 +9,45 @@ import javax.swing.*;
 import java.net.*;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
 
 public class Dashboard extends JFrame {
     
     private int yBulatan = -1;
-    private Map<JButton, ImageIcon[]> iconMap = new HashMap<>();
+    private final Map<JButton, ImageIcon[]> iconMap = new HashMap<>();
+    private final Map<String, Set<JButton>> RoleAkses = new HashMap<>();
+    
+    private userObjek.Status status;
     private userData loginUser;
-
-    private void aturAksesBerdasarkanStatus() {
-        switch (loginUser.getStatus()) {
-            case SuperAdmin:
-                // Semua tombol aktif
-                break;
-
-            case Pemilik:
-                tombol_Kasir.setVisible(false);
-                break;
-
-            case Karyawan:
-                tombol_produk.setVisible(false);
-                tombol_Pembelian.setVisible(false);
-                tombol_dashb.setVisible(false);
-                tombol_rekapan.setVisible(false);
-                tombol_Penjualan.setVisible(false);
-                break;
-        }
+    
+    private void Access() {
+        RoleAkses.put("Pelanggan", Set.of(tombol_Penjualan));
+        RoleAkses.put("Karyawan", Set.of(tombol_Penjualan, tombol_Kasir));
+        Set<JButton> Boundless = Set.of(
+                tombol_Kasir, tombol_Pembelian, tombol_Penjualan,
+                tombol_dashb, tombol_produk, tombol_rekapan);
+        RoleAkses.put("Pemilik", Boundless);
+        RoleAkses.put("SuperAdmin", Boundless);
     }
-    public Dashboard() {
+    
+    private boolean HakAkses(JButton x){
+        String role = (status == null) ? "Pelanggan" : status.toString();
+        Set<JButton> akses = RoleAkses.get(role);
+         if (akses == null || !akses.contains(x)) {
+        JOptionPane.showMessageDialog(this, "Anda tidak memiliki akses", "Peringatan!", JOptionPane.WARNING_MESSAGE);
+        return false;
+    }
+         return true;
+    }
+    
+    public Dashboard(userData login) {
+        this.loginUser = login;
+        this.status = loginUser.getStatus();
+        
         initComponents();
+        
         bulatan.setBackground(Color.WHITE);
-        
-        
+        Access();
         
         iconMap.put(tombol_dashb, new ImageIcon[]{new ImageIcon(getClass().getResource("/Dashb.png")), new ImageIcon(getClass().getResource("/imgdb.png"))});
         iconMap.put(tombol_Pembelian, new ImageIcon[]{new ImageIcon(getClass().getResource("/Pembelian.png")), new ImageIcon(getClass().getResource("/Pembelian_on.png"))});
@@ -293,6 +300,7 @@ public class Dashboard extends JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void tombol_produkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tombol_produkActionPerformed
+        if (!HakAkses(tombol_produk)) return;
         interaksipanel(tombol_produk);
         panelubah.removeAll();
         panelubah.add(new Dataprodukproduk(), BorderLayout.CENTER);
@@ -301,10 +309,12 @@ public class Dashboard extends JFrame {
     }//GEN-LAST:event_tombol_produkActionPerformed
 
     private void tombol_PembelianActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tombol_PembelianActionPerformed
+        if (!HakAkses(tombol_Pembelian)) return;
         interaksipanel(tombol_Pembelian);
     }//GEN-LAST:event_tombol_PembelianActionPerformed
 
     private void tombol_dashbActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tombol_dashbActionPerformed
+        if (!HakAkses(tombol_dashb)) return;
         interaksipanel(tombol_dashb);
         panelubah.removeAll();
         panelubah.revalidate();
@@ -312,6 +322,7 @@ public class Dashboard extends JFrame {
     }//GEN-LAST:event_tombol_dashbActionPerformed
 
     private void tombol_rekapanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tombol_rekapanActionPerformed
+        if (!HakAkses(tombol_rekapan)) return;
         interaksipanel(tombol_rekapan);
         panelubah.removeAll();
         panelubah.revalidate();
@@ -319,6 +330,7 @@ public class Dashboard extends JFrame {
     }//GEN-LAST:event_tombol_rekapanActionPerformed
 
     private void tombol_KasirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tombol_KasirActionPerformed
+        if (!HakAkses(tombol_Kasir)) return;
         interaksipanel(tombol_Kasir);
         panelubah.removeAll();
         panelubah.add(new KasirPenjualan(), BorderLayout.CENTER);
@@ -327,6 +339,7 @@ public class Dashboard extends JFrame {
     }//GEN-LAST:event_tombol_KasirActionPerformed
 
     private void tombol_PenjualanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tombol_PenjualanActionPerformed
+        if (!HakAkses(tombol_Penjualan)) return;
         interaksipanel(tombol_Penjualan);
         panelubah.removeAll();
         panelubah.add(new Penjualan(), BorderLayout.CENTER);
@@ -383,24 +396,6 @@ public class Dashboard extends JFrame {
                 btn.setIcon(entry.getValue()[0]);
             }
         }
-    }
-
-    public static void main(String args[]) {
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Dashboard.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new Dashboard().setVisible(true);
-            }
-        });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

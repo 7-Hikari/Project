@@ -7,6 +7,7 @@ package Login;
 
 import DAO.userData;
 import DAO.userObjek;
+import com.mycompany.kasir.CustAccess;
 import com.mycompany.kasir.Dashboard;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -252,28 +253,31 @@ public class Login extends javax.swing.JFrame {
 
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
- String user = username.getText();
-    String pass = jPasswordField1.getText();
+        String user = username.getText();
+        String pass = jPasswordField1.getText();
 
-    System.out.println("Input user: " + user);
-    System.out.println("Input pass: " + pass);
+        System.out.println("Input user: " + user);
+        System.out.println("Input pass: " + pass);
 
-    // Cek user dari database
-    userData UD = userObjek.CekUser(user, pass);
+        if (user.equalsIgnoreCase("Username") && pass.isBlank()) {
+            new CustAccess().setVisible(true);
+            this.dispose();
+        } else {
+            // Cek user dari database
+            userData UD = userObjek.CekUser(user, pass);
 
-    if (UD != null) {
-        System.out.println("Login berhasil sebagai: " + UD.getUsername());
-        System.out.println("Status: " + UD.getStatus());
+            if (UD != null) {
+                System.out.println("Login berhasil sebagai: " + UD.getUsername());
+                System.out.println("Status: " + UD.getStatus());
 
-        JOptionPane.showMessageDialog(this, "Login berhasil sebagai " + UD.getStatus());
+                JOptionPane.showMessageDialog(this, "Login berhasil sebagai " + UD.getStatus());
 
-        
-    
-    this.dispose();
-
-    } else {
-        JOptionPane.showMessageDialog(this, "Login gagal. Username atau Password salah.");
-    }
+                new Dashboard(UD).setVisible(true);
+                this.dispose();
+            } else {
+                JOptionPane.showMessageDialog(this, "Login gagal. Username atau Password salah.");
+            }
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void usernameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_usernameActionPerformed

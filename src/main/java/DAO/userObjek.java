@@ -7,7 +7,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.*;
 
 public class userObjek {
-    static enum Status {
+    public static enum Status {
         Pemilik, Karyawan, SuperAdmin
     }
     
