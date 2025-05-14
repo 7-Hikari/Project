@@ -5,7 +5,7 @@ import java.sql.*;
 import koneksi.koneksi;
 
 public class bahanObjek {
-    static enum kategori {
+    public static enum kategori {
         dimakan, tidak
     }
     

@@ -22,7 +22,7 @@ public class Dashboard extends JFrame {
     
     private void Access() {
         RoleAkses.put("Pelanggan", Set.of(tombol_Penjualan));
-        RoleAkses.put("Karyawan", Set.of(tombol_Penjualan, tombol_Kasir));
+        RoleAkses.put("Karyawan", Set.of(tombol_dashb, tombol_Penjualan, tombol_Kasir));
         Set<JButton> Boundless = Set.of(
                 tombol_Kasir, tombol_Pembelian, tombol_Penjualan,
                 tombol_dashb, tombol_produk, tombol_rekapan);
@@ -84,7 +84,6 @@ public class Dashboard extends JFrame {
         foto = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setMaximumSize(new java.awt.Dimension(1440, 900));
         setMinimumSize(new java.awt.Dimension(1440, 900));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -224,8 +223,11 @@ public class Dashboard extends JFrame {
         panelRound1.setRoundTopLeft(80);
         panelRound1.setRoundTopRight(80);
 
+        LabelJudul.setBackground(new java.awt.Color(0, 0, 0));
+        LabelJudul.setFont(new java.awt.Font("Lucida Calligraphy", 1, 60)); // NOI18N
         LabelJudul.setForeground(new java.awt.Color(0, 0, 0));
         LabelJudul.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        LabelJudul.setText("Dashboard");
 
         javax.swing.GroupLayout panelRound1Layout = new javax.swing.GroupLayout(panelRound1);
         panelRound1.setLayout(panelRound1Layout);
@@ -240,7 +242,7 @@ public class Dashboard extends JFrame {
             panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRound1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(LabelJudul, javax.swing.GroupLayout.DEFAULT_SIZE, 78, Short.MAX_VALUE)
+                .addComponent(LabelJudul, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -302,6 +304,7 @@ public class Dashboard extends JFrame {
     private void tombol_produkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tombol_produkActionPerformed
         if (!HakAkses(tombol_produk)) return;
         interaksipanel(tombol_produk);
+        LabelJudul.setText("Produk");
         panelubah.removeAll();
         panelubah.add(new Dataprodukproduk(), BorderLayout.CENTER);
         panelubah.revalidate();
@@ -311,11 +314,13 @@ public class Dashboard extends JFrame {
     private void tombol_PembelianActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tombol_PembelianActionPerformed
         if (!HakAkses(tombol_Pembelian)) return;
         interaksipanel(tombol_Pembelian);
+        LabelJudul.setText("Pembelian");
     }//GEN-LAST:event_tombol_PembelianActionPerformed
 
     private void tombol_dashbActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tombol_dashbActionPerformed
         if (!HakAkses(tombol_dashb)) return;
         interaksipanel(tombol_dashb);
+        LabelJudul.setText("Dashboard");
         panelubah.removeAll();
         panelubah.revalidate();
         panelubah.repaint();
@@ -324,6 +329,7 @@ public class Dashboard extends JFrame {
     private void tombol_rekapanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tombol_rekapanActionPerformed
         if (!HakAkses(tombol_rekapan)) return;
         interaksipanel(tombol_rekapan);
+        LabelJudul.setText("Rekapan");
         panelubah.removeAll();
         panelubah.revalidate();
         panelubah.repaint();
@@ -332,6 +338,7 @@ public class Dashboard extends JFrame {
     private void tombol_KasirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tombol_KasirActionPerformed
         if (!HakAkses(tombol_Kasir)) return;
         interaksipanel(tombol_Kasir);
+        LabelJudul.setText("Kasir");
         panelubah.removeAll();
         panelubah.add(new KasirPenjualan(), BorderLayout.CENTER);
         panelubah.revalidate();
@@ -341,6 +348,7 @@ public class Dashboard extends JFrame {
     private void tombol_PenjualanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tombol_PenjualanActionPerformed
         if (!HakAkses(tombol_Penjualan)) return;
         interaksipanel(tombol_Penjualan);
+        LabelJudul.setText("Penjualan");
         panelubah.removeAll();
         panelubah.add(new Penjualan(), BorderLayout.CENTER);
         panelubah.revalidate();

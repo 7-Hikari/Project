@@ -13,6 +13,11 @@ public class bahanData {
         this.kateg = kateg;
         this.jumlah = jumlah;
     }
+    public bahanData(String nama, bahanObjek.kategori kateg, short jml){
+        this.nama_b = nama;
+        this.kateg = kateg;
+        this.jumlah = jml;
+    }
     
     public byte get_id_b() {
         return id_b;
