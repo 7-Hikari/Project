@@ -1,6 +1,7 @@
 package DataMaster;
 
 import DAO.*;
+import java.awt.BorderLayout;
 import java.util.*;
 import java.awt.Color;
 import java.awt.FlowLayout;
@@ -43,7 +44,7 @@ public class Dataprodukproduk extends javax.swing.JPanel {
                 }
             });
             DataProduk.add(produkP);
-            DataProduk.setLayout(new wraplayout(FlowLayout.LEFT, 30, 10));
+            DataProduk.setLayout(new wraplayout(FlowLayout.CENTER, 30, 10));
     }
         int jumlahItem = DataProduk.getComponentCount();
         int tinggiPerBaris = 200;
@@ -62,14 +63,14 @@ public class Dataprodukproduk extends javax.swing.JPanel {
 
         jPanel1 = new javax.swing.JPanel();
         jPanel5 = new javax.swing.JPanel();
-        Panelprodukbahan = new javax.swing.JPanel();
+        Panelprodukbahan = new komponen.PanelRound();
         Hapus = new javax.swing.JButton();
         Edit = new javax.swing.JButton();
         Tambah = new javax.swing.JButton();
         flow = new javax.swing.JScrollPane();
         DataProduk = new komponen.PanelRound();
-        jButton4 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
+        Bahan = new javax.swing.JButton();
+        Produk = new javax.swing.JButton();
         jPanel6 = new javax.swing.JPanel();
 
         setMaximumSize(new java.awt.Dimension(1200, 620));
@@ -84,7 +85,7 @@ public class Dataprodukproduk extends javax.swing.JPanel {
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGap(0, 1257, Short.MAX_VALUE)
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -130,18 +131,18 @@ public class Dataprodukproduk extends javax.swing.JPanel {
 
         Panelprodukbahan.add(flow, new org.netbeans.lib.awtextra.AbsoluteConstraints(7, 10, 1240, 410));
 
-        jButton4.setText("jButton4");
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
+        Bahan.setText("Bahan");
+        Bahan.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
+                BahanActionPerformed(evt);
             }
         });
 
-        jButton5.setText("jButton5");
-        jButton5.setPreferredSize(new java.awt.Dimension(553, 45));
-        jButton5.addActionListener(new java.awt.event.ActionListener() {
+        Produk.setText("Produk");
+        Produk.setPreferredSize(new java.awt.Dimension(553, 45));
+        Produk.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton5ActionPerformed(evt);
+                ProdukActionPerformed(evt);
             }
         });
 
@@ -164,14 +165,13 @@ public class Dataprodukproduk extends javax.swing.JPanel {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(67, 67, 67)
-                        .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 444, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(Produk, javax.swing.GroupLayout.PREFERRED_SIZE, 444, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(81, 81, 81)
                         .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(88, 88, 88)
-                        .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 500, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(Panelprodukbahan, javax.swing.GroupLayout.DEFAULT_SIZE, 1257, Short.MAX_VALUE)
-                        .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addComponent(Bahan, javax.swing.GroupLayout.PREFERRED_SIZE, 500, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Panelprodukbahan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(33, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -181,15 +181,15 @@ public class Dataprodukproduk extends javax.swing.JPanel {
                     .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(31, 31, 31)
-                        .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(Bahan, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(35, 35, 35)
-                        .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(Produk, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(Panelprodukbahan, javax.swing.GroupLayout.PREFERRED_SIZE, 561, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(Panelprodukbahan, javax.swing.GroupLayout.PREFERRED_SIZE, 481, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(478, Short.MAX_VALUE))
         );
 
         add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1290, -1));
@@ -199,7 +199,7 @@ public class Dataprodukproduk extends javax.swing.JPanel {
 
     }//GEN-LAST:event_TambahActionPerformed
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+    private void BahanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BahanActionPerformed
    
     if(probah ==null){
         probah = new Dataprodukbahan();
@@ -212,26 +212,39 @@ public class Dataprodukproduk extends javax.swing.JPanel {
     Panelprodukbahan.revalidate();
     Panelprodukbahan.repaint();
         System.out.println("ss" + Panelprodukbahan.getWidth());
-    }//GEN-LAST:event_jButton4ActionPerformed
+    }//GEN-LAST:event_BahanActionPerformed
 
     private void EditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EditActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_EditActionPerformed
 
-    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton5ActionPerformed
+    private void ProdukActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ProdukActionPerformed
+    tampilkanPanelProduk();
+    }//GEN-LAST:event_ProdukActionPerformed
+
+    private void tampilkanPanelProduk() {
+    Panelprodukbahan.removeAll();
+    Panelprodukbahan.add(flow, new org.netbeans.lib.awtextra.AbsoluteConstraints(7, 10, 1240, 410));
+    Panelprodukbahan.add(Tambah, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 430, -1, -1));
+    Panelprodukbahan.add(Edit, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 430, -1, -1));
+    Panelprodukbahan.add(Hapus, new org.netbeans.lib.awtextra.AbsoluteConstraints(1020, 430, 122, 34));
+
+    Panelprodukbahan.revalidate();
+    Panelprodukbahan.repaint();
+
+    loadProduk(); // optionally reload
+}
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton Bahan;
     private komponen.PanelRound DataProduk;
     private javax.swing.JButton Edit;
     private javax.swing.JButton Hapus;
-    private javax.swing.JPanel Panelprodukbahan;
+    private komponen.PanelRound Panelprodukbahan;
+    private javax.swing.JButton Produk;
     private javax.swing.JButton Tambah;
     private javax.swing.JScrollPane flow;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;

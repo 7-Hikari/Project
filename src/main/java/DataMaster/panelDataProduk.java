@@ -33,6 +33,7 @@ public class panelDataProduk extends JPanel {
         Nama.setText(produkdat.get_nama());
         String harga = Rp.format(produkdat.get_harga());
         Harga.setText(harga);
+        LStok.setText(String.valueOf(produkdat.get_stok()));
     }
     
     @SuppressWarnings("unchecked")
