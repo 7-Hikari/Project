@@ -1,14 +1,37 @@
 package DataMaster;
 
-/**
- *
- * @author RIZKI NABIL P
- */
+import DAO.bahanData;
+import DAO.bahanObjek;
+import javax.swing.table.DefaultTableModel;
+import java.util.List;
+ // @author RIZKI NABIL P
+
 public class Dataprodukbahan extends javax.swing.JPanel {
 
+    private DefaultTableModel tB = null;
+    private int no = 1;
+    
     public Dataprodukbahan() {
         initComponents();
         setSize(1200, 620);
+        
+        tB = (DefaultTableModel) tabelBahan.getModel();
+        loadBahan();
+    }
+    
+    private void loadBahan(){
+        tB.setRowCount(0);
+        List<bahanData> daftarBahan = bahanObjek.getAllBahan();
+        
+        for(bahanData dat : daftarBahan){
+            tB.addRow(new Object[] {
+                no++,
+                dat.get_id_b(),
+                dat.get_nama_b(),
+                dat.get_kategori().name(),
+                dat.jumlah()
+        });
+        }
     }
 
     @SuppressWarnings("unchecked")
@@ -20,7 +43,7 @@ public class Dataprodukbahan extends javax.swing.JPanel {
         Edit = new javax.swing.JButton();
         Tambah = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tabelBahan = new javax.swing.JTable();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setMaximumSize(new java.awt.Dimension(1201, 449));
@@ -50,26 +73,38 @@ public class Dataprodukbahan extends javax.swing.JPanel {
             }
         });
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tabelBahan.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
-                "No", "Nama Bahan", "Kategori", "Jumlah"
+                "No", "Id", "Nama Bahan", "Kategori", "Jumlah"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class
+                java.lang.Integer.class, java.lang.Byte.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class
+            };
+            boolean[] canEdit = new boolean [] {
+                true, false, true, true, true
             };
 
             public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
             }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
         });
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(tabelBahan);
+        if (tabelBahan.getColumnModel().getColumnCount() > 0) {
+            tabelBahan.getColumnModel().getColumn(1).setMinWidth(0);
+            tabelBahan.getColumnModel().getColumn(1).setPreferredWidth(0);
+            tabelBahan.getColumnModel().getColumn(1).setMaxWidth(0);
+        }
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -119,6 +154,6 @@ public class Dataprodukbahan extends javax.swing.JPanel {
     private javax.swing.JButton Tambah;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable tabelBahan;
     // End of variables declaration//GEN-END:variables
 }
