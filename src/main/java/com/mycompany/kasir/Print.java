@@ -1,198 +1,92 @@
 package com.mycompany.kasir;
 
-import javax.print.PrintService;
-import javax.print.PrintServiceLookup;
-import java.awt.print.PageFormat;
-import java.awt.print.Printable;
-import java.awt.print.PrinterException;
-import java.awt.print.PrinterJob;
-import java.awt.Font;
-import java.awt.Color;
-import java.awt.FontMetrics;
-import java.awt.Graphics2D;
-import java.awt.Graphics;
-import java.awt.image.BufferedImage;
-import javax.imageio.ImageIO;
-import java.util.List;
-import java.nio.file.Path;
+import javax.print.*;
+import java.io.*;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-
+import java.util.List;
 
 public class Print {
-    public void cetakStruk(String kode, List<Object[]> dataTabel, Path x) {
-    try {
-        String printerName = "Thermal Printer Generic"; // Ganti sesuai nama printer kamu
 
-        // Cari printer
-        PrintService[] services = PrintServiceLookup.lookupPrintServices(null, null);
-        PrintService selectedService = null;
-        for (PrintService service : services) {
-            if (service.getName().equalsIgnoreCase(printerName)) {
-                selectedService = service;
-                break;
-            }
-        }
-
-        if (selectedService == null) {
-            System.out.println("Printer tidak ditemukan.");
-            return;
-        }
-
-        // Muat gambar barcode dari file
-        BufferedImage barcodeImage = ImageIO.read(x.toFile());
-
-        PrinterJob job = PrinterJob.getPrinterJob();
-        job.setPrintService(selectedService);
-
-        job.setPrintable(new Printable() {
-            @Override
-            public int print(Graphics g, PageFormat pf, int pageIndex) throws PrinterException {
-                if (pageIndex > 0) return NO_SUCH_PAGE;
-
-                Graphics2D g2d = (Graphics2D) g;
-                g2d.translate(pf.getImageableX(), pf.getImageableY());
-
-                // Contoh teks
-                                int y = 10;
-                g2d.setFont(new Font("Monospaced", Font.PLAIN, 10));
-                
-                FontMetrics fm = g2d.getFontMetrics();
-                int pageWidth = (int) pf.getImageableWidth();
-                
-                // Header toko
-                String toko = "== PAPOY DRINK ==";
-                g2d.drawString(toko, (pageWidth - fm.stringWidth(toko)) / 2, y); y += 15;
-                String alamat = "Jl. Jalan No. 123";
-                g2d.drawString(alamat, (pageWidth - fm.stringWidth(alamat)) / 2, y); y += 15;
-
-                // Tanggal dan nomor transaksi
-                String tgl = new SimpleDateFormat("dd/MM/yyyy HH:mm").format(new Date());
-                g2d.drawString("Tgl : " + tgl, 0, y); y += 15;
-                g2d.drawString("Nota: #INV" + kode, 0, y); y += 25;
-
-                // Isi produk (contoh)
-                int total = 0;
-                for (Object[] baris : dataTabel) {
-                    String nama = baris[0].toString();
-                    int qty = Integer.parseInt(baris[1].toString());
-                    int harga = Integer.parseInt(baris[2].toString());
-                    int subtotal = qty * harga;
-                    total += subtotal;
-
-                    String kanan = String.format("x%d Rp%,d", qty, subtotal);
-                    g2d.drawString(nama, 0, y);
-                    g2d.drawString(kanan, pageWidth - fm.stringWidth(kanan), y);
-                    y += 15;
+    public void cetakStruk(String kode, List<Object[]> pesanan) {
+        try {
+            String printerName = "POS-80"; // ganti sesuai printermu
+            PrintService[] services = PrintServiceLookup.lookupPrintServices(null, null);
+            PrintService printer = null;
+            for (PrintService ps : services) {
+                if (ps.getName().equalsIgnoreCase(printerName)) {
+                    printer = ps;
+                    break;
                 }
-                String totalStr = "TOTAL: Rp" + String.format("%,d", total);
-                g2d.drawString(totalStr, pageWidth - fm.stringWidth(totalStr), y); y += 25;
-
-                // Gambar barcode (pusatkan horizontal)
-                int barcodeX = (int) ((pf.getImageableWidth() - barcodeImage.getWidth()) / 2);
-                g2d.drawImage(barcodeImage, barcodeX, y, null);
-                y += barcodeImage.getHeight() + 20;
-
-                // Footer
-                String[] footer = {
-                    "Terima kasih!",
-                    "Barang yang sudah dibeli",
-                    "tidak dapat dikembalikan."
-                };
-                for (String line : footer) {
-                    g2d.drawString(line, (pageWidth - fm.stringWidth(line)) / 2, y);
-                    y += 15;
-                }
-                
-                g2d.dispose();
-
-                return PAGE_EXISTS;
             }
-        });
+            if (printer == null) {
+                System.out.println("Printer tidak ditemukan.");
+                return;
+            }
 
-        job.print();
+            // Build isi struk
+            StringBuilder sb = new StringBuilder();
+            sb.append(center("== PAPOY DRINK ==")).append("\n");
+            sb.append(center("Jl. Jalan No. 123")).append("\n");
 
-    } catch (Exception e) {
-        e.printStackTrace();
-    }
-}
-    
-    public void previewStrukKePng(String kode, List<Object[]> dataTabel, BufferedImage barcodeImage, Path outputPath) {
-    try {
-        // Ukuran kertas thermal kecil, 58mm = ±220 pixel lebar
-        int width = 576;
-        int height = 600; // sementara, bisa disesuaikan
+            String tgl = new SimpleDateFormat("dd/MM/yyyy HH:mm").format(new Date());
+            sb.append("Tgl : ").append(tgl).append("\n");
+            sb.append("Nota: #INV").append(kode).append("\n\n");
 
-        BufferedImage image = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
-        Graphics2D g2d = image.createGraphics();
-        FontMetrics fm = g2d.getFontMetrics();
-        String header = "== PAPOY DRINK ==";
-        int headerX = (width - fm.stringWidth(header)) / 2;
+            int total = 0;
+            for (Object[] row : pesanan) {
+                String nama = row[0].toString();
+                int jumlah = Integer.parseInt(row[1].toString());
+                int harga = Integer.parseInt(row[2].toString());
+                int subtotal = jumlah * harga;
+                total += subtotal;
 
-        // Background putih
-        g2d.setColor(Color.WHITE);
-        g2d.fillRect(0, 0, width, height);
+                String line = String.format("%-10s x%d Rp%,d", potong(nama, 10), jumlah, subtotal);
+                sb.append(line).append("\n");
+            }
 
-        g2d.setColor(Color.BLACK);
-        g2d.setFont(new Font("Monospaced", Font.PLAIN, 10));
+            sb.append("\n");
+            sb.append(String.format("Total:       Rp%,d\n", total));
+            sb.append("\n");
 
-        int y = 10;
+            // Footer
+            sb.append(center("Terima kasih!\n"));
+            sb.append(center("Barang tidak bisa dikembalikan\n\n"));
 
-        // Header
-        g2d.drawString(header, headerX, y); y += 15;
-        g2d.drawString("Jl. Jalan No. 123", 0, y); y += 15;
+            // ESC/POS barcode (GS k)
+            ByteArrayOutputStream out = new ByteArrayOutputStream();
+            out.write(sb.toString().getBytes("UTF-8"));
 
-        String tgl = new SimpleDateFormat("dd/MM/yyyy HH:mm").format(new Date());
-        g2d.drawString("Tgl : " + tgl, 0, y); y += 15;
-        g2d.drawString("Nota: #INV" + kode, 0, y); y += 25;
+            // ESC/POS command to print barcode (CODE128 recommended)
+            out.write(new byte[] { 0x1D, 0x48, 0x02 }); // HRI position: below
+            out.write(new byte[] { 0x1D, 0x77, 0x02 }); // barcode width
+            out.write(new byte[] { 0x1D, 0x68, 0x40 }); // barcode height
+            out.write(new byte[] { 0x1D, 0x6B, 0x49 }); // CODE128
+            out.write((byte) kode.length());           // length of data
+            out.write(kode.getBytes("UTF-8"));         // actual data
 
-        int total = 0;
-        for (Object[] baris : dataTabel) {
-            String nama = baris[0].toString();
-            int qty = Integer.parseInt(baris[1].toString());
-            int harga = Integer.parseInt(baris[2].toString());
-            int subtotal = qty * harga;
-            total += subtotal;
+            // Feed and cut
+            out.write(new byte[]{ 0x0A, 0x0A });
+            out.write(new byte[]{ 0x1D, 0x56, 0x00 }); // full cut
 
-            String kanan = String.format("Rp%,d", subtotal);
-            g2d.drawString(nama, 0, y);
-            g2d.drawString(String.format("X%d", qty), headerX, y);
-            g2d.drawString(kanan, width - fm.stringWidth(kanan), y);
-            y += 15;
-        }
+            DocPrintJob job = printer.createPrintJob();
+            Doc doc = new SimpleDoc(out.toByteArray(), DocFlavor.BYTE_ARRAY.AUTOSENSE, null);
+            job.print(doc, null);
 
-        y += 10;
-        String totalStr = "TOTAL: Rp" + String.format("%,d", total);
-        g2d.drawString(totalStr, width - fm.stringWidth(totalStr), y); y += 25;
-
-        if (barcodeImage != null) {
-            int barcodeX = (width - barcodeImage.getWidth()) / 2;
-            g2d.drawImage(barcodeImage, barcodeX, y, null);
-            y += barcodeImage.getHeight() + 15;
-        }
-
-        // Footer
-        String[] footer = {
-            "Terima kasih!",
-            "Barang yang sudah dibeli",
-            "tidak dapat dikembalikan."
-        };
-        for (String line : footer) {
-            g2d.drawString(line, (width - fm.stringWidth(line)) / 2, y);
-            y += 15;
-        }
-
-            g2d.dispose();
-
-            // Crop tinggi final jika perlu
-            BufferedImage cropped = image.getSubimage(0, 0, width, y);
-            ImageIO.write(cropped, "png", outputPath.toFile());
-
-            System.out.println("Struk preview disimpan ke: " + outputPath);
+            System.out.println("Struk dicetak.");
 
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
+    private String center(String teks) {
+        int width = 32; // lebar karakter (pastikan sesuai font printer)
+        int padding = (width - teks.length()) / 2;
+        return " ".repeat(Math.max(0, padding)) + teks;
+    }
+
+    private String potong(String teks, int max) {
+        return teks.length() > max ? teks.substring(0, max) : teks;
+    }
 }

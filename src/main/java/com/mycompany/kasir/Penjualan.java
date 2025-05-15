@@ -197,11 +197,10 @@ public class Penjualan extends komponen.PanelRound {
 };
                 tabelDat.add(baris);
             }
-//            cetak.cetakStruk(kode, tabelDat, jalur);
             BufferedImage barcode = ImageIO.read(Path.of("barcode.png").toFile());
-            Path output = Path.of("preview_struk.png");
+            
+            cetak.cetakStruk(kode, tabelDat);
 
-            cetak.previewStrukKePng(kode, tabelDat, barcode, output);
 
             
             

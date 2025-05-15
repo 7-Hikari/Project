@@ -42,8 +42,8 @@ public class Dataprodukbahan extends javax.swing.JPanel {
         Hapus = new javax.swing.JButton();
         Edit = new javax.swing.JButton();
         Tambah = new javax.swing.JButton();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        tabelBahan = new javax.swing.JTable();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        tabelBahan = new komponen.Tabel_c();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setMaximumSize(new java.awt.Dimension(1247, 464));
@@ -81,14 +81,14 @@ public class Dataprodukbahan extends javax.swing.JPanel {
                 {null, null, null, null, null}
             },
             new String [] {
-                "No", "Id", "Nama Bahan", "Kategori", "Jumlah"
+                "No", "id", "Nama Bahan", "Kategori", "Jumlah"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.Byte.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class
+                java.lang.Integer.class, java.lang.Byte.class, java.lang.String.class, java.lang.String.class, java.lang.Short.class
             };
             boolean[] canEdit = new boolean [] {
-                true, false, true, true, true
+                false, false, false, true, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -99,8 +99,10 @@ public class Dataprodukbahan extends javax.swing.JPanel {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(tabelBahan);
+        jScrollPane2.setViewportView(tabelBahan);
         if (tabelBahan.getColumnModel().getColumnCount() > 0) {
+            tabelBahan.getColumnModel().getColumn(0).setResizable(false);
+            tabelBahan.getColumnModel().getColumn(0).setPreferredWidth(15);
             tabelBahan.getColumnModel().getColumn(1).setMinWidth(0);
             tabelBahan.getColumnModel().getColumn(1).setPreferredWidth(0);
             tabelBahan.getColumnModel().getColumn(1).setMaxWidth(0);
@@ -120,20 +122,21 @@ public class Dataprodukbahan extends javax.swing.JPanel {
                 .addGap(145, 145, 145))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1244, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(24, 24, 24))
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 917, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(335, 335, 335))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addContainerGap()
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 422, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(30, 30, 30)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(Edit, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(Hapus, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(Tambah, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(5, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(-20, 0, 1290, -1));
@@ -153,7 +156,7 @@ public class Dataprodukbahan extends javax.swing.JPanel {
     private javax.swing.JButton Hapus;
     private javax.swing.JButton Tambah;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable tabelBahan;
+    private javax.swing.JScrollPane jScrollPane2;
+    private komponen.Tabel_c tabelBahan;
     // End of variables declaration//GEN-END:variables
 }
