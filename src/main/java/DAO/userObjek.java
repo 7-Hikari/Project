@@ -33,7 +33,31 @@ public class userObjek {
             try (ResultSet rs = pst.executeQuery();) {
 
                 if (rs.next()) {
-                    byte id_user = rs.getByte("id_user");
+                    int id_user = rs.getInt("id_user");
+                    Status status = Status.valueOf(rs.getString("status"));
+                    String nama = rs.getString("nama");
+
+                    UD = new userData(id_user, status, nama);
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return UD;
+    }
+        
+    public static userData CekID(int ID){
+        userData UD = null;
+        String sql = "select * from pengguna where id_user = ?";
+        Connection conn = koneksi.connect(); 
+        try {
+            PreparedStatement pst = conn.prepareStatement(sql);
+
+            pst.setInt(1, ID);
+            try (ResultSet rs = pst.executeQuery();) {
+
+                if (rs.next()) {
+                    int id_user = rs.getInt("id_user");
                     Status status = Status.valueOf(rs.getString("status"));
                     String nama = rs.getString("nama");
 

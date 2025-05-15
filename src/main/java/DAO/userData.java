@@ -1,11 +1,11 @@
 package DAO;
 
 public class userData {
-    private byte idUser;
+    private int idUser;
     private String username, password;
     private userObjek.Status status;
     
-    userData(byte idUser, userObjek.Status status, String username){
+    userData(int idUser, userObjek.Status status, String username){
         this.idUser = idUser;
         this.status = status;
         this.username = username;
@@ -16,7 +16,7 @@ public class userData {
         this.password = password;
     }
     
-    public byte getId_User(){
+    public int getId_User(){
         return idUser;
     }
     public String getUsername(){
