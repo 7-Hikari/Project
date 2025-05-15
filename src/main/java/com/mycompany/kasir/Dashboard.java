@@ -2,6 +2,7 @@ package com.mycompany.kasir;
 
 import DAO.*;
 import DataMaster.*;
+import Rekapan.Rekapan;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.event.*;
@@ -331,6 +332,7 @@ public class Dashboard extends JFrame {
         interaksipanel(tombol_rekapan);
         LabelJudul.setText("Rekapan");
         panelubah.removeAll();
+        panelubah.add(new Rekapan(), BorderLayout.CENTER);
         panelubah.revalidate();
         panelubah.repaint();
     }//GEN-LAST:event_tombol_rekapanActionPerformed
