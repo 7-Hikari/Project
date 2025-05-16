@@ -1,28 +1,40 @@
 package DataMaster;
 
 import DAO.*;
-import java.awt.BorderLayout;
+import javax.swing.JFrame;
 import java.util.*;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.event.*;
 import javax.swing.BorderFactory;
 import javax.swing.JScrollPane;
+import komponen.PanelRound;
 import komponen.wraplayout;
 
 /**
  *
  * @author RIZKI NABIL P
  */
-public class Dataprodukproduk extends javax.swing.JPanel {
+public class Dataprodukproduk extends komponen.PanelRound {
     private Dataprodukbahan probah = new Dataprodukbahan();
-
+    private JFrame pop;
+    
     public Dataprodukproduk() {
         initComponents();
         
+        setRoundBottomLeft(100);
+        setRoundBottomRight(100);
+        setRoundTopLeft(100);
+        setRoundTopRight(100);
+        
         loadProduk();
+        Panelprodukbahan.setGradientDirection(PanelRound.Direction.VERTICAL);
+        Panelprodukbahan.setGradient(new Color(0x2CC4C9), new Color(0x22EBC6));
+        DataProduk.setGradientDirection(PanelRound.Direction.VERTICAL);
+        DataProduk.setGradient(new Color(0x2CC4C9), new Color(0x22EBC6));
     }
-
+    
     void loadProduk(){
         flow.setPreferredSize(new java.awt.Dimension(650, 800));
         flow.setViewportView(DataProduk);
@@ -52,7 +64,7 @@ public class Dataprodukproduk extends javax.swing.JPanel {
         int baris = (int) Math.ceil(jumlahItem / (double) kolom);
         int tinggiTotal = baris * tinggiPerBaris + 50;
 
-        DataProduk.setPreferredSize(new java.awt.Dimension(640, tinggiTotal));
+        DataProduk.setPreferredSize(new Dimension(640, tinggiTotal));
         DataProduk.revalidate();
         DataProduk.repaint();
     }
@@ -69,34 +81,41 @@ public class Dataprodukproduk extends javax.swing.JPanel {
         Tambah = new javax.swing.JButton();
         flow = new javax.swing.JScrollPane();
         DataProduk = new komponen.PanelRound();
-        Bahan = new javax.swing.JButton();
+        PaNavBol = new javax.swing.JPanel();
         Produk = new javax.swing.JButton();
-        jPanel6 = new javax.swing.JPanel();
+        Bahan = new javax.swing.JButton();
+        jPanel3 = new javax.swing.JPanel();
 
+        setBackground(new java.awt.Color(51, 255, 255));
         setMaximumSize(new java.awt.Dimension(1200, 620));
         setMinimumSize(new java.awt.Dimension(1200, 620));
         setPreferredSize(new java.awt.Dimension(1200, 620));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.setBackground(new Color(0x2CC4C9)
+        );
+        jPanel1.setMaximumSize(new java.awt.Dimension(1250, 620));
         jPanel1.setMinimumSize(new java.awt.Dimension(1260, 620));
+        jPanel1.setPreferredSize(new java.awt.Dimension(1250, 620));
+
+        jPanel5.setBackground(new java.awt.Color(255, 255, 255));
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1290, Short.MAX_VALUE)
+            .addGap(0, 1224, Short.MAX_VALUE)
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 28, Short.MAX_VALUE)
         );
 
-        Panelprodukbahan.setBackground(new java.awt.Color(51, 204, 255));
+        Panelprodukbahan.setBackground(new java.awt.Color(51, 255, 255));
         Panelprodukbahan.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         Hapus.setText("Hapus");
-        Panelprodukbahan.add(Hapus, new org.netbeans.lib.awtextra.AbsoluteConstraints(1020, 430, 122, 34));
+        Panelprodukbahan.add(Hapus, new org.netbeans.lib.awtextra.AbsoluteConstraints(1020, 460, 122, 34));
 
         Edit.setText("Edit");
         Edit.setPreferredSize(new java.awt.Dimension(122, 34));
@@ -105,7 +124,7 @@ public class Dataprodukproduk extends javax.swing.JPanel {
                 EditActionPerformed(evt);
             }
         });
-        Panelprodukbahan.add(Edit, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 430, -1, -1));
+        Panelprodukbahan.add(Edit, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 460, -1, -1));
 
         Tambah.setText("Tambah");
         Tambah.setPreferredSize(new java.awt.Dimension(122, 34));
@@ -114,114 +133,123 @@ public class Dataprodukproduk extends javax.swing.JPanel {
                 TambahActionPerformed(evt);
             }
         });
-        Panelprodukbahan.add(Tambah, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 430, -1, -1));
+        Panelprodukbahan.add(Tambah, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 460, -1, -1));
 
         flow.setBackground(new java.awt.Color(0, 204, 255));
+        flow.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
         flow.setMaximumSize(new java.awt.Dimension(1230, 410));
+        flow.setPreferredSize(new java.awt.Dimension(1250, 416));
 
         DataProduk.setBackground(new java.awt.Color(0, 204, 255));
-        DataProduk.setMaximumSize(new java.awt.Dimension(1230, 410));
-        DataProduk.setMinimumSize(new java.awt.Dimension(1230, 410));
-        DataProduk.setRoundBottomLeft(100);
-        DataProduk.setRoundBottomRight(100);
-        DataProduk.setRoundTopLeft(100);
-        DataProduk.setRoundTopRight(100);
+        DataProduk.setMaximumSize(new java.awt.Dimension(1250, 410));
+        DataProduk.setMinimumSize(new java.awt.Dimension(1250, 410));
+        DataProduk.setPreferredSize(new java.awt.Dimension(1250, 410));
         DataProduk.setLayout(new java.awt.GridLayout(5, 4, 2, 2));
         flow.setViewportView(DataProduk);
 
-        Panelprodukbahan.add(flow, new org.netbeans.lib.awtextra.AbsoluteConstraints(7, 10, 1240, 410));
+        Panelprodukbahan.add(flow, new org.netbeans.lib.awtextra.AbsoluteConstraints(7, 10, 1230, 440));
 
-        Bahan.setText("Bahan");
-        Bahan.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BahanActionPerformed(evt);
-            }
-        });
+        PaNavBol.setMaximumSize(new java.awt.Dimension(1250, 2147483647));
+        PaNavBol.setPreferredSize(new java.awt.Dimension(1250, 63));
+        PaNavBol.setLayout(new java.awt.BorderLayout());
 
+        Produk.setBackground(new Color(0x2CC4C9));
         Produk.setText("Produk");
-        Produk.setPreferredSize(new java.awt.Dimension(553, 45));
+        Produk.setMinimumSize(new java.awt.Dimension(600, 28));
+        Produk.setPreferredSize(new java.awt.Dimension(600, 45));
         Produk.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ProdukActionPerformed(evt);
             }
         });
+        PaNavBol.add(Produk, java.awt.BorderLayout.WEST);
 
-        javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
-        jPanel6.setLayout(jPanel6Layout);
-        jPanel6Layout.setHorizontalGroup(
-            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 26, Short.MAX_VALUE)
+        Bahan.setBackground(new Color(0x2CC4C9)
         );
-        jPanel6Layout.setVerticalGroup(
-            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 119, Short.MAX_VALUE)
+        Bahan.setText("Bahan");
+        Bahan.setMinimumSize(new java.awt.Dimension(600, 28));
+        Bahan.setPreferredSize(new java.awt.Dimension(600, 28));
+        Bahan.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BahanActionPerformed(evt);
+            }
+        });
+        PaNavBol.add(Bahan, java.awt.BorderLayout.EAST);
+
+        jPanel3.setBackground(new java.awt.Color(0, 255, 204));
+        jPanel3.setMaximumSize(new java.awt.Dimension(50, 50));
+        jPanel3.setMinimumSize(new java.awt.Dimension(50, 50));
+        jPanel3.setPreferredSize(new java.awt.Dimension(50, 50));
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 50, Short.MAX_VALUE)
         );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 85, Short.MAX_VALUE)
+        );
+
+        PaNavBol.add(jPanel3, java.awt.BorderLayout.CENTER);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(Panelprodukbahan, javax.swing.GroupLayout.PREFERRED_SIZE, 1256, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(67, 67, 67)
-                        .addComponent(Produk, javax.swing.GroupLayout.PREFERRED_SIZE, 444, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(81, 81, 81)
-                        .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(88, 88, 88)
-                        .addComponent(Bahan, javax.swing.GroupLayout.PREFERRED_SIZE, 500, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(Panelprodukbahan, javax.swing.GroupLayout.DEFAULT_SIZE, 1290, Short.MAX_VALUE))
-                .addContainerGap(0, Short.MAX_VALUE))
+                        .addContainerGap()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(PaNavBol, javax.swing.GroupLayout.PREFERRED_SIZE, 1224, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jPanel5, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(31, 31, 31)
-                        .addComponent(Bahan, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(35, 35, 35)
-                        .addComponent(Produk, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(16, 16, 16)
+                .addComponent(PaNavBol, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(Panelprodukbahan, javax.swing.GroupLayout.PREFERRED_SIZE, 481, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(478, Short.MAX_VALUE))
+                .addComponent(Panelprodukbahan, javax.swing.GroupLayout.PREFERRED_SIZE, 503, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1290, -1));
+        add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1250, 650));
     }// </editor-fold>//GEN-END:initComponents
 
     private void TambahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TambahActionPerformed
-
+        pop = new JFrame("Nambah Produk");
+        pop.setPreferredSize(new Dimension(272, 449));
+        pop.add(new Updatedataprodukproduk()).setVisible(true);
     }//GEN-LAST:event_TambahActionPerformed
-
-    private void BahanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BahanActionPerformed
-   
-    if(probah ==null){
-        probah = new Dataprodukbahan();
-    }
-     probah.setBounds(0,0,Panelprodukbahan.getWidth(),Panelprodukbahan.getHeight());
-    probah.setBorder(BorderFactory.createLineBorder(Color.RED));
-    
-    Panelprodukbahan.removeAll();
-    Panelprodukbahan.add(probah, new org.netbeans.lib.awtextra.AbsoluteConstraints(0,0,Panelprodukbahan.getWidth(),Panelprodukbahan.getHeight()));
-    Panelprodukbahan.revalidate();
-    Panelprodukbahan.repaint();
-        System.out.println("ss" + Panelprodukbahan.getWidth());
-    }//GEN-LAST:event_BahanActionPerformed
 
     private void EditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EditActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_EditActionPerformed
 
     private void ProdukActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ProdukActionPerformed
-    tampilkanPanelProduk();
+        tampilkanPanelProduk();
     }//GEN-LAST:event_ProdukActionPerformed
 
+    private void BahanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BahanActionPerformed
+        if(probah ==null){
+            probah = new Dataprodukbahan();
+        }
+        probah.setBounds(0,0,Panelprodukbahan.getWidth(),Panelprodukbahan.getHeight());
+        probah.setBorder(BorderFactory.createLineBorder(Color.RED));
+
+        Panelprodukbahan.removeAll();
+        Panelprodukbahan.add(probah, new org.netbeans.lib.awtextra.AbsoluteConstraints(0,0,Panelprodukbahan.getWidth(),Panelprodukbahan.getHeight()));
+        Panelprodukbahan.revalidate();
+        Panelprodukbahan.repaint();
+    }//GEN-LAST:event_BahanActionPerformed
+    
     private void tampilkanPanelProduk() {
     Panelprodukbahan.removeAll();
     Panelprodukbahan.add(flow, new org.netbeans.lib.awtextra.AbsoluteConstraints(7, 10, 1240, 410));
@@ -241,12 +269,13 @@ public class Dataprodukproduk extends javax.swing.JPanel {
     private komponen.PanelRound DataProduk;
     private javax.swing.JButton Edit;
     private javax.swing.JButton Hapus;
+    private javax.swing.JPanel PaNavBol;
     private komponen.PanelRound Panelprodukbahan;
     private javax.swing.JButton Produk;
     private javax.swing.JButton Tambah;
     private javax.swing.JScrollPane flow;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel5;
-    private javax.swing.JPanel jPanel6;
     // End of variables declaration//GEN-END:variables
 }

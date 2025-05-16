@@ -1,9 +1,6 @@
 package komponen;
 
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.RenderingHints;
-import java.awt.Shape;
+import java.awt.*;
 import java.awt.geom.Area;
 import java.awt.geom.Rectangle2D;
 import java.awt.geom.RoundRectangle2D;
@@ -14,7 +11,25 @@ import javax.swing.JPanel;
  * @author Muhammad Zaiful
  */
 public class PanelRound extends JPanel {
+    public enum Direction {
+    HORIZONTAL, VERTICAL, DIAGONAL
+}
+    private Color warnaAwal = new Color(0x04AEF6);
+    private Color warnaAkhir = Color.WHITE;
+    
+    private Direction arahGradasi = Direction.HORIZONTAL;
 
+    public void setGradientDirection(Direction arah) {
+        this.arahGradasi = arah;
+        repaint();
+    }
+    
+    public void setGradient(Color awal, Color akhir) {
+        this.warnaAwal = awal;
+        this.warnaAkhir = akhir;
+        repaint();
+    }
+    
     public int getRoundTopLeft() {
         return roundTopLeft;
     }
@@ -64,7 +79,18 @@ public class PanelRound extends JPanel {
     protected void paintComponent(Graphics grphcs) {
         Graphics2D g2 = (Graphics2D) grphcs.create();
         g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-        g2.setColor(getBackground());
+        GradientPaint grad;
+        switch (arahGradasi) {
+            case VERTICAL:
+                grad = new GradientPaint(0, 0, warnaAwal, 0, getHeight(), warnaAkhir);
+                break;
+            case DIAGONAL:
+                grad = new GradientPaint(0, 0, warnaAwal, getWidth(), getHeight(), warnaAkhir);
+                break;
+            default: // HORIZONTAL
+                grad = new GradientPaint(0, 0, warnaAwal, getWidth(), 0, warnaAkhir);
+        }
+        g2.setPaint(grad);
         Area area = new Area(createRoundTopLeft());
         if (roundTopRight > 0) {
             area.intersect(new Area(createRoundTopRight()));

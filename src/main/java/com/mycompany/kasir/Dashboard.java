@@ -11,6 +11,7 @@ import java.net.*;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
+import komponen.PanelRound;
 
 public class Dashboard extends JFrame {
     
@@ -46,6 +47,11 @@ public class Dashboard extends JFrame {
         this.status = loginUser.getStatus();
         
         initComponents();
+        
+        panelnyaPanel.setGradientDirection(PanelRound.Direction.VERTICAL);
+        panelnyaPanel.setGradient(new Color(0x2CC4C9), new Color(0x22EBC6));
+        panelubah.setGradientDirection(PanelRound.Direction.VERTICAL);
+        panelubah.setGradient(new Color(0x2CC4C9), new Color(0x22EBC6));
         
         bulatan.setBackground(Color.WHITE);
         Access();
