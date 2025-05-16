@@ -6,9 +6,12 @@ import java.util.*;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.Frame;
 import java.awt.event.*;
 import javax.swing.BorderFactory;
+import javax.swing.JDialog;
 import javax.swing.JScrollPane;
+import javax.swing.SwingUtilities;
 import komponen.PanelRound;
 import komponen.wraplayout;
 
@@ -19,6 +22,9 @@ import komponen.wraplayout;
 public class Dataprodukproduk extends komponen.PanelRound {
     private Dataprodukbahan probah = new Dataprodukbahan();
     private JFrame pop;
+    public interface ProdukFormListener {
+    void onProdukSaved(produkData produkBaru);
+}
     
     public Dataprodukproduk() {
         initComponents();
@@ -224,9 +230,20 @@ public class Dataprodukproduk extends komponen.PanelRound {
     }// </editor-fold>//GEN-END:initComponents
 
     private void TambahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TambahActionPerformed
-        pop = new JFrame("Nambah Produk");
-        pop.setPreferredSize(new Dimension(272, 449));
-        pop.add(new Updatedataprodukproduk()).setVisible(true);
+        JDialog dialog = new JDialog((Frame) SwingUtilities.getWindowAncestor(this), "Tambah Produk", true);
+    Updatedataprodukproduk formPanel = new Updatedataprodukproduk();
+    
+    formPanel.setProdukFormListener(produkBaru -> {
+        // Tangani produk baru di sini, misal simpan ke DB, reload panel produk, dll
+        System.out.println("Produk baru diterima: " + produkBaru.get_nama());
+        dialog.dispose(); // tutup dialog setelah simpan
+        loadProduk();
+    });
+    
+    dialog.add(formPanel);
+    dialog.pack();
+    dialog.setLocationRelativeTo(this);
+    dialog.setVisible(true);
     }//GEN-LAST:event_TambahActionPerformed
 
     private void EditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EditActionPerformed

@@ -28,6 +28,28 @@ public class bahanObjek {
         return listBahan;
     }
     
+    public static List<bahanData> getBahanKonsum() {
+        List<bahanData> listBahan = new ArrayList<>();
+        String sql = "SELECT * FROM m_bahan where konsumsi = true";
+        Connection conn = koneksi.connect(); 
+        try {
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery(sql);
+
+            while (rs.next()) {
+                short id_b = rs.getShort("id_bahan");
+                String nama_b = rs.getString("nama_bahan");
+                boolean kateg = rs.getBoolean("konsumsi");
+                short jumlah = rs.getShort("jumlah");
+                bahanData B = new bahanData(id_b, nama_b, kateg, jumlah);
+                listBahan.add(B);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return listBahan;
+    }
+    
     public static void insertBahan(bahanData bahdat){
         String sql = "insert into m_bahan (nama_bahan, konsumsi) values (?, ?)";
         Connection conn = koneksi.connect();

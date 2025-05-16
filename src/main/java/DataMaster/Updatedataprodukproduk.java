@@ -1,22 +1,73 @@
 package DataMaster;
 
 import java.awt.Image;
+import java.awt.Color;
 import java.io.File;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileNameExtensionFilter;
+import DAO.*;
+import java.awt.Component;
+import java.util.List;
+import java.io.*;
+import java.util.ArrayList;
+import javax.swing.JCheckBox;
+import javax.swing.JOptionPane;
 
 public class Updatedataprodukproduk extends javax.swing.JPanel {
+    private byte[] foto;
+    private Dataprodukproduk.ProdukFormListener listener;
     
-    public static void main(String[] args) {
-    
-}
-
-
     public Updatedataprodukproduk() {
         initComponents();
+        
+        loadCekbox();
+    }
+    
+    private void loadCekbox(){
+        PanelBahan.removeAll();
+        
+        List<bahanData> listBahan = bahanObjek.getBahanKonsum();
+        for (bahanData b : listBahan) {
+            JCheckBox cb = new JCheckBox(b.get_nama_b());
+            cb.putClientProperty("id", b.get_id_b());
+            cb.setForeground(Color.WHITE);
+            cb.setBackground(new Color(0x5E3330));
+            PanelBahan.add(cb);
+        }
+        PanelBahan.revalidate();
+        PanelBahan.repaint();
     }
 
+    private byte[] bacaFileKeByteArray(File file) throws IOException {
+        try (InputStream is = new FileInputStream(file);
+             ByteArrayOutputStream buffer = new ByteArrayOutputStream()) {
+            int nRead;
+            byte[] data = new byte[16384];
+            while ((nRead = is.read(data, 0, data.length)) != -1) {
+                buffer.write(data, 0, nRead);
+            }
+            buffer.flush();
+            return buffer.toByteArray();
+        }
+    }
+    
+    public byte[] getFotoBytes() {
+        return foto;
+    }
+    
+    public void setFotoBytes(byte[] bytes) {
+        this.foto = bytes;
+        if (bytes != null) {
+            ImageIcon icon = new ImageIcon(bytes);
+            Image img = icon.getImage().getScaledInstance(220, 170, Image.SCALE_SMOOTH);
+            jLabelGambar.setIcon(new ImageIcon(img));
+            jLabelGambar.setText(null);
+        } else {
+            jLabelGambar.setIcon(new ImageIcon(getClass().getResource("/img_lag.png")));
+        }
+    }
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -27,50 +78,54 @@ public class Updatedataprodukproduk extends javax.swing.JPanel {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        Simpan = new javax.swing.JButton();
         JmlP = new javax.swing.JTextField();
         jButtonFile = new javax.swing.JButton();
         jLabelGambar = new javax.swing.JLabel();
+        PanelBahan = new javax.swing.JPanel();
+        jLabel4 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
 
         setMaximumSize(new java.awt.Dimension(349, 574));
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        jPanel1.add(NamaP, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 220, 310, 36));
 
         HargaP.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 HargaPActionPerformed(evt);
             }
         });
+        jPanel1.add(HargaP, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 300, 125, 36));
 
         jLabel2.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(0, 0, 0));
         jLabel2.setText("Nama");
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 200, -1, -1));
 
         jLabel3.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(0, 0, 0));
         jLabel3.setText("Harga");
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 280, -1, -1));
 
         jLabel5.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(0, 0, 0));
         jLabel5.setText("Jumlah");
+        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 280, -1, -1));
 
-        jButton1.setBackground(new java.awt.Color(255, 0, 0));
-        jButton1.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(0, 0, 0));
-        jButton1.setText("Keluar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        Simpan.setBackground(new java.awt.Color(0, 255, 51));
+        Simpan.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        Simpan.setForeground(new java.awt.Color(0, 0, 0));
+        Simpan.setText("Simpan");
+        Simpan.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                SimpanActionPerformed(evt);
             }
         });
-
-        jButton2.setBackground(new java.awt.Color(0, 255, 51));
-        jButton2.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        jButton2.setForeground(new java.awt.Color(0, 0, 0));
-        jButton2.setText("Simpan");
+        jPanel1.add(Simpan, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 460, -1, -1));
+        jPanel1.add(JmlP, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 300, 70, 36));
 
         jButtonFile.setText("Pilih file");
         jButtonFile.addActionListener(new java.awt.event.ActionListener() {
@@ -78,75 +133,26 @@ public class Updatedataprodukproduk extends javax.swing.JPanel {
                 jButtonFileActionPerformed(evt);
             }
         });
+        jPanel1.add(jButtonFile, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 180, 87, 19));
 
+        jLabelGambar.setBackground(new java.awt.Color(0, 0, 0));
+        jLabelGambar.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
+        jLabelGambar.setForeground(new java.awt.Color(0, 0, 0));
         jLabelGambar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabelGambar.setText("No Image");
         jLabelGambar.setMaximumSize(new java.awt.Dimension(176, 141));
         jLabelGambar.setMinimumSize(new java.awt.Dimension(176, 141));
         jLabelGambar.setPreferredSize(new java.awt.Dimension(176, 141));
+        jPanel1.add(jLabelGambar, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 10, 220, 170));
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jButton2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton1)
-                        .addGap(23, 23, 23))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                        .addGap(8, 8, 8)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel5)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(JmlP, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jLabel2)
-                                    .addComponent(jLabel3))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(NamaP, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(HargaP, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE))))))
-                .addGap(19, 19, 19))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(41, 41, 41)
-                        .addComponent(jLabelGambar, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(86, 86, 86)
-                        .addComponent(jButtonFile, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabelGambar, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButtonFile, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(13, 13, 13)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(NamaP, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(20, 20, 20)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(HargaP, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(26, 26, 26)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(JmlP, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel5))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 25, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton2)
-                    .addComponent(jButton1))
-                .addGap(0, 0, 0))
-        );
+        PanelBahan.setBackground(new Color(0x5E3330));
+        PanelBahan.setLayout(new java.awt.GridLayout(0, 2, 10, 5));
+        jPanel1.add(PanelBahan, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 372, 370, 80));
+
+        jLabel4.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel4.setText("Bahan Pendukung");
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 350, -1, -1));
 
         jPanel2.setBackground(new java.awt.Color(0, 153, 255));
 
@@ -162,7 +168,7 @@ public class Updatedataprodukproduk extends javax.swing.JPanel {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 248, Short.MAX_VALUE)
+                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -181,15 +187,14 @@ public class Updatedataprodukproduk extends javax.swing.JPanel {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 380, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 493, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -201,39 +206,64 @@ public class Updatedataprodukproduk extends javax.swing.JPanel {
         int returnValue = fileChooser.showOpenDialog(this); // ganti null ke this biar modal
         if (returnValue == JFileChooser.APPROVE_OPTION) {
             File selectedFile = fileChooser.getSelectedFile();
-            String path = selectedFile.getAbsolutePath();
+            try {
+                foto = bacaFileKeByteArray(selectedFile);
+                ImageIcon icon = new ImageIcon(foto);
+                Image img = icon.getImage().getScaledInstance(220, 170, Image.SCALE_SMOOTH);
+                jLabelGambar.setIcon(new ImageIcon(img));
+                jLabelGambar.setText(null);
+            } catch (IOException ex) {
+                ex.printStackTrace();
+                JOptionPane.showMessageDialog(this, "Gagal membaca file gambar!");
+            }
 
-            // TAMPILIN ke jLabelGambar lo
-            ImageIcon icon = new ImageIcon(path);
-            Image img = icon.getImage().getScaledInstance(170, 147, Image.SCALE_SMOOTH);
-            jLabelGambar.setIcon(new ImageIcon(img));
-
-            // Buat lo yang suka nyari path-nya
-            System.out.println("File dipilih: " + path);
+            System.out.println("File dipilih: " + foto);
         } else {
             System.out.println("Lu batalin, wajar sih lo emang suka ragu 😒");
         }
     }//GEN-LAST:event_jButtonFileActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
-
     private void HargaPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_HargaPActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_HargaPActionPerformed
 
+    private void SimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SimpanActionPerformed
+        produkData pDat = new produkData();
+        if(NamaP.getText().isEmpty() || HargaP.getText().trim().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Data selain 'Jumlah' dilarang kosong");
+            return;
+        }
+        pDat.setProdukData(NamaP.getText(), Short.parseShort(HargaP.getText()));
+        
+        List<detailProdukData> bahanTerpilih = new ArrayList<>();
+        for (Component comp : PanelBahan.getComponents()) {
+            if (comp instanceof JCheckBox cb && cb.isSelected()) {
+                short id = (short) cb.getClientProperty("id");
+                detailProdukData detP = new detailProdukData(id);
+                bahanTerpilih.add(detP);
+            }
+        }
+        produkObjek.insertProduk(pDat, foto, bahanTerpilih);
+        if (listener != null) {
+                listener.onProdukSaved(pDat);
+            }
+    }//GEN-LAST:event_SimpanActionPerformed
+    
+    public void setProdukFormListener(Dataprodukproduk.ProdukFormListener listener) {
+        this.listener = listener;
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField HargaP;
     private javax.swing.JTextField JmlP;
     private javax.swing.JTextField NamaP;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JPanel PanelBahan;
+    private javax.swing.JButton Simpan;
     private javax.swing.JButton jButtonFile;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabelGambar;
     private javax.swing.JPanel jPanel1;
