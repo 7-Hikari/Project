@@ -5,9 +5,6 @@ import java.sql.*;
 import koneksi.koneksi;
 
 public class bahanObjek {
-    public static enum kategori {
-        dimakan, tidak
-    }
     
     public static List<bahanData> getAllBahan() {
         List<bahanData> listBahan = new ArrayList<>();
@@ -18,11 +15,10 @@ public class bahanObjek {
             ResultSet rs = stmt.executeQuery(sql);
 
             while (rs.next()) {
-                byte id_b = rs.getByte("id_bahan");
+                short id_b = rs.getShort("id_bahan");
                 String nama_b = rs.getString("nama_bahan");
-                kategori kateg = kategori.valueOf(rs.getString("kategori"));
+                boolean kateg = rs.getBoolean("konsumsi");
                 short jumlah = rs.getShort("jumlah");
-
                 bahanData B = new bahanData(id_b, nama_b, kateg, jumlah);
                 listBahan.add(B);
             }
@@ -33,13 +29,13 @@ public class bahanObjek {
     }
     
     public static void insertBahan(bahanData bahdat){
-        String sql = "insert into m_bahan (nama_bahan, kategori) values (?, ?)";
+        String sql = "insert into m_bahan (nama_bahan, konsumsi) values (?, ?)";
         Connection conn = koneksi.connect();
         try {
             PreparedStatement pst = conn.prepareStatement(sql);
             
             pst.setString(1, bahdat.get_nama_b());
-            pst.setString(2, bahdat.get_kategori().name());
+            pst.setBoolean(2, bahdat.get_kategori());
             pst.executeUpdate();
         } catch (Exception e){
             e.printStackTrace();
@@ -47,14 +43,16 @@ public class bahanObjek {
     }
     
     public static void updateBahan(bahanData bahdat){
-        String sql = "update m_bahan set nama_bahan = ?, jumlah = ? where id_bahan = ?";
+        String sql = "update m_bahan set nama_bahan = ?, konsumsi = ?, jumlah = ? where id_bahan = ?";
         Connection conn = koneksi.connect();
         try {
             PreparedStatement pst = conn.prepareStatement(sql);
             
             pst.setString(1, bahdat.get_nama_b());
-            pst.setShort(2, bahdat.jumlah());
-            pst.setByte(3, bahdat.get_id_b());
+            pst.setBoolean(2, bahdat.get_kategori());
+            pst.setShort(3, bahdat.jumlah());
+            pst.setShort(4, bahdat.get_id_b());
+            pst.executeUpdate();
         } catch (SQLException e){
             e.printStackTrace();
         }
@@ -65,7 +63,8 @@ public class bahanObjek {
         Connection conn = koneksi.connect();
         try {
             PreparedStatement pst = conn.prepareStatement(sql);
-            pst.setByte(1, bahdat.get_id_b());
+            pst.setShort(1, bahdat.get_id_b());
+            pst.executeUpdate();
         } catch(SQLException e){
             e.printStackTrace();
         }

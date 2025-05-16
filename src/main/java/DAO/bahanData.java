@@ -2,39 +2,43 @@ package DAO;
 
 
 public class bahanData {
-    private byte id_b;
+    private short id_b;
     private String nama_b;
-    private bahanObjek.kategori kateg;
+    private boolean kateg;
     private short jumlah;
     
-    bahanData(byte id, String nama, bahanObjek.kategori kateg, short jumlah) {
+    public static boolean parseKonsumsi(String kategori){
+        return "konsumsi".equalsIgnoreCase(kategori);
+    }
+    
+    public bahanData(short id, String nama, boolean kateg, short jumlah) {
         this.id_b = id;
         this.nama_b = nama;
         this.kateg = kateg;
         this.jumlah = jumlah;
     }
-    public bahanData(String nama, bahanObjek.kategori kateg, short jml){
+    public bahanData(String nama, boolean kateg, short jml){
         this.nama_b = nama;
         this.kateg = kateg;
         this.jumlah = jml;
     }
     
-    public byte get_id_b() {
+    public short get_id_b() {
         return id_b;
     }
     public String get_nama_b(){
         return nama_b;
     }
-    public bahanObjek.kategori get_kategori(){
+    boolean get_kategori(){
         return kateg;
+    }
+    public String getStatusKonsumsi(){
+        return kateg ? "Konsumsi" : "Non-Konsumsi";
     }
     public short jumlah(){
         return jumlah;
     }
-    public void setBahan(byte id, String nama, bahanObjek.kategori kateg, short jumlah){
+    public void setIdBahan(short id){
         this.id_b = id;
-        this.nama_b = nama;
-        this.kateg = kateg;
-        this.jumlah = jumlah;
     }
 }
