@@ -3,25 +3,79 @@ package DataMaster;
 import java.awt.Image;
 import java.awt.Color;
 import java.io.File;
-import javax.swing.ImageIcon;
-import javax.swing.JFileChooser;
+import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import DAO.*;
 import java.awt.Component;
+import java.awt.Dimension;
 import java.util.List;
 import java.io.*;
 import java.util.ArrayList;
-import javax.swing.JCheckBox;
-import javax.swing.JOptionPane;
+import java.util.stream.Collectors;
+import javax.swing.text.AbstractDocument;
 
-public class Updatedataprodukproduk extends javax.swing.JPanel {
+public class Updatedataprodukproduk extends JPanel {
     private byte[] foto;
     private Dataprodukproduk.ProdukFormListener listener;
+    private produkData pDat;
+    String np = "Nama Produk";
+    
+    static void hanyaAngka(JTextField tf) {
+    ((AbstractDocument) tf.getDocument()).setDocumentFilter(new OnlyNum());
+}
     
     public Updatedataprodukproduk() {
         initComponents();
-        
         loadCekbox();
+        hanyaAngka(HargaP);
+        Hapus.setVisible(false);
+        Simpan.setLocation(95, 390);
+        jLabelGambar.setMaximumSize(new Dimension(180,150));
+    }
+    
+    void setData(produkData pDat){
+        this.pDat = pDat;
+        foto = pDat.get_foto();
+        if(foto != null){
+        ImageIcon icon = new ImageIcon(foto);
+        Image img = icon.getImage().getScaledInstance(180, 150, Image.SCALE_SMOOTH);
+        jLabelGambar.setIcon(new ImageIcon(img));
+        jLabelGambar.setText(null);
+        } else {
+            jLabelGambar.setText("No Image");
+        }
+        NamaP.setText(pDat.get_nama());
+        HargaP.setText(Integer.toString(pDat.get_harga()));
+        
+        byte x = pDat.get_id();
+        loadCekbox(x);
+        Simpan.setText("Update");
+        Simpan.setLocation(30, 390);
+        Hapus.setVisible(true);
+    }
+    
+    private void loadCekbox(byte x){
+        PanelBahan.removeAll();
+        
+        List<bahanData> listBahan = bahanObjek.getBahanKonsum();
+        List<detailProdukData> bahanProduk = produkObjek.getBahanProduk(x);
+        List<Short> idBahanProduk = bahanProduk.stream()
+                .map(detailProdukData::getBahanId)
+                .collect(Collectors.toList());
+        
+        for (bahanData b : listBahan) {
+            JCheckBox cb = new JCheckBox(b.get_nama_b());
+            cb.putClientProperty("id", b.get_id_b());
+            cb.setForeground(Color.WHITE);
+            cb.setBackground(new Color(0x5E3330));
+            
+            if (idBahanProduk.contains(b.get_id_b())) {
+                cb.setSelected(true);
+            }
+            PanelBahan.add(cb);
+        }
+        PanelBahan.revalidate();
+        PanelBahan.repaint();
     }
     
     private void loadCekbox(){
@@ -52,68 +106,166 @@ public class Updatedataprodukproduk extends javax.swing.JPanel {
         }
     }
     
-    public byte[] getFotoBytes() {
-        return foto;
-    }
-    
-    public void setFotoBytes(byte[] bytes) {
-        this.foto = bytes;
-        if (bytes != null) {
-            ImageIcon icon = new ImageIcon(bytes);
-            Image img = icon.getImage().getScaledInstance(220, 170, Image.SCALE_SMOOTH);
-            jLabelGambar.setIcon(new ImageIcon(img));
-            jLabelGambar.setText(null);
-        } else {
-            jLabelGambar.setIcon(new ImageIcon(getClass().getResource("/img_lag.png")));
+    private byte[] loadDefaultFoto() {
+    try (InputStream in = getClass().getResourceAsStream("/img_lag.png");
+         ByteArrayOutputStream buffer = new ByteArrayOutputStream()) {
+
+        byte[] temp = new byte[4096];
+        int len;
+        while ((len = in.read(temp)) != -1) {
+            buffer.write(temp, 0, len);
         }
+
+        return buffer.toByteArray();
+    } catch (IOException | NullPointerException e) {
+        e.printStackTrace();
+        JOptionPane.showMessageDialog(this, "Foto default gagal dimuat.");
+        return null;
     }
+}
     
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        panelTitle = new komponen.PanelRound();
+        jLabel1 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         NamaP = new javax.swing.JTextField();
         HargaP = new javax.swing.JTextField();
-        jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        Simpan = new javax.swing.JButton();
-        JmlP = new javax.swing.JTextField();
-        jButtonFile = new javax.swing.JButton();
+        Hapus = new javax.swing.JButton();
+        pilihfile = new javax.swing.JButton();
         jLabelGambar = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
         PanelBahan = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
-        jPanel2 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
+        Simpan = new javax.swing.JButton();
 
-        setMaximumSize(new java.awt.Dimension(349, 574));
+        setBackground(new java.awt.Color(255, 255, 255));
+        setMaximumSize(new java.awt.Dimension(265, 480));
+        setMinimumSize(new java.awt.Dimension(265, 480));
+        setOpaque(false);
+        setPreferredSize(new java.awt.Dimension(265, 480));
+        setLayout(new java.awt.BorderLayout());
+
+        panelTitle.setBackground(new Color (0x04AEF6));
+        panelTitle.setGradientDirection(null);
+        panelTitle.setRoundTopLeft(30);
+        panelTitle.setRoundTopRight(30);
+        panelTitle.setSolid(true);
+        panelTitle.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel1.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setText("Produk");
+        jLabel1.setToolTipText("");
+        panelTitle.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 0, 206, -1));
+
+        jButton1.setFont(new java.awt.Font("sansserif", 1, 12)); // NOI18N
+        jButton1.setForeground(new java.awt.Color(255, 0, 0));
+        jButton1.setText("X");
+        jButton1.setContentAreaFilled(false);
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        panelTitle.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 0, 37, 20));
+
+        add(panelTitle, java.awt.BorderLayout.NORTH);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        jPanel1.add(NamaP, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 220, 310, 36));
+        jPanel1.setMaximumSize(new java.awt.Dimension(390, 519));
+        jPanel1.setMinimumSize(new java.awt.Dimension(390, 519));
+        jPanel1.setPreferredSize(new java.awt.Dimension(390, 511));
+        jPanel1.setLayout(null);
 
+        NamaP.setBackground(new Color(0xFFEECA));
+        NamaP.setFont(new java.awt.Font("Roboto Slab", 1, 14)); // NOI18N
+        NamaP.setForeground(new java.awt.Color(0, 0, 0));
+        NamaP.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        NamaP.setText("Nama Produk");
+        NamaP.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                NamaPFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                NamaPFocusLost(evt);
+            }
+        });
+        NamaP.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                NamaPActionPerformed(evt);
+            }
+        });
+        jPanel1.add(NamaP);
+        NamaP.setBounds(20, 190, 220, 36);
+
+        HargaP.setBackground(new Color(0xFFEECA));
         HargaP.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 HargaPActionPerformed(evt);
             }
         });
-        jPanel1.add(HargaP, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 300, 125, 36));
-
-        jLabel2.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel2.setText("Nama");
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 200, -1, -1));
+        jPanel1.add(HargaP);
+        HargaP.setBounds(90, 230, 150, 36);
 
         jLabel3.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(0, 0, 0));
         jLabel3.setText("Harga");
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 280, -1, -1));
+        jPanel1.add(jLabel3);
+        jLabel3.setBounds(20, 240, 50, 17);
 
-        jLabel5.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        jLabel5.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel5.setText("Jumlah");
-        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 280, -1, -1));
+        Hapus.setBackground(new java.awt.Color(255, 51, 0));
+        Hapus.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        Hapus.setForeground(new java.awt.Color(0, 0, 0));
+        Hapus.setText("Hapus");
+        Hapus.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                HapusActionPerformed(evt);
+            }
+        });
+        jPanel1.add(Hapus);
+        Hapus.setBounds(150, 390, 80, 29);
+
+        pilihfile.setText("Pilih file");
+        pilihfile.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                pilihfileActionPerformed(evt);
+            }
+        });
+        jPanel1.add(pilihfile);
+        pilihfile.setBounds(90, 160, 87, 19);
+
+        jLabelGambar.setBackground(new java.awt.Color(0, 0, 0));
+        jLabelGambar.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
+        jLabelGambar.setForeground(new java.awt.Color(0, 0, 0));
+        jLabelGambar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabelGambar.setText("No Image");
+        jLabelGambar.setBorder(javax.swing.BorderFactory.createCompoundBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, null, java.awt.Color.lightGray, null, null), null));
+        jLabelGambar.setMaximumSize(new java.awt.Dimension(176, 141));
+        jLabelGambar.setMinimumSize(new java.awt.Dimension(176, 141));
+        jLabelGambar.setPreferredSize(new java.awt.Dimension(176, 141));
+        jPanel1.add(jLabelGambar);
+        jLabelGambar.setBounds(50, 10, 176, 141);
+
+        jScrollPane1.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+
+        PanelBahan.setBackground(new Color(0x5E3330));
+        PanelBahan.setLayout(new java.awt.GridLayout(0, 2, 10, 5));
+        jScrollPane1.setViewportView(PanelBahan);
+
+        jPanel1.add(jScrollPane1);
+        jScrollPane1.setBounds(10, 300, 240, 80);
+
+        jLabel4.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel4.setText("Bahan Pendukung");
+        jPanel1.add(jLabel4);
+        jLabel4.setBounds(70, 280, 113, 17);
 
         Simpan.setBackground(new java.awt.Color(0, 255, 51));
         Simpan.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
@@ -124,81 +276,13 @@ public class Updatedataprodukproduk extends javax.swing.JPanel {
                 SimpanActionPerformed(evt);
             }
         });
-        jPanel1.add(Simpan, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 460, -1, -1));
-        jPanel1.add(JmlP, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 300, 70, 36));
+        jPanel1.add(Simpan);
+        Simpan.setBounds(30, 390, 74, 29);
 
-        jButtonFile.setText("Pilih file");
-        jButtonFile.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonFileActionPerformed(evt);
-            }
-        });
-        jPanel1.add(jButtonFile, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 180, 87, 19));
-
-        jLabelGambar.setBackground(new java.awt.Color(0, 0, 0));
-        jLabelGambar.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
-        jLabelGambar.setForeground(new java.awt.Color(0, 0, 0));
-        jLabelGambar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabelGambar.setText("No Image");
-        jLabelGambar.setMaximumSize(new java.awt.Dimension(176, 141));
-        jLabelGambar.setMinimumSize(new java.awt.Dimension(176, 141));
-        jLabelGambar.setPreferredSize(new java.awt.Dimension(176, 141));
-        jPanel1.add(jLabelGambar, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 10, 220, 170));
-
-        PanelBahan.setBackground(new Color(0x5E3330));
-        PanelBahan.setLayout(new java.awt.GridLayout(0, 2, 10, 5));
-        jPanel1.add(PanelBahan, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 372, 370, 80));
-
-        jLabel4.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel4.setText("Bahan Pendukung");
-        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 350, -1, -1));
-
-        jPanel2.setBackground(new java.awt.Color(0, 153, 255));
-
-        jLabel1.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Produk");
-        jLabel1.setToolTipText("");
-
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 32, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 380, Short.MAX_VALUE)))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 493, Short.MAX_VALUE))
-        );
+        add(jPanel1, java.awt.BorderLayout.CENTER);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButtonFileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonFileActionPerformed
+    private void pilihfileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pilihfileActionPerformed
         JFileChooser fileChooser = new JFileChooser();
         FileNameExtensionFilter filter = new FileNameExtensionFilter("Gambar (JPG, PNG, JPEG)", "jpg", "png", "jpeg");
         fileChooser.setFileFilter(filter);
@@ -209,32 +293,44 @@ public class Updatedataprodukproduk extends javax.swing.JPanel {
             try {
                 foto = bacaFileKeByteArray(selectedFile);
                 ImageIcon icon = new ImageIcon(foto);
-                Image img = icon.getImage().getScaledInstance(220, 170, Image.SCALE_SMOOTH);
+                Image img = icon.getImage().getScaledInstance(180, 150, Image.SCALE_SMOOTH);
                 jLabelGambar.setIcon(new ImageIcon(img));
                 jLabelGambar.setText(null);
             } catch (IOException ex) {
                 ex.printStackTrace();
                 JOptionPane.showMessageDialog(this, "Gagal membaca file gambar!");
             }
-
-            System.out.println("File dipilih: " + foto);
         } else {
             System.out.println("Lu batalin, wajar sih lo emang suka ragu 😒");
         }
-    }//GEN-LAST:event_jButtonFileActionPerformed
+    }//GEN-LAST:event_pilihfileActionPerformed
 
     private void HargaPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_HargaPActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_HargaPActionPerformed
 
+    private void HapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_HapusActionPerformed
+        if (Simpan.getText().equals("Update")) {
+            int confirm = JOptionPane.showConfirmDialog(this, "Mau menghapus data ini?", "Konfirmasi", JOptionPane.YES_NO_OPTION);
+            if (confirm != JOptionPane.YES_OPTION) {
+                return;
+            }
+            produkObjek.deleteProduk(pDat);
+            listener.onCloseForm();
+        }
+    }//GEN-LAST:event_HapusActionPerformed
+
     private void SimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SimpanActionPerformed
-        produkData pDat = new produkData();
-        if(NamaP.getText().isEmpty() || HargaP.getText().trim().isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Data selain 'Jumlah' dilarang kosong");
+        if (NamaP.getText().equals(np) || HargaP.getText().equals("")) {
+            JOptionPane.showMessageDialog(this, "Data selain 'Jumlah' dan 'Foto' dilarang kosong!");
             return;
         }
+        if (foto == null) {
+            foto = loadDefaultFoto();
+        }
+        pDat = new produkData();
         pDat.setProdukData(NamaP.getText(), Short.parseShort(HargaP.getText()));
-        
+
         List<detailProdukData> bahanTerpilih = new ArrayList<>();
         for (Component comp : PanelBahan.getComponents()) {
             if (comp instanceof JCheckBox cb && cb.isSelected()) {
@@ -243,30 +339,56 @@ public class Updatedataprodukproduk extends javax.swing.JPanel {
                 bahanTerpilih.add(detP);
             }
         }
-        produkObjek.insertProduk(pDat, foto, bahanTerpilih);
+        if (Simpan.getText().equals("Simpan")) {
+            produkObjek.insertProduk(pDat, foto, bahanTerpilih);
+        } else if (Simpan.getText().equals("Update")) {
+            produkObjek.updateProduk(pDat, foto, bahanTerpilih);
+        }
         if (listener != null) {
-                listener.onProdukSaved(pDat);
-            }
+            listener.onCloseForm();
+        }
     }//GEN-LAST:event_SimpanActionPerformed
+
+    private void NamaPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NamaPActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_NamaPActionPerformed
+
+    private void NamaPFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_NamaPFocusGained
+        if(NamaP.getText().equals(np)) {
+            NamaP.setText("");
+            NamaP.setForeground(new Color (0,0,0));
+        }
+    }//GEN-LAST:event_NamaPFocusGained
+
+    private void NamaPFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_NamaPFocusLost
+        if(NamaP.getText().equals("")) {
+            NamaP.setText(np);
+            NamaP.setForeground(new Color (169,169,169));
+        }
+    }//GEN-LAST:event_NamaPFocusLost
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        listener.onCloseForm();
+    }//GEN-LAST:event_jButton1ActionPerformed
     
     public void setProdukFormListener(Dataprodukproduk.ProdukFormListener listener) {
         this.listener = listener;
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton Hapus;
     private javax.swing.JTextField HargaP;
-    private javax.swing.JTextField JmlP;
     private javax.swing.JTextField NamaP;
     private javax.swing.JPanel PanelBahan;
     private javax.swing.JButton Simpan;
-    private javax.swing.JButton jButtonFile;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabelGambar;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
+    private javax.swing.JScrollPane jScrollPane1;
+    private komponen.PanelRound panelTitle;
+    private javax.swing.JButton pilihfile;
     // End of variables declaration//GEN-END:variables
 }

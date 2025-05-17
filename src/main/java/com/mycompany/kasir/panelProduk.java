@@ -64,10 +64,8 @@ public class panelProduk extends JPanel {
         panelDeskripsi = new javax.swing.JPanel();
         Harga = new javax.swing.JLabel();
         Nama = new javax.swing.JLabel();
-        stok = new javax.swing.JLabel();
         LabelHarga = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
         spin = new javax.swing.JSpinner();
         panelFoto = new javax.swing.JPanel();
         foto = new javax.swing.JLabel();
@@ -81,26 +79,25 @@ public class panelProduk extends JPanel {
 
         panelDeskripsi.setBackground(new java.awt.Color(255, 255, 255));
 
-        Harga.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        Harga.setBackground(new java.awt.Color(0, 0, 0));
+        Harga.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        Harga.setForeground(new java.awt.Color(0, 0, 0));
+        Harga.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         Harga.setText("jLabel6");
-        Harga.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
 
-        Nama.setFont(new java.awt.Font("Roboto Slab", 1, 14)); // NOI18N
+        Nama.setFont(new java.awt.Font("Roboto Slab", 1, 18)); // NOI18N
+        Nama.setForeground(new java.awt.Color(0, 0, 0));
         Nama.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         Nama.setText("jLabel5");
 
-        stok.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
-        stok.setText("Stok");
+        LabelHarga.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        LabelHarga.setForeground(new java.awt.Color(0, 0, 0));
+        LabelHarga.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        LabelHarga.setText("Harga");
 
-        LabelHarga.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
-        LabelHarga.setText("Harga:");
-        LabelHarga.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
-
-        jLabel3.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        jLabel3.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(0, 0, 0));
         jLabel3.setText("Jumlah");
-
-        jLabel5.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
-        jLabel5.setText("jLabel5");
 
         spin.setMaximumSize(new java.awt.Dimension(40, 30));
 
@@ -109,40 +106,32 @@ public class panelProduk extends JPanel {
         panelDeskripsiLayout.setHorizontalGroup(
             panelDeskripsiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelDeskripsiLayout.createSequentialGroup()
-                .addComponent(LabelHarga, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(Harga, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGroup(panelDeskripsiLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(Nama, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(21, 21, 21))
-            .addGroup(panelDeskripsiLayout.createSequentialGroup()
-                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(spin, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(15, 15, 15))
             .addGroup(panelDeskripsiLayout.createSequentialGroup()
-                .addComponent(stok, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 84, Short.MAX_VALUE)
-                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(LabelHarga, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(Harga, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(panelDeskripsiLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(Nama, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         panelDeskripsiLayout.setVerticalGroup(
             panelDeskripsiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelDeskripsiLayout.createSequentialGroup()
-                .addComponent(Nama, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(panelDeskripsiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addComponent(Nama, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(panelDeskripsiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(LabelHarga)
-                    .addComponent(Harga))
+                    .addComponent(Harga, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(panelDeskripsiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(stok)
-                    .addComponent(jLabel5))
-                .addGap(11, 11, 11)
                 .addGroup(panelDeskripsiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(spin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(11, Short.MAX_VALUE))
         );
 
         panelFoto.setPreferredSize(new java.awt.Dimension(170, 147));
@@ -154,7 +143,7 @@ public class panelProduk extends JPanel {
         panelFoto.setLayout(panelFotoLayout);
         panelFotoLayout.setHorizontalGroup(
             panelFotoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGap(0, 209, Short.MAX_VALUE)
             .addGroup(panelFotoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelFotoLayout.createSequentialGroup()
                     .addContainerGap()
@@ -178,8 +167,8 @@ public class panelProduk extends JPanel {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(panelDeskripsi, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(panelFoto, javax.swing.GroupLayout.DEFAULT_SIZE, 209, Short.MAX_VALUE))
+                    .addComponent(panelFoto, javax.swing.GroupLayout.DEFAULT_SIZE, 209, Short.MAX_VALUE)
+                    .addComponent(panelDeskripsi, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -206,11 +195,9 @@ public class panelProduk extends JPanel {
     private javax.swing.JLabel Nama;
     private javax.swing.JLabel foto;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel panelDeskripsi;
     private javax.swing.JPanel panelFoto;
     private javax.swing.JSpinner spin;
-    private javax.swing.JLabel stok;
     // End of variables declaration//GEN-END:variables
 }

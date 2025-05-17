@@ -18,7 +18,7 @@ public class bahanObjek {
                 short id_b = rs.getShort("id_bahan");
                 String nama_b = rs.getString("nama_bahan");
                 boolean kateg = rs.getBoolean("konsumsi");
-                short jumlah = rs.getShort("jumlah");
+                short jumlah = rs.getShort("stok");
                 bahanData B = new bahanData(id_b, nama_b, kateg, jumlah);
                 listBahan.add(B);
             }
@@ -40,7 +40,7 @@ public class bahanObjek {
                 short id_b = rs.getShort("id_bahan");
                 String nama_b = rs.getString("nama_bahan");
                 boolean kateg = rs.getBoolean("konsumsi");
-                short jumlah = rs.getShort("jumlah");
+                short jumlah = rs.getShort("stok");
                 bahanData B = new bahanData(id_b, nama_b, kateg, jumlah);
                 listBahan.add(B);
             }
@@ -65,7 +65,7 @@ public class bahanObjek {
     }
     
     public static void updateBahan(bahanData bahdat){
-        String sql = "update m_bahan set nama_bahan = ?, konsumsi = ?, jumlah = ? where id_bahan = ?";
+        String sql = "update m_bahan set nama_bahan = ?, konsumsi = ?, stok = ? where id_bahan = ?";
         Connection conn = koneksi.connect();
         try {
             PreparedStatement pst = conn.prepareStatement(sql);

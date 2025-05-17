@@ -1,17 +1,11 @@
 package DataMaster;
 
 import DAO.*;
-import javax.swing.JFrame;
-import java.util.*;
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.FlowLayout;
-import java.awt.Frame;
+import java.util.List;
+import java.awt.*;
 import java.awt.event.*;
-import javax.swing.BorderFactory;
-import javax.swing.JDialog;
-import javax.swing.JScrollPane;
-import javax.swing.SwingUtilities;
+import java.awt.geom.RoundRectangle2D;
+import javax.swing.*;
 import komponen.PanelRound;
 import komponen.wraplayout;
 
@@ -20,50 +14,52 @@ import komponen.wraplayout;
  * @author RIZKI NABIL P
  */
 public class Dataprodukproduk extends komponen.PanelRound {
+
     private Dataprodukbahan probah = new Dataprodukbahan();
-    private JFrame pop;
+
     public interface ProdukFormListener {
-    void onProdukSaved(produkData produkBaru);
-}
-    
+
+        void onCloseForm();;
+    }
+    private JDialog jdialog;
+    private Updatedataprodukproduk formPanel;
+    private String judul;
+
     public Dataprodukproduk() {
         initComponents();
-        
+
         setRoundBottomLeft(100);
         setRoundBottomRight(100);
         setRoundTopLeft(100);
         setRoundTopRight(100);
-        
+
         loadProduk();
         Panelprodukbahan.setGradientDirection(PanelRound.Direction.VERTICAL);
         Panelprodukbahan.setGradient(new Color(0x2CC4C9), new Color(0x22EBC6));
         DataProduk.setGradientDirection(PanelRound.Direction.VERTICAL);
         DataProduk.setGradient(new Color(0x2CC4C9), new Color(0x22EBC6));
     }
-    
-    void loadProduk(){
+
+    void loadProduk() {
         flow.setPreferredSize(new java.awt.Dimension(650, 800));
         flow.setViewportView(DataProduk);
-        flow.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
-        flow.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
 
         DataProduk.removeAll();
 
         List<produkData> daftarProduk = produkObjek.getAllProduk();
-        
+
         for (produkData data : daftarProduk) {
             panelDataProduk produkP = new panelDataProduk(data);
 
             produkP.addMouseListener(new MouseAdapter() {
                 @Override
                 public void mouseClicked(MouseEvent e) {
-                    produkData produk = produkP.getproduk();
-//                    masukkanKeTabel(produk, jumlah);
+                    showDetProduk(produkP.getproduk());
                 }
             });
             DataProduk.add(produkP);
             DataProduk.setLayout(new wraplayout(FlowLayout.CENTER, 30, 10));
-    }
+        }
         int jumlahItem = DataProduk.getComponentCount();
         int tinggiPerBaris = 200;
         int kolom = 3;
@@ -74,7 +70,30 @@ public class Dataprodukproduk extends komponen.PanelRound {
         DataProduk.revalidate();
         DataProduk.repaint();
     }
-    
+
+    private void showDetProduk(produkData pDat) {
+        formPanel = new Updatedataprodukproduk();
+        formPanel.setData(pDat);
+        judul = "Detail Produk";
+        dialog(judul, formPanel);
+    }
+
+    private void dialog(String title, Updatedataprodukproduk UPP) {
+        jdialog = new JDialog((Frame) SwingUtilities.getWindowAncestor(this), title, true);
+        jdialog.setUndecorated(true);
+
+        formPanel.setProdukFormListener(() -> {
+            jdialog.dispose();
+            loadProduk();
+        });
+        jdialog.setPreferredSize(new Dimension(265, 450));
+        jdialog.setContentPane(UPP);
+        jdialog.pack();
+        jdialog.setLocationRelativeTo(null);
+        jdialog.setShape(new RoundRectangle2D.Double(0, 0, jdialog.getWidth(), jdialog.getHeight(), 30, 30));
+        jdialog.setVisible(true);
+    }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -82,8 +101,6 @@ public class Dataprodukproduk extends komponen.PanelRound {
         jPanel1 = new javax.swing.JPanel();
         jPanel5 = new javax.swing.JPanel();
         Panelprodukbahan = new komponen.PanelRound();
-        Hapus = new javax.swing.JButton();
-        Edit = new javax.swing.JButton();
         Tambah = new javax.swing.JButton();
         flow = new javax.swing.JScrollPane();
         DataProduk = new komponen.PanelRound();
@@ -120,18 +137,9 @@ public class Dataprodukproduk extends komponen.PanelRound {
         Panelprodukbahan.setBackground(new java.awt.Color(51, 255, 255));
         Panelprodukbahan.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        Hapus.setText("Hapus");
-        Panelprodukbahan.add(Hapus, new org.netbeans.lib.awtextra.AbsoluteConstraints(1020, 460, 122, 34));
-
-        Edit.setText("Edit");
-        Edit.setPreferredSize(new java.awt.Dimension(122, 34));
-        Edit.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                EditActionPerformed(evt);
-            }
-        });
-        Panelprodukbahan.add(Edit, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 460, -1, -1));
-
+        Tambah.setBackground(new java.awt.Color(51, 255, 51));
+        Tambah.setFont(new java.awt.Font("Roboto Medium", 1, 12)); // NOI18N
+        Tambah.setForeground(new java.awt.Color(0, 0, 0));
         Tambah.setText("Tambah");
         Tambah.setPreferredSize(new java.awt.Dimension(122, 34));
         Tambah.addActionListener(new java.awt.event.ActionListener() {
@@ -139,7 +147,7 @@ public class Dataprodukproduk extends komponen.PanelRound {
                 TambahActionPerformed(evt);
             }
         });
-        Panelprodukbahan.add(Tambah, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 460, -1, -1));
+        Panelprodukbahan.add(Tambah, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 460, -1, -1));
 
         flow.setBackground(new java.awt.Color(0, 204, 255));
         flow.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
@@ -230,62 +238,42 @@ public class Dataprodukproduk extends komponen.PanelRound {
     }// </editor-fold>//GEN-END:initComponents
 
     private void TambahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TambahActionPerformed
-        JDialog dialog = new JDialog((Frame) SwingUtilities.getWindowAncestor(this), "Tambah Produk", true);
-    Updatedataprodukproduk formPanel = new Updatedataprodukproduk();
-    
-    formPanel.setProdukFormListener(produkBaru -> {
-        // Tangani produk baru di sini, misal simpan ke DB, reload panel produk, dll
-        System.out.println("Produk baru diterima: " + produkBaru.get_nama());
-        dialog.dispose(); // tutup dialog setelah simpan
-        loadProduk();
-    });
-    
-    dialog.add(formPanel);
-    dialog.pack();
-    dialog.setLocationRelativeTo(this);
-    dialog.setVisible(true);
+        formPanel = new Updatedataprodukproduk();
+        judul = "Tambah Produk";
+        dialog(judul, formPanel);
     }//GEN-LAST:event_TambahActionPerformed
-
-    private void EditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EditActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_EditActionPerformed
 
     private void ProdukActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ProdukActionPerformed
         tampilkanPanelProduk();
     }//GEN-LAST:event_ProdukActionPerformed
 
     private void BahanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BahanActionPerformed
-        if(probah ==null){
+        if (probah == null) {
             probah = new Dataprodukbahan();
         }
-        probah.setBounds(0,0,Panelprodukbahan.getWidth(),Panelprodukbahan.getHeight());
+        probah.setBounds(0, 0, Panelprodukbahan.getWidth(), Panelprodukbahan.getHeight());
         probah.setBorder(BorderFactory.createLineBorder(Color.RED));
 
         Panelprodukbahan.removeAll();
-        Panelprodukbahan.add(probah, new org.netbeans.lib.awtextra.AbsoluteConstraints(0,0,Panelprodukbahan.getWidth(),Panelprodukbahan.getHeight()));
+        Panelprodukbahan.add(probah, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, Panelprodukbahan.getWidth(), Panelprodukbahan.getHeight()));
         Panelprodukbahan.revalidate();
         Panelprodukbahan.repaint();
     }//GEN-LAST:event_BahanActionPerformed
-    
+
     private void tampilkanPanelProduk() {
-    Panelprodukbahan.removeAll();
-    Panelprodukbahan.add(flow, new org.netbeans.lib.awtextra.AbsoluteConstraints(7, 10, 1240, 410));
-    Panelprodukbahan.add(Tambah, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 430, -1, -1));
-    Panelprodukbahan.add(Edit, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 430, -1, -1));
-    Panelprodukbahan.add(Hapus, new org.netbeans.lib.awtextra.AbsoluteConstraints(1020, 430, 122, 34));
+        Panelprodukbahan.removeAll();
+        Panelprodukbahan.add(flow, new org.netbeans.lib.awtextra.AbsoluteConstraints(7, 10, 1240, 410));
+        Panelprodukbahan.add(Tambah, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 460, -1, -1));
+        Panelprodukbahan.revalidate();
+        Panelprodukbahan.repaint();
 
-    Panelprodukbahan.revalidate();
-    Panelprodukbahan.repaint();
-
-    loadProduk(); // optionally reload
-}
+        loadProduk();
+    }
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Bahan;
     private komponen.PanelRound DataProduk;
-    private javax.swing.JButton Edit;
-    private javax.swing.JButton Hapus;
     private javax.swing.JPanel PaNavBol;
     private komponen.PanelRound Panelprodukbahan;
     private javax.swing.JButton Produk;

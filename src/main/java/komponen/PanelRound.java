@@ -16,9 +16,13 @@ public class PanelRound extends JPanel {
 }
     private Color warnaAwal = new Color(0x04AEF6);
     private Color warnaAkhir = Color.WHITE;
-    
+    private boolean useSolid = false;
     private Direction arahGradasi = Direction.HORIZONTAL;
 
+    public void setSolid(boolean solid) {
+    this.useSolid = solid;
+    repaint();
+}
     public void setGradientDirection(Direction arah) {
         this.arahGradasi = arah;
         repaint();
@@ -77,20 +81,26 @@ public class PanelRound extends JPanel {
 
     @Override
     protected void paintComponent(Graphics grphcs) {
+        super.paintComponent(grphcs);
         Graphics2D g2 = (Graphics2D) grphcs.create();
         g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         GradientPaint grad;
-        switch (arahGradasi) {
-            case VERTICAL:
-                grad = new GradientPaint(0, 0, warnaAwal, 0, getHeight(), warnaAkhir);
-                break;
-            case DIAGONAL:
-                grad = new GradientPaint(0, 0, warnaAwal, getWidth(), getHeight(), warnaAkhir);
-                break;
-            default: // HORIZONTAL
-                grad = new GradientPaint(0, 0, warnaAwal, getWidth(), 0, warnaAkhir);
+        if (useSolid) {
+            g2.setPaint(getBackground()); // gunakan background panel
+        } else {
+            // arah gradasi
+            switch (arahGradasi) {
+                case VERTICAL:
+                    grad = new GradientPaint(0, 0, warnaAwal, 0, getHeight(), warnaAkhir);
+                    break;
+                case DIAGONAL:
+                    grad = new GradientPaint(0, 0, warnaAwal, getWidth(), getHeight(), warnaAkhir);
+                    break;
+                default:
+                    grad = new GradientPaint(0, 0, warnaAwal, getWidth(), 0, warnaAkhir);
+            }
+            g2.setPaint(grad);
         }
-        g2.setPaint(grad);
         Area area = new Area(createRoundTopLeft());
         if (roundTopRight > 0) {
             area.intersect(new Area(createRoundTopRight()));
@@ -103,7 +113,6 @@ public class PanelRound extends JPanel {
         }
         g2.fill(area);
         g2.dispose();
-        super.paintComponent(grphcs);
     }
 
     private Shape createRoundTopLeft() {

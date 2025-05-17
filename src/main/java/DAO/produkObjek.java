@@ -19,9 +19,8 @@ public class produkObjek {
                 byte id = rs.getByte("id_produk");
                 String nama = rs.getString("nama_produk");
                 short harga = rs.getShort("harga_jual");
-                short stok = rs.getShort("stok");
 
-                produkData p = new produkData(id, foto, nama, harga, stok);
+                produkData p = new produkData(id, foto, nama, harga);
                 listProduk.add(p);
             }
         } catch (SQLException e) {
@@ -30,7 +29,7 @@ public class produkObjek {
         return listProduk;
     }
 
-    public List<detailProdukData> getBahanProduk(byte id_produk) {
+    public static List<detailProdukData> getBahanProduk(byte id_produk) {
         List<detailProdukData> listBahan = new ArrayList<>();
         try {
             Connection conn = koneksi.connect();
@@ -100,44 +99,65 @@ public class produkObjek {
         }
     }
 
-    public static void updateProduk(produkData data, byte[] fotoByte) {
-        Connection conn = koneksi.connect();
-        String sql = "Update m_produk set nama_produk = ?, Foto = ?, harga_jual = ?, stok = ? WHERE id_produk = ?";
+    public static void updateProduk(produkData data, byte[] fotoByte, List<detailProdukData> detPDat) {
+    Connection conn = koneksi.connect();
+    String sqlUpdate = "Update m_produk set nama_produk = ?, Foto = ?, harga_jual = ? where id_produk = ?";
+    String sqlDeleteDetail = "Delete from m_detailp where id_produk = ?";
+    String sqlInsertDetail = "Insert into m_detailp (id_produk, id_bahan) values (?, ?)";
+    try {
+        conn.setAutoCommit(false);
 
-        try (PreparedStatement pst = conn.prepareStatement(sql)) {
-            pst.setString(1, data.get_nama());
-            pst.setBytes(2, fotoByte);
-            pst.setInt(3, data.get_harga());
-            pst.setShort(4, data.get_stok());
-            pst.setByte(5, data.get_id());
-            pst.executeUpdate();
-        } catch (Exception e) {
+        try (
+            PreparedStatement pstUpdate = conn.prepareStatement(sqlUpdate);
+            PreparedStatement pstDelete = conn.prepareStatement(sqlDeleteDetail);
+            PreparedStatement pstInsert = conn.prepareStatement(sqlInsertDetail);
+        ) {
+            pstUpdate.setString(1, data.get_nama());
+            pstUpdate.setBytes(2, fotoByte);
+            pstUpdate.setInt(3, data.get_harga());
+            pstUpdate.setByte(4, data.get_id());
+            pstUpdate.executeUpdate();
+
+            pstDelete.setByte(1, data.get_id());
+            pstDelete.executeUpdate();
+
+            for (detailProdukData pDet : detPDat) {
+                pstInsert.setByte(1, data.get_id());
+                pstInsert.setShort(2, pDet.getBahanId());
+                pstInsert.addBatch();
+            }
+
+            pstInsert.executeBatch();
+            conn.commit();
+        }
+    } catch (SQLException e) {
+        try {
+            if (conn != null) conn.rollback();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        e.printStackTrace();
+    } finally {
+        try {
+            if (conn != null) conn.setAutoCommit(true);
+        } catch (SQLException e) {
             e.printStackTrace();
         }
     }
+}
+
 
     public static void deleteProduk(produkData data) {
         Connection conn = koneksi.connect();
         byte id_produk = data.get_id();
-        String sql = "delete from m_detailp where id_produk = ?;"
-                + "delete form m_produk where id_produk = ?";
+        String sqld = "delete from m_detailp where id_produk = ?;";
+        String sqlp = "DELETE from m_produk WHERE id_produk = ?";
 
-        try (PreparedStatement pst = conn.prepareStatement(sql)) {
-            pst.setByte(1, id_produk);
-            pst.setByte(2, id_produk);
-            pst.executeUpdate();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    public static void deleteDetailProduk(detailProdukData detPdat) {
-        Connection conn = koneksi.connect();
-        String sql = "delete from m_detailp where id_produk =?  and id_bahan = ?";
-        try (PreparedStatement pst = conn.prepareStatement(sql)) {
-            pst.setByte(1, detPdat.getProdukId());
-            pst.setShort(2, detPdat.getBahanId());
-            pst.executeUpdate();
+        try (PreparedStatement pstd = conn.prepareStatement(sqld); PreparedStatement pstp = conn.prepareStatement(sqlp);) {
+            pstd.setByte(1, id_produk);
+            pstd.executeUpdate();
+            pstp.setByte(1, id_produk);
+            pstp.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace();
         }
