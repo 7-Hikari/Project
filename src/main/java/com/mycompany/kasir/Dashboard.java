@@ -83,7 +83,7 @@ public class Dashboard extends JFrame {
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         bulatan = new komponen.PanelBulat();
-        panelRound1 = new komponen.PanelRound();
+        panelRounddashbord = new komponen.PanelRound();
         LabelJudul = new javax.swing.JLabel();
         panelnyaPanel = new komponen.PanelRound();
         panelubah = new komponen.PanelRound();
@@ -223,12 +223,12 @@ public class Dashboard extends JFrame {
 
         getContentPane().add(panelNavigasi, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 190, 110, 630));
 
-        panelRound1.setBackground(new java.awt.Color(255, 255, 255));
-        panelRound1.setRequestFocusEnabled(false);
-        panelRound1.setRoundBottomLeft(80);
-        panelRound1.setRoundBottomRight(80);
-        panelRound1.setRoundTopLeft(80);
-        panelRound1.setRoundTopRight(80);
+        panelRounddashbord.setBackground(new java.awt.Color(255, 255, 255));
+        panelRounddashbord.setRequestFocusEnabled(false);
+        panelRounddashbord.setRoundBottomLeft(80);
+        panelRounddashbord.setRoundBottomRight(80);
+        panelRounddashbord.setRoundTopLeft(80);
+        panelRounddashbord.setRoundTopRight(80);
 
         LabelJudul.setBackground(new java.awt.Color(0, 0, 0));
         LabelJudul.setFont(new java.awt.Font("Lucida Calligraphy", 1, 60)); // NOI18N
@@ -236,24 +236,24 @@ public class Dashboard extends JFrame {
         LabelJudul.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         LabelJudul.setText("Dashboard");
 
-        javax.swing.GroupLayout panelRound1Layout = new javax.swing.GroupLayout(panelRound1);
-        panelRound1.setLayout(panelRound1Layout);
-        panelRound1Layout.setHorizontalGroup(
-            panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRound1Layout.createSequentialGroup()
+        javax.swing.GroupLayout panelRounddashbordLayout = new javax.swing.GroupLayout(panelRounddashbord);
+        panelRounddashbord.setLayout(panelRounddashbordLayout);
+        panelRounddashbordLayout.setHorizontalGroup(
+            panelRounddashbordLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRounddashbordLayout.createSequentialGroup()
                 .addContainerGap(241, Short.MAX_VALUE)
                 .addComponent(LabelJudul, javax.swing.GroupLayout.PREFERRED_SIZE, 458, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(201, 201, 201))
         );
-        panelRound1Layout.setVerticalGroup(
-            panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRound1Layout.createSequentialGroup()
+        panelRounddashbordLayout.setVerticalGroup(
+            panelRounddashbordLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRounddashbordLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(LabelJudul, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
-        getContentPane().add(panelRound1, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 40, 900, 90));
+        getContentPane().add(panelRounddashbord, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 40, 900, 90));
 
         panelnyaPanel.setBackground(new java.awt.Color(51, 255, 255));
         panelnyaPanel.setMaximumSize(new java.awt.Dimension(1270, 670));
@@ -426,7 +426,7 @@ public class Dashboard extends JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel panelNavigasi;
-    private komponen.PanelRound panelRound1;
+    private komponen.PanelRound panelRounddashbord;
     private komponen.PanelRound panelnyaPanel;
     private komponen.PanelRound panelubah;
     private javax.swing.JButton tombol_Kasir;

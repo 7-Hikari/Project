@@ -134,7 +134,7 @@ public class Dataprodukbahan extends komponen.PanelRound {
             tabelBahan.getColumnModel().getColumn(1).setMaxWidth(0);
         }
 
-        panelRound1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 712, 480));
+        panelRound1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 830, 480));
 
         panelData.setBackground(new java.awt.Color(255, 255, 255));
         panelData.setRoundBottomRight(100);
