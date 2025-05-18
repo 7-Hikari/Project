@@ -13,6 +13,7 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.stream.Collectors;
 import javax.swing.text.AbstractDocument;
+import komponen.PanelRound;
 
 public class Updatedataprodukproduk extends JPanel {
     private byte[] foto;
@@ -28,8 +29,9 @@ public class Updatedataprodukproduk extends JPanel {
         initComponents();
         loadCekbox();
         hanyaAngka(HargaP);
+        panelTitle.setGradientDirection(PanelRound.Direction.VERTICAL);
         Hapus.setVisible(false);
-        Simpan.setLocation(95, 390);
+        Simpan.setLocation(400, 350);
         jLabelGambar.setMaximumSize(new Dimension(180,150));
     }
     
@@ -50,7 +52,7 @@ public class Updatedataprodukproduk extends JPanel {
         byte x = pDat.get_id();
         loadCekbox(x);
         Simpan.setText("Update");
-        Simpan.setLocation(30, 390);
+        Simpan.setLocation(320, 340);
         Hapus.setVisible(true);
     }
     
@@ -142,6 +144,7 @@ public class Updatedataprodukproduk extends JPanel {
         PanelBahan = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         Simpan = new javax.swing.JButton();
+        jLabel5 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setMaximumSize(new java.awt.Dimension(265, 480));
@@ -162,10 +165,10 @@ public class Updatedataprodukproduk extends JPanel {
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Produk");
         jLabel1.setToolTipText("");
-        panelTitle.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 0, 206, -1));
+        panelTitle.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 0, 206, -1));
 
-        jButton1.setFont(new java.awt.Font("sansserif", 1, 12)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(255, 0, 0));
+        jButton1.setFont(new java.awt.Font("sansserif", 1, 18)); // NOI18N
+        jButton1.setForeground(new java.awt.Color(0, 0, 0));
         jButton1.setText("X");
         jButton1.setContentAreaFilled(false);
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -173,7 +176,7 @@ public class Updatedataprodukproduk extends JPanel {
                 jButton1ActionPerformed(evt);
             }
         });
-        panelTitle.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 0, 37, 20));
+        panelTitle.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 0, 50, 30));
 
         add(panelTitle, java.awt.BorderLayout.NORTH);
 
@@ -202,7 +205,7 @@ public class Updatedataprodukproduk extends JPanel {
             }
         });
         jPanel1.add(NamaP);
-        NamaP.setBounds(20, 190, 220, 36);
+        NamaP.setBounds(320, 50, 240, 36);
 
         HargaP.setBackground(new Color(0xFFEECA));
         HargaP.addActionListener(new java.awt.event.ActionListener() {
@@ -211,13 +214,13 @@ public class Updatedataprodukproduk extends JPanel {
             }
         });
         jPanel1.add(HargaP);
-        HargaP.setBounds(90, 230, 150, 36);
+        HargaP.setBounds(320, 120, 240, 36);
 
         jLabel3.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel3.setText("Harga");
+        jLabel3.setText("Nama Produk");
         jPanel1.add(jLabel3);
-        jLabel3.setBounds(20, 240, 50, 17);
+        jLabel3.setBounds(390, 30, 90, 17);
 
         Hapus.setBackground(new java.awt.Color(255, 51, 0));
         Hapus.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
@@ -229,7 +232,7 @@ public class Updatedataprodukproduk extends JPanel {
             }
         });
         jPanel1.add(Hapus);
-        Hapus.setBounds(150, 390, 80, 29);
+        Hapus.setBounds(480, 340, 80, 29);
 
         pilihfile.setText("Pilih file");
         pilihfile.addActionListener(new java.awt.event.ActionListener() {
@@ -238,7 +241,7 @@ public class Updatedataprodukproduk extends JPanel {
             }
         });
         jPanel1.add(pilihfile);
-        pilihfile.setBounds(90, 160, 87, 19);
+        pilihfile.setBounds(90, 280, 87, 30);
 
         jLabelGambar.setBackground(new java.awt.Color(0, 0, 0));
         jLabelGambar.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
@@ -250,7 +253,7 @@ public class Updatedataprodukproduk extends JPanel {
         jLabelGambar.setMinimumSize(new java.awt.Dimension(176, 141));
         jLabelGambar.setPreferredSize(new java.awt.Dimension(176, 141));
         jPanel1.add(jLabelGambar);
-        jLabelGambar.setBounds(50, 10, 176, 141);
+        jLabelGambar.setBounds(40, 100, 180, 170);
 
         jScrollPane1.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 
@@ -259,13 +262,13 @@ public class Updatedataprodukproduk extends JPanel {
         jScrollPane1.setViewportView(PanelBahan);
 
         jPanel1.add(jScrollPane1);
-        jScrollPane1.setBounds(10, 300, 240, 80);
+        jScrollPane1.setBounds(320, 210, 240, 90);
 
         jLabel4.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(0, 0, 0));
         jLabel4.setText("Bahan Pendukung");
         jPanel1.add(jLabel4);
-        jLabel4.setBounds(70, 280, 113, 17);
+        jLabel4.setBounds(380, 190, 113, 17);
 
         Simpan.setBackground(new java.awt.Color(0, 255, 51));
         Simpan.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
@@ -277,7 +280,13 @@ public class Updatedataprodukproduk extends JPanel {
             }
         });
         jPanel1.add(Simpan);
-        Simpan.setBounds(30, 390, 74, 29);
+        Simpan.setBounds(320, 340, 74, 29);
+
+        jLabel5.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel5.setText("Harga");
+        jPanel1.add(jLabel5);
+        jLabel5.setBounds(420, 100, 40, 17);
 
         add(jPanel1, java.awt.BorderLayout.CENTER);
     }// </editor-fold>//GEN-END:initComponents
@@ -385,6 +394,7 @@ public class Updatedataprodukproduk extends JPanel {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabelGambar;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;

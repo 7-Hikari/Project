@@ -75,7 +75,7 @@ public class Login extends javax.swing.JFrame {
         username.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         username.setForeground(new java.awt.Color(169, 169, 169));
         username.setText("Username");
-        username.setToolTipText("Email or Username");
+        username.setToolTipText("");
         username.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 0, 1, 0, new java.awt.Color(204, 204, 204)));
         username.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {

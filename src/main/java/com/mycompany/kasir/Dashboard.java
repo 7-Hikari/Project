@@ -88,6 +88,8 @@ public class Dashboard extends JFrame {
         panelnyaPanel = new komponen.PanelRound();
         panelubah = new komponen.PanelRound();
         Toko = new javax.swing.JLabel();
+        panelBulat1 = new komponen.PanelBulat();
+        jLabel7 = new javax.swing.JLabel();
         foto = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -300,6 +302,29 @@ public class Dashboard extends JFrame {
         Toko.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Papoy.png"))); // NOI18N
         getContentPane().add(Toko, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 20, 160, 130));
 
+        panelBulat1.setPreferredSize(new java.awt.Dimension(90, 90));
+
+        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Add User.png"))); // NOI18N
+
+        javax.swing.GroupLayout panelBulat1Layout = new javax.swing.GroupLayout(panelBulat1);
+        panelBulat1.setLayout(panelBulat1Layout);
+        panelBulat1Layout.setHorizontalGroup(
+            panelBulat1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelBulat1Layout.createSequentialGroup()
+                .addContainerGap(14, Short.MAX_VALUE)
+                .addComponent(jLabel7)
+                .addGap(26, 26, 26))
+        );
+        panelBulat1Layout.setVerticalGroup(
+            panelBulat1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelBulat1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel7)
+                .addContainerGap(34, Short.MAX_VALUE))
+        );
+
+        getContentPane().add(panelBulat1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1300, 40, -1, 90));
+
         URL url = getClass().getResource("komponen/Main.png");
         foto.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         foto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Desktop.png"))); // NOI18N
@@ -425,6 +450,8 @@ public class Dashboard extends JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private komponen.PanelBulat panelBulat1;
     private javax.swing.JPanel panelNavigasi;
     private komponen.PanelRound panelRounddashbord;
     private komponen.PanelRound panelnyaPanel;

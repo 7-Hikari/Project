@@ -58,8 +58,10 @@ public class Rekapan extends javax.swing.JPanel {
         });
         add(cetak, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 600, 140, 40));
 
+        panelRound1.setBackground(new java.awt.Color(51, 204, 255));
         panelRound1.setRoundBottomRight(100);
         panelRound1.setRoundTopRight(100);
+        panelRound1.setSolid(true);
 
         SpinBulan.setFont(new java.awt.Font("sansserif", 0, 24)); // NOI18N
 

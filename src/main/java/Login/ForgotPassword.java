@@ -106,7 +106,7 @@ public class ForgotPassword extends javax.swing.JFrame {
         username.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         username.setForeground(new java.awt.Color(169, 169, 169));
         username.setText("Username");
-        username.setToolTipText("Email or Username");
+        username.setToolTipText("");
         username.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 0, 1, 0, new java.awt.Color(204, 204, 204)));
         username.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
@@ -263,7 +263,7 @@ public class ForgotPassword extends javax.swing.JFrame {
     }//GEN-LAST:event_signInActionPerformed
 
     private void jLabel7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel7MouseClicked
-        //exit
+
         System.exit(0);
     }//GEN-LAST:event_jLabel7MouseClicked
 
@@ -314,7 +314,9 @@ public class ForgotPassword extends javax.swing.JFrame {
     }//GEN-LAST:event_RegisterActionPerformed
 
     private void Register1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Register1ActionPerformed
-        // TODO add your handling code here:
+        new Login().setVisible(true);
+                // Tutup frame ini
+                dispose();
     }//GEN-LAST:event_Register1ActionPerformed
 
     /**

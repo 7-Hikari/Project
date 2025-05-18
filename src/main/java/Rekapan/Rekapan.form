@@ -53,8 +53,12 @@
     </Component>
     <Container class="komponen.PanelRound" name="panelRound1">
       <Properties>
+        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="ff" green="cc" red="33" type="rgb"/>
+        </Property>
         <Property name="roundBottomRight" type="int" value="100"/>
         <Property name="roundTopRight" type="int" value="100"/>
+        <Property name="solid" type="boolean" value="true"/>
       </Properties>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">

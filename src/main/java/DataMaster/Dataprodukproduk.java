@@ -86,7 +86,7 @@ public class Dataprodukproduk extends komponen.PanelRound {
             jdialog.dispose();
             loadProduk();
         });
-        jdialog.setPreferredSize(new Dimension(265, 450));
+        jdialog.setPreferredSize(new Dimension(593, 455));
         jdialog.setContentPane(UPP);
         jdialog.pack();
         jdialog.setLocationRelativeTo(null);

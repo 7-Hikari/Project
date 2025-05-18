@@ -67,7 +67,7 @@ public class Login1 extends javax.swing.JFrame {
         username.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         username.setForeground(new java.awt.Color(169, 169, 169));
         username.setText("Username");
-        username.setToolTipText("Email or Username");
+        username.setToolTipText("");
         username.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 0, 1, 0, new java.awt.Color(204, 204, 204)));
         username.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
@@ -267,6 +267,8 @@ public class Login1 extends javax.swing.JFrame {
         System.out.println("DAO pas " + UD.getPassword());
         
         userObjek.RegisUser(UD);
+        new Login().setVisible(true);
+                dispose();
     }//GEN-LAST:event_RegisterActionPerformed
 
     private void usernameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_usernameActionPerformed
@@ -276,14 +278,9 @@ public class Login1 extends javax.swing.JFrame {
     }//GEN-LAST:event_usernameActionPerformed
 
     private void usernameFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_usernameFocusLost
-        // TODO add your handling code here:
-        if(username.getText().equals("")) {
+            if(username.getText().equals("")) {
             username.setText("Username");
         }
-
-//        if (password.getText().equals("Password")) {
-//            password.setEchoChar((char) 0);
-//        }
     }//GEN-LAST:event_usernameFocusLost
 
     private void usernameFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_usernameFocusGained
@@ -291,10 +288,6 @@ public class Login1 extends javax.swing.JFrame {
         if(username.getText().equals("Username")) {
             username.setText("");
         }
-
-        //        if (password.getText().equals("Password")) {
-            //            password.setEchoChar((char) 0);
-            //        }
     }//GEN-LAST:event_usernameFocusGained
 
     private void jPasswordField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jPasswordField1ActionPerformed
