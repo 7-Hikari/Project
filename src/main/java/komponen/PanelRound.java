@@ -29,6 +29,10 @@ public class PanelRound extends JPanel {
     }
     
     public void setGradient(Color awal, Color akhir) {
+        setGradient(awal, new Color(2933961), akhir);
+    }
+
+    public void setGradient(Color awal, Color tengah, Color akhir) {
         this.warnaAwal = awal;
         this.warnaAkhir = akhir;
         repaint();
