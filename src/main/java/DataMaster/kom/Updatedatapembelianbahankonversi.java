@@ -2,18 +2,18 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
-package DataMaster;
+package DataMaster.kom;
 
 /**
  *
  * @author RIZKI NABIL P
  */
-public class Updatedatapembelianbahankulakan extends javax.swing.JPanel {
+public class Updatedatapembelianbahankonversi extends javax.swing.JPanel {
 
     /**
      * Creates new form Updatedatapembelianbahan
      */
-    public Updatedatapembelianbahankulakan() {
+    public Updatedatapembelianbahankonversi() {
         initComponents();
     }
 
@@ -30,10 +30,10 @@ public class Updatedatapembelianbahankulakan extends javax.swing.JPanel {
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jTextFieldNo = new javax.swing.JTextField();
-        jTextFieldtagihan = new javax.swing.JTextField();
+        jTextFieldHasil = new javax.swing.JTextField();
         jTextFieldtanggalbeli = new javax.swing.JTextField();
-        jTextFieldnamabahan = new javax.swing.JTextField();
-        jTextFieldberat = new javax.swing.JTextField();
+        jTextFieldTanggalkonversi = new javax.swing.JTextField();
+        jTextFieldpembagi = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
@@ -50,7 +50,7 @@ public class Updatedatapembelianbahankulakan extends javax.swing.JPanel {
 
         jLabel1.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel1.setText("Pembelian bahan Kulakan");
+        jLabel1.setText("Pembelian bahan Konversi");
         jLabel1.setToolTipText("");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -67,9 +67,9 @@ public class Updatedatapembelianbahankulakan extends javax.swing.JPanel {
             .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 39, Short.MAX_VALUE)
         );
 
-        jTextFieldtagihan.addActionListener(new java.awt.event.ActionListener() {
+        jTextFieldHasil.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextFieldtagihanActionPerformed(evt);
+                jTextFieldHasilActionPerformed(evt);
             }
         });
 
@@ -79,9 +79,9 @@ public class Updatedatapembelianbahankulakan extends javax.swing.JPanel {
             }
         });
 
-        jTextFieldberat.addActionListener(new java.awt.event.ActionListener() {
+        jTextFieldpembagi.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextFieldberatActionPerformed(evt);
+                jTextFieldpembagiActionPerformed(evt);
             }
         });
 
@@ -95,7 +95,7 @@ public class Updatedatapembelianbahankulakan extends javax.swing.JPanel {
 
         jLabel4.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel4.setText("Nama Bahan");
+        jLabel4.setText("Tanggal Konversi");
 
         jLabel5.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(0, 0, 0));
@@ -103,11 +103,11 @@ public class Updatedatapembelianbahankulakan extends javax.swing.JPanel {
 
         jLabel6.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel6.setText("Berat (g)");
+        jLabel6.setText("Pembagi (g)");
 
         jLabel7.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel7.setText("Tagihan");
+        jLabel7.setText("Hasil");
 
         jButton1.setBackground(new java.awt.Color(255, 0, 0));
         jButton1.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
@@ -125,11 +125,6 @@ public class Updatedatapembelianbahankulakan extends javax.swing.JPanel {
         jButton2.setText("Simpan");
 
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox1ActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -150,11 +145,11 @@ public class Updatedatapembelianbahankulakan extends javax.swing.JPanel {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel4)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jTextFieldnamabahan, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jTextFieldTanggalkonversi, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel7)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jTextFieldtagihan, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jTextFieldHasil, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addComponent(jButton2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -165,7 +160,7 @@ public class Updatedatapembelianbahankulakan extends javax.swing.JPanel {
                             .addComponent(jLabel5))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jTextFieldberat, javax.swing.GroupLayout.DEFAULT_SIZE, 139, Short.MAX_VALUE)
+                            .addComponent(jTextFieldpembagi, javax.swing.GroupLayout.DEFAULT_SIZE, 139, Short.MAX_VALUE)
                             .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap())
         );
@@ -183,21 +178,21 @@ public class Updatedatapembelianbahankulakan extends javax.swing.JPanel {
                     .addComponent(jLabel3))
                 .addGap(29, 29, 29)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextFieldnamabahan, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextFieldTanggalkonversi, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel4))
                 .addGap(38, 38, 38)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(29, 29, 29)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
-                    .addComponent(jTextFieldberat, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTextFieldpembagi, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(28, 28, 28)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextFieldtagihan, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextFieldHasil, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel7))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 8, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
                     .addComponent(jButton2))
@@ -224,17 +219,13 @@ public class Updatedatapembelianbahankulakan extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextFieldtanggalbeliActionPerformed
 
-    private void jTextFieldberatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldberatActionPerformed
+    private void jTextFieldpembagiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldpembagiActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextFieldberatActionPerformed
+    }//GEN-LAST:event_jTextFieldpembagiActionPerformed
 
-    private void jTextFieldtagihanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldtagihanActionPerformed
+    private void jTextFieldHasilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldHasilActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextFieldtagihanActionPerformed
-
-    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBox1ActionPerformed
+    }//GEN-LAST:event_jTextFieldHasilActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -250,10 +241,10 @@ public class Updatedatapembelianbahankulakan extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JTextField jTextFieldHasil;
     private javax.swing.JTextField jTextFieldNo;
-    private javax.swing.JTextField jTextFieldberat;
-    private javax.swing.JTextField jTextFieldnamabahan;
-    private javax.swing.JTextField jTextFieldtagihan;
+    private javax.swing.JTextField jTextFieldTanggalkonversi;
+    private javax.swing.JTextField jTextFieldpembagi;
     private javax.swing.JTextField jTextFieldtanggalbeli;
     // End of variables declaration//GEN-END:variables
 }

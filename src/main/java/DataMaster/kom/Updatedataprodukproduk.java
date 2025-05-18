@@ -1,4 +1,4 @@
-package DataMaster;
+package DataMaster.kom;
 
 import java.awt.Image;
 import java.awt.Color;
@@ -6,6 +6,7 @@ import java.io.File;
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import DAO.*;
+import DataMaster.Dataprodukproduk;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.util.List;
@@ -35,7 +36,7 @@ public class Updatedataprodukproduk extends JPanel {
         jLabelGambar.setMaximumSize(new Dimension(180,150));
     }
     
-    void setData(produkData pDat){
+    public void setData(produkData pDat){
         this.pDat = pDat;
         foto = pDat.get_foto();
         if(foto != null){

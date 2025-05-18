@@ -1,4 +1,4 @@
-package com.mycompany.kasir;
+package Transaksi;
 
 import javax.print.*;
 import java.io.*;

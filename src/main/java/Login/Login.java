@@ -2,8 +2,8 @@ package Login;
 
 import DAO.userData;
 import DAO.userObjek;
-import com.mycompany.kasir.CustAccess;
-import com.mycompany.kasir.Dashboard;
+import Transaksi.CustAccess;
+import DataMaster.Dashboard;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import javax.swing.JFrame;
@@ -294,25 +294,15 @@ public class Login extends javax.swing.JFrame {
     }//GEN-LAST:event_usernameActionPerformed
 
     private void usernameFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_usernameFocusLost
-        // TODO add your handling code here:
         if(username.getText().equals("")) {
             username.setText("Username");
         }
-
-//        if (password.getText().equals("Password")) {
-//            password.setEchoChar((char) 0);
-//        }
     }//GEN-LAST:event_usernameFocusLost
 
     private void usernameFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_usernameFocusGained
-        // TODO add your handling code here:
         if(username.getText().equals("Username")) {
             username.setText("");
         }
-
-        //        if (password.getText().equals("Password")) {
-            //            password.setEchoChar((char) 0);
-            //        }
     }//GEN-LAST:event_usernameFocusGained
 
     private void jPasswordField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jPasswordField1ActionPerformed
@@ -320,15 +310,14 @@ public class Login extends javax.swing.JFrame {
     }//GEN-LAST:event_jPasswordField1ActionPerformed
 
     private void RegisterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RegisterActionPerformed
-
-                new Login1().setVisible(true);
-                // Tutup frame ini
-                dispose();
+        new Login1().setVisible(true);
+        // Tutup frame ini
+        dispose();
     }//GEN-LAST:event_RegisterActionPerformed
 
     private void jLabel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseClicked
         new ForgotPassword().setVisible(true);
-                dispose();
+        dispose();
     }//GEN-LAST:event_jLabel2MouseClicked
 
     /**
@@ -357,23 +346,6 @@ public class Login extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-
-        /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new Login().setVisible(true);

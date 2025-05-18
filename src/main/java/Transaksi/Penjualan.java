@@ -1,4 +1,4 @@
-package com.mycompany.kasir;
+package Transaksi;
 
 import DAO.*;
 import java.awt.*;

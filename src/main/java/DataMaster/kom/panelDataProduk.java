@@ -1,4 +1,4 @@
-package DataMaster;
+package DataMaster.kom;
 
 import javax.swing.*;
 import java.awt.*;

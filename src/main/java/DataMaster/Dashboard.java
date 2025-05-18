@@ -1,8 +1,10 @@
-package com.mycompany.kasir;
+package DataMaster;
 
 import DAO.*;
 import DataMaster.*;
 import Rekapan.Rekapan;
+import Transaksi.KasirPenjualan;
+import Transaksi.Penjualan;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.event.*;

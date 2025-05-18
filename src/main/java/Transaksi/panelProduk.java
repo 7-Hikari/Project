@@ -1,4 +1,4 @@
-package com.mycompany.kasir;
+package Transaksi;
 
 import javax.swing.*;
 import java.awt.*;
