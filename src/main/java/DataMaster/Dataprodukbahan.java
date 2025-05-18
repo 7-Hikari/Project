@@ -32,7 +32,6 @@ public class Dataprodukbahan extends komponen.PanelRound {
         
         tB = (DefaultTableModel) tabelBahan.getModel();
         loadBahan();
-        tabelBahan.setHeaderBackgroundColor(new Color(0x2CBAC6));
         
         tabelBahan.addMouseListener(new MouseAdapter() {
             @Override
@@ -124,6 +123,7 @@ public class Dataprodukbahan extends komponen.PanelRound {
             }
         });
         tabelBahan.setCellFont(new java.awt.Font("Agency FB", 1, 14)); // NOI18N
+        tabelBahan.setHeaderBackgroundColor(new java.awt.Color(0, 204, 255));
         jScrollPane2.setViewportView(tabelBahan);
         if (tabelBahan.getColumnModel().getColumnCount() > 0) {
             tabelBahan.getColumnModel().getColumn(0).setMinWidth(35);

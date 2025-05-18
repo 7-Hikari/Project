@@ -240,6 +240,7 @@ public class Penjualan extends komponen.PanelRound {
         panelRound1.setVerifyInputWhenFocusTarget(false);
         panelRound1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        struk.setBackground(new java.awt.Color(102, 204, 255));
         struk.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         fieldtotal.setFont(new java.awt.Font("Times New Roman", 1, 20)); // NOI18N
@@ -252,6 +253,7 @@ public class Penjualan extends komponen.PanelRound {
         struk.add(fieldtotal, new org.netbeans.lib.awtextra.AbsoluteConstraints(192, 485, 191, 34));
 
         jLabel9.setFont(new java.awt.Font("Times New Roman", 1, 20)); // NOI18N
+        jLabel9.setForeground(new java.awt.Color(0, 0, 0));
         jLabel9.setText(" Total");
         struk.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(24, 485, 106, 34));
 
@@ -278,6 +280,7 @@ public class Penjualan extends komponen.PanelRound {
                 return canEdit [columnIndex];
             }
         });
+        Tabelpesanan.setHeaderBackgroundColor(new java.awt.Color(51, 204, 255));
         jScrollPane1.setViewportView(Tabelpesanan);
         if (Tabelpesanan.getColumnModel().getColumnCount() > 0) {
             Tabelpesanan.getColumnModel().getColumn(0).setResizable(false);
@@ -306,17 +309,18 @@ public class Penjualan extends komponen.PanelRound {
         scroll.setMinimumSize(new java.awt.Dimension(600, 25));
         scroll.setPreferredSize(new java.awt.Dimension(600, 8));
 
-        flowpanel.setBackground(new Color (0x2dbdc7));
+        flowpanel.setBackground(new java.awt.Color(102, 204, 255));
         flowpanel.setMaximumSize(new java.awt.Dimension(600, 800));
         flowpanel.setMinimumSize(new java.awt.Dimension(600, 8));
         flowpanel.setPreferredSize(new java.awt.Dimension(600, 8));
         flowpanel.setLayout(new java.awt.GridLayout(5, 4, 2, 2));
         scroll.setViewportView(flowpanel);
 
-        panelRound1.add(scroll, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 660, 540));
+        panelRound1.add(scroll, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 770, 540));
 
         Pesan.setBackground(new java.awt.Color(0, 255, 51));
         Pesan.setFont(new java.awt.Font("Times New Roman", 1, 20)); // NOI18N
+        Pesan.setForeground(new java.awt.Color(0, 0, 0));
         Pesan.setText("Pesan");
         Pesan.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

@@ -49,9 +49,9 @@ public class Dashboard extends JFrame {
         initComponents();
         
         panelnyaPanel.setGradientDirection(PanelRound.Direction.VERTICAL);
-        panelnyaPanel.setGradient(new Color(0x2CC4C9), new Color(0x22EBC6));
+        panelnyaPanel.setGradient(new Color(0x2CBAC6), new Color(0x48A3EE));
         panelubah.setGradientDirection(PanelRound.Direction.VERTICAL);
-        panelubah.setGradient(new Color(0x2CC4C9), new Color(0x22EBC6));
+        panelubah.setGradient(new Color(0x2CBAC6), new Color(0x48A3EE));
         
         bulatan.setBackground(Color.WHITE);
         Access();
@@ -266,6 +266,7 @@ public class Dashboard extends JFrame {
         panelnyaPanel.setRoundTopLeft(80);
         panelnyaPanel.setRoundTopRight(80);
 
+        panelubah.setGradientDirection(komponen.PanelRound.Direction.VERTICAL);
         panelubah.setMaximumSize(new java.awt.Dimension(1250, 650));
         panelubah.setMinimumSize(new java.awt.Dimension(1250, 650));
         panelubah.setPreferredSize(new java.awt.Dimension(1250, 650));
