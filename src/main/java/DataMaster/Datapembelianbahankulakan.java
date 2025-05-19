@@ -23,15 +23,15 @@ public class Datapembelianbahankulakan extends komponen.PanelRound {
         jPanel1 = new javax.swing.JPanel();
         jPanel5 = new javax.swing.JPanel();
         Panelprodukbahan = new javax.swing.JPanel();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
-        jScrollPane3 = new javax.swing.JScrollPane();
-        jTable3 = new javax.swing.JTable();
-        jScrollPane4 = new javax.swing.JScrollPane();
-        jTable4 = new javax.swing.JTable();
         jTextField1 = new javax.swing.JTextField();
         jButtonSimpan = new javax.swing.JButton();
         jButtonKonversi = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tabel_c1 = new komponen.Tabel_c();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        tabel_c2 = new komponen.Tabel_c();
+        jScrollPane5 = new javax.swing.JScrollPane();
+        tabel_c3 = new komponen.Tabel_c();
 
         setBackground(new java.awt.Color(51, 255, 255));
         setMaximumSize(new java.awt.Dimension(1250, 650));
@@ -62,7 +62,24 @@ public class Datapembelianbahankulakan extends komponen.PanelRound {
         Panelprodukbahan.setBackground(new java.awt.Color(51, 51, 255));
         Panelprodukbahan.setOpaque(false);
 
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+        jTextField1.setBackground(new java.awt.Color(0, 102, 153));
+        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField1ActionPerformed(evt);
+            }
+        });
+
+        jButtonSimpan.setBackground(new java.awt.Color(0, 204, 51));
+        jButtonSimpan.setFont(new java.awt.Font("Times New Roman", 1, 16)); // NOI18N
+        jButtonSimpan.setForeground(new java.awt.Color(0, 0, 0));
+        jButtonSimpan.setText("Simpan");
+
+        jButtonKonversi.setBackground(new java.awt.Color(0, 204, 51));
+        jButtonKonversi.setFont(new java.awt.Font("Times New Roman", 1, 16)); // NOI18N
+        jButtonKonversi.setForeground(new java.awt.Color(0, 0, 0));
+        jButtonKonversi.setText("Konversi");
+
+        tabel_c1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -88,9 +105,10 @@ public class Datapembelianbahankulakan extends komponen.PanelRound {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane2.setViewportView(jTable2);
+        tabel_c1.setHeaderBackgroundColor(new java.awt.Color(0, 204, 255));
+        jScrollPane1.setViewportView(tabel_c1);
 
-        jTable3.setModel(new javax.swing.table.DefaultTableModel(
+        tabel_c2.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null},
                 {null, null, null, null, null},
@@ -116,9 +134,10 @@ public class Datapembelianbahankulakan extends komponen.PanelRound {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane3.setViewportView(jTable3);
+        tabel_c2.setHeaderBackgroundColor(new java.awt.Color(0, 204, 255));
+        jScrollPane2.setViewportView(tabel_c2);
 
-        jTable4.setModel(new javax.swing.table.DefaultTableModel(
+        tabel_c3.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -133,7 +152,7 @@ public class Datapembelianbahankulakan extends komponen.PanelRound {
                 java.lang.Integer.class, java.lang.String.class, java.lang.Integer.class, java.lang.Integer.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, true, false
+                false, false, true, true
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -144,53 +163,31 @@ public class Datapembelianbahankulakan extends komponen.PanelRound {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane4.setViewportView(jTable4);
-
-        jTextField1.setBackground(new java.awt.Color(0, 102, 153));
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
-            }
-        });
-
-        jButtonSimpan.setBackground(new java.awt.Color(0, 204, 51));
-        jButtonSimpan.setFont(new java.awt.Font("Times New Roman", 1, 16)); // NOI18N
-        jButtonSimpan.setForeground(new java.awt.Color(0, 0, 0));
-        jButtonSimpan.setText("Simpan");
-
-        jButtonKonversi.setBackground(new java.awt.Color(0, 204, 51));
-        jButtonKonversi.setFont(new java.awt.Font("Times New Roman", 1, 16)); // NOI18N
-        jButtonKonversi.setForeground(new java.awt.Color(0, 0, 0));
-        jButtonKonversi.setText("Konversi");
+        tabel_c3.setHeaderBackgroundColor(new java.awt.Color(0, 204, 255));
+        jScrollPane5.setViewportView(tabel_c3);
 
         javax.swing.GroupLayout PanelprodukbahanLayout = new javax.swing.GroupLayout(Panelprodukbahan);
         Panelprodukbahan.setLayout(PanelprodukbahanLayout);
         PanelprodukbahanLayout.setHorizontalGroup(
             PanelprodukbahanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(PanelprodukbahanLayout.createSequentialGroup()
-                .addGroup(PanelprodukbahanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(PanelprodukbahanLayout.createSequentialGroup()
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 334, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(61, 61, 61)
-                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 541, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelprodukbahanLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jButtonKonversi, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(217, 217, 217)))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 354, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(41, 41, 41)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 551, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
                 .addGroup(PanelprodukbahanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelprodukbahanLayout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(jButtonSimpan, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(153, 153, 153))
-                    .addGroup(PanelprodukbahanLayout.createSequentialGroup()
-                        .addGroup(PanelprodukbahanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(PanelprodukbahanLayout.createSequentialGroup()
-                                .addGap(54, 54, 54)
-                                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(PanelprodukbahanLayout.createSequentialGroup()
-                                .addGap(46, 46, 46)
-                                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addContainerGap(92, Short.MAX_VALUE))))
+                        .addGap(82, 82, 82))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelprodukbahanLayout.createSequentialGroup()
+                        .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(30, 30, 30))))
+            .addGroup(PanelprodukbahanLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButtonKonversi, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(264, 264, 264)
+                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(22, 22, 22))
         );
         PanelprodukbahanLayout.setVerticalGroup(
             PanelprodukbahanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -198,20 +195,21 @@ public class Datapembelianbahankulakan extends komponen.PanelRound {
                 .addGap(6, 6, 6)
                 .addGroup(PanelprodukbahanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(PanelprodukbahanLayout.createSequentialGroup()
-                        .addGap(6, 6, 6)
-                        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 397, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
-                        .addComponent(jButtonSimpan)
-                        .addGap(50, 50, 50)
-                        .addGroup(PanelprodukbahanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButtonKonversi, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 368, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(57, 57, 57)
+                        .addComponent(jButtonSimpan))
+                    .addGroup(PanelprodukbahanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 483, Short.MAX_VALUE)
+                        .addComponent(jScrollPane2)))
+                .addGroup(PanelprodukbahanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(PanelprodukbahanLayout.createSequentialGroup()
-                        .addGroup(PanelprodukbahanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 483, Short.MAX_VALUE)
-                            .addComponent(jScrollPane2))
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 47, Short.MAX_VALUE)
+                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(164, 164, 164))
+                    .addGroup(PanelprodukbahanLayout.createSequentialGroup()
+                        .addGap(27, 27, 27)
+                        .addComponent(jButtonKonversi, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -233,7 +231,7 @@ public class Datapembelianbahankulakan extends komponen.PanelRound {
                 .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(Panelprodukbahan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(27, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1250, 650));
@@ -250,12 +248,12 @@ public class Datapembelianbahankulakan extends komponen.PanelRound {
     private javax.swing.JButton jButtonSimpan;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel5;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JScrollPane jScrollPane4;
-    private javax.swing.JTable jTable2;
-    private javax.swing.JTable jTable3;
-    private javax.swing.JTable jTable4;
+    private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JTextField jTextField1;
+    private komponen.Tabel_c tabel_c1;
+    private komponen.Tabel_c tabel_c2;
+    private komponen.Tabel_c tabel_c3;
     // End of variables declaration//GEN-END:variables
 }
