@@ -57,6 +57,7 @@ public class Login extends javax.swing.JFrame {
         Register = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setIconImage(new javax.swing.ImageIcon(getClass().getResource("/Papoy.png")).getImage());
         setUndecorated(true);
 
         Body.setBackground(new java.awt.Color(255, 255, 255));
