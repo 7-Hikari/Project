@@ -50,8 +50,11 @@ public class Rekapan extends komponen.PanelRound {
         setBackground(new java.awt.Color(255, 255, 255));
         setMaximumSize(new java.awt.Dimension(1250, 650));
         setMinimumSize(new java.awt.Dimension(1250, 650));
-        setOpaque(false);
         setPreferredSize(new java.awt.Dimension(1250, 650));
+        setRoundBottomLeft(100);
+        setRoundBottomRight(100);
+        setRoundTopLeft(100);
+        setRoundTopRight(100);
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         cetak.setBackground(new java.awt.Color(0, 204, 102));
