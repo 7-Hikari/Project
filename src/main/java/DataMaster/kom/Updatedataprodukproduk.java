@@ -19,6 +19,7 @@ import komponen.PanelRound;
 public class Updatedataprodukproduk extends JPanel {
     private byte[] foto;
     private Dataprodukproduk.ProdukFormListener listener;
+    private List<detailProdukData> bahanTerpilih;
     private produkData pDat;
     String np = "Nama Produk";
     
@@ -338,20 +339,13 @@ public class Updatedataprodukproduk extends JPanel {
         if (foto == null) {
             foto = loadDefaultFoto();
         }
-        pDat = new produkData();
-        pDat.setProdukData(NamaP.getText(), Short.parseShort(HargaP.getText()));
-
-        List<detailProdukData> bahanTerpilih = new ArrayList<>();
-        for (Component comp : PanelBahan.getComponents()) {
-            if (comp instanceof JCheckBox cb && cb.isSelected()) {
-                short id = (short) cb.getClientProperty("id");
-                detailProdukData detP = new detailProdukData(id);
-                bahanTerpilih.add(detP);
-            }
-        }
+        
+        dat();
         if (Simpan.getText().equals("Simpan")) {
+            pDat = new produkData(foto, NamaP.getText(), Short.parseShort(HargaP.getText()));
             produkObjek.insertProduk(pDat, foto, bahanTerpilih);
         } else if (Simpan.getText().equals("Update")) {
+            pDat = new produkData(pDat.get_id(), foto, NamaP.getText(), Short.parseShort(HargaP.getText()));
             produkObjek.updateProduk(pDat, foto, bahanTerpilih);
         }
         if (listener != null) {
@@ -380,6 +374,18 @@ public class Updatedataprodukproduk extends JPanel {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         listener.onCloseForm();
     }//GEN-LAST:event_jButton1ActionPerformed
+    
+    private List<detailProdukData> dat() {
+    bahanTerpilih = new ArrayList<>();
+        for (Component comp : PanelBahan.getComponents()) {
+            if (comp instanceof JCheckBox cb && cb.isSelected()) {
+                short id = (short) cb.getClientProperty("id");
+                detailProdukData detP = new detailProdukData(id);
+                bahanTerpilih.add(detP);
+            }
+        }
+        return bahanTerpilih;
+}
     
     public void setProdukFormListener(Dataprodukproduk.ProdukFormListener listener) {
         this.listener = listener;

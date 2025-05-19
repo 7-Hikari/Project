@@ -6,11 +6,8 @@ public class produkData {
     private byte id;
     private String nama;
     private short harga;
-    
-    
-    public produkData(){}
-    
-    produkData(byte id, byte foto[], String nama, short harga) {
+
+    public produkData(byte id, byte foto[], String nama, short harga) {
         this.id = id;
         this.foto = foto;
         this.nama = nama;
@@ -29,8 +26,9 @@ public class produkData {
         return harga;
     }
     
-    public void setProdukData(String nama, short harga) {
+    public produkData(byte foto[], String nama, short harga) {
         this.nama = nama;
+        this.foto = foto;
         this.harga = harga;
     }
     
@@ -38,9 +36,10 @@ public class produkData {
         this.id = id;
     }
     
-    public void setProdukData(byte id, String nama, short harga){
+    public void setProdukData(byte id, byte foto[], String nama, short harga){
         this.id = id;
         this.nama = nama;
+        this.foto = foto;
         this.harga = harga;
     }
 }

@@ -29,6 +29,7 @@ public class Dataprodukbahan extends komponen.PanelRound {
         TitleForm.setGradient(new Color(0,153,255), new Color(0,153,255));
         
         setSize(1200, 620);
+        Get.setVisible(false);
         
         tB = (DefaultTableModel) tabelBahan.getModel();
         loadBahan();
@@ -36,14 +37,8 @@ public class Dataprodukbahan extends komponen.PanelRound {
         tabelBahan.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent evt){
-                if (evt.getClickCount() == 2 && tabelBahan.getSelectedRow() != -1){
-                    no = tabelBahan.getSelectedRow();
-                    
-                    id = (short) tabelBahan.getValueAt(no, 1);
-                    NamaBahan.setText(tabelBahan.getValueAt(no, 2).toString());
-                    Kategori.setSelectedItem(tabelBahan.getValueAt(no, 3));
-                    Jumlah.setText(tabelBahan.getValueAt(no, 4).toString());
-                    Simpan.setText("Update");
+                if (tabelBahan.getSelectedRow() != -1){
+                    Get.setVisible(true);
                 }
             }
         });
@@ -85,6 +80,7 @@ public class Dataprodukbahan extends komponen.PanelRound {
         TitleForm = new komponen.PanelRound();
         PopUpTitle = new javax.swing.JLabel();
         Simpan = new javax.swing.JButton();
+        Get = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(204, 204, 204));
         setMaximumSize(new java.awt.Dimension(1237, 494));
@@ -210,6 +206,16 @@ public class Dataprodukbahan extends komponen.PanelRound {
             }
         });
 
+        Get.setBackground(new java.awt.Color(0, 204, 51));
+        Get.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        Get.setForeground(new java.awt.Color(0, 0, 0));
+        Get.setText("Ambil");
+        Get.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                GetActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout panelDataLayout = new javax.swing.GroupLayout(panelData);
         panelData.setLayout(panelDataLayout);
         panelDataLayout.setHorizontalGroup(
@@ -219,6 +225,8 @@ public class Dataprodukbahan extends komponen.PanelRound {
                 .addGroup(panelDataLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panelDataLayout.createSequentialGroup()
                         .addComponent(Simpan)
+                        .addGap(32, 32, 32)
+                        .addComponent(Get)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(Hapus)
                         .addGap(52, 52, 52))
@@ -257,7 +265,8 @@ public class Dataprodukbahan extends komponen.PanelRound {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 73, Short.MAX_VALUE)
                 .addGroup(panelDataLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(Simpan)
-                    .addComponent(Hapus))
+                    .addComponent(Hapus)
+                    .addComponent(Get))
                 .addGap(21, 21, 21))
         );
 
@@ -307,8 +316,22 @@ public class Dataprodukbahan extends komponen.PanelRound {
         loadBahan();
     }//GEN-LAST:event_HapusActionPerformed
 
+    private void GetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GetActionPerformed
+        if (tabelBahan.getSelectedRow() != -1){
+        no = tabelBahan.getSelectedRow();
+
+        id = (short) tabelBahan.getValueAt(no, 1);
+        NamaBahan.setText(tabelBahan.getValueAt(no, 2).toString());
+        Kategori.setSelectedItem(tabelBahan.getValueAt(no, 3));
+        Jumlah.setText(tabelBahan.getValueAt(no, 4).toString());
+        Simpan.setText("Update");
+        Get.setVisible(false);
+        }
+    }//GEN-LAST:event_GetActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton Get;
     private javax.swing.JButton Hapus;
     private javax.swing.JTextField Jumlah;
     private javax.swing.JComboBox<String> Kategori;

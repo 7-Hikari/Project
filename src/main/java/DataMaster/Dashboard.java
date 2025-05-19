@@ -15,14 +15,14 @@ import java.util.Set;
 import komponen.PanelRound;
 
 public class Dashboard extends JFrame {
-    
+
     private int yBulatan = -1;
     private final Map<JButton, ImageIcon[]> iconMap = new HashMap<>();
     private final Map<String, Set<JButton>> RoleAkses = new HashMap<>();
-    
+
     private userObjek.Status status;
     private userData loginUser;
-    
+
     private void Access() {
         RoleAkses.put("Pelanggan", Set.of(tombol_Penjualan));
         RoleAkses.put("Karyawan", Set.of(tombol_dashb, tombol_Penjualan, tombol_Kasir));
@@ -32,31 +32,34 @@ public class Dashboard extends JFrame {
         RoleAkses.put("Pemilik", Boundless);
         RoleAkses.put("SuperAdmin", Boundless);
     }
-    
-    private boolean HakAkses(JButton x){
+
+    private boolean HakAkses(JButton x) {
         String role = (status == null) ? "Pelanggan" : status.toString();
         Set<JButton> akses = RoleAkses.get(role);
-         if (akses == null || !akses.contains(x)) {
-        JOptionPane.showMessageDialog(this, "Anda tidak memiliki akses", "Peringatan!", JOptionPane.WARNING_MESSAGE);
-        return false;
+        if (akses == null || !akses.contains(x)) {
+            JOptionPane.showMessageDialog(this, "Anda tidak memiliki akses", "Peringatan!", JOptionPane.WARNING_MESSAGE);
+            return false;
+        }
+        return true;
     }
-         return true;
-    }
-    
+
     public Dashboard(userData login) {
         this.loginUser = login;
         this.status = loginUser.getStatus();
-        
+
         initComponents();
-        
+        panelBulat1.setDiameter(90);
+        panelBulat1.revalidate();
+        panelBulat1.repaint();
+        panelBulat1.add(jLabel7);
         panelnyaPanel.setGradientDirection(PanelRound.Direction.VERTICAL);
         panelnyaPanel.setGradient(new Color(0x2CBAC6), new Color(0x48A3EE));
         panelubah.setGradientDirection(PanelRound.Direction.VERTICAL);
         panelubah.setGradient(new Color(0x2CBAC6), new Color(0x48A3EE));
-        
+
         bulatan.setBackground(Color.WHITE);
         Access();
-        
+
         iconMap.put(tombol_dashb, new ImageIcon[]{new ImageIcon(getClass().getResource("/Dashb.png")), new ImageIcon(getClass().getResource("/imgdb.png"))});
         iconMap.put(tombol_Pembelian, new ImageIcon[]{new ImageIcon(getClass().getResource("/Pembelian.png")), new ImageIcon(getClass().getResource("/Pembelian_on.png"))});
         iconMap.put(tombol_Kasir, new ImageIcon[]{new ImageIcon(getClass().getResource("/Kasir.png")), new ImageIcon(getClass().getResource("/Kasir_on.png"))});
@@ -182,32 +185,32 @@ public class Dashboard extends JFrame {
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Rekapan");
         panelNavigasi.add(jLabel1);
-        jLabel1.setBounds(10, 580, 70, 15);
+        jLabel1.setBounds(10, 580, 70, 16);
 
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setText("Dashboard");
         panelNavigasi.add(jLabel2);
-        jLabel2.setBounds(10, 100, 70, 15);
+        jLabel2.setBounds(10, 100, 70, 16);
 
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel3.setText("Produk");
         panelNavigasi.add(jLabel3);
-        jLabel3.setBounds(10, 190, 70, 15);
+        jLabel3.setBounds(10, 190, 70, 16);
 
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel4.setText("Penjualan");
         panelNavigasi.add(jLabel4);
-        jLabel4.setBounds(10, 490, 70, 15);
+        jLabel4.setBounds(10, 490, 70, 16);
 
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel5.setText("Pembelian");
         panelNavigasi.add(jLabel5);
-        jLabel5.setBounds(10, 390, 70, 15);
+        jLabel5.setBounds(10, 390, 70, 16);
 
         jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel6.setText("Kasir");
         panelNavigasi.add(jLabel6);
-        jLabel6.setBounds(10, 290, 70, 15);
+        jLabel6.setBounds(10, 290, 70, 16);
 
         bulatan.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -309,16 +312,16 @@ public class Dashboard extends JFrame {
         panelBulat1Layout.setHorizontalGroup(
             panelBulat1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelBulat1Layout.createSequentialGroup()
-                .addContainerGap(14, Short.MAX_VALUE)
+                .addContainerGap(23, Short.MAX_VALUE)
                 .addComponent(jLabel7)
-                .addGap(26, 26, 26))
+                .addGap(17, 17, 17))
         );
         panelBulat1Layout.setVerticalGroup(
             panelBulat1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelBulat1Layout.createSequentialGroup()
-                .addContainerGap()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelBulat1Layout.createSequentialGroup()
+                .addContainerGap(21, Short.MAX_VALUE)
                 .addComponent(jLabel7)
-                .addContainerGap(34, Short.MAX_VALUE))
+                .addGap(19, 19, 19))
         );
 
         getContentPane().add(panelBulat1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1300, 40, -1, 90));
@@ -332,7 +335,9 @@ public class Dashboard extends JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void tombol_produkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tombol_produkActionPerformed
-        if (!HakAkses(tombol_produk)) return;
+        if (!HakAkses(tombol_produk)) {
+            return;
+        }
         interaksipanel(tombol_produk);
         LabelJudul.setText("Produk");
         panelubah.removeAll();
@@ -342,7 +347,9 @@ public class Dashboard extends JFrame {
     }//GEN-LAST:event_tombol_produkActionPerformed
 
     private void tombol_PembelianActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tombol_PembelianActionPerformed
-        if (!HakAkses(tombol_Pembelian)) return;
+        if (!HakAkses(tombol_Pembelian)) {
+            return;
+        }
         interaksipanel(tombol_Pembelian);
         LabelJudul.setText("Pembelian");
         panelubah.removeAll();
@@ -352,7 +359,9 @@ public class Dashboard extends JFrame {
     }//GEN-LAST:event_tombol_PembelianActionPerformed
 
     private void tombol_dashbActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tombol_dashbActionPerformed
-        if (!HakAkses(tombol_dashb)) return;
+        if (!HakAkses(tombol_dashb)) {
+            return;
+        }
         interaksipanel(tombol_dashb);
         LabelJudul.setText("Dashboard");
         panelubah.removeAll();
@@ -361,7 +370,9 @@ public class Dashboard extends JFrame {
     }//GEN-LAST:event_tombol_dashbActionPerformed
 
     private void tombol_rekapanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tombol_rekapanActionPerformed
-        if (!HakAkses(tombol_rekapan)) return;
+        if (!HakAkses(tombol_rekapan)) {
+            return;
+        }
         interaksipanel(tombol_rekapan);
         LabelJudul.setText("Rekapan");
         panelubah.removeAll();
@@ -371,7 +382,9 @@ public class Dashboard extends JFrame {
     }//GEN-LAST:event_tombol_rekapanActionPerformed
 
     private void tombol_KasirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tombol_KasirActionPerformed
-        if (!HakAkses(tombol_Kasir)) return;
+        if (!HakAkses(tombol_Kasir)) {
+            return;
+        }
         interaksipanel(tombol_Kasir);
         LabelJudul.setText("Kasir");
         panelubah.removeAll();
@@ -381,7 +394,9 @@ public class Dashboard extends JFrame {
     }//GEN-LAST:event_tombol_KasirActionPerformed
 
     private void tombol_PenjualanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tombol_PenjualanActionPerformed
-        if (!HakAkses(tombol_Penjualan)) return;
+        if (!HakAkses(tombol_Penjualan)) {
+            return;
+        }
         interaksipanel(tombol_Penjualan);
         LabelJudul.setText("Penjualan");
         panelubah.removeAll();
@@ -391,18 +406,18 @@ public class Dashboard extends JFrame {
     }//GEN-LAST:event_tombol_PenjualanActionPerformed
 
     private void interaksipanel(JButton ba_en) {
-        
+
         int targetY = ba_en.getY() + (ba_en.getHeight() - bulatan.getHeight()) / 2;
-        
+
         if (targetY == yBulatan) {
-        updateTombolAktif(ba_en);
-        return;
-    }
+            updateTombolAktif(ba_en);
+            return;
+        }
         int startY = yBulatan;
         int selisih = Math.abs(targetY - startY);
         int langkah_a = Math.max(2, selisih / 15);
         int langkah = langkah_a * ((targetY > startY) ? 1 : -1);
-        
+
         Timer waktu = new Timer(20, null);
         waktu.addActionListener(new ActionListener() {
             int y = startY;
@@ -424,7 +439,7 @@ public class Dashboard extends JFrame {
         waktu.start();
         updateTombolNonAktif(ba_en);
     }
-    
+
     private void updateTombolAktif(JButton aktif) {
         ImageIcon[] icons = iconMap.get(aktif);
         if (icons != null) {
