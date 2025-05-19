@@ -94,6 +94,7 @@ public class Dashboard extends JFrame {
         foto = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setIconImage(new javax.swing.ImageIcon(getClass().getResource("/Papoy.png")).getImage());
         setMinimumSize(new java.awt.Dimension(1440, 900));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -181,32 +182,32 @@ public class Dashboard extends JFrame {
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Rekapan");
         panelNavigasi.add(jLabel1);
-        jLabel1.setBounds(10, 580, 70, 16);
+        jLabel1.setBounds(10, 580, 70, 15);
 
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setText("Dashboard");
         panelNavigasi.add(jLabel2);
-        jLabel2.setBounds(10, 100, 70, 16);
+        jLabel2.setBounds(10, 100, 70, 15);
 
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel3.setText("Produk");
         panelNavigasi.add(jLabel3);
-        jLabel3.setBounds(10, 190, 70, 16);
+        jLabel3.setBounds(10, 190, 70, 15);
 
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel4.setText("Penjualan");
         panelNavigasi.add(jLabel4);
-        jLabel4.setBounds(10, 490, 70, 16);
+        jLabel4.setBounds(10, 490, 70, 15);
 
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel5.setText("Pembelian");
         panelNavigasi.add(jLabel5);
-        jLabel5.setBounds(10, 390, 70, 16);
+        jLabel5.setBounds(10, 390, 70, 15);
 
         jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel6.setText("Kasir");
         panelNavigasi.add(jLabel6);
-        jLabel6.setBounds(10, 290, 70, 16);
+        jLabel6.setBounds(10, 290, 70, 15);
 
         bulatan.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -267,7 +268,6 @@ public class Dashboard extends JFrame {
         panelnyaPanel.setRoundTopLeft(80);
         panelnyaPanel.setRoundTopRight(80);
 
-        panelubah.setGradientDirection(komponen.PanelRound.Direction.VERTICAL);
         panelubah.setMaximumSize(new java.awt.Dimension(1250, 650));
         panelubah.setMinimumSize(new java.awt.Dimension(1250, 650));
         panelubah.setPreferredSize(new java.awt.Dimension(1250, 650));
