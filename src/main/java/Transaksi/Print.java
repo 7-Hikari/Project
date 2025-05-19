@@ -24,69 +24,98 @@ public class Print {
                 return;
             }
 
-            // Build isi struk
-            StringBuilder sb = new StringBuilder();
-            sb.append(center("== PAPOY DRINK ==")).append("\n");
-            sb.append(center("Jl. Jalan No. 123")).append("\n");
+            int lineWidth = 48;
 
+            StringBuilder sb = new StringBuilder();
+
+            // Header - rata tengah dengan '=' di pinggir
+            sb.append(centerWithFill("PAPOY DRINK", lineWidth, '=')).append("\n");
+            sb.append(centerText("Jl. Jalan No. 123", lineWidth)).append("\n");
+            sb.append("=".repeat(lineWidth)).append("\n\n");
+
+            // Tanggal dan Nota, rata kiri
             String tgl = new SimpleDateFormat("dd/MM/yyyy HH:mm").format(new Date());
-            sb.append("Tgl : ").append(tgl).append("\n");
-            sb.append("Nota: #INV").append(kode).append("\n\n");
+            sb.append(String.format("%-6s : %s\n", "Tgl", tgl));
+            sb.append(String.format("%-6s : %s\n\n", "Nota", "#INV" + kode));
+
+            // Header kolom pesanan, rata kiri
+            sb.append(String.format("%-20s %5s %12s\n", "Item", "Qty", "Subtotal"));
+            sb.append("-".repeat(lineWidth)).append("\n");
 
             int total = 0;
             for (Object[] row : pesanan) {
-                String nama = row[0].toString();
+                String nama = potong(row[0].toString(), 20);
                 int jumlah = Integer.parseInt(row[1].toString());
                 int harga = Integer.parseInt(row[2].toString());
                 int subtotal = jumlah * harga;
                 total += subtotal;
 
-                String line = String.format("%-10s x%d Rp%,d", potong(nama, 10), jumlah, subtotal);
-                sb.append(line).append("\n");
+                sb.append(String.format("%-20s %5d %12s\n", nama, jumlah, formatRupiah(subtotal)));
             }
 
-            sb.append("\n");
-            sb.append(String.format("Total:       Rp%,d\n", total));
-            sb.append("\n");
+            sb.append("-".repeat(lineWidth)).append("\n");
 
-            // Footer
-            sb.append(center("Terima kasih!\n"));
-            sb.append(center("Barang tidak bisa dikembalikan\n\n"));
+            // Total, rata kiri untuk label, rata kanan untuk nominal
+            sb.append(String.format("%-26s %12s\n\n", "Total:", formatRupiah(total)));
 
-            // ESC/POS barcode (GS k)
+            // Footer rata tengah tanpa spasi kosong tambahan
+            sb.append(centerText("Terima kasih!", lineWidth)).append("\n");
+            sb.append(centerText("Barang tidak bisa dikembalikan", lineWidth)).append("\n");
+
+            // Output ke printer
             ByteArrayOutputStream out = new ByteArrayOutputStream();
             out.write(sb.toString().getBytes("UTF-8"));
 
-            // ESC/POS command to print barcode (CODE128 recommended)
-            out.write(new byte[] { 0x1D, 0x48, 0x02 }); // HRI position: below
-            out.write(new byte[] { 0x1D, 0x77, 0x02 }); // barcode width
-            out.write(new byte[] { 0x1D, 0x68, 0x40 }); // barcode height
-            out.write(new byte[] { 0x1D, 0x6B, 0x49 }); // CODE128
-            out.write((byte) kode.length());           // length of data
-            out.write(kode.getBytes("UTF-8"));         // actual data
+            // Barcode (set align center dengan ESC a 1)
+            out.write(new byte[]{0x1B, 0x61, 0x01});
 
-            // Feed and cut
-            out.write(new byte[]{ 0x0A, 0x0A });
-            out.write(new byte[]{ 0x1D, 0x56, 0x00 }); // full cut
+            out.write(new byte[]{0x1D, 0x48, 0x02}); // HRI di bawah
+            out.write(new byte[]{0x1D, 0x77, 0x02}); // Lebar barcode
+            out.write(new byte[]{0x1D, 0x68, 0x40}); // Tinggi barcode
+            out.write(new byte[]{0x1D, 0x6B, 0x49}); // CODE128
+            out.write((byte) kode.length());
+            out.write(kode.getBytes("UTF-8"));
+
+            out.write("\n\n".getBytes("UTF-8"));
+
+            // Hapus bagian kode barcode tercetak di bawah teks barcode (INV kode)
+
+            // Feed dan cut
+            out.write(new byte[]{0x0A, 0x0A});
+            out.write(new byte[]{0x1D, 0x56, 0x00});
 
             DocPrintJob job = printer.createPrintJob();
             Doc doc = new SimpleDoc(out.toByteArray(), DocFlavor.BYTE_ARRAY.AUTOSENSE, null);
             job.print(doc, null);
 
             System.out.println("Struk dicetak.");
-
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    private String center(String teks) {
-        int width = 32; // lebar karakter (pastikan sesuai font printer)
-        int padding = (width - teks.length()) / 2;
-        return " ".repeat(Math.max(0, padding)) + teks;
+    private static String centerText(String text, int width) {
+        if (text.length() >= width) return text;
+        int totalPadding = width - text.length();
+        int paddingLeft = totalPadding / 2;
+        int paddingRight = totalPadding - paddingLeft;
+        return " ".repeat(paddingLeft) + text + " ".repeat(paddingRight);
     }
 
-    private String potong(String teks, int max) {
-        return teks.length() > max ? teks.substring(0, max) : teks;
+    private static String centerWithFill(String text, int width, char fillChar) {
+        int textLength = text.length();
+        if (textLength >= width) return text;
+        int totalFill = width - textLength;
+        int fillLeft = totalFill / 2;
+        int fillRight = totalFill - fillLeft;
+        return String.valueOf(fillChar).repeat(fillLeft) + text + String.valueOf(fillChar).repeat(fillRight);
+    }
+
+    private String potong(String text, int max) {
+        return text.length() > max ? text.substring(0, max) : text;
+    }
+
+    private String formatRupiah(int amount) {
+        return String.format("Rp%,d", amount).replace(',', '.');
     }
 }
