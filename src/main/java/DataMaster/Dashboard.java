@@ -1,7 +1,6 @@
 package DataMaster;
 
 import DAO.*;
-import DataMaster.*;
 import Rekapan.Rekapan;
 import Transaksi.KasirPenjualan;
 import Transaksi.Penjualan;
@@ -346,6 +345,10 @@ public class Dashboard extends JFrame {
         if (!HakAkses(tombol_Pembelian)) return;
         interaksipanel(tombol_Pembelian);
         LabelJudul.setText("Pembelian");
+        panelubah.removeAll();
+        panelubah.add(new Datapembelianbahankulakan(), BorderLayout.CENTER);
+        panelubah.revalidate();
+        panelubah.repaint();
     }//GEN-LAST:event_tombol_PembelianActionPerformed
 
     private void tombol_dashbActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tombol_dashbActionPerformed

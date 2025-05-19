@@ -117,10 +117,9 @@ public class Dataprodukproduk extends komponen.PanelRound {
         setPreferredSize(new java.awt.Dimension(1200, 620));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel1.setBackground(new Color(0x2CC4C9)
-        );
         jPanel1.setMaximumSize(new java.awt.Dimension(1250, 620));
         jPanel1.setMinimumSize(new java.awt.Dimension(1260, 620));
+        jPanel1.setOpaque(false);
         jPanel1.setPreferredSize(new java.awt.Dimension(1250, 620));
 
         jPanel5.setBackground(new java.awt.Color(255, 255, 255));
