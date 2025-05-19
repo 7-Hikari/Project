@@ -48,9 +48,7 @@ public class Dashboard extends JFrame {
         this.status = loginUser.getStatus();
 
         initComponents();
-        panelBulat1.setDiameter(90);
-        panelBulat1.revalidate();
-        panelBulat1.repaint();
+        
         panelBulat1.add(jLabel7);
         panelnyaPanel.setGradientDirection(PanelRound.Direction.VERTICAL);
         panelnyaPanel.setGradient(new Color(0x2CBAC6), new Color(0x48A3EE));
@@ -303,7 +301,8 @@ public class Dashboard extends JFrame {
         Toko.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Papoy.png"))); // NOI18N
         getContentPane().add(Toko, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 20, 160, 130));
 
-        panelBulat1.setPreferredSize(new java.awt.Dimension(90, 90));
+        panelBulat1.setBackground(new java.awt.Color(51, 204, 255));
+        panelBulat1.setLingkar(90);
 
         jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Add User.png"))); // NOI18N
 
@@ -365,6 +364,7 @@ public class Dashboard extends JFrame {
         interaksipanel(tombol_dashb);
         LabelJudul.setText("Dashboard");
         panelubah.removeAll();
+        panelubah.add(new PanelDashboard(), BorderLayout.CENTER);
         panelubah.revalidate();
         panelubah.repaint();
     }//GEN-LAST:event_tombol_dashbActionPerformed

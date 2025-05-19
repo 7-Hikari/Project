@@ -34,9 +34,4 @@ public class pesananDetailData {
     public boolean getLunas(){
         return lunas;
     }
-    public void setDetail_J(byte idproduk, short jumlah, short harga){
-        this.produkId = idproduk;
-        this.jumlah = jumlah;
-        this.harga = harga;
-    }
 }

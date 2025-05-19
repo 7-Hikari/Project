@@ -24,7 +24,7 @@ public class PanelBulat extends JPanel{
     public int getLingkar(){
         return d;
     }
-    public void setDiameter (int x){
+    public void setLingkar (int x){
         this.d = x;
         setPreferredSize(new Dimension(x, x));
         repaint();

@@ -111,13 +111,12 @@ public class userObjek {
     }
     
     public static void updatePengguna(userData usDat){
-        String sql = "update pengguna set password = ?, status = ? where nama = ?";
+        String sql = "update pengguna set password = ? where nama = ?";
         Connection conn = koneksi.connect(); 
         try {
             PreparedStatement pst = conn.prepareStatement(sql);
             
             pst.setString(1, usDat.getPassword());
-            pst.setString(2, usDat.getStatus().name());
             pst.setString(3, usDat.getUsername());
             pst.executeUpdate();
         } catch(SQLException e){
