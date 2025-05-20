@@ -18,6 +18,7 @@ import javax.swing.table.DefaultTableModel;
 public class Penjualan extends komponen.PanelRound {
     
     private int no = 1;
+    private final String tgl = new SimpleDateFormat("yyMMdd").format(new Date());
     private java.util.List<Byte> ProdukIdList = new ArrayList<>();
     private final NumberFormat Rp = NumberFormat.getCurrencyInstance(new Locale("id", "ID"));
     int total = 0;
@@ -34,11 +35,9 @@ public class Penjualan extends komponen.PanelRound {
         
         setLayout(new BorderLayout());
         add(panelRound1, BorderLayout.CENTER);
-
         setPreferredSize(new java.awt.Dimension(1240, 640));
         
-        DefaultTableModel tabel = (DefaultTableModel) Tabelpesanan.getModel();
-        m_pesanan = tabel;
+        m_pesanan = (DefaultTableModel) Tabelpesanan.getModel();
         
         loadproduk();
     }
@@ -150,7 +149,10 @@ public class Penjualan extends komponen.PanelRound {
     }
     
     private void simpan(int total) {
-        pesananData pesDat = new pesananData(total);
+        short count = pesananObjek.CekKode();
+        String kode = tgl + count;
+        
+        pesananData pesDat = new pesananData(kode, total);
         java.util.List<pesananDetailData> listDetail = new ArrayList<>();
         
         for (no = 0; no < Tabelpesanan.getRowCount(); no++) {
@@ -162,13 +164,11 @@ public class Penjualan extends komponen.PanelRound {
             listDetail.add(PDetDat);
         }
         pesananObjek.simpanTransaksi(pesDat, listDetail);
-        int id_tr = pesDat.get_idJual();
-        cetakBC(id_tr);
+        cetakBC(kode);
     }
     
-    private void cetakBC(int id){
-        String tgl = new SimpleDateFormat("yyMMdd").format(new Date());
-        String kode = tgl + id;
+    private void cetakBC(String code){
+        
 
         int width = 300;
         int height = 100;
@@ -178,7 +178,7 @@ public class Penjualan extends komponen.PanelRound {
             hints.put(EncodeHintType.CHARACTER_SET, "UTF-8");
             
             BitMatrix matrix = new MultiFormatWriter().encode(
-                    kode, BarcodeFormat.CODE_128, width, height, hints);
+                    code, BarcodeFormat.CODE_128, width, height, hints);
             
             BufferedImage bcImg = MatrixToImageWriter.toBufferedImage(matrix);
             
@@ -199,7 +199,7 @@ public class Penjualan extends komponen.PanelRound {
             }
             BufferedImage barcode = ImageIO.read(Path.of("barcode.png").toFile());
             
-            cetak.cetakStruk(kode, tabelDat);
+            cetak.cetakStruk(code, tabelDat);
 
 
             

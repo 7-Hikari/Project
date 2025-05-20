@@ -46,6 +46,7 @@ public class panelProduk extends JPanel {
         Nama.setText(produkdat.get_nama());
         String harga = Rp.format(produkdat.get_harga());
         Harga.setText(harga);
+        Sisa.setText(String.valueOf(produkdat.getStok()));
     }
     
     public int getJumlah(){
@@ -67,6 +68,8 @@ public class panelProduk extends JPanel {
         LabelHarga = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         spin = new javax.swing.JSpinner();
+        LabelSisa = new javax.swing.JLabel();
+        Sisa = new javax.swing.JLabel();
         panelFoto = new javax.swing.JPanel();
         foto = new javax.swing.JLabel();
 
@@ -101,37 +104,60 @@ public class panelProduk extends JPanel {
 
         spin.setMaximumSize(new java.awt.Dimension(40, 30));
 
+        LabelSisa.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        LabelSisa.setForeground(new java.awt.Color(0, 0, 0));
+        LabelSisa.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        LabelSisa.setText("Sisa Stok");
+
+        Sisa.setBackground(new java.awt.Color(0, 0, 0));
+        Sisa.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        Sisa.setForeground(new java.awt.Color(0, 0, 0));
+        Sisa.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+
         javax.swing.GroupLayout panelDeskripsiLayout = new javax.swing.GroupLayout(panelDeskripsi);
         panelDeskripsi.setLayout(panelDeskripsiLayout);
         panelDeskripsiLayout.setHorizontalGroup(
             panelDeskripsiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelDeskripsiLayout.createSequentialGroup()
-                .addComponent(jLabel3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(spin, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(15, 15, 15))
-            .addGroup(panelDeskripsiLayout.createSequentialGroup()
-                .addComponent(LabelHarga, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(Harga, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGroup(panelDeskripsiLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(Nama, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+                .addGroup(panelDeskripsiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panelDeskripsiLayout.createSequentialGroup()
+                        .addComponent(jLabel3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(spin, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(25, 25, 25))
+                    .addGroup(panelDeskripsiLayout.createSequentialGroup()
+                        .addGroup(panelDeskripsiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(Nama, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(panelDeskripsiLayout.createSequentialGroup()
+                                .addGroup(panelDeskripsiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(LabelHarga, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(LabelSisa))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(panelDeskripsiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addGroup(panelDeskripsiLayout.createSequentialGroup()
+                                        .addGap(6, 6, 6)
+                                        .addComponent(Sisa, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                    .addComponent(Harga, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addContainerGap())))
         );
         panelDeskripsiLayout.setVerticalGroup(
             panelDeskripsiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelDeskripsiLayout.createSequentialGroup()
                 .addComponent(Nama, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(panelDeskripsiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(LabelHarga)
-                    .addComponent(Harga, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(panelDeskripsiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(spin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(11, Short.MAX_VALUE))
+                    .addComponent(Harga, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(LabelHarga))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(panelDeskripsiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(LabelSisa)
+                    .addComponent(Sisa, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(panelDeskripsiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(spin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3))
+                .addContainerGap())
         );
 
         panelFoto.setPreferredSize(new java.awt.Dimension(170, 147));
@@ -192,7 +218,9 @@ public class panelProduk extends JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Harga;
     private javax.swing.JLabel LabelHarga;
+    private javax.swing.JLabel LabelSisa;
     private javax.swing.JLabel Nama;
+    private javax.swing.JLabel Sisa;
     private javax.swing.JLabel foto;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;

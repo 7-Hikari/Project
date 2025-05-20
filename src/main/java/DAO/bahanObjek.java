@@ -80,12 +80,12 @@ public class bahanObjek {
         }
     }
     
-    public static void deleteBahan(bahanData bahdat){
+    public static void deleteBahan(short id){
         String sql = "delete from m_bahan where id_bahan = ?";
         Connection conn = koneksi.connect();
         try {
             PreparedStatement pst = conn.prepareStatement(sql);
-            pst.setShort(1, bahdat.get_id_b());
+            pst.setShort(1, id);
             pst.executeUpdate();
         } catch(SQLException e){
             e.printStackTrace();

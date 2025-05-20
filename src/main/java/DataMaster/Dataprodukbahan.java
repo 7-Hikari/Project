@@ -16,7 +16,7 @@ public class Dataprodukbahan extends komponen.PanelRound {
     private int no = 1;
     private String nama, kateg;
     private short jml, id;
-    private bahanData bD = null;
+    private bahanData bD = new bahanData();
     
     public Dataprodukbahan() {
         initComponents();
@@ -305,13 +305,14 @@ public class Dataprodukbahan extends komponen.PanelRound {
     }//GEN-LAST:event_SimpanActionPerformed
 
     private void HapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_HapusActionPerformed
+        no = tabelBahan.getSelectedRow();
         int confirm = JOptionPane.showConfirmDialog(this, "Mau menghapus data ini?", "Konfirmasi", JOptionPane.YES_NO_OPTION);
         if (confirm != JOptionPane.YES_OPTION) {
             return;
         }
         Simpan.setText("Simpan");
-        bD.setIdBahan(id);
-        bahanObjek.deleteBahan(bD);
+        id = (short) tabelBahan.getValueAt(no, 1);
+        bahanObjek.deleteBahan(id);
         JOptionPane.showMessageDialog(this, "Data telah dihapus!", "Info", JOptionPane.INFORMATION_MESSAGE);
         loadBahan();
     }//GEN-LAST:event_HapusActionPerformed

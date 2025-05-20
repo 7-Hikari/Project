@@ -14,13 +14,14 @@ public class pesananObjek {
             ResultSet rs = stmt.executeQuery(sql);
             while (rs.next()) {
                 int id_jual = rs.getInt("id_jual");
+                String kode = rs.getString("kode_jual");
                 String tanggal = rs.getString("waktu");
                 int tagihan = rs.getInt("tagihan");
                 boolean lunas = rs.getBoolean("lunas");
                 byte user = rs.getByte("id_user");
 
                 pesananData pesanan = new pesananData(id_jual, tanggal, tagihan, lunas, user);
-                pesanan.setListDetail(ambilDetailTransaksi(id_jual));
+                pesanan.setListDetail(ambilDetailTransaksi(kode));
                 listPesanan.add(pesanan);
             }
         } catch (SQLException e) {
@@ -30,7 +31,7 @@ public class pesananObjek {
     }
 
     
-    public static List<pesananDetailData> ambilDetailTransaksi(int idTransaksi){
+    public static List<pesananDetailData> ambilDetailTransaksi(String kode){
         List<pesananDetailData> detailList = new ArrayList<>();
         
         String sql = """
@@ -41,7 +42,7 @@ public class pesananObjek {
         Connection conn = koneksi.connect();
         
         try (PreparedStatement pst = conn.prepareStatement(sql);) {
-            pst.setInt(1, idTransaksi);
+            pst.setString(1, kode);
 
             try (ResultSet rs = pst.executeQuery();) {
 
@@ -57,13 +58,26 @@ public class pesananObjek {
             }
         } catch (SQLException e){
             e.printStackTrace();
-            System.out.println("aa");
         }
         return detailList;
     }
     
+    public static short CekKode(){
+        String sql = "SELECT COUNT(*) as n FROM transaksi_jual WHERE DATE(waktu) = CURRENT_DATE";
+        Connection conn = koneksi.connect();
+        short n = 0;
+        try(Statement stmt = conn.createStatement(); ResultSet rs = stmt.executeQuery(sql)){
+            while (rs.next()){
+                n = rs.getShort("n");
+            }
+        } catch  (SQLException e){
+            e.printStackTrace();
+        }
+        return n;
+    }
+    
     public static void simpanTransaksi(pesananData trDat, List<pesananDetailData> trDetDat) {
-        String Tr = "INSERT INTO transaksi_jual(tagihan) VALUES (?)";
+        String Tr = "INSERT INTO transaksi_jual(kode_jual, tagihan) VALUES (?, ?)";
         String trDet = "INSERT INTO detail_jual(id_jual, id_produk, jumlah, harga_satuan) VALUES (?, ?, ?, ?)";
         Connection conn = koneksi.connect();
         try {
@@ -72,7 +86,8 @@ public class pesananObjek {
             try (PreparedStatement pstTransaksi = conn.prepareStatement(Tr, Statement.RETURN_GENERATED_KEYS);
                     PreparedStatement pstDetail = conn.prepareStatement(trDet);) {
 
-                pstTransaksi.setInt(1, trDat.get_tagihan());
+                pstTransaksi.setString(1, trDat.getKode());
+                pstTransaksi.setInt(2, trDat.get_tagihan());
                 pstTransaksi.executeUpdate();
 
                 int idTransaksi = -1;
@@ -117,13 +132,13 @@ public class pesananObjek {
     
     public static void updateTr(pesananData trDat, byte userId){
         
-        String sql = "update transaksi_jual set Lunas = ?, id_user = ? where id_jual = ?";
+        String sql = "update transaksi_jual set Lunas = ?, id_user = ? where kode_jual = ?";
         Connection conn = koneksi.connect(); 
         try{
             PreparedStatement pst = conn.prepareStatement(sql);
             pst.setBoolean(1, trDat.get_lunas());
             pst.setByte(2, userId);
-            pst.setInt(3, trDat.get_idJual());
+            pst.setString(3, trDat.getKode());
             pst.executeUpdate();
         } catch (SQLException e){
             e.printStackTrace();

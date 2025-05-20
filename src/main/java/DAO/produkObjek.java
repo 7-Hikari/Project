@@ -19,8 +19,9 @@ public class produkObjek {
                 byte id = rs.getByte("id_produk");
                 String nama = rs.getString("nama_produk");
                 short harga = rs.getShort("harga_jual");
+                short stok = rs.getShort("stok");
 
-                produkData p = new produkData(id, foto, nama, harga);
+                produkData p = new produkData(id, foto, nama, harga, stok);
                 listProduk.add(p);
             }
         } catch (SQLException e) {
@@ -99,9 +100,21 @@ public class produkObjek {
         }
     }
 
+    public static void upStokProduk(produkData data){
+        Connection conn = koneksi.connect();
+        String sql = "update m_produk set stok = stok + ? where id_produk = ?";
+        try (PreparedStatement pst = conn.prepareStatement(sql)){
+            pst.setInt(1, data.getStok());
+            pst.setByte(2, data.get_id());
+            pst.executeUpdate();
+        } catch(SQLException e){
+            e.printStackTrace();
+        }
+    }
+    
     public static void updateProduk(produkData data, byte[] fotoByte, List<detailProdukData> detPDat) {
     Connection conn = koneksi.connect();
-    String sqlUpdate = "Update m_produk set nama_produk = ?, Foto = ?, harga_jual = ? where id_produk = ?";
+    String sqlUpdate = "Update m_produk set nama_produk = ?, Foto = ?, harga_jual = ?, stok = ? where id_produk = ?";
     String sqlDeleteDetail = "Delete from m_detailp where id_produk = ?";
     String sqlInsertDetail = "Insert into m_detailp (id_produk, id_bahan) values (?, ?)";
     try {
@@ -115,7 +128,8 @@ public class produkObjek {
             pstUpdate.setString(1, data.get_nama());
             pstUpdate.setBytes(2, fotoByte);
             pstUpdate.setInt(3, data.get_harga());
-            pstUpdate.setByte(4, data.get_id());
+            pstUpdate.setShort(4, data.getStok());
+            pstUpdate.setByte(5, data.get_id());
             pstUpdate.executeUpdate();
 
             pstDelete.setByte(1, data.get_id());

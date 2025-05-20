@@ -11,6 +11,10 @@ public class bahanData {
         return "konsumsi".equalsIgnoreCase(kategori);
     }
     
+    public bahanData(){
+        
+    }
+    
     public bahanData(short id, String nama, boolean kateg, short jumlah) {
         this.id_b = id;
         this.nama_b = nama;

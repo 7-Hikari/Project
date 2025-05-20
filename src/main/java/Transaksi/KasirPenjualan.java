@@ -12,7 +12,7 @@ public class KasirPenjualan extends komponen.PanelRound {
     
     private int no = 1;
     private int total = 0;
-    private int trans;
+    private String tr;
     private final NumberFormat Rp = NumberFormat.getCurrencyInstance(new Locale("id", "ID"));
     DefaultTableModel m_pesanan = null;
     
@@ -36,9 +36,9 @@ public class KasirPenjualan extends komponen.PanelRound {
     }
 
 
-    private void masukkanKeTabel(int transaksi) {
+    private void masukkanKeTabel(String kode) {
          
-        List<pesananDetailData> pesanan = pesananObjek.ambilDetailTransaksi(transaksi);
+        List<pesananDetailData> pesanan = pesananObjek.ambilDetailTransaksi(kode);
 
         m_pesanan.setRowCount(0);
         
@@ -280,7 +280,7 @@ public class KasirPenjualan extends komponen.PanelRound {
 
     private void BayarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BayarActionPerformed
         byte a = 1;
-        pesananData pesDat = new pesananData(trans, Boolean.TRUE);
+        pesananData pesDat = new pesananData(tr, Boolean.TRUE);
         pesananObjek.updateTr(pesDat, a);
         m_pesanan.setRowCount(0);
     }//GEN-LAST:event_BayarActionPerformed
@@ -290,13 +290,12 @@ public class KasirPenjualan extends komponen.PanelRound {
     }//GEN-LAST:event_fieldtotalActionPerformed
 
     private void AmbilDataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AmbilDataActionPerformed
-        String tr = transaksi.getText();
-        if (tr.length() < 7) {
+        tr = transaksi.getText();
+        if (tr.length() < 10) {
             m_pesanan.setRowCount(0);
         } else {
-            trans = Integer.parseInt(tr.substring(6));
-            System.out.println("a " + trans);
-            masukkanKeTabel(trans);
+            System.out.println("a " + tr);
+            masukkanKeTabel(tr);
         }
     }//GEN-LAST:event_AmbilDataActionPerformed
     

@@ -4,7 +4,7 @@ import java.util.List;
 
 public class pesananData {
     private int id_jual, tagihan;
-    private String tanggal;
+    private String tanggal, kode;
     private Boolean Lunas;
     private Byte user;
     private List<pesananDetailData> listDetail;
@@ -16,7 +16,8 @@ public class pesananData {
         this.Lunas = lunas;
         this.user = user;
     }
-    public pesananData(int tagihan){
+    public pesananData(String kode, int tagihan){
+        this.kode = kode;
         this.tagihan = tagihan;
     }
             
@@ -35,14 +36,17 @@ public class pesananData {
     public Byte get_user(){
         return user;
     }
+    String getKode(){
+        return kode;
+    }
     public List<pesananDetailData> getListDetail(){
         return listDetail;
     }
     public void setListDetail(List<pesananDetailData> listDetail) {
         this.listDetail = listDetail;
     }
-    public pesananData(int id_jual, Boolean lunas){
-        this.id_jual = id_jual;
+    public pesananData(String kode, Boolean lunas){
+        this.kode = kode;
         this.Lunas = lunas;
     }
     void setTransaksi_J(int id_jual){

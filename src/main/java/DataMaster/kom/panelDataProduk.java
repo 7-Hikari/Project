@@ -33,6 +33,7 @@ public class panelDataProduk extends JPanel {
         Nama.setText(produkdat.get_nama());
         String harga = Rp.format(produkdat.get_harga());
         Harga.setText(harga);
+        sisa.setText(String.valueOf(produkdat.getStok()));
     }
     
     @SuppressWarnings("unchecked")
@@ -43,6 +44,8 @@ public class panelDataProduk extends JPanel {
         panelDeskripsi = new javax.swing.JPanel();
         Harga = new javax.swing.JLabel();
         Nama = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
+        sisa = new javax.swing.JTextField();
         panelFoto = new javax.swing.JPanel();
         foto = new javax.swing.JLabel();
 
@@ -59,6 +62,7 @@ public class panelDataProduk extends JPanel {
         Harga.setBackground(new java.awt.Color(255, 255, 255));
         Harga.setFont(new java.awt.Font("Sitka Text", 1, 16)); // NOI18N
         Harga.setForeground(new java.awt.Color(0, 0, 0));
+        Harga.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         Harga.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
 
         Nama.setFont(new java.awt.Font("Roboto Slab", 1, 18)); // NOI18N
@@ -66,27 +70,54 @@ public class panelDataProduk extends JPanel {
         Nama.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         Nama.setText("Nama Produk");
 
+        jLabel1.setFont(new java.awt.Font("Franklin Gothic Demi", 1, 12)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setText("Stok");
+
+        sisa.setBackground(new java.awt.Color(255, 255, 255));
+        sisa.setFont(new java.awt.Font("Britannic Bold", 1, 12)); // NOI18N
+        sisa.setForeground(new java.awt.Color(0, 0, 0));
+        sisa.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+
         javax.swing.GroupLayout panelDeskripsiLayout = new javax.swing.GroupLayout(panelDeskripsi);
         panelDeskripsi.setLayout(panelDeskripsiLayout);
         panelDeskripsiLayout.setHorizontalGroup(
             panelDeskripsiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelDeskripsiLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(Nama, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(panelDeskripsiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panelDeskripsiLayout.createSequentialGroup()
+                        .addGroup(panelDeskripsiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(panelDeskripsiLayout.createSequentialGroup()
+                                .addGap(28, 28, 28)
+                                .addComponent(Harga, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(panelDeskripsiLayout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(jLabel1)))
+                        .addGap(0, 26, Short.MAX_VALUE))
+                    .addGroup(panelDeskripsiLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(panelDeskripsiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(Nama, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelDeskripsiLayout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(sisa, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addContainerGap())
-            .addGroup(panelDeskripsiLayout.createSequentialGroup()
-                .addGap(28, 28, 28)
-                .addComponent(Harga, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(32, Short.MAX_VALUE))
         );
         panelDeskripsiLayout.setVerticalGroup(
             panelDeskripsiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelDeskripsiLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(Nama, javax.swing.GroupLayout.DEFAULT_SIZE, 34, Short.MAX_VALUE)
+                .addComponent(Nama)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(Harga, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addGroup(panelDeskripsiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panelDeskripsiLayout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addGap(0, 8, Short.MAX_VALUE))
+                    .addComponent(sisa, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(Harga, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(12, 12, 12))
         );
 
         jPanel1.add(panelDeskripsi, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 165, -1, -1));
@@ -131,8 +162,10 @@ public class panelDataProduk extends JPanel {
     private javax.swing.JLabel Harga;
     private javax.swing.JLabel Nama;
     private javax.swing.JLabel foto;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel panelDeskripsi;
     private javax.swing.JPanel panelFoto;
+    private javax.swing.JTextField sisa;
     // End of variables declaration//GEN-END:variables
 }
