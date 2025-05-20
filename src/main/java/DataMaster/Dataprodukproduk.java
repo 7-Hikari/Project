@@ -111,6 +111,7 @@ public class Dataprodukproduk extends komponen.PanelRound {
         jPanel3 = new javax.swing.JPanel();
 
         setBackground(new java.awt.Color(51, 255, 255));
+        setGradientDirection(komponen.PanelRound.Direction.VERTICAL);
         setMaximumSize(new java.awt.Dimension(1200, 620));
         setMinimumSize(new java.awt.Dimension(1200, 620));
         setPreferredSize(new java.awt.Dimension(1200, 620));
@@ -127,7 +128,7 @@ public class Dataprodukproduk extends komponen.PanelRound {
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1224, Short.MAX_VALUE)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -166,6 +167,7 @@ public class Dataprodukproduk extends komponen.PanelRound {
         Panelprodukbahan.add(flow, new org.netbeans.lib.awtextra.AbsoluteConstraints(7, 10, 1230, 440));
 
         PaNavBol.setMaximumSize(new java.awt.Dimension(1250, 2147483647));
+        PaNavBol.setOpaque(false);
         PaNavBol.setPreferredSize(new java.awt.Dimension(1250, 63));
         PaNavBol.setLayout(new java.awt.BorderLayout());
 
@@ -195,6 +197,7 @@ public class Dataprodukproduk extends komponen.PanelRound {
         jPanel3.setBackground(new java.awt.Color(0, 255, 204));
         jPanel3.setMaximumSize(new java.awt.Dimension(50, 50));
         jPanel3.setMinimumSize(new java.awt.Dimension(50, 50));
+        jPanel3.setOpaque(false);
         jPanel3.setPreferredSize(new java.awt.Dimension(50, 50));
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
@@ -216,13 +219,15 @@ public class Dataprodukproduk extends komponen.PanelRound {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(Panelprodukbahan, javax.swing.GroupLayout.PREFERRED_SIZE, 1256, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(PaNavBol, javax.swing.GroupLayout.PREFERRED_SIZE, 1224, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jPanel5, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(Panelprodukbahan, javax.swing.GroupLayout.PREFERRED_SIZE, 1256, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(PaNavBol, javax.swing.GroupLayout.PREFERRED_SIZE, 1224, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(jPanel5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

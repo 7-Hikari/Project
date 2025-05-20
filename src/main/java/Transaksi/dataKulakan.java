@@ -1,4 +1,4 @@
-package DataMaster;
+package Transaksi;
 
 import DAO.*;
 import java.awt.Color;
@@ -106,6 +106,7 @@ public class dataKulakan extends komponen.PanelRound {
         setRoundBottomRight(100);
         setRoundTopLeft(100);
         setRoundTopRight(100);
+        setSolid(false);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setMaximumSize(new java.awt.Dimension(1250, 650));
@@ -121,14 +122,14 @@ public class dataKulakan extends komponen.PanelRound {
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1250, Short.MAX_VALUE)
+            .addGap(0, 1230, Short.MAX_VALUE)
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 22, Short.MAX_VALUE)
         );
 
-        jPanel1.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 25, -1, -1));
+        jPanel1.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 25, 1230, -1));
 
         Panelprodukbahan.setBackground(new java.awt.Color(51, 51, 255));
         Panelprodukbahan.setMaximumSize(new java.awt.Dimension(1240, 600));
@@ -143,7 +144,7 @@ public class dataKulakan extends komponen.PanelRound {
         Total.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         Total.setText("Rp0,00");
 
-        Simpan.setBackground(new java.awt.Color(0, 204, 51));
+        Simpan.setBackground(new java.awt.Color(0, 102, 204));
         Simpan.setFont(new java.awt.Font("Times New Roman", 1, 16)); // NOI18N
         Simpan.setForeground(new java.awt.Color(0, 0, 0));
         Simpan.setText("Simpan");
@@ -153,7 +154,7 @@ public class dataKulakan extends komponen.PanelRound {
             }
         });
 
-        Konversi.setBackground(new java.awt.Color(204, 204, 0));
+        Konversi.setBackground(new java.awt.Color(0, 102, 204));
         Konversi.setFont(new java.awt.Font("Times New Roman", 1, 16)); // NOI18N
         Konversi.setForeground(new java.awt.Color(0, 0, 0));
         Konversi.setText("Konversi");
@@ -211,14 +212,14 @@ public class dataKulakan extends komponen.PanelRound {
 
             },
             new String [] {
-                "No", "ProBah", "Nama", "Jml", "Harga"
+                "No", "ProBah", "Nama", "Jml", "Harga", "pembagi"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.Object.class, java.lang.String.class, java.lang.Short.class, java.lang.Integer.class
+                java.lang.Integer.class, java.lang.Object.class, java.lang.String.class, java.lang.Short.class, java.lang.Integer.class, java.lang.Short.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, true, true
+                false, false, false, true, true, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -245,6 +246,9 @@ public class dataKulakan extends komponen.PanelRound {
             TabelPembelian.getColumnModel().getColumn(3).setMinWidth(40);
             TabelPembelian.getColumnModel().getColumn(3).setPreferredWidth(40);
             TabelPembelian.getColumnModel().getColumn(3).setMaxWidth(40);
+            TabelPembelian.getColumnModel().getColumn(5).setMinWidth(0);
+            TabelPembelian.getColumnModel().getColumn(5).setPreferredWidth(0);
+            TabelPembelian.getColumnModel().getColumn(5).setMaxWidth(0);
         }
 
         jLabel4.setFont(new java.awt.Font("Century Schoolbook", 1, 24)); // NOI18N
@@ -407,43 +411,39 @@ public class dataKulakan extends komponen.PanelRound {
         Panelprodukbahan.setLayout(PanelprodukbahanLayout);
         PanelprodukbahanLayout.setHorizontalGroup(
             PanelprodukbahanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelprodukbahanLayout.createSequentialGroup()
+            .addGroup(PanelprodukbahanLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(Konversi, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(236, 236, 236)
+                .addComponent(Hapus, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(179, 179, 179)
+                .addComponent(Simpan, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(145, 145, 145))
+            .addGroup(PanelprodukbahanLayout.createSequentialGroup()
                 .addGroup(PanelprodukbahanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(PanelprodukbahanLayout.createSequentialGroup()
                         .addGap(19, 19, 19)
                         .addComponent(panelRound3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(148, 148, 148)
-                        .addComponent(panelRound1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(PanelprodukbahanLayout.createSequentialGroup()
-                        .addGroup(PanelprodukbahanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(PanelprodukbahanLayout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(PanelBahan, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 491, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(144, 144, 144))
-                            .addGroup(PanelprodukbahanLayout.createSequentialGroup()
-                                .addGap(397, 397, 397)
-                                .addComponent(Konversi, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(Hapus, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(42, 42, 42)))
+                        .addGap(180, 180, 180)
+                        .addComponent(panelRound1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelprodukbahanLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(PanelBahan, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 543, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 40, Short.MAX_VALUE)
                 .addGroup(PanelprodukbahanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelprodukbahanLayout.createSequentialGroup()
-                        .addComponent(Simpan, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(117, 117, 117))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelprodukbahanLayout.createSequentialGroup()
-                        .addComponent(jLabel4)
-                        .addGap(29, 29, 29)
-                        .addComponent(Total, javax.swing.GroupLayout.PREFERRED_SIZE, 233, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18))
+                        .addGroup(PanelprodukbahanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelprodukbahanLayout.createSequentialGroup()
+                                .addComponent(jLabel4)
+                                .addGap(88, 88, 88)
+                                .addComponent(Total, javax.swing.GroupLayout.PREFERRED_SIZE, 233, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jScrollPane5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 433, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addContainerGap())
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelprodukbahanLayout.createSequentialGroup()
                         .addComponent(panelRound2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(106, 106, 106))
-                    .addGroup(PanelprodukbahanLayout.createSequentialGroup()
-                        .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 339, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap())))
+                        .addGap(151, 151, 151))))
         );
         PanelprodukbahanLayout.setVerticalGroup(
             PanelprodukbahanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -460,22 +460,25 @@ public class dataKulakan extends komponen.PanelRound {
                                 .addGap(0, 8, Short.MAX_VALUE)
                                 .addComponent(PanelBahan, javax.swing.GroupLayout.PREFERRED_SIZE, 487, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(PanelprodukbahanLayout.createSequentialGroup()
-                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 487, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(PanelprodukbahanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 487, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(PanelprodukbahanLayout.createSequentialGroup()
+                                        .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 430, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addGroup(PanelprodukbahanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                            .addComponent(jLabel4)
+                                            .addComponent(Total, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))))
                                 .addGap(0, 0, Short.MAX_VALUE))))
                     .addGroup(PanelprodukbahanLayout.createSequentialGroup()
                         .addComponent(panelRound2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(PanelprodukbahanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(Total, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel4))))
-                .addGap(27, 27, 27)
-                .addGroup(PanelprodukbahanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(Konversi)
-                    .addComponent(Simpan)
-                    .addComponent(Hapus))
-                .addContainerGap(14, Short.MAX_VALUE))
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addGap(18, 18, 18)
+                .addGroup(PanelprodukbahanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(PanelprodukbahanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(Simpan)
+                        .addComponent(Hapus))
+                    .addComponent(Konversi))
+                .addContainerGap(23, Short.MAX_VALUE))
         );
 
         jPanel1.add(Panelprodukbahan, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 53, 1240, 600));
@@ -497,7 +500,7 @@ public class dataKulakan extends komponen.PanelRound {
         if (comp instanceof JCheckBox cb && cb.isSelected()) {
             produkData prod = (produkData) cb.getClientProperty("data");
             if (!sudahAdaObjekDiTabel(tk, prod)) {
-                tk.addRow(new Object[]{tk.getRowCount() + 1, prod, null, null, null, null});
+                tk.addRow(new Object[]{tk.getRowCount() + 1, prod, prod.get_nama(), null, null, null});
             }
         }
     }
@@ -506,7 +509,7 @@ public class dataKulakan extends komponen.PanelRound {
         if (comp instanceof JCheckBox cb && cb.isSelected()) {
             bahanData bah = (bahanData) cb.getClientProperty("data");
             if (!sudahAdaObjekDiTabel(tk, bah)) {
-                tk.addRow(new Object[]{tk.getRowCount() + 1, bah, null, null, null, null});
+                tk.addRow(new Object[]{tk.getRowCount() + 1, bah, bah.get_nama_b(), null, null, null});
             }
         }
     }
@@ -515,7 +518,7 @@ public class dataKulakan extends komponen.PanelRound {
         if (comp instanceof JCheckBox cb && cb.isSelected()) {
             bahanData bah = (bahanData) cb.getClientProperty("data");
             if (!sudahAdaObjekDiTabel(tp, bah)) {
-                tp.addRow(new Object[]{tp.getRowCount() + 1, bah, 1, null, null});
+                tp.addRow(new Object[]{tp.getRowCount() + 1, bah, bah.get_nama_b(), 1, null, null});
             }
         }
     }
@@ -536,8 +539,8 @@ public class dataKulakan extends komponen.PanelRound {
                 }
             }
         }
-    tk.setRowCount(0);
-    upTotal();
+        tk.setRowCount(0);
+        upTotal();
     }//GEN-LAST:event_KonversiActionPerformed
 
     private void HapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_HapusActionPerformed
@@ -554,22 +557,40 @@ public class dataKulakan extends komponen.PanelRound {
     }//GEN-LAST:event_HapusActionPerformed
 
     private void SimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SimpanActionPerformed
-        pemDetDat = new ArrayList<>();
-        
-                
-        for(no = 0; no < TabelPembelian.getRowCount(); no++){
-            
-        }
-        
+        pemDetDat = ambilDataTabel();
+        PembelianObjek.simpanBeli(ttl, pemDetDat);
         tp.setRowCount(0);
         no_urut();
         upTotal();
     }//GEN-LAST:event_SimpanActionPerformed
 
-        private void prosesKonversi(bahanData bah, int row) {
-        int berat = Integer.parseInt(tk.getValueAt(row, 2).toString());
-        int harga = Integer.parseInt(tk.getValueAt(row, 3).toString());
-        int pembagi = Integer.parseInt(tk.getValueAt(row, 4).toString());
+    private List<pembelianDetailData> ambilDataTabel(){
+        List<pembelianDetailData> list = new ArrayList<>();
+        
+        for(no = 0; no < TabelPembelian.getRowCount(); no++){
+            Object item = tp.getValueAt(no, 1);
+            short jumlah = Short.parseShort(tp.getValueAt(no, 3).toString());
+            int harga = Integer.parseInt(tp.getValueAt(no, 4).toString());
+            boolean konsumsi = true;
+            short pembagi = 0;
+            if (item instanceof bahanData bah) {
+                konsumsi = bah.get_kategori();
+                if(konsumsi) pembagi = Short.parseShort(tp.getValueAt(no, 5).toString());
+            } else if (item instanceof produkData) {
+                konsumsi = true;
+                pembagi = Short.parseShort(tp.getValueAt(no, 5).toString());
+            }
+            
+            list.add(new pembelianDetailData(item, jumlah, konsumsi, pembagi, harga));
+        }
+        return list;
+    }
+    
+    private void prosesKonversi(bahanData bah, int row) {
+        String nama = tk.getValueAt(row, 2).toString();
+        int berat = Integer.parseInt(tk.getValueAt(row, 3).toString());
+        int harga = Integer.parseInt(tk.getValueAt(row, 4).toString());
+        int pembagi = Integer.parseInt(tk.getValueAt(row, 5).toString());
 
         short jumlah = (short) Math.round((double) berat / pembagi);
 
@@ -577,15 +598,19 @@ public class dataKulakan extends komponen.PanelRound {
             tp.addRow(new Object[]{
                 tp.getRowCount() + 1,
                 bah,
+                nama,
                 jumlah,
-                harga
+                harga,
+                pembagi
             });
         }
     }
+
     private void prosesKonversi(produkData prod, int row) {
-        int berat = Integer.parseInt(tk.getValueAt(row, 2).toString());
-        int harga = Integer.parseInt(tk.getValueAt(row, 3).toString());
-        int pembagi = Integer.parseInt(tk.getValueAt(row, 4).toString());
+        String nama = tk.getValueAt(row, 2).toString();
+        int berat = Integer.parseInt(tk.getValueAt(row, 3).toString());
+        int harga = Integer.parseInt(tk.getValueAt(row, 4).toString());
+        int pembagi = Integer.parseInt(tk.getValueAt(row, 5).toString());
 
         short jumlah = (short) Math.round((double) berat / pembagi);
 
@@ -593,8 +618,10 @@ public class dataKulakan extends komponen.PanelRound {
             tp.addRow(new Object[]{
                 tp.getRowCount() + 1,
                 prod,
+                nama,
                 jumlah,
-                harga
+                harga,
+                pembagi
             });
         }
     }

@@ -1,5 +1,6 @@
 package DataMaster;
 
+import Transaksi.dataKulakan;
 import DAO.*;
 import Rekapan.Rekapan;
 import Transaksi.KasirPenjualan;

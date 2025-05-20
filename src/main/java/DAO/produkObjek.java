@@ -99,18 +99,6 @@ public class produkObjek {
             }
         }
     }
-
-    public static void upStokProduk(produkData data){
-        Connection conn = koneksi.connect();
-        String sql = "update m_produk set stok = stok + ? where id_produk = ?";
-        try (PreparedStatement pst = conn.prepareStatement(sql)){
-            pst.setInt(1, data.getStok());
-            pst.setByte(2, data.get_id());
-            pst.executeUpdate();
-        } catch(SQLException e){
-            e.printStackTrace();
-        }
-    }
     
     public static void updateProduk(produkData data, byte[] fotoByte, List<detailProdukData> detPDat) {
     Connection conn = koneksi.connect();

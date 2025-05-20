@@ -56,7 +56,7 @@ public class PembelianObjek {
     
     public static void simpanBeli(int total, List<pembelianDetailData> pemDetDat){
         String Tr = "INSERT INTO transaksi_beli(tagihan) VALUES (?)";
-        String trDet = "INSERT INTO detail_jual(id_beli, id_bahan, id_produk, jumlah, konsumsi, pembagi_g, harga_subtotal)"
+        String trDet = "INSERT INTO detail_beli(id_beli, id_bahan, id_produk, jumlah, konsumsi, pembagi_g, harga_subtotal)"
                 + " VALUES (?, ?, ?, ?, ?, ?, ?)";
         Connection conn = koneksi.connect();
         try {
@@ -78,11 +78,19 @@ public class PembelianObjek {
                 }
 
                 for (pembelianDetailData detail : pemDetDat) {
+                    Object item = detail.getItem();
                     pstDetail.setInt(1, idBeli);
-                    pstDetail.setShort(2, detail.getIdBahan());
-                    pstDetail.setShort(3, detail.getIdPr());
+                    
+                    if(item instanceof bahanData b){
+                        pstDetail.setShort(2, b.get_id_b());
+                        pstDetail.setNull(3, Types.INTEGER);
+                    } else if(item instanceof produkData p){
+                        pstDetail.setNull(2, Types.INTEGER);
+                        pstDetail.setByte(3, p.get_id());
+                    }
+                    
                     pstDetail.setShort(4, detail.getJml());
-                    pstDetail.setByte(5, detail.getKonsum());
+                    pstDetail.setBoolean(5, detail.getKonsum());
                     pstDetail.setShort(6, detail.getPembagi());
                     pstDetail.setInt(7, detail.getSubtotal());
                     pstDetail.addBatch();
