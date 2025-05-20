@@ -22,7 +22,16 @@ public class Updatedataprodukproduk extends JPanel {
     private List<detailProdukData> bahanTerpilih;
     private produkData pDat;
     String np = "Nama Produk";
-    
+    private boolean dataBerubah = false;
+
+    public void setDataBerubah(boolean berubah) {
+        this.dataBerubah = berubah;
+    }
+
+    public boolean isDataBerubah() {
+        return dataBerubah;
+    }
+
     static void hanyaAngka(JTextField tf) {
     ((AbstractDocument) tf.getDocument()).setDocumentFilter(new OnlyNum());
 }
@@ -293,6 +302,8 @@ public class Updatedataprodukproduk extends JPanel {
         jLabel5.setText("Stok");
         jPanel1.add(jLabel5);
         jLabel5.setBounds(430, 160, 30, 17);
+
+        stok.setBackground(new Color(0xFFEECA));
         jPanel1.add(stok);
         stok.setBounds(320, 180, 240, 28);
 
@@ -340,6 +351,7 @@ public class Updatedataprodukproduk extends JPanel {
             }
             produkObjek.deleteProduk(pDat);
             listener.onCloseForm();
+            setDataBerubah(true);
         }
     }//GEN-LAST:event_HapusActionPerformed
 
@@ -360,9 +372,9 @@ public class Updatedataprodukproduk extends JPanel {
             pDat = new produkData(pDat.get_id(), foto, NamaP.getText(), Short.parseShort(HargaP.getText()), Short.parseShort(stok.getText()));
             produkObjek.updateProduk(pDat, foto, bahanTerpilih);
         }
-        if (listener != null) {
+        
             listener.onCloseForm();
-        }
+            setDataBerubah(true);
     }//GEN-LAST:event_SimpanActionPerformed
 
     private void NamaPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NamaPActionPerformed
@@ -384,6 +396,7 @@ public class Updatedataprodukproduk extends JPanel {
     }//GEN-LAST:event_NamaPFocusLost
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        setDataBerubah(false);
         listener.onCloseForm();
     }//GEN-LAST:event_jButton1ActionPerformed
     

@@ -1,11 +1,11 @@
 package DataMaster;
 
+import DAO.DataCache;
 import DAO.bahanData;
 import DAO.bahanObjek;
 import java.awt.Color;
 import java.awt.event.*;
 import javax.swing.table.DefaultTableModel;
-import java.util.List;
 import javax.swing.JOptionPane;
 import komponen.PanelRound;
  // @author RIZKI NABIL P
@@ -32,7 +32,7 @@ public class Dataprodukbahan extends komponen.PanelRound {
         Get.setVisible(false);
         
         tB = (DefaultTableModel) tabelBahan.getModel();
-        loadBahan();
+        LoadBahan();
         
         tabelBahan.addMouseListener(new MouseAdapter() {
             @Override
@@ -44,12 +44,11 @@ public class Dataprodukbahan extends komponen.PanelRound {
         });
     }
     
-    private void loadBahan(){
+    private void LoadBahan(){
         no = 1;
         tB.setRowCount(0);
-        List<bahanData> daftarBahan = bahanObjek.getAllBahan();
-        
-        for(bahanData dat : daftarBahan){
+        DataCache.refreshBahan();
+        for(bahanData dat : DataCache.getBahan()){
             tB.addRow(new Object[] {
                 no++,
                 dat.get_id_b(),
@@ -119,7 +118,7 @@ public class Dataprodukbahan extends komponen.PanelRound {
             }
         });
         tabelBahan.setCellFont(new java.awt.Font("Agency FB", 1, 14)); // NOI18N
-        tabelBahan.setHeaderBackgroundColor(new java.awt.Color(0, 204, 255));
+        tabelBahan.setHeaderBackgroundColor(new java.awt.Color(0, 153, 255));
         jScrollPane2.setViewportView(tabelBahan);
         if (tabelBahan.getColumnModel().getColumnCount() > 0) {
             tabelBahan.getColumnModel().getColumn(0).setMinWidth(35);
@@ -287,7 +286,7 @@ public class Dataprodukbahan extends komponen.PanelRound {
         if (Simpan.getText().equals("Simpan")) {
             bD = new bahanData(nama, bahanData.parseKonsumsi(kateg), jml);
             bahanObjek.insertBahan(bD);
-            loadBahan();
+            LoadBahan();
             JOptionPane.showMessageDialog(this, "Data tersimpan!", "Info", JOptionPane.INFORMATION_MESSAGE);
         } else if (Simpan.getText().equals("Update")) {
             jml = Short.parseShort(Jumlah.getText());
@@ -298,7 +297,7 @@ public class Dataprodukbahan extends komponen.PanelRound {
             bD = new bahanData(id, nama, bahanData.parseKonsumsi(kateg), jml);
             bahanObjek.updateBahan(bD);
             Simpan.setText("Simpan");
-            loadBahan();
+            LoadBahan();
             JOptionPane.showMessageDialog(this, "Data diperbarui!", "Info", JOptionPane.INFORMATION_MESSAGE);
         }
         
@@ -314,7 +313,7 @@ public class Dataprodukbahan extends komponen.PanelRound {
         id = (short) tabelBahan.getValueAt(no, 1);
         bahanObjek.deleteBahan(id);
         JOptionPane.showMessageDialog(this, "Data telah dihapus!", "Info", JOptionPane.INFORMATION_MESSAGE);
-        loadBahan();
+        LoadBahan();
     }//GEN-LAST:event_HapusActionPerformed
 
     private void GetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GetActionPerformed

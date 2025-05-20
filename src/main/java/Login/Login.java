@@ -2,6 +2,7 @@ package Login;
 
 import DAO.userData;
 import DAO.userObjek;
+import DAO.DataCache;
 import Transaksi.CustAccess;
 import DataMaster.Dashboard;
 import java.awt.event.KeyAdapter;
@@ -14,6 +15,9 @@ public class Login extends javax.swing.JFrame {
     private userData UD = null;
     public Login() {
         initComponents();
+        
+        DataCache.loadAll();
+        
         username.addKeyListener(new KeyAdapter() {
                 @Override
                 public void keyReleased(KeyEvent e) {

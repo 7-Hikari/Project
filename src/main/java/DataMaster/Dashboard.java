@@ -234,6 +234,7 @@ public class Dashboard extends JFrame {
         panelRounddashbord.setRoundBottomRight(80);
         panelRounddashbord.setRoundTopLeft(80);
         panelRounddashbord.setRoundTopRight(80);
+        panelRounddashbord.setSolid(true);
 
         LabelJudul.setBackground(new java.awt.Color(0, 0, 0));
         LabelJudul.setFont(new java.awt.Font("Lucida Calligraphy", 1, 60)); // NOI18N
@@ -269,6 +270,7 @@ public class Dashboard extends JFrame {
         panelnyaPanel.setRoundTopLeft(80);
         panelnyaPanel.setRoundTopRight(80);
 
+        panelubah.setGradientDirection(komponen.PanelRound.Direction.VERTICAL);
         panelubah.setMaximumSize(new java.awt.Dimension(1250, 650));
         panelubah.setMinimumSize(new java.awt.Dimension(1250, 650));
         panelubah.setPreferredSize(new java.awt.Dimension(1250, 650));
@@ -352,7 +354,7 @@ public class Dashboard extends JFrame {
         interaksipanel(tombol_Pembelian);
         LabelJudul.setText("Pembelian");
         panelubah.removeAll();
-        panelubah.add(new Datapembelianbahankulakan(), BorderLayout.CENTER);
+        panelubah.add(new dataKulakan(), BorderLayout.CENTER);
         panelubah.revalidate();
         panelubah.repaint();
     }//GEN-LAST:event_tombol_PembelianActionPerformed

@@ -24,14 +24,12 @@ public class KasirPenjualan extends komponen.PanelRound {
         setRoundTopLeft(100);
         setRoundTopRight(100);
         
-        setLayout(new BorderLayout());
-        add(panelRound1, BorderLayout.CENTER);
+        panelRound1.setGradient(new Color(0x2CBAC6), new Color(0x48A3EE));
 
         setPreferredSize(new Dimension(1240, 640));
         
         DefaultTableModel tabel = (DefaultTableModel) Tabelpesanan.getModel();
         m_pesanan = tabel;
-        Tabelpesanan.setHeaderBackgroundColor(Color.CYAN);
         
     }
 
@@ -126,6 +124,7 @@ public class KasirPenjualan extends komponen.PanelRound {
         setLayout(new java.awt.BorderLayout());
 
         panelRound1.setBackground(new java.awt.Color(255, 255, 255));
+        panelRound1.setGradientDirection(komponen.PanelRound.Direction.VERTICAL);
         panelRound1.setMaximumSize(new java.awt.Dimension(1100, 800));
         panelRound1.setMinimumSize(new java.awt.Dimension(1100, 800));
         panelRound1.setPreferredSize(new java.awt.Dimension(1100, 800));
@@ -147,14 +146,14 @@ public class KasirPenjualan extends komponen.PanelRound {
                 fieldtotalActionPerformed(evt);
             }
         });
-        struk.add(fieldtotal, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 400, 191, 34));
+        struk.add(fieldtotal, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 550, 191, 34));
 
         jLabel9.setFont(new java.awt.Font("Times New Roman", 1, 20)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(0, 0, 0));
         jLabel9.setText(" Total");
-        struk.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 350, 60, 34));
+        struk.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 520, 60, 34));
 
-        Tabelpesanan.setBackground(new java.awt.Color(255, 102, 51));
+        Tabelpesanan.setBackground(new java.awt.Color(0, 204, 255));
         Tabelpesanan.setBorder(javax.swing.BorderFactory.createEtchedBorder(java.awt.Color.cyan, java.awt.Color.blue));
         Tabelpesanan.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -179,6 +178,9 @@ public class KasirPenjualan extends komponen.PanelRound {
                 return canEdit [columnIndex];
             }
         });
+        Tabelpesanan.setHeaderBackgroundColor(new java.awt.Color(0, 153, 255));
+        Tabelpesanan.getTableHeader().setResizingAllowed(false);
+        Tabelpesanan.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(Tabelpesanan);
         if (Tabelpesanan.getColumnModel().getColumnCount() > 0) {
             Tabelpesanan.getColumnModel().getColumn(0).setResizable(false);
@@ -188,9 +190,9 @@ public class KasirPenjualan extends komponen.PanelRound {
             Tabelpesanan.getColumnModel().getColumn(3).setPreferredWidth(20);
         }
 
-        struk.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 1200, 330));
+        struk.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 1200, 510));
 
-        panelRound1.add(struk, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 140, 1220, 450));
+        panelRound1.add(struk, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 100, 1220, 600));
 
         Bayar.setBackground(new java.awt.Color(255, 51, 0));
         Bayar.setFont(new java.awt.Font("Times New Roman", 1, 20)); // NOI18N
@@ -200,7 +202,7 @@ public class KasirPenjualan extends komponen.PanelRound {
                 BayarActionPerformed(evt);
             }
         });
-        panelRound1.add(Bayar, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 590, 170, -1));
+        panelRound1.add(Bayar, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 710, 170, -1));
 
         panelRound2.setBackground(new java.awt.Color(255, 255, 255));
         panelRound2.setRoundBottomLeft(50);
@@ -232,7 +234,7 @@ public class KasirPenjualan extends komponen.PanelRound {
                     .addGap(0, 0, Short.MAX_VALUE)))
         );
 
-        panelRound1.add(panelRound2, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 90, 350, 40));
+        panelRound1.add(panelRound2, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 50, 350, 40));
 
         PanelTr.setBackground(new java.awt.Color(0, 153, 255));
 
@@ -246,24 +248,18 @@ public class KasirPenjualan extends komponen.PanelRound {
         PanelTr.setLayout(PanelTrLayout);
         PanelTrLayout.setHorizontalGroup(
             PanelTrLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 150, Short.MAX_VALUE)
-            .addGroup(PanelTrLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(PanelTrLayout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(labelpanel, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 0, Short.MAX_VALUE)))
+            .addGroup(PanelTrLayout.createSequentialGroup()
+                .addComponent(labelpanel, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         PanelTrLayout.setVerticalGroup(
             PanelTrLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 30, Short.MAX_VALUE)
-            .addGroup(PanelTrLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(PanelTrLayout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(labelpanel, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 0, Short.MAX_VALUE)))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelTrLayout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(labelpanel, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
-        panelRound1.add(PanelTr, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 50, 150, 30));
+        panelRound1.add(PanelTr, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 10, 150, 30));
 
         AmbilData.setBackground(new java.awt.Color(0, 153, 255));
         AmbilData.setFont(new java.awt.Font("Times New Roman", 1, 20)); // NOI18N
@@ -273,7 +269,7 @@ public class KasirPenjualan extends komponen.PanelRound {
                 AmbilDataActionPerformed(evt);
             }
         });
-        panelRound1.add(AmbilData, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 90, 70, 40));
+        panelRound1.add(AmbilData, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 50, 70, 40));
 
         add(panelRound1, java.awt.BorderLayout.CENTER);
     }// </editor-fold>//GEN-END:initComponents

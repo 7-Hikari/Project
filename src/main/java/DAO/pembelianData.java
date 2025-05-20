@@ -7,8 +7,7 @@ public class pembelianData {
     private int tagihan, id_beli;
     private List<pembelianDetailData> listPemDet;
     
-    pembelianData(int id_beli, String tanggal, int total){
-        this.id_beli = id_beli;
+    pembelianData(String tanggal, int total){
         this.tanggal = tanggal;
         this.tagihan = total;
     }
@@ -29,8 +28,5 @@ public class pembelianData {
     }
     public void setListPemDet(List <pembelianDetailData> lPemDet){
         this.listPemDet = lPemDet;
-    }
-    void setIdBeli(int idBeli){
-        this.id_beli = idBeli;
     }
 }

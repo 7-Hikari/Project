@@ -287,6 +287,7 @@
         <Property name="roundBottomRight" type="int" value="80"/>
         <Property name="roundTopLeft" type="int" value="80"/>
         <Property name="roundTopRight" type="int" value="80"/>
+        <Property name="solid" type="boolean" value="true"/>
       </Properties>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
@@ -380,6 +381,9 @@
       <SubComponents>
         <Container class="komponen.PanelRound" name="panelubah">
           <Properties>
+            <Property name="gradientDirection" type="komponen.PanelRound$Direction" editor="org.netbeans.modules.form.editors.EnumEditor">
+              <Value id="VERTICAL"/>
+            </Property>
             <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
               <Dimension value="[1250, 650]"/>
             </Property>

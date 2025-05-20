@@ -14,6 +14,10 @@ public class bahanData {
     public bahanData(){
         
     }
+    @Override
+    public String toString() {
+        return this.nama_b;
+    }
     
     public bahanData(short id, String nama, boolean kateg, short jumlah) {
         this.id_b = id;
@@ -33,7 +37,7 @@ public class bahanData {
     public String get_nama_b(){
         return nama_b;
     }
-    boolean get_kategori(){
+    public boolean get_kategori(){
         return kateg;
     }
     public String getStatusKonsumsi(){

@@ -3,7 +3,6 @@ package DataMaster;
 import DataMaster.kom.panelDataProduk;
 import DataMaster.kom.Updatedataprodukproduk;
 import DAO.*;
-import java.util.List;
 import java.awt.*;
 import java.awt.event.*;
 import java.awt.geom.RoundRectangle2D;
@@ -36,10 +35,8 @@ public class Dataprodukproduk extends komponen.PanelRound {
         setRoundTopRight(100);
 
         loadProduk();
-        Panelprodukbahan.setGradientDirection(PanelRound.Direction.VERTICAL);
-        Panelprodukbahan.setGradient(new Color(0x2CC4C9), new Color(0x22EBC6));
-        DataProduk.setGradientDirection(PanelRound.Direction.VERTICAL);
-        DataProduk.setGradient(new Color(0x2CC4C9), new Color(0x22EBC6));
+        Panelprodukbahan.setGradient(new Color(0x2CBAC6), new Color(0x48A3EE));
+        DataProduk.setGradient(new Color(0x2CBAC6), new Color(0x48A3EE));
     }
 
     void loadProduk() {
@@ -48,9 +45,7 @@ public class Dataprodukproduk extends komponen.PanelRound {
 
         DataProduk.removeAll();
 
-        List<produkData> daftarProduk = produkObjek.getAllProduk();
-
-        for (produkData data : daftarProduk) {
+        for (produkData data : DataCache.getProduk()) {
             panelDataProduk produkP = new panelDataProduk(data);
 
             produkP.addMouseListener(new MouseAdapter() {
@@ -86,6 +81,10 @@ public class Dataprodukproduk extends komponen.PanelRound {
 
         formPanel.setProdukFormListener(() -> {
             jdialog.dispose();
+            if (!formPanel.isDataBerubah()) {
+                DataCache.refreshProduk(); // hanya refresh kalau data memang berubah
+                loadProduk();
+            }
             loadProduk();
         });
         jdialog.setPreferredSize(new Dimension(593, 455));
@@ -136,6 +135,7 @@ public class Dataprodukproduk extends komponen.PanelRound {
         );
 
         Panelprodukbahan.setBackground(new java.awt.Color(51, 255, 255));
+        Panelprodukbahan.setGradientDirection(komponen.PanelRound.Direction.VERTICAL);
         Panelprodukbahan.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         Tambah.setBackground(new java.awt.Color(51, 255, 51));
@@ -156,6 +156,7 @@ public class Dataprodukproduk extends komponen.PanelRound {
         flow.setPreferredSize(new java.awt.Dimension(1250, 416));
 
         DataProduk.setBackground(new java.awt.Color(0, 204, 255));
+        DataProduk.setGradientDirection(komponen.PanelRound.Direction.VERTICAL);
         DataProduk.setMaximumSize(new java.awt.Dimension(1250, 410));
         DataProduk.setMinimumSize(new java.awt.Dimension(1250, 410));
         DataProduk.setPreferredSize(new java.awt.Dimension(1250, 410));
@@ -268,6 +269,7 @@ public class Dataprodukproduk extends komponen.PanelRound {
         Panelprodukbahan.revalidate();
         Panelprodukbahan.repaint();
 
+        DataCache.refreshProduk();
         loadProduk();
     }
 

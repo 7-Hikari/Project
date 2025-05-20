@@ -33,8 +33,8 @@ public class Penjualan extends komponen.PanelRound {
         setRoundTopLeft(100);
         setRoundTopRight(100);
         
-        setLayout(new BorderLayout());
-        add(panelRound1, BorderLayout.CENTER);
+        panelRound1.setGradient(new Color(0x2CBAC6), new Color(0x48A3EE));
+        
         setPreferredSize(new java.awt.Dimension(1240, 640));
         
         m_pesanan = (DefaultTableModel) Tabelpesanan.getModel();
@@ -49,10 +49,8 @@ public class Penjualan extends komponen.PanelRound {
         scroll.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
 
         flowpanel.removeAll();
-
-        java.util.List<produkData> daftarProduk = produkObjek.getAllProduk();
         
-        for (produkData data : daftarProduk) {
+        for (produkData data : DataCache.getProduk()) {
             panelProduk produkP = new panelProduk(data);
 
             produkP.addMouseListener(new MouseAdapter() {
@@ -225,11 +223,14 @@ public class Penjualan extends komponen.PanelRound {
         flowpanel = new JPanel();
         Pesan = new javax.swing.JButton();
 
+        setBackground(new java.awt.Color(255, 255, 255));
         setMaximumSize(new java.awt.Dimension(1100, 800));
         setPreferredSize(new java.awt.Dimension(1100, 800));
+        setSolid(true);
         setLayout(new java.awt.BorderLayout());
 
         panelRound1.setBackground(new java.awt.Color(255, 255, 255));
+        panelRound1.setGradientDirection(komponen.PanelRound.Direction.VERTICAL);
         panelRound1.setMaximumSize(new java.awt.Dimension(1240, 640));
         panelRound1.setMinimumSize(new java.awt.Dimension(1240, 640));
         panelRound1.setPreferredSize(new java.awt.Dimension(1240, 640));
@@ -240,7 +241,7 @@ public class Penjualan extends komponen.PanelRound {
         panelRound1.setVerifyInputWhenFocusTarget(false);
         panelRound1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        struk.setBackground(new java.awt.Color(102, 204, 255));
+        struk.setBackground(new java.awt.Color(22, 174, 225));
         struk.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         fieldtotal.setFont(new java.awt.Font("Times New Roman", 1, 20)); // NOI18N
@@ -280,7 +281,7 @@ public class Penjualan extends komponen.PanelRound {
                 return canEdit [columnIndex];
             }
         });
-        Tabelpesanan.setHeaderBackgroundColor(new java.awt.Color(51, 204, 255));
+        Tabelpesanan.setHeaderBackgroundColor(new java.awt.Color(0, 153, 255));
         jScrollPane1.setViewportView(Tabelpesanan);
         if (Tabelpesanan.getColumnModel().getColumnCount() > 0) {
             Tabelpesanan.getColumnModel().getColumn(0).setResizable(false);
@@ -304,7 +305,7 @@ public class Penjualan extends komponen.PanelRound {
         });
         struk.add(tmbl_hapus, new org.netbeans.lib.awtextra.AbsoluteConstraints(317, 36, 80, 30));
 
-        panelRound1.add(struk, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 10, 420, 540));
+        panelRound1.add(struk, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 20, 420, 530));
 
         scroll.setMinimumSize(new java.awt.Dimension(600, 25));
         scroll.setPreferredSize(new java.awt.Dimension(600, 8));
@@ -316,7 +317,7 @@ public class Penjualan extends komponen.PanelRound {
         flowpanel.setLayout(new java.awt.GridLayout(5, 4, 2, 2));
         scroll.setViewportView(flowpanel);
 
-        panelRound1.add(scroll, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 770, 540));
+        panelRound1.add(scroll, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 770, 530));
 
         Pesan.setBackground(new java.awt.Color(0, 255, 51));
         Pesan.setFont(new java.awt.Font("Times New Roman", 1, 20)); // NOI18N

@@ -14,6 +14,10 @@ public class produkData {
         this.harga = harga;
         this.stok = stok;
     }
+    @Override
+    public String toString() {
+        return this.nama;
+    }
     public byte get_id(){
         return id;
     }
