@@ -4,16 +4,14 @@ import java.util.List;
 
 public class pesananData {
     private int id_jual, tagihan;
-    private String tanggal, kode;
+    private String tanggal, kode, user;
     private Boolean Lunas;
-    private Byte user;
     private List<pesananDetailData> listDetail;
     
-    pesananData(int id_jual, String tanggal, int tagihan, Boolean lunas, Byte user){ //transaksi jual
-        this.id_jual = id_jual;
+    pesananData(String kode, String tanggal, int tagihan, String user){ //transaksi jual
+        this.kode = kode;
         this.tanggal = tanggal;
         this.tagihan = tagihan;
-        this.Lunas = lunas;
         this.user = user;
     }
     public pesananData(String kode, int tagihan){
@@ -33,10 +31,10 @@ public class pesananData {
     public Boolean get_lunas(){
         return Lunas;
     }
-    public Byte get_user(){
+    public String get_user(){
         return user;
     }
-    String getKode(){
+    public String getKode(){
         return kode;
     }
     public List<pesananDetailData> getListDetail(){

@@ -36,7 +36,7 @@ public class KasirPenjualan extends komponen.PanelRound {
 
     private void masukkanKeTabel(String kode) {
          
-        List<pesananDetailData> pesanan = pesananObjek.ambilDetailTransaksi(kode);
+        List<pesananDetailData> pesanan = transaksiObjek.ambilDetailTransaksi(kode);
 
         m_pesanan.setRowCount(0);
         
@@ -277,7 +277,7 @@ public class KasirPenjualan extends komponen.PanelRound {
     private void BayarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BayarActionPerformed
         byte a = 1;
         pesananData pesDat = new pesananData(tr, Boolean.TRUE);
-        pesananObjek.updateTr(pesDat, a);
+        transaksiObjek.updateTr(pesDat, a);
         m_pesanan.setRowCount(0);
     }//GEN-LAST:event_BayarActionPerformed
 

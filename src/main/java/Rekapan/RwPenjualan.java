@@ -1,4 +1,4 @@
-package Riwayat;
+package Rekapan;
 
 public class RwPenjualan extends komponen.PanelRound {
 
@@ -28,10 +28,30 @@ public class RwPenjualan extends komponen.PanelRound {
                 {null, null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "No", "Tanggal", "a", "Title 4"
             }
-        ));
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Integer.class, java.lang.String.class, java.lang.Object.class, java.lang.Object.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, true, true, true
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jScrollPane1.setViewportView(tabel_c1);
+        if (tabel_c1.getColumnModel().getColumnCount() > 0) {
+            tabel_c1.getColumnModel().getColumn(0).setMinWidth(25);
+            tabel_c1.getColumnModel().getColumn(0).setPreferredWidth(25);
+            tabel_c1.getColumnModel().getColumn(0).setMaxWidth(25);
+        }
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);

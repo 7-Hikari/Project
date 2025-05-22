@@ -147,7 +147,7 @@ public class Penjualan extends komponen.PanelRound {
     }
     
     private void simpan(int total) {
-        short count = pesananObjek.CekKode();
+        short count = transaksiObjek.CekKode();
         String kode = tgl + count;
         
         pesananData pesDat = new pesananData(kode, total);
@@ -161,7 +161,7 @@ public class Penjualan extends komponen.PanelRound {
             pesananDetailData PDetDat = new pesananDetailData(idProduk, jumlah, harga);
             listDetail.add(PDetDat);
         }
-        pesananObjek.simpanTransaksi(pesDat, listDetail);
+        transaksiObjek.simpanTransaksi(pesDat, listDetail);
         cetakBC(kode);
     }
     
@@ -213,15 +213,15 @@ public class Penjualan extends komponen.PanelRound {
     private void initComponents() {
 
         panelRound1 = new komponen.PanelRound();
-        struk = new javax.swing.JPanel();
+        scroll = new JScrollPane();
+        flowpanel = new JPanel();
+        Pesan = new javax.swing.JButton();
+        panelRound2 = new komponen.PanelRound();
         fieldtotal = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         Tabelpesanan = new komponen.Tabel_c();
         tmbl_hapus = new javax.swing.JButton();
-        scroll = new JScrollPane();
-        flowpanel = new JPanel();
-        Pesan = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setMaximumSize(new java.awt.Dimension(1100, 800));
@@ -241,8 +241,36 @@ public class Penjualan extends komponen.PanelRound {
         panelRound1.setVerifyInputWhenFocusTarget(false);
         panelRound1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        struk.setBackground(new java.awt.Color(22, 174, 225));
-        struk.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        scroll.setMinimumSize(new java.awt.Dimension(600, 25));
+        scroll.setPreferredSize(new java.awt.Dimension(600, 8));
+
+        flowpanel.setBackground(new java.awt.Color(51, 204, 255));
+        flowpanel.setMaximumSize(new java.awt.Dimension(600, 800));
+        flowpanel.setMinimumSize(new java.awt.Dimension(600, 8));
+        flowpanel.setPreferredSize(new java.awt.Dimension(600, 8));
+        flowpanel.setLayout(new java.awt.GridLayout(5, 4, 2, 2));
+        scroll.setViewportView(flowpanel);
+
+        panelRound1.add(scroll, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 770, 580));
+
+        Pesan.setBackground(new java.awt.Color(0, 255, 51));
+        Pesan.setFont(new java.awt.Font("Times New Roman", 1, 20)); // NOI18N
+        Pesan.setForeground(new java.awt.Color(0, 0, 0));
+        Pesan.setText("Pesan");
+        Pesan.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                PesanActionPerformed(evt);
+            }
+        });
+        panelRound1.add(Pesan, new org.netbeans.lib.awtextra.AbsoluteConstraints(940, 600, 107, -1));
+
+        panelRound2.setBackground(new java.awt.Color(51, 204, 255));
+        panelRound2.setMinimumSize(new java.awt.Dimension(440, 580));
+        panelRound2.setPreferredSize(new java.awt.Dimension(440, 580));
+        panelRound2.setRoundBottomRight(80);
+        panelRound2.setRoundTopRight(80);
+        panelRound2.setSolid(true);
+        panelRound2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         fieldtotal.setFont(new java.awt.Font("Times New Roman", 1, 20)); // NOI18N
         fieldtotal.setText("Rp0,00");
@@ -251,12 +279,12 @@ public class Penjualan extends komponen.PanelRound {
                 fieldtotalActionPerformed(evt);
             }
         });
-        struk.add(fieldtotal, new org.netbeans.lib.awtextra.AbsoluteConstraints(192, 485, 191, 34));
+        panelRound2.add(fieldtotal, new org.netbeans.lib.awtextra.AbsoluteConstraints(192, 485, 191, 34));
 
         jLabel9.setFont(new java.awt.Font("Times New Roman", 1, 20)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(0, 0, 0));
         jLabel9.setText(" Total");
-        struk.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(24, 485, 106, 34));
+        panelRound2.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(24, 485, 106, 34));
 
         Tabelpesanan.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -293,7 +321,7 @@ public class Penjualan extends komponen.PanelRound {
             Tabelpesanan.getColumnModel().getColumn(5).setResizable(false);
         }
 
-        struk.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 80, 400, 390));
+        panelRound2.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 80, 420, 390));
 
         tmbl_hapus.setBackground(new java.awt.Color(255, 0, 0));
         tmbl_hapus.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
@@ -303,32 +331,9 @@ public class Penjualan extends komponen.PanelRound {
                 tmbl_hapusActionPerformed(evt);
             }
         });
-        struk.add(tmbl_hapus, new org.netbeans.lib.awtextra.AbsoluteConstraints(317, 36, 80, 30));
+        panelRound2.add(tmbl_hapus, new org.netbeans.lib.awtextra.AbsoluteConstraints(317, 36, 80, 30));
 
-        panelRound1.add(struk, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 20, 420, 530));
-
-        scroll.setMinimumSize(new java.awt.Dimension(600, 25));
-        scroll.setPreferredSize(new java.awt.Dimension(600, 8));
-
-        flowpanel.setBackground(new java.awt.Color(102, 204, 255));
-        flowpanel.setMaximumSize(new java.awt.Dimension(600, 800));
-        flowpanel.setMinimumSize(new java.awt.Dimension(600, 8));
-        flowpanel.setPreferredSize(new java.awt.Dimension(600, 8));
-        flowpanel.setLayout(new java.awt.GridLayout(5, 4, 2, 2));
-        scroll.setViewportView(flowpanel);
-
-        panelRound1.add(scroll, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 770, 530));
-
-        Pesan.setBackground(new java.awt.Color(0, 255, 51));
-        Pesan.setFont(new java.awt.Font("Times New Roman", 1, 20)); // NOI18N
-        Pesan.setForeground(new java.awt.Color(0, 0, 0));
-        Pesan.setText("Pesan");
-        Pesan.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                PesanActionPerformed(evt);
-            }
-        });
-        panelRound1.add(Pesan, new org.netbeans.lib.awtextra.AbsoluteConstraints(940, 560, 107, -1));
+        panelRound1.add(panelRound2, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 20, 440, 580));
 
         add(panelRound1, java.awt.BorderLayout.CENTER);
     }// </editor-fold>//GEN-END:initComponents
@@ -367,8 +372,8 @@ public class Penjualan extends komponen.PanelRound {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
     private komponen.PanelRound panelRound1;
+    private komponen.PanelRound panelRound2;
     private javax.swing.JScrollPane scroll;
-    private javax.swing.JPanel struk;
     private javax.swing.JButton tmbl_hapus;
     // End of variables declaration//GEN-END:variables
 }

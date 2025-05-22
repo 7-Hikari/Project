@@ -80,11 +80,11 @@ public class dataKulakan extends komponen.PanelRound {
         jLabel4 = new javax.swing.JLabel();
         PanelBahan = new javax.swing.JPanel();
         skrolProd = new javax.swing.JScrollPane();
-        pProd = new javax.swing.JPanel();
+        pProd = new komponen.PanelRound();
         skrolKons = new javax.swing.JScrollPane();
-        pKons = new javax.swing.JPanel();
+        pKons = new komponen.PanelRound();
         skrolNkons = new javax.swing.JScrollPane();
-        pNKons = new javax.swing.JPanel();
+        pNKons = new komponen.PanelRound();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         Pindahkan = new javax.swing.JButton();
@@ -122,14 +122,14 @@ public class dataKulakan extends komponen.PanelRound {
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1230, Short.MAX_VALUE)
+            .addGap(0, 1250, Short.MAX_VALUE)
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 22, Short.MAX_VALUE)
         );
 
-        jPanel1.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 25, 1230, -1));
+        jPanel1.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 25, 1250, -1));
 
         Panelprodukbahan.setBackground(new java.awt.Color(51, 51, 255));
         Panelprodukbahan.setMaximumSize(new java.awt.Dimension(1240, 600));
@@ -262,27 +262,32 @@ public class dataKulakan extends komponen.PanelRound {
 
         skrolProd.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 
-        pProd.setBackground(new java.awt.Color(0, 204, 255));
-        pProd.setLayout(new java.awt.GridLayout(0, 2, 2, 2));
+        pProd.setBackground(new java.awt.Color(138, 231, 255));
+        pProd.setGradientDirection(komponen.PanelRound.Direction.VERTICAL);
+        pProd.setSolid(true);
+        pProd.setLayout(new java.awt.GridLayout(0, 2, 1, 2));
         skrolProd.setViewportView(pProd);
 
-        PanelBahan.add(skrolProd, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 220, 180, 100));
+        PanelBahan.add(skrolProd, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 220, 190, 100));
 
         skrolKons.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 
-        pKons.setBackground(new java.awt.Color(0, 204, 255));
-        pKons.setLayout(new java.awt.GridLayout(0, 2, 2, 2));
+        pKons.setBackground(new java.awt.Color(138, 231, 255));
+        pKons.setSolid(true);
+        pKons.setLayout(new java.awt.GridLayout(0, 2, 1, 2));
         skrolKons.setViewportView(pKons);
 
-        PanelBahan.add(skrolKons, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 40, 180, 130));
+        PanelBahan.add(skrolKons, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 40, 190, 130));
 
         skrolNkons.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 
-        pNKons.setBackground(new java.awt.Color(0, 204, 255));
-        pNKons.setLayout(new java.awt.GridLayout(0, 2, 2, 2));
+        pNKons.setBackground(new java.awt.Color(138, 231, 255));
+        pNKons.setGradientDirection(komponen.PanelRound.Direction.DIAGONAL);
+        pNKons.setSolid(true);
+        pNKons.setLayout(new java.awt.GridLayout(0, 2, 1, 2));
         skrolNkons.setViewportView(pNKons);
 
-        PanelBahan.add(skrolNkons, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 360, 180, 90));
+        PanelBahan.add(skrolNkons, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 360, 190, 90));
 
         jLabel5.setFont(new java.awt.Font("Century Schoolbook", 1, 16)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(0, 0, 0));
@@ -558,7 +563,7 @@ public class dataKulakan extends komponen.PanelRound {
 
     private void SimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SimpanActionPerformed
         pemDetDat = ambilDataTabel();
-        PembelianObjek.simpanBeli(ttl, pemDetDat);
+        transaksiObjek.simpanBeli(ttl, pemDetDat);
         tp.setRowCount(0);
         no_urut();
         upTotal();
@@ -688,9 +693,9 @@ public class dataKulakan extends komponen.PanelRound {
     private javax.swing.JPanel jPanel5;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane5;
-    private javax.swing.JPanel pKons;
-    private javax.swing.JPanel pNKons;
-    private javax.swing.JPanel pProd;
+    private komponen.PanelRound pKons;
+    private komponen.PanelRound pNKons;
+    private komponen.PanelRound pProd;
     private komponen.PanelRound panelRound1;
     private komponen.PanelRound panelRound2;
     private komponen.PanelRound panelRound3;

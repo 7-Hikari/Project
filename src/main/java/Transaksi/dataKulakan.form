@@ -80,14 +80,14 @@
           </Properties>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="10" y="25" width="1230" height="-1"/>
+              <AbsoluteConstraints x="0" y="25" width="1250" height="-1"/>
             </Constraint>
           </Constraints>
 
           <Layout>
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <EmptySpace min="0" pref="1230" max="32767" attributes="0"/>
+                  <EmptySpace min="0" pref="1250" max="32767" attributes="0"/>
               </Group>
             </DimensionLayout>
             <DimensionLayout dim="1">
@@ -439,22 +439,26 @@
                   </Properties>
                   <Constraints>
                     <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                      <AbsoluteConstraints x="0" y="220" width="180" height="100"/>
+                      <AbsoluteConstraints x="0" y="220" width="190" height="100"/>
                     </Constraint>
                   </Constraints>
 
                   <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
                   <SubComponents>
-                    <Container class="javax.swing.JPanel" name="pProd">
+                    <Container class="komponen.PanelRound" name="pProd">
                       <Properties>
                         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                          <Color blue="ff" green="cc" red="0" type="rgb"/>
+                          <Color blue="ff" green="e7" red="8a" type="rgb"/>
                         </Property>
+                        <Property name="gradientDirection" type="komponen.PanelRound$Direction" editor="org.netbeans.modules.form.editors.EnumEditor">
+                          <Value id="VERTICAL"/>
+                        </Property>
+                        <Property name="solid" type="boolean" value="true"/>
                       </Properties>
 
                       <Layout class="org.netbeans.modules.form.compat2.layouts.DesignGridLayout">
                         <Property name="columns" type="int" value="2"/>
-                        <Property name="horizontalGap" type="int" value="2"/>
+                        <Property name="horizontalGap" type="int" value="1"/>
                         <Property name="rows" type="int" value="0"/>
                         <Property name="verticalGap" type="int" value="2"/>
                       </Layout>
@@ -467,22 +471,23 @@
                   </Properties>
                   <Constraints>
                     <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                      <AbsoluteConstraints x="0" y="40" width="180" height="130"/>
+                      <AbsoluteConstraints x="0" y="40" width="190" height="130"/>
                     </Constraint>
                   </Constraints>
 
                   <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
                   <SubComponents>
-                    <Container class="javax.swing.JPanel" name="pKons">
+                    <Container class="komponen.PanelRound" name="pKons">
                       <Properties>
                         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                          <Color blue="ff" green="cc" red="0" type="rgb"/>
+                          <Color blue="ff" green="e7" red="8a" type="rgb"/>
                         </Property>
+                        <Property name="solid" type="boolean" value="true"/>
                       </Properties>
 
                       <Layout class="org.netbeans.modules.form.compat2.layouts.DesignGridLayout">
                         <Property name="columns" type="int" value="2"/>
-                        <Property name="horizontalGap" type="int" value="2"/>
+                        <Property name="horizontalGap" type="int" value="1"/>
                         <Property name="rows" type="int" value="0"/>
                         <Property name="verticalGap" type="int" value="2"/>
                       </Layout>
@@ -495,22 +500,26 @@
                   </Properties>
                   <Constraints>
                     <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                      <AbsoluteConstraints x="0" y="360" width="180" height="90"/>
+                      <AbsoluteConstraints x="0" y="360" width="190" height="90"/>
                     </Constraint>
                   </Constraints>
 
                   <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
                   <SubComponents>
-                    <Container class="javax.swing.JPanel" name="pNKons">
+                    <Container class="komponen.PanelRound" name="pNKons">
                       <Properties>
                         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                          <Color blue="ff" green="cc" red="0" type="rgb"/>
+                          <Color blue="ff" green="e7" red="8a" type="rgb"/>
                         </Property>
+                        <Property name="gradientDirection" type="komponen.PanelRound$Direction" editor="org.netbeans.modules.form.editors.EnumEditor">
+                          <Value id="DIAGONAL"/>
+                        </Property>
+                        <Property name="solid" type="boolean" value="true"/>
                       </Properties>
 
                       <Layout class="org.netbeans.modules.form.compat2.layouts.DesignGridLayout">
                         <Property name="columns" type="int" value="2"/>
-                        <Property name="horizontalGap" type="int" value="2"/>
+                        <Property name="horizontalGap" type="int" value="1"/>
                         <Property name="rows" type="int" value="0"/>
                         <Property name="verticalGap" type="int" value="2"/>
                       </Layout>

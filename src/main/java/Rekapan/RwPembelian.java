@@ -1,4 +1,4 @@
-package Riwayat;
+package Rekapan;
 
 public class RwPembelian extends komponen.PanelRound {
 
