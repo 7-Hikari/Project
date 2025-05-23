@@ -19,6 +19,9 @@ public class PenjualanChartPanel extends JPanel {
     private Color chartBackgroundColor = Color.WHITE;
     private Color barColor = new Color(70, 130, 180); // SteelBlue
     private Color gridColor = Color.LIGHT_GRAY;
+    private String title = "Grafik Penjualan Bulanan";
+    private String categoriesLabel = "Bulan";
+    private String valuesLabel = "Pendapatan (Rp)";
 
     public PenjualanChartPanel() {
         setLayout(new BorderLayout());
@@ -39,9 +42,9 @@ public class PenjualanChartPanel extends JPanel {
 
     private JFreeChart createChart() {
         return ChartFactory.createBarChart(
-                "Grafik Penjualan Bulanan",
-                "Bulan",
-                "Jumlah",
+                title,
+                categoriesLabel,
+                valuesLabel,
                 dataset,
                 PlotOrientation.VERTICAL,
                 true, true, false
@@ -59,6 +62,24 @@ public class PenjualanChartPanel extends JPanel {
         renderer.setShadowVisible(false);
     }
 
+    public void setTitle(String title){
+        this.title = title;
+    }
+    public String getTitle(){
+        return title;
+    }
+    public void setLabel(String Category){
+        this.categoriesLabel = Category;
+    }
+    public String getLabel(){
+        return categoriesLabel;
+    }
+    public void setValue(String value){
+        this.valuesLabel = value;
+    }
+    public String getValue(){
+        return valuesLabel;
+    }
     public void setBarColor(Color color) {
         this.barColor = color;
         applyChartStyle();  // update chart

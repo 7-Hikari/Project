@@ -10,6 +10,7 @@ public class userData {
         this.idUser = idUser;
         this.status = status;
         this.username = username;
+        this.photos = foto;
     }
     userData(String nama){
         this.username = nama;

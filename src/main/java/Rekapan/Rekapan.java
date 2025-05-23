@@ -45,7 +45,6 @@ public class Rekapan extends komponen.PanelRound {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        cetak = new javax.swing.JButton();
         panelRingkas = new komponen.PanelRound();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -66,10 +65,10 @@ public class Rekapan extends komponen.PanelRound {
         Laba = new javax.swing.JTextField();
         NamaPenTerendah = new javax.swing.JTextField();
         jCbBulan = new javax.swing.JComboBox<>();
-        Ekspor = new javax.swing.JButton();
         ChartPenjualan = new komponen.PenjualanChartPanel();
         dasarChart = new komponen.PanelRound();
         jCbTahun = new javax.swing.JComboBox<>();
+        Ekspor = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setGradientDirection(komponen.PanelRound.Direction.VERTICAL);
@@ -80,18 +79,8 @@ public class Rekapan extends komponen.PanelRound {
         setRoundBottomRight(100);
         setRoundTopLeft(100);
         setRoundTopRight(100);
+        setSolid(false);
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        cetak.setBackground(new java.awt.Color(0, 204, 102));
-        cetak.setFont(new java.awt.Font("Book Antiqua", 1, 14)); // NOI18N
-        cetak.setForeground(new java.awt.Color(0, 0, 0));
-        cetak.setText("Cetak Ringkasan");
-        cetak.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cetakActionPerformed(evt);
-            }
-        });
-        add(cetak, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 610, 140, 40));
 
         panelRingkas.setBackground(new java.awt.Color(51, 204, 255));
         panelRingkas.setRoundBottomRight(100);
@@ -177,16 +166,6 @@ public class Rekapan extends komponen.PanelRound {
             }
         });
 
-        Ekspor.setBackground(new java.awt.Color(0, 204, 102));
-        Ekspor.setFont(new java.awt.Font("Book Antiqua", 1, 14)); // NOI18N
-        Ekspor.setForeground(new java.awt.Color(0, 0, 0));
-        Ekspor.setText("Ekspor");
-        Ekspor.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                EksporActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout panelRingkasLayout = new javax.swing.GroupLayout(panelRingkas);
         panelRingkas.setLayout(panelRingkasLayout);
         panelRingkasLayout.setHorizontalGroup(
@@ -241,10 +220,6 @@ public class Rekapan extends komponen.PanelRound {
                         .addComponent(jCbBulan, javax.swing.GroupLayout.Alignment.TRAILING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(Totaltransaksi, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 268, Short.MAX_VALUE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRingkasLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(Ekspor, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(104, 104, 104))
         );
         panelRingkasLayout.setVerticalGroup(
             panelRingkasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -287,9 +262,7 @@ public class Rekapan extends komponen.PanelRound {
                 .addComponent(jLabel6)
                 .addGap(5, 5, 5)
                 .addComponent(Laba, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(Ekspor, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(12, Short.MAX_VALUE))
+                .addContainerGap(44, Short.MAX_VALUE))
         );
 
         add(panelRingkas, new org.netbeans.lib.awtextra.AbsoluteConstraints(930, 20, 310, 580));
@@ -338,11 +311,18 @@ public class Rekapan extends komponen.PanelRound {
         );
 
         add(dasarChart, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 910, 580));
-    }// </editor-fold>//GEN-END:initComponents
 
-    private void cetakActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cetakActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cetakActionPerformed
+        Ekspor.setBackground(new java.awt.Color(0, 204, 102));
+        Ekspor.setFont(new java.awt.Font("Book Antiqua", 1, 14)); // NOI18N
+        Ekspor.setForeground(new java.awt.Color(0, 0, 0));
+        Ekspor.setText("Ekspor");
+        Ekspor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                EksporActionPerformed(evt);
+            }
+        });
+        add(Ekspor, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 610, 150, 30));
+    }// </editor-fold>//GEN-END:initComponents
 
     private void jCbTahunActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCbTahunActionPerformed
         selected = (String) jCbTahun.getSelectedItem();
@@ -407,7 +387,6 @@ public class Rekapan extends komponen.PanelRound {
     private javax.swing.JTextField TotalProdukkeluar;
     private javax.swing.JTextField Totalpendapatan;
     private javax.swing.JTextField Totaltransaksi;
-    private javax.swing.JButton cetak;
     private komponen.PanelRound dasarChart;
     private javax.swing.JComboBox<String> jCbBulan;
     private javax.swing.JComboBox<String> jCbTahun;

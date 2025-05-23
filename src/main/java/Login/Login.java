@@ -12,34 +12,53 @@ import javax.swing.JOptionPane;
 
 public class Login extends javax.swing.JFrame {
 
+    private long waktuMulai = -1;
+    private StringBuilder bufferRFID = new StringBuilder();
     private userData UD = null;
+
     public Login() {
         initComponents();
-        
+
         DataCache.loadAll();
-        
+
         username.addKeyListener(new KeyAdapter() {
-                @Override
-                public void keyReleased(KeyEvent e) {
-                    String uid = username.getText().trim();
-                    if (uid.length() >= 10) {
-                        int b = Integer.parseInt(uid);
-                        
-                        UD = userObjek.CekID(b);
-                        String nama = UD.getUsername();
-                        
-                        if (nama != null) {
-                            System.out.println("Halo "+ nama);
-                            new Dashboard(UD).setVisible(true); // Buka JFrame DashPeg
-                        } else {
-                            System.out.println("Tidak ada");
+            @Override
+            public void keyPressed(KeyEvent e) {
+                if (bufferRFID.length() == 0) {
+                    waktuMulai = System.currentTimeMillis();
+                }
+                if (Character.isDigit(e.getKeyChar())) {
+                    bufferRFID.append(e.getKeyChar());
+                }
+                if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+                    long waktuSelesai = System.currentTimeMillis();
+                    long durasi = waktuSelesai - waktuMulai;
+                    String uid = bufferRFID.toString();
+                    System.out.println("d"+waktuMulai);
+                    if (uid.matches("\\d{10,}") && durasi < 200) {
+                        try {
+                            int id = Integer.parseInt(uid);
+                            UD = userObjek.CekID(id);
+                            if (UD != null) {
+                                System.out.println("RFID terdeteksi: " + UD.getUsername());
+                                Dashboard db = new Dashboard();
+                                db.setData(UD);
+                                db.setVisible(true);
+                            } else {
+                                JOptionPane.showMessageDialog(username, "ID tidak ditemukan.");
+                                username.setText("");
+                            }
+                        } catch (NumberFormatException ex) {
+                            JOptionPane.showMessageDialog(username, "Format ID tidak valid.");
                         }
-                        username.setText("");
                     }
                 }
-            }); 
-        
+                bufferRFID.setLength(0);
+                waktuMulai = 0;
+            }
+        });
     }
+                
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -284,7 +303,9 @@ public class Login extends javax.swing.JFrame {
 
                 JOptionPane.showMessageDialog(this, "Login berhasil sebagai " + UD.getStatus());
 
-                new Dashboard(UD).setVisible(true);
+                Dashboard db = new Dashboard();
+                db.setData(UD);
+                db.setVisible(true);
                 this.dispose();
             } else {
                 JOptionPane.showMessageDialog(this, "Login gagal. Username atau Password salah.");
@@ -293,19 +314,19 @@ public class Login extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void usernameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_usernameActionPerformed
-        if(username.getText().equals("")) {
+        if (username.getText().equals("")) {
             username.setText("Username");
         }
     }//GEN-LAST:event_usernameActionPerformed
 
     private void usernameFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_usernameFocusLost
-        if(username.getText().equals("")) {
+        if (username.getText().equals("")) {
             username.setText("Username");
         }
     }//GEN-LAST:event_usernameFocusLost
 
     private void usernameFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_usernameFocusGained
-        if(username.getText().equals("Username")) {
+        if (username.getText().equals("Username")) {
             username.setText("");
         }
     }//GEN-LAST:event_usernameFocusGained

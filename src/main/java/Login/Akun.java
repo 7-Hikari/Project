@@ -1,5 +1,8 @@
 package Login;
 
+import DAO.userData;
+import DAO.userObjek;
+import DataMaster.Dashboard;
 import java.awt.Image;
 import java.io.*;
 import javax.swing.ImageIcon;
@@ -10,8 +13,28 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 public class Akun extends javax.swing.JFrame {
 
     private byte [] foto;
+    private userData UD;
+    private boolean editfoto = false;
+    private String val;
+    private Dashboard db;
+    
     public Akun() {
         initComponents();
+    }
+    
+    public void setAkun(Dashboard db, userData UD){
+        this.UD = UD;
+        this.db = db;
+        Header.setText("Selamat Datang "+UD.getUsername());
+        user.setText(UD.getUsername());
+        pass.setEnabled(false);
+        confirmPass.setEnabled(false);
+        foto = UD.getFoto();
+        if (foto != null && foto.length > 0) {
+            ImageIcon ikon = new ImageIcon(foto);
+            Image img = ikon.getImage().getScaledInstance(120, 115, Image.SCALE_SMOOTH);
+            jLabelGambar.setIcon(new ImageIcon(img));
+        }
     }
     
     @SuppressWarnings("unchecked")
@@ -22,25 +45,30 @@ public class Akun extends javax.swing.JFrame {
         panelBulat1 = new komponen.PanelBulat();
         jLabelGambar = new javax.swing.JLabel();
         user = new javax.swing.JTextField();
-        labelNama = new javax.swing.JLabel();
+        Header = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         Simpan = new javax.swing.JButton();
         labelNama1 = new javax.swing.JLabel();
-        user2 = new javax.swing.JTextField();
         labelNama2 = new javax.swing.JLabel();
-        jPasswordField1 = new javax.swing.JPasswordField();
+        confirmPass = new javax.swing.JPasswordField();
+        pass = new javax.swing.JPasswordField();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        panelRound1.setGradientDirection(komponen.PanelRound.Direction.VERTICAL);
 
         panelBulat1.setLingkar(110);
         panelBulat1.setLayout(new java.awt.BorderLayout());
         panelBulat1.add(jLabelGambar, java.awt.BorderLayout.CENTER);
 
+        user.setEditable(false);
         user.setHorizontalAlignment(javax.swing.JTextField.CENTER);
 
-        labelNama.setFont(new java.awt.Font("Arial Black", 0, 12)); // NOI18N
-        labelNama.setForeground(new java.awt.Color(0, 0, 0));
-        labelNama.setText("jLabel1");
+        Header.setFont(new java.awt.Font("Arial Black", 0, 12)); // NOI18N
+        Header.setForeground(new java.awt.Color(0, 0, 0));
+        Header.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        Header.setText("jLabel1");
 
         jButton1.setBackground(new java.awt.Color(51, 204, 255));
         jButton1.setForeground(new java.awt.Color(0, 0, 0));
@@ -55,65 +83,71 @@ public class Akun extends javax.swing.JFrame {
         Simpan.setFont(new java.awt.Font("Franklin Gothic Demi", 0, 12)); // NOI18N
         Simpan.setForeground(new java.awt.Color(0, 0, 0));
         Simpan.setText("Simpan");
+        Simpan.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                SimpanActionPerformed(evt);
+            }
+        });
 
         labelNama1.setFont(new java.awt.Font("Arial Black", 0, 10)); // NOI18N
         labelNama1.setForeground(new java.awt.Color(0, 0, 0));
         labelNama1.setText("Password");
 
-        user2.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-
         labelNama2.setFont(new java.awt.Font("Arial Black", 0, 10)); // NOI18N
         labelNama2.setForeground(new java.awt.Color(0, 0, 0));
         labelNama2.setText("Konfirmasi Password");
 
-        jPasswordField1.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        confirmPass.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        confirmPass.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                confirmPassMouseClicked(evt);
+            }
+        });
+
+        pass.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        pass.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                passMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout panelRound1Layout = new javax.swing.GroupLayout(panelRound1);
         panelRound1.setLayout(panelRound1Layout);
         panelRound1Layout.setHorizontalGroup(
             panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRound1Layout.createSequentialGroup()
+                .addContainerGap(72, Short.MAX_VALUE)
+                .addComponent(panelBulat1, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(69, 69, 69))
             .addGroup(panelRound1Layout.createSequentialGroup()
                 .addGroup(panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panelRound1Layout.createSequentialGroup()
                         .addGap(92, 92, 92)
                         .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(panelRound1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(user2, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(panelRound1Layout.createSequentialGroup()
                         .addGap(72, 72, 72)
                         .addComponent(labelNama2))
                     .addGroup(panelRound1Layout.createSequentialGroup()
                         .addGap(109, 109, 109)
-                        .addComponent(labelNama1)))
+                        .addComponent(labelNama1))
+                    .addGroup(panelRound1Layout.createSequentialGroup()
+                        .addGap(88, 88, 88)
+                        .addComponent(Simpan)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRound1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRound1Layout.createSequentialGroup()
-                        .addComponent(panelBulat1, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(69, 69, 69))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRound1Layout.createSequentialGroup()
-                        .addComponent(user, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap())))
-            .addGroup(panelRound1Layout.createSequentialGroup()
-                .addGap(107, 107, 107)
-                .addComponent(labelNama)
-                .addGap(0, 0, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRound1Layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(Simpan)
-                .addGap(93, 93, 93))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRound1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPasswordField1)
+                .addGroup(panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(confirmPass, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(pass, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(user, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(Header, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         panelRound1Layout.setVerticalGroup(
             panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelRound1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(labelNama)
+                .addComponent(Header)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(panelBulat1, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -123,25 +157,16 @@ public class Akun extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(labelNama1, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(user2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(pass, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(labelNama2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(confirmPass, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
                 .addComponent(Simpan))
         );
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(panelRound1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(panelRound1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
+        getContentPane().add(panelRound1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -155,19 +180,84 @@ public class Akun extends javax.swing.JFrame {
         if (returnValue == JFileChooser.APPROVE_OPTION) {
             File selectedFile = fileChooser.getSelectedFile();
             try {
+                if (selectedFile.length() > 1_048_576) { // > 1MB
+                    JOptionPane.showMessageDialog(this, "Ukuran foto terlalu besar! Maksimal 1MB.");
+                    return;
+                }
                 foto = bacaFileKeByteArray(selectedFile);
                 ImageIcon icon = new ImageIcon(foto);
-                Image img = icon.getImage().getScaledInstance(180, 150, Image.SCALE_SMOOTH);
+                Image img = icon.getImage().getScaledInstance(120, 115, Image.SCALE_SMOOTH);
                 jLabelGambar.setIcon(new ImageIcon(img));
                 jLabelGambar.setText(null);
+                editfoto = true;
             } catch (IOException ex) {
                 ex.printStackTrace();
                 JOptionPane.showMessageDialog(this, "Gagal membaca file gambar!");
             }
-        } else {
-            System.out.println("Lu batalin, wajar sih lo emang suka ragu 😒");
         }
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void SimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SimpanActionPerformed
+        if (foto == null) {
+            foto = loadDefaultFoto();
+        }
+        if (!pass.isEnabled() && editfoto){
+            UD.setProfil(foto);
+            UD.setAccount(user.getText(), pass.getText());
+            userObjek.updateFoto(UD);
+        } else if (pass.isEnabled()){
+            if(!pass.getText().isEmpty() && pass.getText().equals(confirmPass.getText())){
+            UD.setAccount(user.getText(), pass.getText());
+            userObjek.updatePengguna(UD);
+            } else {
+                JOptionPane.showMessageDialog(this, "Isi password dan samakan dengan konfirmasi password");
+                return;
+            }
+        }
+        
+        db.setData(UD);
+        this.dispose();
+    }//GEN-LAST:event_SimpanActionPerformed
+
+    private void passMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_passMouseClicked
+        if(!pass.isEnabled())cekValidasi();
+    }//GEN-LAST:event_passMouseClicked
+
+    private void confirmPassMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_confirmPassMouseClicked
+        if(!confirmPass.isEnabled())cekValidasi();
+    }//GEN-LAST:event_confirmPassMouseClicked
+    
+    void cekValidasi(){
+        val = JOptionPane.showInputDialog(this, "Masukkan nama sahabat pertamamu");
+        if (val != null) {
+            UD = userObjek.Forgot(user.getText(), val);
+            if (UD != null) {
+                pass.setEnabled(true);
+                confirmPass.setEnabled(true);
+            } else {
+                JOptionPane.showMessageDialog(this, "Tolong jangan ganti password orang lain ya!",
+                        "Validasi salah!", JOptionPane.INFORMATION_MESSAGE);
+            }
+        }
+    }
+    
+    private byte[] loadDefaultFoto() {
+    try (InputStream in = getClass().getResourceAsStream("/Add User.png");
+         ByteArrayOutputStream buffer = new ByteArrayOutputStream()) {
+
+        byte[] temp = new byte[4096];
+        int len;
+        while ((len = in.read(temp)) != -1) {
+            buffer.write(temp, 0, len);
+        }
+
+        return buffer.toByteArray();
+    } catch (IOException | NullPointerException e) {
+        e.printStackTrace();
+        JOptionPane.showMessageDialog(this, "Foto default gagal dimuat.");
+        return null;
+    }
+}
     
     private byte[] bacaFileKeByteArray(File file) throws IOException {
         try (InputStream is = new FileInputStream(file);
@@ -215,16 +305,16 @@ public class Akun extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel Header;
     private javax.swing.JButton Simpan;
+    private javax.swing.JPasswordField confirmPass;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabelGambar;
-    private javax.swing.JPasswordField jPasswordField1;
-    private javax.swing.JLabel labelNama;
     private javax.swing.JLabel labelNama1;
     private javax.swing.JLabel labelNama2;
     private komponen.PanelBulat panelBulat1;
     private komponen.PanelRound panelRound1;
+    private javax.swing.JPasswordField pass;
     private javax.swing.JTextField user;
-    private javax.swing.JTextField user2;
     // End of variables declaration//GEN-END:variables
 }

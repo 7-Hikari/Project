@@ -131,7 +131,7 @@ public class userObjek {
             PreparedStatement pst = conn.prepareStatement(sql);
             
             pst.setBytes(1, usDat.getFoto());
-            pst.setString(2, usDat.getStatus().name());
+            pst.setString(2, usDat.getUsername());
             pst.executeUpdate();
         } catch(SQLException e){
             e.printStackTrace();

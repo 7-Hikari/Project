@@ -2,17 +2,24 @@ package DataMaster;
 
 import Transaksi.dataKulakan;
 import DAO.*;
+import Login.Akun;
 import Rekapan.Rekapan;
 import Transaksi.KasirPenjualan;
 import Transaksi.Penjualan;
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Graphics2D;
+import java.awt.Image;
 import java.awt.event.*;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
 import javax.swing.*;
 import java.net.*;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
+import javax.imageio.ImageIO;
 import komponen.PanelRound;
 
 public class Dashboard extends JFrame {
@@ -44,13 +51,23 @@ public class Dashboard extends JFrame {
         return true;
     }
 
-    public Dashboard(userData login) {
+    public void setData(userData login){
         this.loginUser = login;
         this.status = loginUser.getStatus();
-
+        byte []Profil =login.getFoto();
+        
+        if (Profil != null && Profil.length > 0) {
+            ImageIcon bulat = buatGambarBulat(Profil, 106);
+            labelProfil.setIcon(bulat);
+        } else {
+            labelProfil.setIcon(new ImageIcon(getClass().getResource("/Add User.png")));
+        }
+    }
+    
+    public Dashboard() {
         initComponents();
         
-        panelBulat1.add(jLabel7);
+        panelProfil.add(labelProfil);
         panelnyaPanel.setGradientDirection(PanelRound.Direction.VERTICAL);
         panelnyaPanel.setGradient(new Color(0x2CBAC6), new Color(0x48A3EE));
         panelubah.setGradientDirection(PanelRound.Direction.VERTICAL);
@@ -91,8 +108,8 @@ public class Dashboard extends JFrame {
         panelnyaPanel = new komponen.PanelRound();
         panelubah = new komponen.PanelRound();
         Toko = new javax.swing.JLabel();
-        panelBulat1 = new komponen.PanelBulat();
-        jLabel7 = new javax.swing.JLabel();
+        panelProfil = new komponen.PanelBulat();
+        labelProfil = new javax.swing.JLabel();
         foto = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -304,29 +321,20 @@ public class Dashboard extends JFrame {
         Toko.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Papoy.png"))); // NOI18N
         getContentPane().add(Toko, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 20, 160, 130));
 
-        panelBulat1.setBackground(new java.awt.Color(51, 204, 255));
-        panelBulat1.setLingkar(90);
+        panelProfil.setBackground(new java.awt.Color(51, 204, 255));
+        panelProfil.setLingkar(110);
+        panelProfil.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                panelProfilMouseClicked(evt);
+            }
+        });
+        panelProfil.setLayout(new java.awt.BorderLayout());
 
-        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Add User.png"))); // NOI18N
+        labelProfil.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        labelProfil.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Add User.png"))); // NOI18N
+        panelProfil.add(labelProfil, java.awt.BorderLayout.CENTER);
 
-        javax.swing.GroupLayout panelBulat1Layout = new javax.swing.GroupLayout(panelBulat1);
-        panelBulat1.setLayout(panelBulat1Layout);
-        panelBulat1Layout.setHorizontalGroup(
-            panelBulat1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelBulat1Layout.createSequentialGroup()
-                .addContainerGap(23, Short.MAX_VALUE)
-                .addComponent(jLabel7)
-                .addGap(17, 17, 17))
-        );
-        panelBulat1Layout.setVerticalGroup(
-            panelBulat1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelBulat1Layout.createSequentialGroup()
-                .addContainerGap(21, Short.MAX_VALUE)
-                .addComponent(jLabel7)
-                .addGap(19, 19, 19))
-        );
-
-        getContentPane().add(panelBulat1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1300, 40, -1, 90));
+        getContentPane().add(panelProfil, new org.netbeans.lib.awtextra.AbsoluteConstraints(1290, 20, 110, 110));
 
         URL url = getClass().getResource("komponen/Main.png");
         foto.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -408,6 +416,58 @@ public class Dashboard extends JFrame {
         panelubah.repaint();
     }//GEN-LAST:event_tombol_PenjualanActionPerformed
 
+    private void panelProfilMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelProfilMouseClicked
+        Akun a = new Akun();
+        a.setAkun(this, loginUser);
+        if(a.isVisible())return;
+        animasiMasuk(a, this.getWidth(), 1164);
+    }//GEN-LAST:event_panelProfilMouseClicked
+    
+    public static ImageIcon buatGambarBulat(byte[] foto, int diameter) {
+    try {
+        BufferedImage originalImage = ImageIO.read(new ByteArrayInputStream(foto));
+        Image scaledImage = originalImage.getScaledInstance(diameter, diameter, Image.SCALE_SMOOTH);
+
+        BufferedImage masked = new BufferedImage(diameter, diameter, BufferedImage.TYPE_INT_ARGB);
+        Graphics2D g2 = masked.createGraphics();
+
+        g2.setClip(new java.awt.geom.Ellipse2D.Float(0, 0, diameter, diameter));
+        g2.drawImage(scaledImage, 0, 0, null);
+        g2.dispose();
+
+        return new ImageIcon(masked);
+    } catch (IOException e) {
+        e.printStackTrace();
+        return null;
+    }
+}
+
+    public static void animasiMasuk(JFrame frame, int startX, int targetX) {
+    final int delay = 5; 
+    final int step = 20;
+
+    frame.setLocation(startX, 31);
+    frame.setVisible(true);
+
+    Timer timer = new Timer(delay, null);
+    timer.addActionListener(new ActionListener() {
+        int x = startX;
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            x -= step;
+            if (x <= targetX) {
+                x = targetX;
+                timer.stop();
+            }
+            frame.setLocation(x, 31);
+        }
+    });
+
+    timer.start();
+}
+
+    
     private void interaksipanel(JButton ba_en) {
 
         int targetY = ba_en.getY() + (ba_en.getHeight() - bulatan.getHeight()) / 2;
@@ -470,9 +530,9 @@ public class Dashboard extends JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private komponen.PanelBulat panelBulat1;
+    private javax.swing.JLabel labelProfil;
     private javax.swing.JPanel panelNavigasi;
+    private komponen.PanelBulat panelProfil;
     private komponen.PanelRound panelRounddashbord;
     private komponen.PanelRound panelnyaPanel;
     private komponen.PanelRound panelubah;
