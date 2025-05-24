@@ -33,12 +33,8 @@ public class PanelDashboard extends komponen.PanelRound {
         Keterangan = new komponen.PanelRound();
         jScrollPane1 = new javax.swing.JScrollPane();
         stokProduk = new komponen.Tabel_c();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        stokBahan = new komponen.Tabel_c();
-        Gap = new javax.swing.JPanel();
         headKeterangan = new komponen.PanelRound();
         Produk = new javax.swing.JLabel();
-        Bahan = new javax.swing.JLabel();
         Cetak = new javax.swing.JButton();
 
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -60,8 +56,8 @@ public class PanelDashboard extends komponen.PanelRound {
         HeadP2.setLayout(new java.awt.BorderLayout());
 
         Produkterjual.setBackground(new java.awt.Color(0, 0, 0));
-        Produkterjual.setFont(new java.awt.Font("Book Antiqua", 1, 14)); // NOI18N
-        Produkterjual.setForeground(new java.awt.Color(0, 0, 0));
+        Produkterjual.setFont(new java.awt.Font("Book Antiqua", 1, 18)); // NOI18N
+        Produkterjual.setForeground(new java.awt.Color(255, 255, 255));
         Produkterjual.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         Produkterjual.setText("Produk terjual");
         HeadP2.add(Produkterjual, java.awt.BorderLayout.CENTER);
@@ -91,15 +87,15 @@ public class PanelDashboard extends komponen.PanelRound {
         HeadP1.setLayout(new java.awt.BorderLayout());
 
         Penjualanhariiini.setBackground(new java.awt.Color(0, 0, 0));
-        Penjualanhariiini.setFont(new java.awt.Font("Book Antiqua", 1, 14)); // NOI18N
-        Penjualanhariiini.setForeground(new java.awt.Color(0, 0, 0));
+        Penjualanhariiini.setFont(new java.awt.Font("Book Antiqua", 1, 18)); // NOI18N
+        Penjualanhariiini.setForeground(new java.awt.Color(255, 255, 255));
         Penjualanhariiini.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        Penjualanhariiini.setText("Penjualan hari ini");
+        Penjualanhariiini.setText("Transaksi Hari Ini");
         HeadP1.add(Penjualanhariiini, java.awt.BorderLayout.CENTER);
 
         Panel1.add(HeadP1, java.awt.BorderLayout.NORTH);
 
-        Sales.setFont(new java.awt.Font("Stencil", 1, 48)); // NOI18N
+        Sales.setFont(new java.awt.Font("Futura Md BT", 1, 48)); // NOI18N
         Sales.setForeground(new java.awt.Color(0, 0, 0));
         Sales.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         Sales.setText("212");
@@ -114,9 +110,10 @@ public class PanelDashboard extends komponen.PanelRound {
         Panel3.setRoundTopRight(50);
         Panel3.setLayout(new java.awt.BorderLayout());
 
-        MoneyIn.setFont(new java.awt.Font("Stencil", 1, 48)); // NOI18N
+        MoneyIn.setFont(new java.awt.Font("Rockwell", 1, 48)); // NOI18N
         MoneyIn.setForeground(new java.awt.Color(0, 0, 0));
         MoneyIn.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        MoneyIn.setText("Rp100.000");
         Panel3.add(MoneyIn, java.awt.BorderLayout.CENTER);
 
         HeadP3.setBackground(new java.awt.Color(66, 160, 255));
@@ -128,8 +125,8 @@ public class PanelDashboard extends komponen.PanelRound {
         HeadP3.setLayout(new java.awt.BorderLayout());
 
         Uangmasukhariini.setBackground(new java.awt.Color(0, 0, 0));
-        Uangmasukhariini.setFont(new java.awt.Font("Book Antiqua", 1, 14)); // NOI18N
-        Uangmasukhariini.setForeground(new java.awt.Color(0, 0, 0));
+        Uangmasukhariini.setFont(new java.awt.Font("Book Antiqua", 1, 18)); // NOI18N
+        Uangmasukhariini.setForeground(new java.awt.Color(255, 255, 255));
         Uangmasukhariini.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         Uangmasukhariini.setText("Uang masuk hari ini");
         HeadP3.add(Uangmasukhariini, java.awt.BorderLayout.CENTER);
@@ -185,67 +182,7 @@ public class PanelDashboard extends komponen.PanelRound {
             stokProduk.getColumnModel().getColumn(3).setMaxWidth(80);
         }
 
-        Keterangan.add(jScrollPane1, java.awt.BorderLayout.WEST);
-
-        jScrollPane2.setPreferredSize(new java.awt.Dimension(330, 406));
-
-        stokBahan.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
-            },
-            new String [] {
-                "No", "Nama Bahan", "Sisa Stok"
-            }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.Integer.class
-            };
-            boolean[] canEdit = new boolean [] {
-                false, false, false
-            };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
-        stokBahan.setPreferredScrollableViewportSize(new java.awt.Dimension(350, 400));
-        jScrollPane2.setViewportView(stokBahan);
-        if (stokBahan.getColumnModel().getColumnCount() > 0) {
-            stokBahan.getColumnModel().getColumn(0).setMinWidth(30);
-            stokBahan.getColumnModel().getColumn(0).setPreferredWidth(30);
-            stokBahan.getColumnModel().getColumn(0).setMaxWidth(30);
-            stokBahan.getColumnModel().getColumn(2).setMinWidth(80);
-            stokBahan.getColumnModel().getColumn(2).setPreferredWidth(80);
-            stokBahan.getColumnModel().getColumn(2).setMaxWidth(80);
-        }
-
-        Keterangan.add(jScrollPane2, java.awt.BorderLayout.EAST);
-
-        Gap.setMaximumSize(new java.awt.Dimension(30, 30));
-        Gap.setMinimumSize(new java.awt.Dimension(30, 30));
-        Gap.setOpaque(false);
-        Gap.setPreferredSize(new java.awt.Dimension(10, 10));
-        Gap.setVerifyInputWhenFocusTarget(false);
-
-        javax.swing.GroupLayout GapLayout = new javax.swing.GroupLayout(Gap);
-        Gap.setLayout(GapLayout);
-        GapLayout.setHorizontalGroup(
-            GapLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-        );
-        GapLayout.setVerticalGroup(
-            GapLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-        );
-
-        Keterangan.add(Gap, java.awt.BorderLayout.CENTER);
+        Keterangan.add(jScrollPane1, java.awt.BorderLayout.CENTER);
 
         headKeterangan.setBackground(new java.awt.Color(66, 160, 255));
         headKeterangan.setPreferredSize(new java.awt.Dimension(780, 40));
@@ -254,19 +191,12 @@ public class PanelDashboard extends komponen.PanelRound {
         headKeterangan.setSolid(true);
         headKeterangan.setLayout(new java.awt.BorderLayout());
 
-        Produk.setFont(new java.awt.Font("Perpetua", 1, 18)); // NOI18N
-        Produk.setForeground(new java.awt.Color(0, 0, 0));
+        Produk.setFont(new java.awt.Font("Perpetua", 1, 24)); // NOI18N
+        Produk.setForeground(new java.awt.Color(255, 255, 255));
         Produk.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         Produk.setText("Keterangan Produk");
         Produk.setPreferredSize(new java.awt.Dimension(410, 16));
-        headKeterangan.add(Produk, java.awt.BorderLayout.WEST);
-
-        Bahan.setFont(new java.awt.Font("Perpetua", 1, 18)); // NOI18N
-        Bahan.setForeground(new java.awt.Color(0, 0, 0));
-        Bahan.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        Bahan.setText("Keterangan Bahan");
-        Bahan.setPreferredSize(new java.awt.Dimension(310, 16));
-        headKeterangan.add(Bahan, java.awt.BorderLayout.EAST);
+        headKeterangan.add(Produk, java.awt.BorderLayout.CENTER);
 
         Keterangan.add(headKeterangan, java.awt.BorderLayout.NORTH);
 
@@ -276,14 +206,12 @@ public class PanelDashboard extends komponen.PanelRound {
         Cetak.setFont(new java.awt.Font("Dubai Medium", 1, 14)); // NOI18N
         Cetak.setForeground(new java.awt.Color(0, 0, 0));
         Cetak.setText("Cetak");
-        add(Cetak, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 600, 140, 40));
+        add(Cetak, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 600, 140, 40));
     }// </editor-fold>//GEN-END:initComponents
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel Bahan;
     private javax.swing.JButton Cetak;
-    private javax.swing.JPanel Gap;
     private komponen.PanelRound HeadP1;
     private komponen.PanelRound HeadP2;
     private komponen.PanelRound HeadP3;
@@ -299,9 +227,7 @@ public class PanelDashboard extends komponen.PanelRound {
     private javax.swing.JLabel Uangmasukhariini;
     private komponen.PanelRound headKeterangan;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel produkSaled;
-    private komponen.Tabel_c stokBahan;
     private komponen.Tabel_c stokProduk;
     // End of variables declaration//GEN-END:variables
 }
