@@ -1,6 +1,7 @@
 package Transaksi;
 
 import DAO.*;
+import DataMaster.kom.OnlyNum;
 import java.awt.*;
 import komponen.wraplayout;
 import java.awt.event.*;
@@ -11,7 +12,7 @@ import com.google.zxing.*;
 import com.google.zxing.client.j2se.MatrixToImageWriter;
 import com.google.zxing.common.BitMatrix;
 import java.awt.image.BufferedImage;
-import java.text.*;
+import java.text.SimpleDateFormat;
 import java.nio.file.Path;
 import javax.swing.table.DefaultTableModel;
 
@@ -20,7 +21,6 @@ public class Penjualan extends komponen.PanelRound {
     private int no = 1;
     private final String tgl = new SimpleDateFormat("yyMMdd").format(new Date());
     private java.util.List<Byte> ProdukIdList = new ArrayList<>();
-    private final NumberFormat Rp = NumberFormat.getCurrencyInstance(new Locale("id", "ID"));
     int total = 0;
     
     DefaultTableModel m_pesanan = null;
@@ -136,7 +136,7 @@ public class Penjualan extends komponen.PanelRound {
                 total += Integer.parseInt(nilai.toString());
             }
         }
-        String ttl = Rp.format(total);
+        String ttl = OnlyNum.Rp.format(total);
         fieldtotal.setText(String.valueOf(ttl));
     }
     
@@ -148,7 +148,7 @@ public class Penjualan extends komponen.PanelRound {
     
     private void simpan(int total) {
         short count = transaksiObjek.CekKode();
-        String kode = tgl + count;
+        String kode = "T" + tgl + String.format("%03d", count);
         
         pesananData pesDat = new pesananData(kode, total);
         java.util.List<pesananDetailData> listDetail = new ArrayList<>();
@@ -224,8 +224,8 @@ public class Penjualan extends komponen.PanelRound {
         tmbl_hapus = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(255, 255, 255));
-        setMaximumSize(new java.awt.Dimension(1100, 800));
-        setPreferredSize(new java.awt.Dimension(1100, 800));
+        setMaximumSize(new java.awt.Dimension(1100, 650));
+        setPreferredSize(new java.awt.Dimension(1100, 650));
         setSolid(true);
         setLayout(new java.awt.BorderLayout());
 

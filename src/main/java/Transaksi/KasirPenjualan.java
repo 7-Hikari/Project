@@ -1,11 +1,10 @@
 package Transaksi;
 
 import DAO.*;
-import java.awt.BorderLayout;
+import DataMaster.kom.OnlyNum;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.util.*;
-import java.text.NumberFormat;
 import javax.swing.table.*;
 
 public class KasirPenjualan extends komponen.PanelRound {
@@ -13,7 +12,6 @@ public class KasirPenjualan extends komponen.PanelRound {
     private int no = 1;
     private int total = 0;
     private String tr;
-    private final NumberFormat Rp = NumberFormat.getCurrencyInstance(new Locale("id", "ID"));
     DefaultTableModel m_pesanan = null;
     
     public KasirPenjualan() {
@@ -36,6 +34,8 @@ public class KasirPenjualan extends komponen.PanelRound {
 
     private void masukkanKeTabel(String kode) {
          
+        no = 1;
+        
         List<pesananDetailData> pesanan = transaksiObjek.ambilDetailTransaksi(kode);
 
         m_pesanan.setRowCount(0);
@@ -50,9 +50,9 @@ public class KasirPenjualan extends komponen.PanelRound {
             Object[] row = {
                 no,
                 p.getNama(),
-                Rp.format(p.get_harga()),
+                OnlyNum.Rp.format(p.get_harga()),
                 p.get_jumlah(),
-                Rp.format(subtotal)
+                OnlyNum.Rp.format(subtotal)
             };
             System.out.println(total);
             total += subtotal;
@@ -64,7 +64,7 @@ public class KasirPenjualan extends komponen.PanelRound {
             System.out.println();
 
             m_pesanan.addRow(row);
-            fieldtotal.setText(Rp.format(total));
+            fieldtotal.setText(OnlyNum.Rp.format(total));
         }
     }
 //
@@ -118,16 +118,16 @@ public class KasirPenjualan extends komponen.PanelRound {
         AmbilData = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(51, 153, 255));
-        setMaximumSize(new java.awt.Dimension(1100, 800));
-        setMinimumSize(new java.awt.Dimension(1100, 800));
-        setPreferredSize(new java.awt.Dimension(1100, 800));
+        setMaximumSize(new java.awt.Dimension(1100, 650));
+        setMinimumSize(new java.awt.Dimension(1100, 650));
+        setPreferredSize(new java.awt.Dimension(1100, 650));
         setLayout(new java.awt.BorderLayout());
 
         panelRound1.setBackground(new java.awt.Color(255, 255, 255));
         panelRound1.setGradientDirection(komponen.PanelRound.Direction.VERTICAL);
-        panelRound1.setMaximumSize(new java.awt.Dimension(1100, 800));
-        panelRound1.setMinimumSize(new java.awt.Dimension(1100, 800));
-        panelRound1.setPreferredSize(new java.awt.Dimension(1100, 800));
+        panelRound1.setMaximumSize(new java.awt.Dimension(1100, 650));
+        panelRound1.setMinimumSize(new java.awt.Dimension(1100, 650));
+        panelRound1.setPreferredSize(new java.awt.Dimension(1100, 650));
         panelRound1.setRoundBottomLeft(100);
         panelRound1.setRoundBottomRight(100);
         panelRound1.setRoundTopLeft(100);
@@ -146,12 +146,12 @@ public class KasirPenjualan extends komponen.PanelRound {
                 fieldtotalActionPerformed(evt);
             }
         });
-        struk.add(fieldtotal, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 550, 191, 34));
+        struk.add(fieldtotal, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 410, 191, 34));
 
         jLabel9.setFont(new java.awt.Font("Times New Roman", 1, 20)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(0, 0, 0));
         jLabel9.setText(" Total");
-        struk.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 520, 60, 34));
+        struk.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 380, 60, 34));
 
         Tabelpesanan.setBackground(new java.awt.Color(0, 204, 255));
         Tabelpesanan.setBorder(javax.swing.BorderFactory.createEtchedBorder(java.awt.Color.cyan, java.awt.Color.blue));
@@ -190,9 +190,9 @@ public class KasirPenjualan extends komponen.PanelRound {
             Tabelpesanan.getColumnModel().getColumn(3).setPreferredWidth(20);
         }
 
-        struk.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 1200, 510));
+        struk.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 1200, 370));
 
-        panelRound1.add(struk, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 100, 1220, 600));
+        panelRound1.add(struk, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 100, 1220, 450));
 
         Bayar.setBackground(new java.awt.Color(255, 51, 0));
         Bayar.setFont(new java.awt.Font("Times New Roman", 1, 20)); // NOI18N
@@ -202,7 +202,7 @@ public class KasirPenjualan extends komponen.PanelRound {
                 BayarActionPerformed(evt);
             }
         });
-        panelRound1.add(Bayar, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 710, 170, -1));
+        panelRound1.add(Bayar, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 560, 170, -1));
 
         panelRound2.setBackground(new java.awt.Color(255, 255, 255));
         panelRound2.setRoundBottomLeft(50);
@@ -279,6 +279,7 @@ public class KasirPenjualan extends komponen.PanelRound {
         pesananData pesDat = new pesananData(tr, Boolean.TRUE);
         transaksiObjek.updateTr(pesDat, a);
         m_pesanan.setRowCount(0);
+        total = 0;
     }//GEN-LAST:event_BayarActionPerformed
 
     private void fieldtotalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fieldtotalActionPerformed
@@ -287,7 +288,7 @@ public class KasirPenjualan extends komponen.PanelRound {
 
     private void AmbilDataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AmbilDataActionPerformed
         tr = transaksi.getText();
-        if (tr.length() < 10) {
+        if (tr.length() < 9) {
             m_pesanan.setRowCount(0);
         } else {
             System.out.println("a " + tr);

@@ -1,8 +1,13 @@
 package DataMaster.kom;
 import java.awt.Toolkit;
+import java.text.NumberFormat;
+import java.util.Locale;
 import javax.swing.text.*;
 
 public class OnlyNum extends DocumentFilter {
+    
+    public static final NumberFormat Rp = NumberFormat.getCurrencyInstance(new Locale("id", "ID"));
+    
     @Override
     public void insertString(FilterBypass fb, int offset, String string, AttributeSet attr) throws BadLocationException {
         if (string.matches("\\d+")) {

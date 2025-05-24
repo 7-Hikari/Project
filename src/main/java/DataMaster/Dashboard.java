@@ -20,7 +20,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 import javax.imageio.ImageIO;
-import komponen.PanelRound;
 
 public class Dashboard extends JFrame {
 
@@ -68,11 +67,9 @@ public class Dashboard extends JFrame {
         initComponents();
         
         panelProfil.add(labelProfil);
-        panelnyaPanel.setGradientDirection(PanelRound.Direction.VERTICAL);
         panelnyaPanel.setGradient(new Color(0x2CBAC6), new Color(0x48A3EE));
-        panelubah.setGradientDirection(PanelRound.Direction.VERTICAL);
         panelubah.setGradient(new Color(0x2CBAC6), new Color(0x48A3EE));
-        panelubah.add(new dataKulakan(), BorderLayout.CENTER);
+        panelubah.add(new PanelDashboard(), BorderLayout.CENTER);
         bulatan.setBackground(Color.WHITE);
         Access();
 
@@ -280,6 +277,7 @@ public class Dashboard extends JFrame {
         getContentPane().add(panelRounddashbord, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 40, 900, 90));
 
         panelnyaPanel.setBackground(new java.awt.Color(51, 255, 255));
+        panelnyaPanel.setGradientDirection(komponen.PanelRound.Direction.VERTICAL);
         panelnyaPanel.setMaximumSize(new java.awt.Dimension(1270, 670));
         panelnyaPanel.setMinimumSize(new java.awt.Dimension(1270, 670));
         panelnyaPanel.setPreferredSize(new java.awt.Dimension(1270, 670));

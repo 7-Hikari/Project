@@ -3,13 +3,10 @@ package DataMaster.kom;
 import javax.swing.*;
 import java.awt.*;
 import DAO.produkData;
-import java.text.NumberFormat;
-import java.util.Locale;
 
 public class panelDataProduk extends JPanel {
     
     private final produkData produkdat;
-    private final NumberFormat Rp = NumberFormat.getCurrencyInstance(new Locale("id", "ID"));
     
     public panelDataProduk(produkData data) {
         initComponents();
@@ -31,7 +28,7 @@ public class panelDataProduk extends JPanel {
         }
         
         Nama.setText(produkdat.get_nama());
-        String harga = Rp.format(produkdat.get_harga());
+        String harga = OnlyNum.Rp.format(produkdat.get_harga());
         Harga.setText(harga);
         sisa.setText(String.valueOf(produkdat.getStok()));
     }

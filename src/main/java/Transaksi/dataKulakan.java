@@ -1,13 +1,12 @@
 package Transaksi;
 
 import DAO.*;
+import DataMaster.kom.OnlyNum;
 import java.awt.Color;
 import java.awt.Component;
-import java.text.NumberFormat;
 import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
 import java.util.List;
-import java.util.Locale;
 import javax.swing.JCheckBox;
 import javax.swing.JPanel;
 import javax.swing.event.TableModelEvent;
@@ -20,7 +19,6 @@ public class dataKulakan extends komponen.PanelRound {
     private DefaultTableModel tk = null;
     private DefaultTableModel tp = null;
     private List<pembelianDetailData> pemDetDat;
-    private final NumberFormat Rp = NumberFormat.getCurrencyInstance(new Locale("id", "ID"));
     
     public dataKulakan() {
         initComponents();
@@ -639,7 +637,7 @@ public class dataKulakan extends komponen.PanelRound {
                 ttl += Integer.parseInt(nilai.toString());
             }
         }
-        String forfield = Rp.format(ttl);
+        String forfield = OnlyNum.Rp.format(ttl);
         Total.setText(String.valueOf(forfield));
     }
     

@@ -5,29 +5,29 @@ import java.sql.*;
 import koneksi.koneksi;
 
 public class transaksiObjek {
-    
+
     //rekapan
-    public static List<Short> getTh(){
+    public static List<Short> getTh() {
         Connection conn = koneksi.connect();
         List<Short> th = new ArrayList<>();
         String sql = "SELECT Year(waktu) AS tahun FROM transaksi_jual GROUP by year(waktu) ORDER BY `tahun`";
-        try(Statement stm = conn.createStatement();
-            ResultSet rs = stm.executeQuery(sql)){
-            
-            while (rs.next()){
+        try (Statement stm = conn.createStatement(); ResultSet rs = stm.executeQuery(sql)) {
+
+            while (rs.next()) {
                 short tahun = rs.getShort("tahun");
                 th.add(tahun);
             }
-        } catch (SQLException e){
+        } catch (SQLException e) {
             e.printStackTrace();
-        } return th;
+        }
+        return th;
     }
-    
+
     public static Map<String, Integer> getPenjualanRekap(short tahun) {
         Map<String, Integer> hasil = new LinkedHashMap<>();
         Connection conn = koneksi.connect();
         String sql = "SELECT DATE_FORMAT(waktu, '%b') AS bulan, sum(tagihan) as total "
-                + "FROM transaksi_jual where year(waktu) = ? group by month(waktu) "
+                + "FROM transaksi_jual where year(waktu) = ? and Lunas = 1 group by month(waktu) "
                 + "order by month(waktu)";
         try (PreparedStatement pst = conn.prepareStatement(sql)) {
             pst.setShort(1, tahun);
@@ -50,140 +50,193 @@ public class transaksiObjek {
         rekapanData data = new rekapanData();
         try {
             Connection conn = koneksi.connect();
-
-            PreparedStatement stmt = conn.prepareStatement(
-                    "SELECT COUNT(*) FROM transaksi_jual WHERE MONTH(waktu) = ? AND YEAR(waktu) = ?");
-            stmt.setInt(1, bulan);
-            stmt.setString(2, tahun);
-            
-            ResultSet rs = stmt.executeQuery();
-            if (rs.next()) {
-                data.totalTransaksi = rs.getInt(1);
-            }
-            rs.close();
-            stmt.close();
-            // Total produk keluar
-            stmt = conn.prepareStatement(
-                    "SELECT SUM(dj.jumlah) "
-                    + "FROM detail_jual dj "
-                    + "JOIN transaksi_jual t ON dj.id_jual = t.id_jual "
-                    + "WHERE MONTH(t.waktu) = ? AND YEAR(t.waktu) = ?");
-            stmt.setInt(1, bulan);
-            stmt.setString(2, tahun);
-            rs = stmt.executeQuery();
-            if (rs.next()) {
-                data.totalProdukKeluar = rs.getInt(1);
-            }
-            rs.close();
-            stmt.close();
-            // 3 Produk unggulan
-            stmt = conn.prepareStatement(
-                    "SELECT p.nama_produk, SUM(dj.jumlah) as jumlah "
-                    + "FROM detail_jual dj "
-                    + "JOIN m_produk p ON dj.id_produk = p.id_produk "
-                    + "JOIN transaksi_jual t ON dj.id_jual = t.id_jual "
-                    + "WHERE MONTH(t.waktu) = ? AND YEAR(t.waktu) = ? "
-                    + "GROUP BY p.id_produk ORDER BY jumlah DESC LIMIT 3");
-            stmt.setInt(1, bulan);
-            stmt.setString(2, tahun);
-            rs = stmt.executeQuery();
-
-            int i = 0;
-            while (rs.next()) {
-                data.namaUnggulan[i] = rs.getString("nama_produk");
-                data.jumlahUnggulan[i] = rs.getInt("jumlah");
-                i++;
-            }
-            rs.close();
-            stmt.close();
-            // Produk penjualan terendah
-            stmt = conn.prepareStatement(
-                    "SELECT p.nama_produk, SUM(dj.jumlah) as jumlah "
-                    + "FROM detail_jual dj "
-                    + "JOIN m_produk p ON dj.id_produk = p.id_produk "
-                    + "JOIN transaksi_jual t ON dj.id_jual = t.id_jual "
-                    + "WHERE MONTH(t.waktu) = ? AND YEAR(t.waktu) = ? "
-                    + "GROUP BY p.id_produk ORDER BY jumlah asc LIMIT 1");
-            stmt.setInt(1, bulan);
-            stmt.setString(2, tahun);
-            rs = stmt.executeQuery();
-            if (rs.next()) {
-                data.produkTerendah = rs.getString("nama_produk");
-                data.jumlahTerendah = rs.getInt("jumlah");
-            }
-            rs.close();
-            stmt.close();
-            // Total pendapatan
-            stmt = conn.prepareStatement(
-                    "SELECT SUM(tagihan) FROM transaksi_jual WHERE MONTH(waktu) = ? AND YEAR(waktu) = ?");
-            stmt.setInt(1, bulan);
-            stmt.setString(2, tahun);
-            rs = stmt.executeQuery();
-            if (rs.next()) {
-                data.totalPendapatan = rs.getInt(1);
-            }
-            rs.close();
-            stmt.close();
-            // Total pembelian (harga modal)
-            stmt = conn.prepareStatement(
-                    "SELECT SUM(tagihan) FROM transaksi_beli WHERE MONTH(waktu) = ? AND YEAR(waktu) = ?");
-            stmt.setInt(1, bulan);
-            stmt.setString(2, tahun);
-            rs = stmt.executeQuery();
-            if (rs.next()) {
-                data.totalPembelian = rs.getInt(1);
-            }
-            rs.close();
-            stmt.close();
+            data.totalTransaksi = getTotalTransaksi(conn, bulan, tahun);
+            data.totalProdukKeluar = getTotalProdukKeluar(conn, bulan, tahun);
+            isiTop3Produk(conn, bulan, tahun, data);
+            isiProdukTerendah(conn, bulan, tahun, data);
+            data.totalPendapatan = getTotalPendapatan(conn, bulan, tahun);
+            data.totalPembelian = getTotalPembelian(conn, bulan, tahun);
         } catch (SQLException e) {
             e.printStackTrace();
         }
         return data;
     }
-    
-    public static List<pesananData> getJual(int bulan, String tahun){
+
+    private static int getTotalTransaksi(Connection conn, int bulan, String tahun) throws SQLException {
+        String sql = "SELECT COUNT(*) FROM transaksi_jual WHERE MONTH(waktu) = ? AND YEAR(waktu) = ? AND Lunas = 1";
+        try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setInt(1, bulan);
+            stmt.setString(2, tahun);
+            try (ResultSet rs = stmt.executeQuery()) {
+                return rs.next() ? rs.getInt(1) : 0;
+            }
+        }
+    }
+
+    private static int getTotalProdukKeluar(Connection conn, int bulan, String tahun) throws SQLException {
+        String sql = """
+        SELECT SUM(dj.jumlah) FROM detail_jual dj 
+        JOIN transaksi_jual t ON dj.id_jual = t.id_jual 
+        WHERE MONTH(t.waktu) = ? AND YEAR(t.waktu) = ? AND t.Lunas = 1""";
+        try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setInt(1, bulan);
+            stmt.setString(2, tahun);
+            try (ResultSet rs = stmt.executeQuery()) {
+                return rs.next() ? rs.getInt(1) : 0;
+            }
+        }
+    }
+
+    private static void isiTop3Produk(Connection conn, int bulan, String tahun, rekapanData data) throws SQLException {
+        String sql = """
+        SELECT p.nama_produk, SUM(dj.jumlah) as jumlah
+        FROM detail_jual dj
+        JOIN m_produk p ON dj.id_produk = p.id_produk
+        JOIN transaksi_jual t ON dj.id_jual = t.id_jual
+        WHERE MONTH(t.waktu) = ? AND YEAR(t.waktu) = ? AND t.Lunas = 1
+        GROUP BY p.id_produk ORDER BY jumlah DESC LIMIT 3""";
+
+        try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setInt(1, bulan);
+            stmt.setString(2, tahun);
+            try (ResultSet rs = stmt.executeQuery()) {
+                int i = 0;
+                while (rs.next() && i < 3) {
+                    data.namaUnggulan[i] = rs.getString("nama_produk");
+                    data.jumlahUnggulan[i] = rs.getInt("jumlah");
+                    i++;
+                }
+            }
+        }
+    }
+
+    private static void isiProdukTerendah(Connection conn, int bulan, String tahun, rekapanData data) throws SQLException {
+        String sql = """
+        SELECT p.nama_produk, SUM(dj.jumlah) as jumlah
+        FROM detail_jual dj
+        JOIN m_produk p ON dj.id_produk = p.id_produk
+        JOIN transaksi_jual t ON dj.id_jual = t.id_jual
+        WHERE MONTH(t.waktu) = ? AND YEAR(t.waktu) = ? AND t.Lunas = 1
+        GROUP BY p.id_produk ORDER BY jumlah ASC LIMIT 1""";
+
+        try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setInt(1, bulan);
+            stmt.setString(2, tahun);
+            try (ResultSet rs = stmt.executeQuery()) {
+                if (rs.next()) {
+                    data.produkTerendah = rs.getString("nama_produk");
+                    data.jumlahTerendah = rs.getInt("jumlah");
+                }
+            }
+        }
+    }
+
+    private static int getTotalPendapatan(Connection conn, int bulan, String tahun) throws SQLException {
+        String sql = "SELECT SUM(tagihan) FROM transaksi_jual WHERE MONTH(waktu) = ? AND YEAR(waktu) = ? AND Lunas = 1";
+        try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setInt(1, bulan);
+            stmt.setString(2, tahun);
+            try (ResultSet rs = stmt.executeQuery()) {
+                return rs.next() ? rs.getInt(1) : 0;
+            }
+        }
+    }
+
+    private static int getTotalPembelian(Connection conn, int bulan, String tahun) throws SQLException {
+        String sql = "SELECT SUM(tagihan) FROM transaksi_beli WHERE MONTH(waktu) = ? AND YEAR(waktu) = ?";
+        try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setInt(1, bulan);
+            stmt.setString(2, tahun);
+            try (ResultSet rs = stmt.executeQuery()) {
+                return rs.next() ? rs.getInt(1) : 0;
+            }
+        }
+    }
+
+    public static List<pesananData> getJual(int bulan, String tahun) {
         List<pesananData> list = new ArrayList<>();
         pesananData dat;
         String sql = "select kode_jual, waktu, tagihan, nama from transaksi_jual t "
                 + "join pengguna p on t.id_user = p.id_user WHERE MONTH(t.waktu) = ? "
-                + "AND YEAR(t.waktu) = ?";
+                + "AND YEAR(t.waktu) = ? and t.Lunas = 1 ";
         Connection conn = koneksi.connect();
-        
-        try(PreparedStatement pst = conn.prepareStatement(sql)){
+
+        try (PreparedStatement pst = conn.prepareStatement(sql)) {
             pst.setInt(1, bulan);
             pst.setString(2, tahun);
-            
+
             ResultSet rs = pst.executeQuery();
-            while(rs.next()){
+            while (rs.next()) {
                 String kode = rs.getString("kode_jual");
                 String tgl = rs.getString("waktu");
                 String tanggal = tgl.substring(0, 10);
                 int ttl = rs.getInt("tagihan");
                 String nama = rs.getString("nama");
-                
+
                 dat = new pesananData(kode, tanggal, ttl, nama);
                 dat.setListDetail(ambilDetailTransaksi(kode));
                 list.add(dat);
             }
-            
-        } catch(SQLException e){
+
+        } catch (SQLException e) {
             e.printStackTrace();
         }
         return list;
     }
 
-    
+    public static List<rekapanData> tabelDashboard() {
+        List<rekapanData> rekap = new ArrayList<>();
+        String sql = """
+                     SELECT p.nama_produk, SUM(dj.jumlah) AS terjual, p.stok
+                         FROM m_produk p
+                         JOIN detail_jual dj ON p.id_produk = dj.id_produk
+                         JOIN transaksi_jual tj ON tj.id_jual = dj.id_jual
+                         WHERE DATE(tj.waktu) = CURRENT_DATE
+                         GROUP BY dj.id_produk
+                         """;
+        Connection conn = koneksi.connect();
+
+        try (Statement stmt = conn.createStatement(); ResultSet rs = stmt.executeQuery(sql)) {
+            while (rs.next()) {
+                String nama = rs.getString("nama_produk");
+                short terjual = rs.getShort("terjual");
+                short stok = rs.getShort("stok");
+
+                rekap.add(new rekapanData(nama, terjual, stok));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return rekap;
+    }
+
+    public static rekapanData harianData() {
+        rekapanData reDat = new rekapanData();
+        Connection conn = koneksi.connect();
+        String sql = "SELECT SUM(tagihan) as total, count(*) as jml FROM transaksi_jual "
+                + "WHERE waktu >= CURRENT_DATE AND waktu < CURRENT_DATE + INTERVAL 1 DAY and Lunas = 1 ";
+        try (Statement stmt = conn.createStatement(); ResultSet rs = stmt.executeQuery(sql)) {
+            if (rs.next()) {
+                reDat.totalPendapatan = rs.getInt("total");
+                reDat.totalTransaksi = rs.getInt("jml");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return reDat;
+    }
+
     //penjualan data
-    public static List<pesananDetailData> ambilDetailTransaksi(String kode){
+    public static List<pesananDetailData> ambilDetailTransaksi(String kode) {
         List<pesananDetailData> detailList = new ArrayList<>();
-        
+
         String sql = """
                      SELECT dt.id_produk as id_p, nama_produk, dt.harga_satuan, dt.jumlah, tr.Lunas 
                      FROM detail_jual dt JOIN m_produk ON dt.id_produk = m_produk.id_produk 
                      join transaksi_jual tr on dt.id_jual = tr.id_jual 
                      WHERE tr.kode_jual = ?""";
         Connection conn = koneksi.connect();
-        
+
         try (PreparedStatement pst = conn.prepareStatement(sql);) {
             pst.setString(1, kode);
 
@@ -199,26 +252,26 @@ public class transaksiObjek {
                     detailList.add(new pesananDetailData(idProduk, nama, jumlah, harga, stts));
                 }
             }
-        } catch (SQLException e){
+        } catch (SQLException e) {
             e.printStackTrace();
         }
         return detailList;
     }
-    
-    public static short CekKode(){
+
+    public static short CekKode() {
         String sql = "SELECT COUNT(*) as n FROM transaksi_jual WHERE DATE(waktu) = CURRENT_DATE";
         Connection conn = koneksi.connect();
         short n = 0;
-        try(Statement stmt = conn.createStatement(); ResultSet rs = stmt.executeQuery(sql)){
-            while (rs.next()){
+        try (Statement stmt = conn.createStatement(); ResultSet rs = stmt.executeQuery(sql)) {
+            while (rs.next()) {
                 n = rs.getShort("n");
             }
-        } catch  (SQLException e){
+        } catch (SQLException e) {
             e.printStackTrace();
         }
         return n;
     }
-    
+
     public static void simpanTransaksi(pesananData trDat, List<pesananDetailData> trDetDat) {
         String Tr = "INSERT INTO transaksi_jual(kode_jual, tagihan) VALUES (?, ?)";
         String trDet = "INSERT INTO detail_jual(id_jual, id_produk, jumlah, harga_satuan) VALUES (?, ?, ?, ?)";
@@ -226,8 +279,7 @@ public class transaksiObjek {
         try {
             conn.setAutoCommit(false);
 
-            try (PreparedStatement pstTransaksi = conn.prepareStatement(Tr, Statement.RETURN_GENERATED_KEYS);
-                    PreparedStatement pstDetail = conn.prepareStatement(trDet);) {
+            try (PreparedStatement pstTransaksi = conn.prepareStatement(Tr, Statement.RETURN_GENERATED_KEYS); PreparedStatement pstDetail = conn.prepareStatement(trDet);) {
 
                 pstTransaksi.setString(1, trDat.getKode());
                 pstTransaksi.setInt(2, trDat.get_tagihan());
@@ -272,27 +324,27 @@ public class transaksiObjek {
             }
         }
     }
-    
-    public static void updateTr(pesananData trDat, byte userId){
-        
+
+    public static void updateTr(pesananData trDat, byte userId) {
+
         String sql = "update transaksi_jual set Lunas = ?, id_user = ? where kode_jual = ?";
-        Connection conn = koneksi.connect(); 
-        try{
+        Connection conn = koneksi.connect();
+        try {
             PreparedStatement pst = conn.prepareStatement(sql);
             pst.setBoolean(1, trDat.get_lunas());
             pst.setByte(2, userId);
             pst.setString(3, trDat.getKode());
             pst.executeUpdate();
-        } catch (SQLException e){
+        } catch (SQLException e) {
             e.printStackTrace();
         }
     }
-    
+
     //pembelian data
-        public static List<pembelianData> getAllPemDat(byte bulan, short tahun){
+    public static List<pembelianData> getAllPemDat(byte bulan, short tahun) {
         Map<Integer, pembelianData> mapPem = new LinkedHashMap<>();
         Connection conn = koneksi.connect();
-        
+
         String sql = """
         SELECT pem.id_beli, pem.waktu, pem.tagihan,
                db.jumlah, db.pembagi_g, db.harga_subtotal,
@@ -305,14 +357,14 @@ public class transaksiObjek {
         ORDER BY pem.id_beli
     """;
 
-        try(PreparedStatement pst = conn.prepareStatement(sql)){
+        try (PreparedStatement pst = conn.prepareStatement(sql)) {
             pst.setByte(1, bulan);
             pst.setShort(2, tahun);
-            
-            try (ResultSet rs = pst.executeQuery()){
+
+            try (ResultSet rs = pst.executeQuery()) {
                 while (rs.next()) {
                     int id = rs.getInt("id_beli");
-                 
+
                     pembelianData pemData = mapPem.get(id);
                     if (pemData == null) {
                         String waktu = rs.getString("waktu");
@@ -323,7 +375,7 @@ public class transaksiObjek {
                         mapPem.put(id, pemData);
                     }
                     String namaB = rs.getString("nama_bahan");
-                    String namaP= rs.getString("nama_produk");
+                    String namaP = rs.getString("nama_produk");
                     short jumlah = rs.getShort("jumlah");
                     short pembagiG = rs.getShort("pembagi_g");
                     int subtotal = rs.getInt("harga_subtotal");
@@ -332,13 +384,13 @@ public class transaksiObjek {
                     pemData.getlistPemDet().add(pemDetDat);
                 }
             }
-        } catch(SQLException e){
+        } catch (SQLException e) {
             e.printStackTrace();
         }
         return new ArrayList<>(mapPem.values());
     }
-    
-    public static void simpanBeli(int total, List<pembelianDetailData> pemDetDat){
+
+    public static void simpanBeli(int total, List<pembelianDetailData> pemDetDat) {
         String Tr = "INSERT INTO transaksi_beli(tagihan) VALUES (?)";
         String trDet = "INSERT INTO detail_beli(id_beli, id_bahan, id_produk, jumlah, konsumsi, pembagi_g, harga_subtotal)"
                 + " VALUES (?, ?, ?, ?, ?, ?, ?)";
@@ -346,9 +398,8 @@ public class transaksiObjek {
         try {
             conn.setAutoCommit(false);
 
-            try (PreparedStatement pstTransaksi = conn.prepareStatement(Tr, Statement.RETURN_GENERATED_KEYS);
-                    PreparedStatement pstDetail = conn.prepareStatement(trDet);) {
-                
+            try (PreparedStatement pstTransaksi = conn.prepareStatement(Tr, Statement.RETURN_GENERATED_KEYS); PreparedStatement pstDetail = conn.prepareStatement(trDet);) {
+
                 pstTransaksi.setInt(1, total);
                 pstTransaksi.executeUpdate();
 
@@ -364,15 +415,15 @@ public class transaksiObjek {
                 for (pembelianDetailData detail : pemDetDat) {
                     Object item = detail.getItem();
                     pstDetail.setInt(1, idBeli);
-                    
-                    if(item instanceof bahanData b){
+
+                    if (item instanceof bahanData b) {
                         pstDetail.setShort(2, b.get_id_b());
                         pstDetail.setNull(3, Types.INTEGER);
-                    } else if(item instanceof produkData p){
+                    } else if (item instanceof produkData p) {
                         pstDetail.setNull(2, Types.INTEGER);
                         pstDetail.setByte(3, p.get_id());
                     }
-                    
+
                     pstDetail.setShort(4, detail.getJml());
                     pstDetail.setBoolean(5, detail.getKonsum());
                     pstDetail.setShort(6, detail.getPembagi());
