@@ -191,7 +191,7 @@ public class transaksiObjek {
                          FROM m_produk p
                          JOIN detail_jual dj ON p.id_produk = dj.id_produk
                          JOIN transaksi_jual tj ON tj.id_jual = dj.id_jual
-                         WHERE DATE(tj.waktu) = CURRENT_DATE
+                         WHERE DATE(tj.waktu) = CURRENT_DATE and tj.Lunas = 1
                          GROUP BY dj.id_produk
                          """;
         Connection conn = koneksi.connect();
@@ -224,6 +224,34 @@ public class transaksiObjek {
             e.printStackTrace();
         }
         return reDat;
+    }
+    
+    public static List<rekapanData> rekapProduk(String bulan, String tahun){
+        Connection conn = koneksi.connect();
+        List<rekapanData> produkList = new ArrayList<>();
+        String sql = """
+        SELECT p.nama_produk, SUM(dj.jumlah) as jumlah
+        FROM detail_jual dj
+        JOIN m_produk p ON dj.id_produk = p.id_produk
+        JOIN transaksi_jual t ON dj.id_jual = t.id_jual
+        WHERE MONTH(t.waktu) = ? AND YEAR(t.waktu) = ? AND t.Lunas = 1
+        GROUP BY p.id_produk ORDER BY jumlah DESC""";
+
+        try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setString(1, bulan);
+            stmt.setString(2, tahun);
+            try (ResultSet rs = stmt.executeQuery()) {
+                while (rs.next()) {
+                    String nama = rs.getString("nama_produk");
+                    short jml = rs.getShort("jumlah");
+                    short z = 0;
+                    produkList.add(new rekapanData(nama, jml, z));
+                }
+            }
+        } catch (SQLException e){
+            e.printStackTrace();
+        }
+        return produkList;
     }
 
     //penjualan data
@@ -341,13 +369,13 @@ public class transaksiObjek {
     }
 
     //pembelian data
-    public static List<pembelianData> getAllPemDat(byte bulan, short tahun) {
+    public static List<pembelianData> getAllPemDat(int bulan, String tahun) {
         Map<Integer, pembelianData> mapPem = new LinkedHashMap<>();
         Connection conn = koneksi.connect();
 
         String sql = """
         SELECT pem.id_beli, pem.waktu, pem.tagihan,
-               db.jumlah, db.pembagi_g, db.harga_subtotal,
+               db.jumlah, db.konsumsi, db.pembagi_g, db.harga_subtotal,
                b.nama_bahan, p.nama_produk
         FROM transaksi_beli pem
         JOIN detail_beli db ON db.id_beli = pem.id_beli
@@ -358,8 +386,8 @@ public class transaksiObjek {
     """;
 
         try (PreparedStatement pst = conn.prepareStatement(sql)) {
-            pst.setByte(1, bulan);
-            pst.setShort(2, tahun);
+            pst.setInt(1, bulan);
+            pst.setString(2, tahun);
 
             try (ResultSet rs = pst.executeQuery()) {
                 while (rs.next()) {
@@ -377,10 +405,11 @@ public class transaksiObjek {
                     String namaB = rs.getString("nama_bahan");
                     String namaP = rs.getString("nama_produk");
                     short jumlah = rs.getShort("jumlah");
+                    boolean konsum = rs.getBoolean("konsumsi");
                     short pembagiG = rs.getShort("pembagi_g");
                     int subtotal = rs.getInt("harga_subtotal");
 
-                    pembelianDetailData pemDetDat = new pembelianDetailData(namaB, namaP, jumlah, pembagiG, subtotal);
+                    pembelianDetailData pemDetDat = new pembelianDetailData(namaB, namaP, jumlah, konsum, pembagiG, subtotal);
                     pemData.getlistPemDet().add(pemDetDat);
                 }
             }

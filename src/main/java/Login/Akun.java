@@ -4,6 +4,7 @@ import DAO.userData;
 import DAO.userObjek;
 import DataMaster.Dashboard;
 import java.awt.Image;
+import java.awt.geom.RoundRectangle2D;
 import java.io.*;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
@@ -20,6 +21,8 @@ public class Akun extends javax.swing.JFrame {
     
     public Akun() {
         initComponents();
+        
+        setShape(new RoundRectangle2D.Double(0, 0, getWidth(), getHeight(), 40, 40));
     }
     
     public void setAkun(Dashboard db, userData UD){
@@ -46,38 +49,46 @@ public class Akun extends javax.swing.JFrame {
         jLabelGambar = new javax.swing.JLabel();
         user = new javax.swing.JTextField();
         Header = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        getPhoto = new javax.swing.JButton();
         Simpan = new javax.swing.JButton();
         labelNama1 = new javax.swing.JLabel();
         labelNama2 = new javax.swing.JLabel();
         confirmPass = new javax.swing.JPasswordField();
         pass = new javax.swing.JPasswordField();
+        close = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setUndecorated(true);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         panelRound1.setGradientDirection(komponen.PanelRound.Direction.VERTICAL);
+        panelRound1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         panelBulat1.setLingkar(110);
         panelBulat1.setLayout(new java.awt.BorderLayout());
         panelBulat1.add(jLabelGambar, java.awt.BorderLayout.CENTER);
 
+        panelRound1.add(panelBulat1, new org.netbeans.lib.awtextra.AbsoluteConstraints(73, 30, 121, 114));
+
         user.setEditable(false);
         user.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        panelRound1.add(user, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 184, 250, -1));
 
         Header.setFont(new java.awt.Font("Arial Black", 0, 12)); // NOI18N
         Header.setForeground(new java.awt.Color(0, 0, 0));
         Header.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         Header.setText("jLabel1");
+        panelRound1.add(Header, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, 260, -1));
 
-        jButton1.setBackground(new java.awt.Color(51, 204, 255));
-        jButton1.setForeground(new java.awt.Color(0, 0, 0));
-        jButton1.setText("Pilih foto");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        getPhoto.setBackground(new java.awt.Color(51, 204, 255));
+        getPhoto.setForeground(new java.awt.Color(0, 0, 0));
+        getPhoto.setText("Pilih foto");
+        getPhoto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                getPhotoActionPerformed(evt);
             }
         });
+        panelRound1.add(getPhoto, new org.netbeans.lib.awtextra.AbsoluteConstraints(93, 150, -1, 19));
 
         Simpan.setBackground(new java.awt.Color(0, 153, 255));
         Simpan.setFont(new java.awt.Font("Franklin Gothic Demi", 0, 12)); // NOI18N
@@ -88,14 +99,17 @@ public class Akun extends javax.swing.JFrame {
                 SimpanActionPerformed(evt);
             }
         });
+        panelRound1.add(Simpan, new org.netbeans.lib.awtextra.AbsoluteConstraints(102, 340, -1, -1));
 
         labelNama1.setFont(new java.awt.Font("Arial Black", 0, 10)); // NOI18N
         labelNama1.setForeground(new java.awt.Color(0, 0, 0));
         labelNama1.setText("Password");
+        panelRound1.add(labelNama1, new org.netbeans.lib.awtextra.AbsoluteConstraints(104, 230, -1, -1));
 
         labelNama2.setFont(new java.awt.Font("Arial Black", 0, 10)); // NOI18N
         labelNama2.setForeground(new java.awt.Color(0, 0, 0));
         labelNama2.setText("Konfirmasi Password");
+        panelRound1.add(labelNama2, new org.netbeans.lib.awtextra.AbsoluteConstraints(74, 280, -1, -1));
 
         confirmPass.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         confirmPass.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -103,6 +117,7 @@ public class Akun extends javax.swing.JFrame {
                 confirmPassMouseClicked(evt);
             }
         });
+        panelRound1.add(confirmPass, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 300, 250, -1));
 
         pass.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         pass.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -110,68 +125,25 @@ public class Akun extends javax.swing.JFrame {
                 passMouseClicked(evt);
             }
         });
+        panelRound1.add(pass, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 245, 250, -1));
 
-        javax.swing.GroupLayout panelRound1Layout = new javax.swing.GroupLayout(panelRound1);
-        panelRound1.setLayout(panelRound1Layout);
-        panelRound1Layout.setHorizontalGroup(
-            panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRound1Layout.createSequentialGroup()
-                .addContainerGap(72, Short.MAX_VALUE)
-                .addComponent(panelBulat1, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(69, 69, 69))
-            .addGroup(panelRound1Layout.createSequentialGroup()
-                .addGroup(panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(panelRound1Layout.createSequentialGroup()
-                        .addGap(92, 92, 92)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(panelRound1Layout.createSequentialGroup()
-                        .addGap(72, 72, 72)
-                        .addComponent(labelNama2))
-                    .addGroup(panelRound1Layout.createSequentialGroup()
-                        .addGap(109, 109, 109)
-                        .addComponent(labelNama1))
-                    .addGroup(panelRound1Layout.createSequentialGroup()
-                        .addGap(88, 88, 88)
-                        .addComponent(Simpan)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRound1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(confirmPass, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(pass, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(user, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(Header, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
-        );
-        panelRound1Layout.setVerticalGroup(
-            panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelRound1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(Header)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(panelBulat1, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(15, 15, 15)
-                .addComponent(user, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(labelNama1, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(pass, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(labelNama2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(confirmPass, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
-                .addComponent(Simpan))
-        );
+        close.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
+        close.setForeground(new java.awt.Color(0, 0, 0));
+        close.setText("X");
+        close.setContentAreaFilled(false);
+        close.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                closeActionPerformed(evt);
+            }
+        });
+        panelRound1.add(close, new org.netbeans.lib.awtextra.AbsoluteConstraints(228, 0, 38, 20));
 
-        getContentPane().add(panelRound1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+        getContentPane().add(panelRound1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 260, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void getPhotoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_getPhotoActionPerformed
         JFileChooser fileChooser = new JFileChooser();
         FileNameExtensionFilter filter = new FileNameExtensionFilter("Gambar (JPG, PNG, JPEG)", "jpg", "png", "jpeg");
         fileChooser.setFileFilter(filter);
@@ -195,7 +167,7 @@ public class Akun extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(this, "Gagal membaca file gambar!");
             }
         }
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_getPhotoActionPerformed
 
     private void SimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SimpanActionPerformed
         if (foto == null) {
@@ -226,6 +198,10 @@ public class Akun extends javax.swing.JFrame {
     private void confirmPassMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_confirmPassMouseClicked
         if(!confirmPass.isEnabled())cekValidasi();
     }//GEN-LAST:event_confirmPassMouseClicked
+
+    private void closeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_closeActionPerformed
+        dispose();
+    }//GEN-LAST:event_closeActionPerformed
     
     void cekValidasi(){
         val = JOptionPane.showInputDialog(this, "Masukkan nama sahabat pertamamu");
@@ -307,8 +283,9 @@ public class Akun extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Header;
     private javax.swing.JButton Simpan;
+    private javax.swing.JButton close;
     private javax.swing.JPasswordField confirmPass;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton getPhoto;
     private javax.swing.JLabel jLabelGambar;
     private javax.swing.JLabel labelNama1;
     private javax.swing.JLabel labelNama2;

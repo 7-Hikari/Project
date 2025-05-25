@@ -50,7 +50,7 @@ public class dataKulakan extends komponen.PanelRound {
             pProd.add(check);
         }
 
-        for (bahanData bahdat : DataCache.getBahan()) {
+        for (bahanData bahdat : bahanObjek.getAllBahan()) {
             check = new JCheckBox(bahdat.get_nama_b());
             check.putClientProperty("data", bahdat);
             if (bahdat.get_kategori()) {

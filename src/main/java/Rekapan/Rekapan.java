@@ -1,5 +1,6 @@
 package Rekapan;
 
+import DAO.pembelianData;
 import DAO.pesananData;
 import DAO.transaksiObjek;
 import DAO.rekapanData;
@@ -346,7 +347,8 @@ public class Rekapan extends komponen.PanelRound {
 
     private void EksporActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EksporActionPerformed
         List<pesananData> dat = transaksiObjek.getJual(pilihBulan, selected);
-        LaporanTransaksiExporter.exportToExcel(dat, reDat, (String) jCbBulan.getSelectedItem(), selected);
+        List<pembelianData> pemDat = transaksiObjek.getAllPemDat(pilihBulan, selected);
+        ExportLaporan.exportToExcel(dat, pemDat, reDat, (String) jCbBulan.getSelectedItem(), selected);
     }//GEN-LAST:event_EksporActionPerformed
 
     private void Ringkasan(int bulan, String tahun) {

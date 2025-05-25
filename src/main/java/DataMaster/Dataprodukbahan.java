@@ -1,6 +1,5 @@
 package DataMaster;
 
-import DAO.DataCache;
 import DAO.bahanData;
 import DAO.bahanObjek;
 import java.awt.Color;
@@ -47,8 +46,7 @@ public class Dataprodukbahan extends komponen.PanelRound {
     private void LoadBahan(){
         no = 1;
         tB.setRowCount(0);
-        DataCache.refreshBahan();
-        for(bahanData dat : DataCache.getBahan()){
+        for(bahanData dat : bahanObjek.getAllBahan()){
             tB.addRow(new Object[] {
                 no++,
                 dat.get_id_b(),

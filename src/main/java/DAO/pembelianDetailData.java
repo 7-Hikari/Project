@@ -8,10 +8,11 @@ public class pembelianDetailData {
     private boolean konsumsi;
     private int subtotal;
 
-    public pembelianDetailData(String nama_bahan, String nama_produk, short jumlah, short bagi, int hargasub) { //riwayat
+    public pembelianDetailData(String nama_bahan, String nama_produk, short jumlah, boolean konsum, short bagi, int hargasub) { //riwayat
         this.nama_b = nama_bahan;
         this.nama_pr = nama_produk;
         this.jumlah = jumlah;
+        this.konsumsi = konsum;
         this.pembagiG = bagi;
         this.subtotal = hargasub;
     }
@@ -34,7 +35,7 @@ public class pembelianDetailData {
     public short getJml(){
         return jumlah;
     }
-    boolean getKonsum(){
+    public boolean getKonsum(){
         return konsumsi;
     }
     public short getPembagi(){

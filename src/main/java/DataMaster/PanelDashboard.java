@@ -3,6 +3,8 @@ package DataMaster;
 import java.awt.Color;
 import DAO.*;
 import DataMaster.kom.OnlyNum;
+import Rekapan.ExportLaporan;
+import java.io.FileNotFoundException;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
 
@@ -11,7 +13,10 @@ import javax.swing.table.DefaultTableModel;
  * @author Muhammad Zaiful
  */
 public class PanelDashboard extends komponen.PanelRound {
-
+    private List<rekapanData> reDatas;
+    private List<bahanData> bahDats;
+    private int ttl, jmlTransaksi, uangMasuk;
+    
     public PanelDashboard() {
         initComponents();
 
@@ -216,15 +221,28 @@ public class PanelDashboard extends komponen.PanelRound {
         Cetak.setFont(new java.awt.Font("Dubai Medium", 1, 14)); // NOI18N
         Cetak.setForeground(new java.awt.Color(0, 0, 0));
         Cetak.setText("Ekspor");
+        Cetak.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CetakActionPerformed(evt);
+            }
+        });
         add(Cetak, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 600, 140, 40));
     }// </editor-fold>//GEN-END:initComponents
+
+    private void CetakActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CetakActionPerformed
+        try{
+            ExportLaporan.exportHarian(reDatas, bahDats, ttl, jmlTransaksi, uangMasuk);
+        }catch(FileNotFoundException e){
+            e.printStackTrace();
+        }
+    }//GEN-LAST:event_CetakActionPerformed
 
     private void loadData() {
         DefaultTableModel model = (DefaultTableModel) stokProduk.getModel();
         model.setRowCount(0);
         int no = 1;
-        List<rekapanData> reDatas = transaksiObjek.tabelDashboard();
-        List<bahanData> bahDats = bahanObjek.getAllBahan();
+        reDatas = transaksiObjek.tabelDashboard();
+        bahDats = bahanObjek.getAllBahan();
         rekapanData reDat = transaksiObjek.harianData();
 
         for (rekapanData reData : reDatas) {
@@ -245,16 +263,20 @@ public class PanelDashboard extends komponen.PanelRound {
             });
         }
 
-        int ttl = 0;
+        ttl = 0;
         for (int row = 0; row < stokProduk.getRowCount(); row++) {
             Object nilai = stokProduk.getValueAt(row, 2);
             if (nilai != "-") {
                 ttl += Integer.parseInt(nilai.toString());
             }
         }
+        
+        jmlTransaksi = reDat.totalTransaksi;
+        uangMasuk = reDat.totalPendapatan;
+        
         produkSaled.setText(String.valueOf(ttl));
-        Sales.setText(String.valueOf(reDat.totalTransaksi));
-        MoneyIn.setText(OnlyNum.Rp.format(reDat.totalPendapatan));
+        Sales.setText(String.valueOf(jmlTransaksi));
+        MoneyIn.setText(OnlyNum.Rp.format(uangMasuk));
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

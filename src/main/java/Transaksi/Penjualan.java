@@ -50,7 +50,7 @@ public class Penjualan extends komponen.PanelRound {
 
         flowpanel.removeAll();
         
-        for (produkData data : DataCache.getProduk()) {
+        for (produkData data : produkObjek.getAllProduk()) {
             panelProduk produkP = new panelProduk(data);
 
             produkP.addMouseListener(new MouseAdapter() {

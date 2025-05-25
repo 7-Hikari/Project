@@ -19,7 +19,7 @@ public class Login extends javax.swing.JFrame {
     public Login() {
         initComponents();
 
-        DataCache.loadAll();
+        DataCache.getProduk();
 
         username.addKeyListener(new KeyAdapter() {
             @Override
