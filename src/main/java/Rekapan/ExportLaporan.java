@@ -1,5 +1,4 @@
 package Rekapan;
-//@uthor Rafli RD
 
 import DAO.*;
 import com.lowagie.text.Document;
