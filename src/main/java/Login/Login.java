@@ -33,17 +33,20 @@ public class Login extends javax.swing.JFrame {
                 if (e.getKeyCode() == KeyEvent.VK_ENTER) {
                     long waktuSelesai = System.currentTimeMillis();
                     long durasi = waktuSelesai - waktuMulai;
+
                     String uid = bufferRFID.toString();
-                    System.out.println("d"+waktuMulai);
-                    if (uid.matches("\\d{10,}") && durasi < 200) {
+                    System.out.println("UID: " + uid);
+                    System.out.println("Durasi: " + durasi + " ms");
+
+                    if (uid.matches("\\d{10,}") && durasi < 500) {
                         try {
-                            int id = Integer.parseInt(uid);
-                            UD = userObjek.CekID(id);
+                            UD = userObjek.CekID(uid);
                             if (UD != null) {
                                 System.out.println("RFID terdeteksi: " + UD.getUsername());
                                 Dashboard db = new Dashboard();
                                 db.setData(UD);
                                 db.setVisible(true);
+                                dispose();
                             } else {
                                 JOptionPane.showMessageDialog(username, "ID tidak ditemukan.");
                                 username.setText("");
@@ -52,13 +55,13 @@ public class Login extends javax.swing.JFrame {
                             JOptionPane.showMessageDialog(username, "Format ID tidak valid.");
                         }
                     }
+                    bufferRFID.setLength(0);
+                    waktuMulai = 0;
                 }
-                bufferRFID.setLength(0);
-                waktuMulai = 0;
             }
         });
     }
-                
+               
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents

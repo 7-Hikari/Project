@@ -16,7 +16,8 @@ public class Akun extends javax.swing.JFrame {
     private byte [] foto;
     private userData UD;
     private boolean editfoto = false;
-    private String val;
+    private String val, nama;
+    private int id;
     private Dashboard db;
     
     public Akun() {
@@ -28,10 +29,14 @@ public class Akun extends javax.swing.JFrame {
     public void setAkun(Dashboard db, userData UD){
         this.UD = UD;
         this.db = db;
-        Header.setText("Selamat Datang "+UD.getUsername());
-        user.setText(UD.getUsername());
+        nama = UD.getUsername();
+        id = UD.getId_User();
+        
+        Header.setText("Selamat Datang ~"+nama+"~");
+        rfid.setText(UD.getRFID());
         pass.setEnabled(false);
         confirmPass.setEnabled(false);
+        
         foto = UD.getFoto();
         if (foto != null && foto.length > 0) {
             ImageIcon ikon = new ImageIcon(foto);
@@ -47,7 +52,7 @@ public class Akun extends javax.swing.JFrame {
         panelRound1 = new komponen.PanelRound();
         panelBulat1 = new komponen.PanelBulat();
         jLabelGambar = new javax.swing.JLabel();
-        user = new javax.swing.JTextField();
+        rfid = new javax.swing.JTextField();
         Header = new javax.swing.JLabel();
         getPhoto = new javax.swing.JButton();
         Simpan = new javax.swing.JButton();
@@ -56,6 +61,7 @@ public class Akun extends javax.swing.JFrame {
         confirmPass = new javax.swing.JPasswordField();
         pass = new javax.swing.JPasswordField();
         close = new javax.swing.JButton();
+        labelNama3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setUndecorated(true);
@@ -70,9 +76,15 @@ public class Akun extends javax.swing.JFrame {
 
         panelRound1.add(panelBulat1, new org.netbeans.lib.awtextra.AbsoluteConstraints(73, 30, 121, 114));
 
-        user.setEditable(false);
-        user.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        panelRound1.add(user, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 184, 250, -1));
+        rfid.setEditable(false);
+        rfid.setFont(new java.awt.Font("Engravers MT", 1, 12)); // NOI18N
+        rfid.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        rfid.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rfidActionPerformed(evt);
+            }
+        });
+        panelRound1.add(rfid, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 208, 250, -1));
 
         Header.setFont(new java.awt.Font("Arial Black", 0, 12)); // NOI18N
         Header.setForeground(new java.awt.Color(0, 0, 0));
@@ -103,13 +115,13 @@ public class Akun extends javax.swing.JFrame {
 
         labelNama1.setFont(new java.awt.Font("Arial Black", 0, 10)); // NOI18N
         labelNama1.setForeground(new java.awt.Color(0, 0, 0));
-        labelNama1.setText("Password");
-        panelRound1.add(labelNama1, new org.netbeans.lib.awtextra.AbsoluteConstraints(104, 230, -1, -1));
+        labelNama1.setText("RFID");
+        panelRound1.add(labelNama1, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 190, -1, -1));
 
         labelNama2.setFont(new java.awt.Font("Arial Black", 0, 10)); // NOI18N
         labelNama2.setForeground(new java.awt.Color(0, 0, 0));
         labelNama2.setText("Konfirmasi Password");
-        panelRound1.add(labelNama2, new org.netbeans.lib.awtextra.AbsoluteConstraints(74, 280, -1, -1));
+        panelRound1.add(labelNama2, new org.netbeans.lib.awtextra.AbsoluteConstraints(74, 287, -1, -1));
 
         confirmPass.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         confirmPass.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -117,7 +129,7 @@ public class Akun extends javax.swing.JFrame {
                 confirmPassMouseClicked(evt);
             }
         });
-        panelRound1.add(confirmPass, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 300, 250, -1));
+        panelRound1.add(confirmPass, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 305, 250, -1));
 
         pass.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         pass.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -125,7 +137,7 @@ public class Akun extends javax.swing.JFrame {
                 passMouseClicked(evt);
             }
         });
-        panelRound1.add(pass, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 245, 250, -1));
+        panelRound1.add(pass, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 255, 250, -1));
 
         close.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
         close.setForeground(new java.awt.Color(0, 0, 0));
@@ -137,6 +149,11 @@ public class Akun extends javax.swing.JFrame {
             }
         });
         panelRound1.add(close, new org.netbeans.lib.awtextra.AbsoluteConstraints(228, 0, 38, 20));
+
+        labelNama3.setFont(new java.awt.Font("Arial Black", 0, 10)); // NOI18N
+        labelNama3.setForeground(new java.awt.Color(0, 0, 0));
+        labelNama3.setText("Password");
+        panelRound1.add(labelNama3, new org.netbeans.lib.awtextra.AbsoluteConstraints(104, 238, -1, -1));
 
         getContentPane().add(panelRound1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 260, -1));
 
@@ -175,11 +192,11 @@ public class Akun extends javax.swing.JFrame {
         }
         if (!pass.isEnabled() && editfoto){
             UD.setProfil(foto);
-            UD.setAccount(user.getText(), pass.getText());
+            UD.setAccount(id, nama, pass.getText(), rfid.getText());
             userObjek.updateFoto(UD);
         } else if (pass.isEnabled()){
             if(!pass.getText().isEmpty() && pass.getText().equals(confirmPass.getText())){
-            UD.setAccount(user.getText(), pass.getText());
+            UD.setAccount(id, nama, pass.getText(), rfid.getText());
             userObjek.updatePengguna(UD);
             } else {
                 JOptionPane.showMessageDialog(this, "Isi password dan samakan dengan konfirmasi password");
@@ -202,14 +219,19 @@ public class Akun extends javax.swing.JFrame {
     private void closeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_closeActionPerformed
         dispose();
     }//GEN-LAST:event_closeActionPerformed
+
+    private void rfidActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rfidActionPerformed
+        if(!rfid.isEditable())cekValidasi();
+    }//GEN-LAST:event_rfidActionPerformed
     
     void cekValidasi(){
         val = JOptionPane.showInputDialog(this, "Masukkan nama sahabat pertamamu");
         if (val != null) {
-            UD = userObjek.Forgot(user.getText(), val);
+            UD = userObjek.Forgot(nama, val);
             if (UD != null) {
                 pass.setEnabled(true);
                 confirmPass.setEnabled(true);
+                rfid.setEditable(true);
             } else {
                 JOptionPane.showMessageDialog(this, "Tolong jangan ganti password orang lain ya!",
                         "Validasi salah!", JOptionPane.INFORMATION_MESSAGE);
@@ -289,9 +311,10 @@ public class Akun extends javax.swing.JFrame {
     private javax.swing.JLabel jLabelGambar;
     private javax.swing.JLabel labelNama1;
     private javax.swing.JLabel labelNama2;
+    private javax.swing.JLabel labelNama3;
     private komponen.PanelBulat panelBulat1;
     private komponen.PanelRound panelRound1;
     private javax.swing.JPasswordField pass;
-    private javax.swing.JTextField user;
+    private javax.swing.JTextField rfid;
     // End of variables declaration//GEN-END:variables
 }

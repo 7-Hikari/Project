@@ -34,11 +34,12 @@ public class userObjek {
 
                 if (rs.next()) {
                     int id_user = rs.getInt("id_user");
+                    String rfid = rs.getString("RFID");
                     Status status = Status.valueOf(rs.getString("status"));
                     String nama = rs.getString("nama");
                     byte[] ikon = rs.getBytes("foto");
 
-                    UD = new userData(id_user, status, nama, ikon);
+                    UD = new userData(id_user, rfid, status, nama, ikon);
                 }
             }
         } catch (SQLException e) {
@@ -70,23 +71,24 @@ public class userObjek {
         return UD;
     }
         
-    public static userData CekID(int ID){
+    public static userData CekID(String RFID){
         userData UD = null;
-        String sql = "select * from pengguna where id_user = ?";
+        String sql = "select * from pengguna where RFID = ?";
         Connection conn = koneksi.connect(); 
         try {
             PreparedStatement pst = conn.prepareStatement(sql);
 
-            pst.setInt(1, ID);
+            pst.setString(1, RFID);
             try (ResultSet rs = pst.executeQuery();) {
 
                 if (rs.next()) {
                     int id_user = rs.getInt("id_user");
+                    String rfid = rs.getString("RFID");
                     Status status = Status.valueOf(rs.getString("status"));
                     String nama = rs.getString("nama");
                     byte[] ikon = rs.getBytes("foto");
 
-                    UD = new userData(id_user, status, nama, ikon);
+                    UD = new userData(id_user, rfid, status, nama, ikon);
                 }
             }
         } catch (SQLException e) {
@@ -111,13 +113,15 @@ public class userObjek {
     }
     
     public static void updatePengguna(userData usDat){
-        String sql = "update pengguna set password = ? where nama = ?";
+        String sql = "update pengguna set password = ?, RFID = ? where nama = ? and id_user = ?";
         Connection conn = koneksi.connect(); 
         try {
             PreparedStatement pst = conn.prepareStatement(sql);
             
             pst.setString(1, usDat.getPassword());
+            pst.setString(2, usDat.getRFID());
             pst.setString(3, usDat.getUsername());
+            pst.setInt(4, usDat.getId_User());
             pst.executeUpdate();
         } catch(SQLException e){
             e.printStackTrace();
@@ -125,13 +129,14 @@ public class userObjek {
     }
     
     public static void updateFoto(userData usDat){
-        String sql = "update pengguna set foto = ? where nama = ?";
+        String sql = "update pengguna set foto = ? where nama = ? and id_user = ?";
         Connection conn = koneksi.connect(); 
         try {
             PreparedStatement pst = conn.prepareStatement(sql);
             
             pst.setBytes(1, usDat.getFoto());
             pst.setString(2, usDat.getUsername());
+            pst.setInt(3, usDat.getId_User());
             pst.executeUpdate();
         } catch(SQLException e){
             e.printStackTrace();
