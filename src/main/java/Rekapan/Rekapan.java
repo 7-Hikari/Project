@@ -348,7 +348,7 @@ public class Rekapan extends komponen.PanelRound {
     private void EksporActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EksporActionPerformed
         List<pesananData> dat = transaksiObjek.getJual(pilihBulan, selected);
         List<pembelianData> pemDat = transaksiObjek.getAllPemDat(pilihBulan, selected);
-        ExportLaporan.exportToExcel(dat, pemDat, reDat, (String) jCbBulan.getSelectedItem(), selected);
+        ExportLaporan.exportToExcel(dat, pemDat, reDat, pilihBulan, selected);
     }//GEN-LAST:event_EksporActionPerformed
 
     private void Ringkasan(int bulan, String tahun) {

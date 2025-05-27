@@ -226,7 +226,7 @@ public class transaksiObjek {
         return reDat;
     }
     
-    public static List<rekapanData> rekapProduk(String bulan, String tahun){
+    public static List<rekapanData> rekapProduk(int bulan, String tahun){
         Connection conn = koneksi.connect();
         List<rekapanData> produkList = new ArrayList<>();
         String sql = """
@@ -238,7 +238,7 @@ public class transaksiObjek {
         GROUP BY p.id_produk ORDER BY jumlah DESC""";
 
         try (PreparedStatement stmt = conn.prepareStatement(sql)) {
-            stmt.setString(1, bulan);
+            stmt.setInt(1, bulan);
             stmt.setString(2, tahun);
             try (ResultSet rs = stmt.executeQuery()) {
                 while (rs.next()) {
@@ -379,8 +379,8 @@ public class transaksiObjek {
                b.nama_bahan, p.nama_produk
         FROM transaksi_beli pem
         JOIN detail_beli db ON db.id_beli = pem.id_beli
-        JOIN m_bahan b ON db.id_bahan = b.id_bahan
-        JOIN m_produk p ON db.id_produk = p.id_produk
+        left JOIN m_bahan b ON db.id_bahan = b.id_bahan
+        left JOIN m_produk p ON db.id_produk = p.id_produk
         WHERE MONTH(pem.waktu) = ? AND YEAR(pem.waktu) = ?
         ORDER BY pem.id_beli
     """;
@@ -399,6 +399,7 @@ public class transaksiObjek {
                         int tagihan = rs.getInt("tagihan");
 
                         pemData = new pembelianData(waktu, tagihan);
+                        pemData.setidBeli(id);
                         pemData.setListPemDet(new ArrayList<>());
                         mapPem.put(id, pemData);
                     }
