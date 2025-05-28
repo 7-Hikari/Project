@@ -67,39 +67,6 @@ public class KasirPenjualan extends komponen.PanelRound {
             fieldtotal.setText(OnlyNum.Rp.format(total));
         }
     }
-//
-//        if (!ada) {
-//            m_pesanan.addRow(new Object[]{
-//                no++,
-//                data.get_id(),
-//                data.get_nama(),
-//                data.get_harga(),
-//                jumlahBaru,
-//                data.get_harga() * jumlahBaru
-//            });
-//            upTotal();
-//            ProdukIdList.add(data.get_id());
-//        }
-//    }
-    
-//    private void upTotal(){
-//        total = 0;
-//        for(int row =0; row < Tabelpesanan.getRowCount(); row++) {
-//            Object nilai = Tabelpesanan.getValueAt(row, 5);
-//            if (nilai !=null) {
-//                total += Integer.parseInt(nilai.toString());
-//            }
-//        }
-//        String ttl = Rp.format(total);
-//        fieldtotal.setText(String.valueOf(ttl));
-//    }
-//    
-//    private void no_urut(){
-//        for (no = 1; no <= Tabelpesanan.getRowCount(); no++){
-//            Tabelpesanan.setValueAt(no, no - 1, 0);
-//        }
-//    }
-//    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -280,6 +247,7 @@ public class KasirPenjualan extends komponen.PanelRound {
         transaksiObjek.updateTr(pesDat, a);
         m_pesanan.setRowCount(0);
         total = 0;
+        fieldtotal.setText(OnlyNum.Rp.format(total));
     }//GEN-LAST:event_BayarActionPerformed
 
     private void fieldtotalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fieldtotalActionPerformed

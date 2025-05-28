@@ -35,7 +35,7 @@ public class Dashboard extends JFrame {
         RoleAkses.put("Karyawan", Set.of(tombol_dashb, tombol_Penjualan, tombol_Kasir));
         Set<JButton> Boundless = Set.of(
                 tombol_Kasir, tombol_Pembelian, tombol_Penjualan,
-                tombol_dashb, tombol_produk, tombol_rekapan);
+                tombol_dashb, tombol_produk, tombol_rekapan, Reset);
         RoleAkses.put("Pemilik", Boundless);
         RoleAkses.put("SuperAdmin", Boundless);
     }
@@ -67,8 +67,6 @@ public class Dashboard extends JFrame {
         initComponents();
         
         panelProfil.add(labelProfil);
-//        panelnyaPanel.setGradient(new Color(0x2CBAC6), new Color(0x48A3EE));
-//        panelubah.setGradient(new Color(0x2CBAC6), new Color(0x48A3EE));
         panelubah.add(new PanelDashboard(), BorderLayout.CENTER);
         bulatan.setBackground(Color.WHITE);
         Access();
@@ -107,6 +105,7 @@ public class Dashboard extends JFrame {
         Toko = new javax.swing.JLabel();
         panelProfil = new komponen.PanelBulat();
         labelProfil = new javax.swing.JLabel();
+        Reset = new javax.swing.JButton();
         foto = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -334,6 +333,18 @@ public class Dashboard extends JFrame {
 
         getContentPane().add(panelProfil, new org.netbeans.lib.awtextra.AbsoluteConstraints(1290, 20, 110, 110));
 
+        Reset.setBackground(new java.awt.Color(255, 255, 255));
+        Reset.setFont(new java.awt.Font("Cambria Math", 1, 10)); // NOI18N
+        Reset.setForeground(new java.awt.Color(255, 0, 0));
+        Reset.setText("Reset");
+        Reset.setContentAreaFilled(false);
+        Reset.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ResetActionPerformed(evt);
+            }
+        });
+        getContentPane().add(Reset, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 830, -1, -1));
+
         URL url = getClass().getResource("komponen/Main.png");
         foto.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         foto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Desktop.png"))); // NOI18N
@@ -420,6 +431,12 @@ public class Dashboard extends JFrame {
         if(a.isVisible())return;
         animasiMasuk(a, this.getWidth(), 1164);
     }//GEN-LAST:event_panelProfilMouseClicked
+
+    private void ResetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ResetActionPerformed
+        JOptionPane.showConfirmDialog(this, "", "warning!", JOptionPane.OK_CANCEL_OPTION);
+        userObjek.reset();
+        
+    }//GEN-LAST:event_ResetActionPerformed
     
     public static ImageIcon buatGambarBulat(byte[] foto, int diameter) {
     try {
@@ -519,6 +536,7 @@ public class Dashboard extends JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel LabelJudul;
+    private javax.swing.JButton Reset;
     private javax.swing.JLabel Toko;
     private komponen.PanelBulat bulatan;
     private javax.swing.JLabel foto;
