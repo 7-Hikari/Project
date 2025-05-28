@@ -2,10 +2,14 @@ package DAO;
 
 import java.util.*;
 import java.sql.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import koneksi.koneksi;
 
 public class produkObjek {
 
+     private static Logger logger = koneksi.getLogger();
+    
     public static List<produkData> getAllProduk() {
         List<produkData> listProduk = new ArrayList<>();
         String sql = "SELECT * FROM m_produk";
@@ -25,7 +29,7 @@ public class produkObjek {
                 listProduk.add(p);
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            logger.log(Level.SEVERE, "Gagal mengambil Produk", e);
         }
         return listProduk;
     }
@@ -45,7 +49,7 @@ public class produkObjek {
                 listBahan.add(new detailProdukData(id_produk, id_bahan, namaBahan));
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            logger.log(Level.SEVERE, "Gagal mengambil Bahan Produk", e);
         }
         return listBahan;
     }
@@ -69,7 +73,7 @@ public class produkObjek {
                         idP = rs.getByte(1);
                         data.setIdp(idP);
                     } else {
-                        throw new SQLException("Gagal mendapatkan ID Produk");
+                        logger.log(Level.SEVERE, "Gagal mendapatkan ID Produk");
                     }
                 }
                 for (detailProdukData pDet : detPDat) {
@@ -88,14 +92,14 @@ public class produkObjek {
             } catch (SQLException rollbackEx) {
                 rollbackEx.printStackTrace();
             }
-            e.printStackTrace();
+            logger.log(Level.SEVERE, "Gagal insert produk", e);
         } finally {
             try {
                 if (conn != null) {
                     conn.setAutoCommit(true);
                 }
             } catch (SQLException ex) {
-                ex.printStackTrace();
+               logger.log(Level.SEVERE, "Gagal insert data produk", ex);
             }
         }
     }
@@ -136,14 +140,14 @@ public class produkObjek {
         try {
             if (conn != null) conn.rollback();
         } catch (SQLException ex) {
-            ex.printStackTrace();
+            logger.log(Level.SEVERE, "Gagal menghubungkan bahan produk di database", ex);
         }
-        e.printStackTrace();
+        logger.log(Level.SEVERE, "Gagal update produk", e);
     } finally {
         try {
             if (conn != null) conn.setAutoCommit(true);
         } catch (SQLException e) {
-            e.printStackTrace();
+            logger.log(Level.SEVERE, "Gagal update bahan produk", e);
         }
     }
 }
@@ -161,7 +165,7 @@ public class produkObjek {
             pstp.setByte(1, id_produk);
             pstp.executeUpdate();
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.log(Level.SEVERE, "Gagal menghapus produk", e);
         }
     }
 }

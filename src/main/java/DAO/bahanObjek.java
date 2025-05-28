@@ -2,9 +2,12 @@ package DAO;
 
 import java.util.*;
 import java.sql.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import koneksi.koneksi;
 
 public class bahanObjek {
+    private static Logger logger = koneksi.getLogger();
     
     public static List<bahanData> getAllBahan() {
         List<bahanData> listBahan = new ArrayList<>();
@@ -23,7 +26,7 @@ public class bahanObjek {
                 listBahan.add(B);
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.log(Level.SEVERE, "Gagal mengambil Bahan", e);
         }
         return listBahan;
     }
@@ -45,7 +48,7 @@ public class bahanObjek {
                 listBahan.add(B);
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.log(Level.SEVERE, "Gagal mengambil Bahan konsum", e);
         }
         return listBahan;
     }
@@ -60,7 +63,7 @@ public class bahanObjek {
             pst.setBoolean(2, bahdat.get_kategori());
             pst.executeUpdate();
         } catch (Exception e){
-            e.printStackTrace();
+            logger.log(Level.SEVERE, "Gagal insert Bahan", e);
         }
     }
     
@@ -76,7 +79,7 @@ public class bahanObjek {
             pst.setShort(4, bahdat.get_id_b());
             pst.executeUpdate();
         } catch (SQLException e){
-            e.printStackTrace();
+            logger.log(Level.SEVERE, "Gagal update Bahan", e);
         }
     }
     
@@ -88,7 +91,7 @@ public class bahanObjek {
             pst.setShort(1, id);
             pst.executeUpdate();
         } catch(SQLException e){
-            e.printStackTrace();
+           logger.log(Level.SEVERE, "Gagal hapus Bahan", e);
         }
     }
 }

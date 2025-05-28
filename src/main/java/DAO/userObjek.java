@@ -5,8 +5,10 @@ import java.sql.*;
 import koneksi.koneksi;
 import java.nio.charset.StandardCharsets;
 import java.util.*;
+import java.util.logging.*;
 
 public class userObjek {
+    private static Logger logger = koneksi.getLogger();
     public static enum Status {
         Pemilik, Karyawan, SuperAdmin
     }
@@ -43,7 +45,7 @@ public class userObjek {
                 }
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            logger.log(Level.SEVERE, "Gagal mengecek user", e);
         }
         return UD;
     }
@@ -66,7 +68,7 @@ public class userObjek {
                 }
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            logger.log(Level.SEVERE, "Gagal memvalidasi user", e);
         }
         return UD;
     }
@@ -92,7 +94,7 @@ public class userObjek {
                 }
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            logger.log(Level.SEVERE, "Gagal mengecek RFID", e);
         }
         return UD;
     }
@@ -108,7 +110,7 @@ public class userObjek {
             pst.setString(3, hash(usDat.getValidate()));
             pst.executeUpdate();
         } catch (SQLException e){
-            e.printStackTrace();
+           logger.log(Level.SEVERE, "Gagal meregistrasi akun", e);
         }
     }
     
@@ -124,7 +126,7 @@ public class userObjek {
             pst.setInt(4, usDat.getId_User());
             pst.executeUpdate();
         } catch(SQLException e){
-            e.printStackTrace();
+            logger.log(Level.SEVERE, "Gagal mengupdate akun pengguna", e);
         }
     }
     
@@ -139,7 +141,7 @@ public class userObjek {
             pst.setInt(3, usDat.getId_User());
             pst.executeUpdate();
         } catch(SQLException e){
-            e.printStackTrace();
+            logger.log(Level.SEVERE, "Gagal mengubah foto", e);
         }
     }
     
@@ -152,7 +154,7 @@ public class userObjek {
             pst.setInt(1, usDat.getId_User());
             pst.executeUpdate();
         } catch(SQLException e){
-            e.printStackTrace();
+            logger.log(Level.SEVERE, "Gagal mengubah menghapus akun", e);
         }
     }
     

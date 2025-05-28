@@ -2,9 +2,12 @@ package DAO;
 
 import java.util.*;
 import java.sql.*;
+import java.util.logging.*;
 import koneksi.koneksi;
 
 public class transaksiObjek {
+
+    private static Logger logger = koneksi.getLogger();
 
     //rekapan
     public static List<Short> getTh() {
@@ -18,7 +21,7 @@ public class transaksiObjek {
                 th.add(tahun);
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            logger.log(Level.SEVERE, "Gagal mengambil tahun", e);
         }
         return th;
     }
@@ -41,7 +44,7 @@ public class transaksiObjek {
                 }
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            logger.log(Level.SEVERE, "Gagal mengambil rekap penjualan bulanan", e);
         }
         return hasil;
     }
@@ -57,7 +60,7 @@ public class transaksiObjek {
             data.totalPendapatan = getTotalPendapatan(conn, bulan, tahun);
             data.totalPembelian = getTotalPembelian(conn, bulan, tahun);
         } catch (SQLException e) {
-            e.printStackTrace();
+            logger.log(Level.SEVERE, "Gagal mengambil ringkasan bulanan", e);
         }
         return data;
     }
@@ -179,7 +182,7 @@ public class transaksiObjek {
             }
 
         } catch (SQLException e) {
-            e.printStackTrace();
+            logger.log(Level.SEVERE, "Gagal mengambil data penjualan bulanan", e);
         }
         return list;
     }
@@ -205,7 +208,7 @@ public class transaksiObjek {
                 rekap.add(new rekapanData(nama, terjual, stok));
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            logger.log(Level.SEVERE, "Gagal mengambil rekap stok harian", e);
         }
         return rekap;
     }
@@ -221,13 +224,13 @@ public class transaksiObjek {
                 reDat.totalTransaksi = rs.getInt("jml");
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            logger.log(Level.SEVERE, "Gagal merekap data harian", e);
         }
         return reDat;
     }
 
-    public static List <rekapanData> hariData() {
-        List <rekapanData> reDatH = new ArrayList<>();
+    public static List<rekapanData> hariData() {
+        List<rekapanData> reDatH = new ArrayList<>();
         Connection conn = koneksi.connect();
         String sql = "SELECT \n"
                 + "  SUM(dj.jumlah) AS total, \n"
@@ -243,7 +246,7 @@ public class transaksiObjek {
                 reDatH.add(new rekapanData(jam, total));
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            logger.log(Level.SEVERE, "Gagal menampilkan data chartpie", e);
         }
         return reDatH;
     }
@@ -271,7 +274,7 @@ public class transaksiObjek {
                 }
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            logger.log(Level.SEVERE, "Gagal mengambil data export produk", e);
         }
         return produkList;
     }
@@ -303,7 +306,7 @@ public class transaksiObjek {
                 }
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            logger.log(Level.SEVERE, "Gagal mengambil data detail jual", e);
         }
         return detailList;
     }
@@ -317,7 +320,7 @@ public class transaksiObjek {
                 n = rs.getShort("n");
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            logger.log(Level.SEVERE, "Gagal menghitung transaksi hari ini", e);
         }
         return n;
     }
@@ -342,7 +345,10 @@ public class transaksiObjek {
                         trDat.setTransaksi_J(idTransaksi);
                     } else {
                         throw new SQLException("Gagal mendapatkan ID Transaksi");
+
                     }
+                } catch (SQLException e) {
+                    logger.log(Level.SEVERE, "Gagal mendapatkan ID Transaksi", e);
                 }
 
                 for (pesananDetailData detail : trDetDat) {
@@ -363,14 +369,14 @@ public class transaksiObjek {
             } catch (SQLException rollbackEx) {
                 rollbackEx.printStackTrace();
             }
-            e.printStackTrace();
+            logger.log(Level.SEVERE, "Gagal menyimpan transaksi", e);
         } finally {
             try {
                 if (conn != null) {
                     conn.setAutoCommit(true);
                 }
             } catch (SQLException ex) {
-                ex.printStackTrace();
+                logger.log(Level.SEVERE, "Gagal menyimpan detail transaksi", ex);
             }
         }
     }
@@ -386,7 +392,7 @@ public class transaksiObjek {
             pst.setString(3, trDat.getKode());
             pst.executeUpdate();
         } catch (SQLException e) {
-            e.printStackTrace();
+            logger.log(Level.SEVERE, "Gagal melunasi transaksi", e);
         }
     }
 
@@ -437,7 +443,7 @@ public class transaksiObjek {
                 }
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            logger.log(Level.SEVERE, "Gagal mengambil data pembelian", e);
         }
         return new ArrayList<>(mapPem.values());
     }
@@ -493,14 +499,14 @@ public class transaksiObjek {
             } catch (SQLException rollbackEx) {
                 rollbackEx.printStackTrace();
             }
-            e.printStackTrace();
+            logger.log(Level.SEVERE, "Gagal menyimpan transaksi pembelian", e);
         } finally {
             try {
                 if (conn != null) {
                     conn.setAutoCommit(true);
                 }
             } catch (SQLException ex) {
-                ex.printStackTrace();
+                logger.log(Level.SEVERE, "Gagal menyimpan detail transaksi pembelian", ex);
             }
         }
     }
