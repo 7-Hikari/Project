@@ -76,7 +76,7 @@ public class panelProduk extends JPanel {
         setMaximumSize(new java.awt.Dimension(200, 300));
         setLayout(new java.awt.BorderLayout());
 
-        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.setBackground(new java.awt.Color(51, 204, 255));
         jPanel1.setMaximumSize(new java.awt.Dimension(300, 500));
         jPanel1.setName(""); // NOI18N
 

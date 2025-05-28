@@ -5,13 +5,16 @@
     <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
       <Color blue="ff" green="ff" red="ff" type="rgb"/>
     </Property>
+    <Property name="gradientDirection" type="komponen.PanelRound$Direction" editor="org.netbeans.modules.form.editors.EnumEditor">
+      <Value id="VERTICAL"/>
+    </Property>
     <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
       <Dimension value="[1100, 650]"/>
     </Property>
     <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
       <Dimension value="[1100, 650]"/>
     </Property>
-    <Property name="solid" type="boolean" value="true"/>
+    <Property name="solid" type="boolean" value="false"/>
   </Properties>
   <AuxValues>
     <AuxValue name="FormSettings_autoResourcing" type="java.lang.Integer" value="0"/>
@@ -49,6 +52,7 @@
         <Property name="roundBottomRight" type="int" value="100"/>
         <Property name="roundTopLeft" type="int" value="100"/>
         <Property name="roundTopRight" type="int" value="100"/>
+        <Property name="solid" type="boolean" value="false"/>
         <Property name="verifyInputWhenFocusTarget" type="boolean" value="false"/>
       </Properties>
       <Constraints>
@@ -84,7 +88,7 @@
             <Container class="javax.swing.JPanel" name="flowpanel">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="ff" green="cc" red="33" type="rgb"/>
+                  <Color blue="ff" green="ff" red="ff" type="rgb"/>
                 </Property>
                 <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
                   <Dimension value="[600, 800]"/>

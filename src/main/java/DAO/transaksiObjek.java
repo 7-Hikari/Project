@@ -225,8 +225,30 @@ public class transaksiObjek {
         }
         return reDat;
     }
-    
-    public static List<rekapanData> rekapProduk(int bulan, String tahun){
+
+    public static List <rekapanData> hariData() {
+        List <rekapanData> reDatH = new ArrayList<>();
+        Connection conn = koneksi.connect();
+        String sql = "SELECT \n"
+                + "  SUM(dj.jumlah) AS total, \n"
+                + "  HOUR(t.waktu) AS jam \n"
+                + "FROM transaksi_jual t\n"
+                + "JOIN detail_jual dj ON dj.id_jual = t.id_jual\n"
+                + "WHERE DATE(t.waktu) = CURRENT_DATE AND Lunas = 1\n"
+                + "GROUP BY jam ";
+        try (Statement stmt = conn.createStatement(); ResultSet rs = stmt.executeQuery(sql)) {
+            while (rs.next()) {
+                String jam = rs.getString("jam");
+                short total = rs.getShort("total");
+                reDatH.add(new rekapanData(jam, total));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return reDatH;
+    }
+
+    public static List<rekapanData> rekapProduk(int bulan, String tahun) {
         Connection conn = koneksi.connect();
         List<rekapanData> produkList = new ArrayList<>();
         String sql = """
@@ -248,7 +270,7 @@ public class transaksiObjek {
                     produkList.add(new rekapanData(nama, jml, z));
                 }
             }
-        } catch (SQLException e){
+        } catch (SQLException e) {
             e.printStackTrace();
         }
         return produkList;
