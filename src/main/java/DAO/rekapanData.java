@@ -7,7 +7,7 @@ public class rekapanData {
     public int[] jumlahUnggulan = new int[3];
     public String produkTerendah;
     
-    private String namaProduk;
+    private String namaProduk, jam;
     private short terjual, stok;
     
     public rekapanData(){}
@@ -25,5 +25,12 @@ public class rekapanData {
     }
     public short getStok(){
         return stok;
+    }
+    public String getJam(){
+        return jam;
+    }
+    rekapanData (String jam, short terjual){
+        this.jam = jam ;
+        this.terjual = terjual;
     }
 }

@@ -33,7 +33,7 @@ public class Penjualan extends komponen.PanelRound {
         setRoundTopLeft(100);
         setRoundTopRight(100);
         
-        panelRound1.setGradient(new Color(0x2CBAC6), new Color(0x48A3EE));
+//        panelRound1.setGradient(new Color(0x2CBAC6), new Color(0x48A3EE));
         
         setPreferredSize(new java.awt.Dimension(1240, 640));
         
@@ -67,7 +67,7 @@ public class Penjualan extends komponen.PanelRound {
 
             flowpanel.add(produkP);
 
-            flowpanel.setLayout(new wraplayout(FlowLayout.LEFT, 10, 10));
+            flowpanel.setLayout(new wraplayout(FlowLayout.LEFT, 35, 10));
 
         }
 
@@ -224,9 +224,10 @@ public class Penjualan extends komponen.PanelRound {
         tmbl_hapus = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(255, 255, 255));
+        setGradientDirection(komponen.PanelRound.Direction.VERTICAL);
         setMaximumSize(new java.awt.Dimension(1100, 650));
         setPreferredSize(new java.awt.Dimension(1100, 650));
-        setSolid(true);
+        setSolid(false);
         setLayout(new java.awt.BorderLayout());
 
         panelRound1.setBackground(new java.awt.Color(255, 255, 255));
@@ -238,13 +239,14 @@ public class Penjualan extends komponen.PanelRound {
         panelRound1.setRoundBottomRight(100);
         panelRound1.setRoundTopLeft(100);
         panelRound1.setRoundTopRight(100);
+        panelRound1.setSolid(false);
         panelRound1.setVerifyInputWhenFocusTarget(false);
         panelRound1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         scroll.setMinimumSize(new java.awt.Dimension(600, 25));
         scroll.setPreferredSize(new java.awt.Dimension(600, 8));
 
-        flowpanel.setBackground(new java.awt.Color(51, 204, 255));
+        flowpanel.setBackground(new java.awt.Color(255, 255, 255));
         flowpanel.setMaximumSize(new java.awt.Dimension(600, 800));
         flowpanel.setMinimumSize(new java.awt.Dimension(600, 8));
         flowpanel.setPreferredSize(new java.awt.Dimension(600, 8));

@@ -23,6 +23,9 @@ public class pembelianData {
     public int getTotal(){
         return tagihan;
     }
+    void setidBeli(int idBeli){
+        this.id_beli = idBeli;
+    }
     public List<pembelianDetailData> getlistPemDet(){
         return listPemDet;
     }

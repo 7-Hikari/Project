@@ -28,7 +28,7 @@ public class ExportLaporan {
         Cell c;
         String tglStr;
         LocalDate tgl;
-        Date tanggal;
+        java.sql.Date tanggal;
 
         Workbook workbook = new XSSFWorkbook();
         Sheet sheet = workbook.createSheet("Laporan Penjualan" + bulan + " " + tahun);
@@ -121,7 +121,7 @@ public class ExportLaporan {
             sheet.autoSizeColumn(i);
         }
 //Produk
-        Sheet dafProduk = workbook.createSheet("Rekap Produk " + bulan + "/" + tahun);
+        Sheet dafProduk = workbook.createSheet("Rekap Produk");
         rowNum = 1;
         headerRow = dafProduk.createRow(0);
 
@@ -138,7 +138,7 @@ public class ExportLaporan {
         }
 
 //Belanjaan
-        Sheet belanjaan = workbook.createSheet("Belanjaan " + bulan + "/" + tahun);
+        Sheet belanjaan = workbook.createSheet("Belanjaan");
         rowNum = 1;
         headerRow = belanjaan.createRow(0);
         String[] headersB = {"kode pembelian", "Tanggal", "Daftar Belanja", "Kategori", "Jumlah", "pembagi (g)", "Berat (g)", "Subtotal"};

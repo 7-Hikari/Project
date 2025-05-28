@@ -33,7 +33,7 @@
           <Value id="VERTICAL"/>
         </Property>
         <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-          <Dimension value="[300, 190]"/>
+          <Dimension value="[300, 99]"/>
         </Property>
         <Property name="roundBottomLeft" type="int" value="50"/>
         <Property name="roundBottomRight" type="int" value="50"/>
@@ -42,7 +42,7 @@
       </Properties>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="40" y="220" width="350" height="170"/>
+          <AbsoluteConstraints x="440" y="20" width="370" height="160"/>
         </Constraint>
       </Constraints>
 
@@ -123,7 +123,7 @@
       </Properties>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="40" y="20" width="350" height="170"/>
+          <AbsoluteConstraints x="50" y="20" width="370" height="160"/>
         </Constraint>
       </Constraints>
 
@@ -205,7 +205,7 @@
       </Properties>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="40" y="420" width="350" height="170"/>
+          <AbsoluteConstraints x="830" y="20" width="370" height="160"/>
         </Constraint>
       </Constraints>
 
@@ -286,7 +286,7 @@
       </Properties>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="690" y="20" width="550" height="570"/>
+          <AbsoluteConstraints x="490" y="210" width="570" height="390"/>
         </Constraint>
       </Constraints>
 
@@ -421,7 +421,19 @@
       </Events>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="570" y="600" width="140" height="40"/>
+          <AbsoluteConstraints x="1080" y="560" width="140" height="40"/>
+        </Constraint>
+      </Constraints>
+    </Component>
+    <Component class="komponen.PenjualanHarianPie" name="ChartPie">
+      <Properties>
+        <Property name="chartBackgroundColor" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="ff" green="cc" red="99" type="rgb"/>
+        </Property>
+      </Properties>
+      <Constraints>
+        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+          <AbsoluteConstraints x="50" y="210" width="400" height="390"/>
         </Constraint>
       </Constraints>
     </Component>

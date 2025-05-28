@@ -5,6 +5,7 @@ import DAO.*;
 import DataMaster.kom.OnlyNum;
 import Rekapan.ExportLaporan;
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
 
@@ -15,15 +16,32 @@ import javax.swing.table.DefaultTableModel;
 public class PanelDashboard extends komponen.PanelRound {
     private List<rekapanData> reDatas;
     private List<bahanData> bahDats;
+    private List<String> labels = new ArrayList<>();
+    private List<Number> values = new ArrayList<>();
     private int ttl, jmlTransaksi, uangMasuk;
     
     public PanelDashboard() {
         initComponents();
 
-        setGradient(new Color(0x2CBAC6), new Color(0x48A3EE));
+//        setGradient(new Color(0x2CBAC6), new Color(0x48A3EE));
         loadData();
+        
+        ambilDataPie(); 
     }
 
+    private void ambilDataPie() {
+    labels.clear();
+    values.clear();
+    
+    List<rekapanData> dat = transaksiObjek.hariData();
+
+    for (rekapanData rd : dat) {
+        labels.add(rd.getJam());
+        values.add(rd.getTerjual());
+    }
+    ChartPie.setData(labels, values);
+}
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -46,6 +64,7 @@ public class PanelDashboard extends komponen.PanelRound {
         headKeterangan = new komponen.PanelRound();
         HeadKet = new javax.swing.JLabel();
         Cetak = new javax.swing.JButton();
+        ChartPie = new komponen.PenjualanHarianPie();
 
         setGradientDirection(komponen.PanelRound.Direction.VERTICAL);
         setRoundBottomLeft(100);
@@ -55,7 +74,7 @@ public class PanelDashboard extends komponen.PanelRound {
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         Panel2.setGradientDirection(komponen.PanelRound.Direction.VERTICAL);
-        Panel2.setPreferredSize(new java.awt.Dimension(300, 190));
+        Panel2.setPreferredSize(new java.awt.Dimension(300, 99));
         Panel2.setRoundBottomLeft(50);
         Panel2.setRoundBottomRight(50);
         Panel2.setRoundTopLeft(50);
@@ -84,7 +103,7 @@ public class PanelDashboard extends komponen.PanelRound {
         produkSaled.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         Panel2.add(produkSaled, java.awt.BorderLayout.CENTER);
 
-        add(Panel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 220, 350, 170));
+        add(Panel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 20, 370, 160));
 
         Panel1.setGradientDirection(komponen.PanelRound.Direction.VERTICAL);
         Panel1.setRoundBottomLeft(50);
@@ -116,7 +135,7 @@ public class PanelDashboard extends komponen.PanelRound {
         Sales.setText("212");
         Panel1.add(Sales, java.awt.BorderLayout.CENTER);
 
-        add(Panel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 20, 350, 170));
+        add(Panel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 20, 370, 160));
 
         Panel3.setGradientDirection(komponen.PanelRound.Direction.VERTICAL);
         Panel3.setRoundBottomLeft(50);
@@ -148,7 +167,7 @@ public class PanelDashboard extends komponen.PanelRound {
 
         Panel3.add(HeadP3, java.awt.BorderLayout.NORTH);
 
-        add(Panel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 420, 350, 170));
+        add(Panel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 20, 370, 160));
 
         Keterangan.setBackground(new java.awt.Color(51, 204, 255));
         Keterangan.setRoundTopLeft(50);
@@ -215,7 +234,7 @@ public class PanelDashboard extends komponen.PanelRound {
 
         Keterangan.add(headKeterangan, java.awt.BorderLayout.NORTH);
 
-        add(Keterangan, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 20, 550, 570));
+        add(Keterangan, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 210, 570, 390));
 
         Cetak.setBackground(new java.awt.Color(0, 255, 0));
         Cetak.setFont(new java.awt.Font("Dubai Medium", 1, 14)); // NOI18N
@@ -226,7 +245,10 @@ public class PanelDashboard extends komponen.PanelRound {
                 CetakActionPerformed(evt);
             }
         });
-        add(Cetak, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 600, 140, 40));
+        add(Cetak, new org.netbeans.lib.awtextra.AbsoluteConstraints(1080, 560, 140, 40));
+
+        ChartPie.setChartBackgroundColor(new java.awt.Color(153, 204, 255));
+        add(ChartPie, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 210, 400, 390));
     }// </editor-fold>//GEN-END:initComponents
 
     private void CetakActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CetakActionPerformed
@@ -281,6 +303,7 @@ public class PanelDashboard extends komponen.PanelRound {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Cetak;
+    private komponen.PenjualanHarianPie ChartPie;
     private javax.swing.JLabel HeadKet;
     private komponen.PanelRound HeadP1;
     private komponen.PanelRound HeadP2;
