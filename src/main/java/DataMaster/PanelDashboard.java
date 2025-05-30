@@ -247,7 +247,7 @@ public class PanelDashboard extends komponen.PanelRound {
         });
         add(Cetak, new org.netbeans.lib.awtextra.AbsoluteConstraints(1080, 210, 140, 40));
 
-        ChartPie.setChartBackgroundColor(new java.awt.Color(153, 204, 255));
+        ChartPie.setChartBackgroundColor(new java.awt.Color(51, 204, 255));
         add(ChartPie, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 210, 400, 390));
     }// </editor-fold>//GEN-END:initComponents
 
