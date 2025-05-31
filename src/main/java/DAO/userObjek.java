@@ -115,6 +115,33 @@ public class userObjek {
             logger.log(Level.SEVERE, "Gagal meregistrasi akun", e);
         }
     }
+    
+    public static boolean adaPemilik() {
+        String sql = "SELECT 1 FROM pengguna WHERE status = 'Pemilik' LIMIT 1";
+        Connection conn = koneksi.connect();
+        try (PreparedStatement ps = conn.prepareStatement(sql); ResultSet rs = ps.executeQuery()) {
+            return rs.next();
+        } catch (SQLException e) {
+            logger.log(Level.SEVERE, "database masih mereset", e);
+            return false;
+        }
+    }
+    
+    public static void regisPemilik(userData usDat) {
+        String sql = "insert into pengguna (nama, password, Validasi, status) values (?, ?, ?, ?)";
+        Connection conn = koneksi.connect();
+        try {
+            PreparedStatement pst = conn.prepareStatement(sql);
+
+            pst.setString(1, usDat.getUsername());
+            pst.setString(2, hash(usDat.getPassword()));
+            pst.setString(3, hash(usDat.getValidate()));
+            pst.setString(4, "Pemilik");
+            pst.executeUpdate();
+        } catch (SQLException e) {
+            logger.log(Level.SEVERE, "Gagal meregistrasi akun", e);
+        }
+    }
 
     public static void updatePengguna(userData usDat) {
         String sql = "update pengguna set password = ?, RFID = ? where nama = ? and id_user = ?";
@@ -187,6 +214,9 @@ public class userObjek {
 
             "DELETE FROM pengguna",
             "ALTER TABLE pengguna AUTO_INCREMENT = 1",
+            
+            "INSERT INTO pengguna (status, nama, password) VALUES " +
+            "('SuperAdmin', 'Admin', '" + hash("Eau de Farfum Asoyy") + "')",
 
             "SET FOREIGN_KEY_CHECKS = 1"
         };
@@ -203,4 +233,3 @@ public class userObjek {
         }
     }
 }
-

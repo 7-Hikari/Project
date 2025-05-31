@@ -5,6 +5,8 @@ import java.io.*;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.logging.Level;
+import javax.swing.JOptionPane;
 
 public class Print {
 
@@ -20,7 +22,7 @@ public class Print {
                 }
             }
             if (printer == null) {
-                System.out.println("Printer tidak ditemukan.");
+                JOptionPane.showMessageDialog(null, "printer tidak ditemukan!");
                 return;
             }
 
@@ -87,10 +89,8 @@ public class Print {
             DocPrintJob job = printer.createPrintJob();
             Doc doc = new SimpleDoc(out.toByteArray(), DocFlavor.BYTE_ARRAY.AUTOSENSE, null);
             job.print(doc, null);
-
-            System.out.println("Struk dicetak.");
         } catch (Exception e) {
-            e.printStackTrace();
+            koneksi.koneksi.getLogger().log(Level.SEVERE, "Galat ketika cetak struk", e);
         }
     }
 

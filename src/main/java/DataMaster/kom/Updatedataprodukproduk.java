@@ -334,8 +334,6 @@ public class Updatedataprodukproduk extends JPanel {
                 ex.printStackTrace();
                 JOptionPane.showMessageDialog(this, "Gagal membaca file gambar!");
             }
-        } else {
-            System.out.println("Lu batalin, wajar sih lo emang suka ragu 😒");
         }
     }//GEN-LAST:event_pilihfileActionPerformed
 
@@ -350,6 +348,7 @@ public class Updatedataprodukproduk extends JPanel {
                 return;
             }
             produkObjek.deleteProduk(pDat);
+            JOptionPane.showMessageDialog(this, "Berhasil dihapus");
             listener.onCloseForm();
             setDataBerubah(true);
         }
@@ -373,8 +372,9 @@ public class Updatedataprodukproduk extends JPanel {
             produkObjek.updateProduk(pDat, foto, bahanTerpilih);
         }
         
-            listener.onCloseForm();
-            setDataBerubah(true);
+        JOptionPane.showMessageDialog(this, "Berhasil disimpan");
+        listener.onCloseForm();
+        setDataBerubah(true);
     }//GEN-LAST:event_SimpanActionPerformed
 
     private void NamaPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NamaPActionPerformed

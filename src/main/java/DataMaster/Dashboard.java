@@ -19,11 +19,15 @@ import java.net.*;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.imageio.ImageIO;
+import koneksi.koneksi;
 
 public class Dashboard extends JFrame {
 
     private int yBulatan = -1;
+    private static Logger logger = koneksi.getLogger();
     private final Map<JButton, ImageIcon[]> iconMap = new HashMap<>();
     private final Map<String, Set<JButton>> RoleAkses = new HashMap<>();
 
@@ -50,6 +54,10 @@ public class Dashboard extends JFrame {
         return true;
     }
 
+    public void Logout(){
+        this.dispose();
+    }
+    
     public void setData(userData login){
         this.loginUser = login;
         this.status = loginUser.getStatus();
@@ -433,9 +441,32 @@ public class Dashboard extends JFrame {
     }//GEN-LAST:event_panelProfilMouseClicked
 
     private void ResetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ResetActionPerformed
-        JOptionPane.showConfirmDialog(this, "", "warning!", JOptionPane.OK_CANCEL_OPTION);
-        userObjek.reset();
-        
+        if (!HakAkses(Reset)) {
+            return;
+        }
+        int pilihan = JOptionPane.showConfirmDialog(
+                this,
+                "Seluruh data akan dihapus permanen!\nLanjutkan?",
+                "PERINGATAN!",
+                JOptionPane.OK_CANCEL_OPTION,
+                JOptionPane.WARNING_MESSAGE
+        );
+
+        if (pilihan == JOptionPane.OK_OPTION) {
+            String pass = JOptionPane.showInputDialog(this, "Masukkan password");
+            if (pass != null) {
+                loginUser = userObjek.CekUser(loginUser.getUsername(), pass);
+                if (loginUser != null) {
+                    userObjek.reset();
+                    JOptionPane.showMessageDialog(this, "Reset berhasil!. Silakan buat akun baru.");
+                    try {
+                        Thread.sleep(1500);
+                    } catch (InterruptedException e) {
+                    }
+                    System.exit(0);
+                }
+            }
+        }
     }//GEN-LAST:event_ResetActionPerformed
     
     public static ImageIcon buatGambarBulat(byte[] foto, int diameter) {
@@ -452,7 +483,7 @@ public class Dashboard extends JFrame {
 
         return new ImageIcon(masked);
     } catch (IOException e) {
-        e.printStackTrace();
+        logger.log(Level.SEVERE, "Gagal memuat gambar profil", e);
         return null;
     }
 }

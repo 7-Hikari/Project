@@ -285,7 +285,7 @@ public class Dataprodukbahan extends komponen.PanelRound {
             bD = new bahanData(nama, bahanData.parseKonsumsi(kateg), jml);
             bahanObjek.insertBahan(bD);
             LoadBahan();
-            JOptionPane.showMessageDialog(this, "Data tersimpan!", "Info", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Data berhasil tersimpan!");
         } else if (Simpan.getText().equals("Update")) {
             jml = Short.parseShort(Jumlah.getText());
             if (jml < 0 || jml > Short.MAX_VALUE) {
@@ -296,7 +296,7 @@ public class Dataprodukbahan extends komponen.PanelRound {
             bahanObjek.updateBahan(bD);
             Simpan.setText("Simpan");
             LoadBahan();
-            JOptionPane.showMessageDialog(this, "Data diperbarui!", "Info", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Data berhasil diperbarui!");
         }
         
     }//GEN-LAST:event_SimpanActionPerformed
@@ -310,7 +310,7 @@ public class Dataprodukbahan extends komponen.PanelRound {
         Simpan.setText("Simpan");
         id = (short) tabelBahan.getValueAt(no, 1);
         bahanObjek.deleteBahan(id);
-        JOptionPane.showMessageDialog(this, "Data telah dihapus!", "Info", JOptionPane.INFORMATION_MESSAGE);
+        JOptionPane.showMessageDialog(this, "Data telah dihapus!");
         LoadBahan();
     }//GEN-LAST:event_HapusActionPerformed
 

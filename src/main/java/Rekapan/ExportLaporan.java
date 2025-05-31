@@ -15,11 +15,16 @@ import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import koneksi.koneksi;
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 public class ExportLaporan {
 
+    private static Logger logger = koneksi.getLogger();
     private static Row row;
     private static CellStyle currencyStyle;
     private static DataFormat format;
@@ -198,9 +203,9 @@ public class ExportLaporan {
             }
             workbook.close();
 
-            System.out.println("Laporan berhasil disimpan di: " + folderPath);
+            JOptionPane.showMessageDialog(null, "Laporan berhasil disimpan di "+folderPath);
         } catch (IOException e) {
-            e.printStackTrace();
+            logger.log(Level.SEVERE, "Gagal menyimpan file", e);
         }
 
     }
@@ -251,6 +256,6 @@ public class ExportLaporan {
 
         document.close();
 
-        System.out.println("File tersimpan di " + folder);
+        JOptionPane.showMessageDialog(null, "Laporan berhasil disimpan di "+folder);
     }
 }

@@ -262,7 +262,7 @@ public class Login1 extends javax.swing.JFrame {
         String user = username.getText();
         String pass = jPasswordField1.getText();
         String valid = Validasi.getText();
-
+        
         if (user.equals("Username")||pass.equals("")||valid.equals("")) {
             JOptionPane.showMessageDialog(this, "Semua field harus diisi!", "Peringatan!", JOptionPane.INFORMATION_MESSAGE);
             return;
@@ -274,7 +274,19 @@ public class Login1 extends javax.swing.JFrame {
         userData UD = new userData(user, pass, valid);
         System.out.println("DAO us" + UD.getUsername());
 
-        userObjek.RegisUser(UD);
+        boolean ada = userObjek.adaPemilik();
+
+        if (!ada) {
+            userObjek.regisPemilik(UD);
+        } else {
+            userObjek.RegisUser(UD);
+        }
+
+        String status = !ada ? "Pemilik" : "Karyawan";
+        JOptionPane.showMessageDialog(this,
+                "Akun berhasil dibuat sebagai " + status);
+
+        
         new Login().setVisible(true);
         dispose();
     }//GEN-LAST:event_RegisterActionPerformed

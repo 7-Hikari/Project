@@ -5,6 +5,7 @@ import DataMaster.kom.OnlyNum;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.util.*;
+import javax.swing.JOptionPane;
 import javax.swing.table.*;
 
 public class KasirPenjualan extends komponen.PanelRound {
@@ -42,7 +43,7 @@ public class KasirPenjualan extends komponen.PanelRound {
         
         for (pesananDetailData p : pesanan) {
             if(p.getLunas()){
-                System.out.println("Transaksi sudah lunas!");
+                JOptionPane.showMessageDialog(this, "Transaksi ini sudah lunas!");
                 return;
             }
                     
@@ -54,15 +55,8 @@ public class KasirPenjualan extends komponen.PanelRound {
                 p.get_jumlah(),
                 OnlyNum.Rp.format(subtotal)
             };
-            System.out.println(total);
             total += subtotal;
             no++;
-            System.out.println(p.get_jumlah());
-            System.out.println(p.get_harga());
-            System.out.println(subtotal);
-            System.out.println(total);
-            System.out.println();
-
             m_pesanan.addRow(row);
             fieldtotal.setText(OnlyNum.Rp.format(total));
         }
@@ -248,6 +242,7 @@ public class KasirPenjualan extends komponen.PanelRound {
         m_pesanan.setRowCount(0);
         total = 0;
         fieldtotal.setText(OnlyNum.Rp.format(total));
+        JOptionPane.showMessageDialog(this, "Berhasil disimpan");
     }//GEN-LAST:event_BayarActionPerformed
 
     private void fieldtotalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fieldtotalActionPerformed
@@ -256,9 +251,7 @@ public class KasirPenjualan extends komponen.PanelRound {
 
     private void AmbilDataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AmbilDataActionPerformed
         tr = transaksi.getText();
-        if (tr.length() < 9) {
-            m_pesanan.setRowCount(0);
-        } else {
+        if (tr.length() > 9) {
             System.out.println("a " + tr);
             masukkanKeTabel(tr);
         }

@@ -14,6 +14,7 @@ import com.google.zxing.common.BitMatrix;
 import java.awt.image.BufferedImage;
 import java.text.SimpleDateFormat;
 import java.nio.file.Path;
+import java.util.logging.Level;
 import javax.swing.table.DefaultTableModel;
 
 public class Penjualan extends komponen.PanelRound {
@@ -32,9 +33,6 @@ public class Penjualan extends komponen.PanelRound {
         setRoundBottomRight(100);
         setRoundTopLeft(100);
         setRoundTopRight(100);
-        
-//        panelRound1.setGradient(new Color(0x2CBAC6), new Color(0x48A3EE));
-        
         setPreferredSize(new java.awt.Dimension(1240, 640));
         
         m_pesanan = (DefaultTableModel) Tabelpesanan.getModel();
@@ -106,6 +104,10 @@ public class Penjualan extends komponen.PanelRound {
                 int jumlahLama = (int) m_pesanan.getValueAt(i, 4);
                 int jumlahBaruFinal = jumlahLama + jumlahBaru;
                 
+                if (jumlahBaru > data.getStok()) {
+                    jumlahBaru = data.getStok();
+                }
+                
                 m_pesanan.setValueAt(jumlahBaruFinal, i, 4); // Jumlah
                 m_pesanan.setValueAt(jumlahBaruFinal * data.get_harga(), i, 5); // Total
                 
@@ -115,6 +117,7 @@ public class Penjualan extends komponen.PanelRound {
         }
 
         if (!ada) {
+            if(data.getStok()<1)return;
             m_pesanan.addRow(new Object[]{
                 no++,
                 data.get_id(),
@@ -198,13 +201,8 @@ public class Penjualan extends komponen.PanelRound {
             BufferedImage barcode = ImageIO.read(Path.of("barcode.png").toFile());
             
             cetak.cetakStruk(code, tabelDat);
-
-
-            
-            
-            System.out.println("barcode");
         } catch (Exception e){
-            e.printStackTrace();
+            koneksi.koneksi.getLogger().log(Level.SEVERE, "Error saat mencetak barcode", e);
         }
     }
   

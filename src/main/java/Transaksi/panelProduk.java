@@ -21,7 +21,15 @@ public class panelProduk extends JPanel {
         this.setPreferredSize(new Dimension(200, 320));
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         
-        spin.setModel(new SpinnerNumberModel(1, 1, 250, 1));
+        short stok = data.getStok();
+        if (stok > 0) {
+            spin.setModel(new SpinnerNumberModel(1, 1, data.getStok(), 1));
+            spin.setEnabled(true);
+        } else {
+            spin.setModel(new SpinnerNumberModel(0, 0, 0, 0));
+            spin.setEnabled(false);
+        }
+        
         spin.addChangeListener(e -> {
             if (listenerUpdateTabel != null) {
                 listenerUpdateTabel.onJumlahChanged(data, (int) spin.getValue());

@@ -62,7 +62,7 @@ public class Akun extends javax.swing.JFrame {
         pass = new javax.swing.JPasswordField();
         close = new javax.swing.JButton();
         labelNama3 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        logout = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setUndecorated(true);
@@ -156,15 +156,15 @@ public class Akun extends javax.swing.JFrame {
         labelNama3.setText("Password");
         panelRound1.add(labelNama3, new org.netbeans.lib.awtextra.AbsoluteConstraints(104, 238, -1, -1));
 
-        jButton1.setBackground(new java.awt.Color(255, 51, 51));
-        jButton1.setFont(new java.awt.Font("Franklin Gothic Demi", 0, 12)); // NOI18N
-        jButton1.setText("Log Out");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        logout.setBackground(new java.awt.Color(255, 51, 51));
+        logout.setFont(new java.awt.Font("Franklin Gothic Demi", 0, 12)); // NOI18N
+        logout.setText("Log Out");
+        logout.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                logoutActionPerformed(evt);
             }
         });
-        panelRound1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 340, -1, -1));
+        panelRound1.add(logout, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 340, -1, -1));
 
         getContentPane().add(panelRound1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 260, -1));
 
@@ -216,6 +216,7 @@ public class Akun extends javax.swing.JFrame {
         }
         
         db.setData(UD);
+        JOptionPane.showMessageDialog(this, "Berhasil Update");
         this.dispose();
     }//GEN-LAST:event_SimpanActionPerformed
 
@@ -235,10 +236,18 @@ public class Akun extends javax.swing.JFrame {
         if(!rfid.isEditable())cekValidasi();
     }//GEN-LAST:event_rfidActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        new Login().setVisible(true);
-        dispose();
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void logoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logoutActionPerformed
+        int pilihan = JOptionPane.showConfirmDialog(
+                this,
+                "Mau pergi nih?"
+        );
+
+        if (pilihan == JOptionPane.OK_OPTION) {
+            new Login().setVisible(true);
+            db.Logout();
+            dispose();
+        }
+    }//GEN-LAST:event_logoutActionPerformed
     
     void cekValidasi(){
         val = JOptionPane.showInputDialog(this, "Masukkan nama sahabat pertamamu");
@@ -324,11 +333,11 @@ public class Akun extends javax.swing.JFrame {
     private javax.swing.JButton close;
     private javax.swing.JPasswordField confirmPass;
     private javax.swing.JButton getPhoto;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabelGambar;
     private javax.swing.JLabel labelNama1;
     private javax.swing.JLabel labelNama2;
     private javax.swing.JLabel labelNama3;
+    private javax.swing.JButton logout;
     private komponen.PanelBulat panelBulat1;
     private komponen.PanelRound panelRound1;
     private javax.swing.JPasswordField pass;

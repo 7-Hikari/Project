@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
 import java.util.List;
 import javax.swing.JCheckBox;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.event.TableModelEvent;
 
@@ -565,6 +566,7 @@ public class dataKulakan extends komponen.PanelRound {
         tp.setRowCount(0);
         no_urut();
         upTotal();
+        JOptionPane.showMessageDialog(this, "Transaksi berhasil disimpan!");
     }//GEN-LAST:event_SimpanActionPerformed
 
     private List<pembelianDetailData> ambilDataTabel(){
