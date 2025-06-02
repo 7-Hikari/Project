@@ -5,6 +5,9 @@
     <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
       <Color blue="cc" green="cc" red="cc" type="rgb"/>
     </Property>
+    <Property name="gradientDirection" type="komponen.PanelRound$Direction" editor="org.netbeans.modules.form.editors.EnumEditor">
+      <Value id="VERTICAL"/>
+    </Property>
     <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
       <Dimension value="[1237, 494]"/>
     </Property>
@@ -34,6 +37,9 @@
   <SubComponents>
     <Container class="komponen.PanelRound" name="panelRound1">
       <Properties>
+        <Property name="gradientDirection" type="komponen.PanelRound$Direction" editor="org.netbeans.modules.form.editors.EnumEditor">
+          <Value id="VERTICAL"/>
+        </Property>
         <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
           <Dimension value="[1237, 410]"/>
         </Property>

@@ -23,7 +23,7 @@ public class PanelDashboard extends komponen.PanelRound {
     public PanelDashboard() {
         initComponents();
 
-//        setGradient(new Color(0x2CBAC6), new Color(0x48A3EE));
+        setGradient(new Color(0x2CBAC6), Color.white);
         loadData();
         
         ambilDataPie(); 
@@ -73,15 +73,18 @@ public class PanelDashboard extends komponen.PanelRound {
         setRoundTopRight(100);
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        Panel2.setBackground(new java.awt.Color(255, 255, 255));
         Panel2.setGradientDirection(komponen.PanelRound.Direction.VERTICAL);
         Panel2.setPreferredSize(new java.awt.Dimension(300, 99));
         Panel2.setRoundBottomLeft(50);
         Panel2.setRoundBottomRight(50);
         Panel2.setRoundTopLeft(50);
         Panel2.setRoundTopRight(50);
+        Panel2.setSolid(true);
         Panel2.setLayout(new java.awt.BorderLayout());
 
-        HeadP2.setBackground(new java.awt.Color(66, 160, 255));
+        HeadP2.setBackground(new Color(0x37A4AD)
+        );
         HeadP2.setMaximumSize(new java.awt.Dimension(300, 40));
         HeadP2.setPreferredSize(new java.awt.Dimension(300, 40));
         HeadP2.setRoundTopLeft(50);
@@ -105,14 +108,16 @@ public class PanelDashboard extends komponen.PanelRound {
 
         add(Panel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 20, 370, 160));
 
+        Panel1.setBackground(new java.awt.Color(255, 255, 255));
         Panel1.setGradientDirection(komponen.PanelRound.Direction.VERTICAL);
         Panel1.setRoundBottomLeft(50);
         Panel1.setRoundBottomRight(50);
         Panel1.setRoundTopLeft(50);
         Panel1.setRoundTopRight(50);
+        Panel1.setSolid(true);
         Panel1.setLayout(new java.awt.BorderLayout());
 
-        HeadP1.setBackground(new java.awt.Color(66, 160, 255));
+        HeadP1.setBackground(new Color(0x37A4AD));
         HeadP1.setMaximumSize(new java.awt.Dimension(300, 40));
         HeadP1.setPreferredSize(new java.awt.Dimension(300, 40));
         HeadP1.setRoundTopLeft(50);
@@ -137,11 +142,13 @@ public class PanelDashboard extends komponen.PanelRound {
 
         add(Panel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 20, 370, 160));
 
+        Panel3.setBackground(new java.awt.Color(255, 255, 255));
         Panel3.setGradientDirection(komponen.PanelRound.Direction.VERTICAL);
         Panel3.setRoundBottomLeft(50);
         Panel3.setRoundBottomRight(50);
         Panel3.setRoundTopLeft(50);
         Panel3.setRoundTopRight(50);
+        Panel3.setSolid(true);
         Panel3.setLayout(new java.awt.BorderLayout());
 
         MoneyIn.setFont(new java.awt.Font("Rockwell", 1, 48)); // NOI18N
@@ -150,7 +157,7 @@ public class PanelDashboard extends komponen.PanelRound {
         MoneyIn.setText("Rp100.000");
         Panel3.add(MoneyIn, java.awt.BorderLayout.CENTER);
 
-        HeadP3.setBackground(new java.awt.Color(66, 160, 255));
+        HeadP3.setBackground(new Color(0x37A4AD));
         HeadP3.setMaximumSize(new java.awt.Dimension(300, 40));
         HeadP3.setPreferredSize(new java.awt.Dimension(300, 40));
         HeadP3.setRoundTopLeft(50);
@@ -200,6 +207,8 @@ public class PanelDashboard extends komponen.PanelRound {
                 return canEdit [columnIndex];
             }
         });
+        stokProduk.setCellFont(new java.awt.Font("Agency FB", 1, 14)); // NOI18N
+        stokProduk.setHeaderBackgroundColor(new Color(0x2CBAC6));
         stokProduk.setPreferredScrollableViewportSize(new java.awt.Dimension(350, 400));
         stokProduk.setPreferredSize(new java.awt.Dimension(285, 80));
         jScrollPane1.setViewportView(stokProduk);
@@ -217,7 +226,7 @@ public class PanelDashboard extends komponen.PanelRound {
 
         Keterangan.add(jScrollPane1, java.awt.BorderLayout.CENTER);
 
-        headKeterangan.setBackground(new java.awt.Color(66, 160, 255));
+        headKeterangan.setBackground(new Color(0x2CBAC6));
         headKeterangan.setMinimumSize(new java.awt.Dimension(780, 40));
         headKeterangan.setPreferredSize(new java.awt.Dimension(780, 42));
         headKeterangan.setRoundTopLeft(50);
@@ -234,7 +243,7 @@ public class PanelDashboard extends komponen.PanelRound {
 
         Keterangan.add(headKeterangan, java.awt.BorderLayout.NORTH);
 
-        add(Keterangan, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 210, 570, 390));
+        add(Keterangan, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 210, 720, 390));
 
         Cetak.setBackground(new java.awt.Color(0, 255, 0));
         Cetak.setFont(new java.awt.Font("Dubai Medium", 1, 14)); // NOI18N
@@ -245,9 +254,10 @@ public class PanelDashboard extends komponen.PanelRound {
                 CetakActionPerformed(evt);
             }
         });
-        add(Cetak, new org.netbeans.lib.awtextra.AbsoluteConstraints(1080, 210, 140, 40));
+        add(Cetak, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 600, 140, 40));
 
-        ChartPie.setChartBackgroundColor(new java.awt.Color(51, 204, 255));
+        ChartPie.setBackground(new Color(0x2CBAC6));
+        ChartPie.setChartBackgroundColor(new java.awt.Color(36, 214, 214));
         add(ChartPie, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 210, 400, 390));
     }// </editor-fold>//GEN-END:initComponents
 

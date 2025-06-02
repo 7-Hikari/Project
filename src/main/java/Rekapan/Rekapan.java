@@ -37,7 +37,8 @@ public class Rekapan extends komponen.PanelRound {
     public Rekapan() {
         initComponents();
         jCbBulan.setModel(new DefaultComboBoxModel<>(bulan));
-        setGradient(new Color(0x2CBAC6), new Color(0x48A3EE));
+        setGradient(new Color(0x2cbac6), Color.white);
+        
         
         ambilTahun();
     }
@@ -273,6 +274,8 @@ public class Rekapan extends komponen.PanelRound {
         add(ChartPenjualan, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 60, 910, 540));
 
         dasarChart.setBackground(new java.awt.Color(51, 204, 255));
+        dasarChart.setRoundBottomLeft(100);
+        dasarChart.setRoundTopLeft(100);
         dasarChart.setSolid(true);
 
         jCbTahun.setBackground(new java.awt.Color(51, 204, 255));

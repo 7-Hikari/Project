@@ -362,7 +362,13 @@ public class Updatedataprodukproduk extends JPanel {
         if (foto == null) {
             foto = loadDefaultFoto();
         }
-        
+        short harga = 0;
+        if(Integer.parseInt(HargaP.getText()) >= Short.MAX_VALUE){
+            JOptionPane.showMessageDialog(this, "harga maximumum Rp32.500,- ");
+            return;
+        }else {
+            harga = Short.parseShort(HargaP.getText());
+        }
         dat();
         if (Simpan.getText().equals("Simpan")) {
             pDat = new produkData(foto, NamaP.getText(), Short.parseShort(HargaP.getText()));
@@ -371,7 +377,6 @@ public class Updatedataprodukproduk extends JPanel {
             pDat = new produkData(pDat.get_id(), foto, NamaP.getText(), Short.parseShort(HargaP.getText()), Short.parseShort(stok.getText()));
             produkObjek.updateProduk(pDat, foto, bahanTerpilih);
         }
-        
         JOptionPane.showMessageDialog(this, "Berhasil disimpan");
         listener.onCloseForm();
         setDataBerubah(true);

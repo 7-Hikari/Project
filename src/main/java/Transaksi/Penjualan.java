@@ -34,7 +34,8 @@ public class Penjualan extends komponen.PanelRound {
         setRoundTopLeft(100);
         setRoundTopRight(100);
         setPreferredSize(new java.awt.Dimension(1240, 640));
-        
+        setGradient(new Color(0x2cbac6), Color.white);
+        panelRound1.setGradient(new Color(0x2cbac6), Color.white);
         m_pesanan = (DefaultTableModel) Tabelpesanan.getModel();
         
         loadproduk();

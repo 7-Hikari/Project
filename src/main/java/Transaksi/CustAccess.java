@@ -1,5 +1,7 @@
 package Transaksi;
 
+import java.awt.Color;
+
 public class CustAccess extends javax.swing.JFrame {
 
     public CustAccess() {
@@ -7,6 +9,9 @@ public class CustAccess extends javax.swing.JFrame {
         setLocationRelativeTo(null);
         Penjualan p = new Penjualan();
         p.setVisible(true);
+        panelRound1.setGradient(new Color(0x2cbac6), Color.white);
+        panelRound2.setGradient(new Color(0x2cbac6), Color.white);
+        panelRound3.setGradient(new Color(0x2cbac6), Color.white);
         IniPanel.add(p);
     }
 
@@ -15,7 +20,6 @@ public class CustAccess extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        Panel = new javax.swing.JPanel();
         panelRound2 = new komponen.PanelRound();
         panelRound1 = new komponen.PanelRound();
         panelRound3 = new komponen.PanelRound();
@@ -27,21 +31,28 @@ public class CustAccess extends javax.swing.JFrame {
         setMinimumSize(new java.awt.Dimension(1440, 900));
         setResizable(false);
 
-        Panel.setLayout(null);
-
         panelRound2.setBackground(new java.awt.Color(51, 153, 255));
+        panelRound2.setGradientDirection(komponen.PanelRound.Direction.VERTICAL);
+        panelRound2.setOpaque(true);
+        panelRound2.setSolid(false);
+        panelRound2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         panelRound1.setBackground(new java.awt.Color(51, 204, 255));
+        panelRound1.setGradientDirection(komponen.PanelRound.Direction.VERTICAL);
         panelRound1.setRoundBottomLeft(50);
         panelRound1.setRoundBottomRight(50);
         panelRound1.setRoundTopLeft(50);
         panelRound1.setRoundTopRight(50);
+        panelRound1.setSolid(false);
+        panelRound1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         panelRound3.setBackground(new java.awt.Color(102, 204, 255));
+        panelRound3.setGradientDirection(komponen.PanelRound.Direction.VERTICAL);
         panelRound3.setRoundBottomLeft(50);
         panelRound3.setRoundBottomRight(50);
         panelRound3.setRoundTopLeft(50);
         panelRound3.setRoundTopRight(50);
+        panelRound3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         IniPanel.setBackground(new java.awt.Color(255, 255, 255));
         IniPanel.setMaximumSize(new java.awt.Dimension(1240, 640));
@@ -58,71 +69,21 @@ public class CustAccess extends javax.swing.JFrame {
         });
         IniPanel.add(Kembali, java.awt.BorderLayout.PAGE_END);
 
-        javax.swing.GroupLayout panelRound3Layout = new javax.swing.GroupLayout(panelRound3);
-        panelRound3.setLayout(panelRound3Layout);
-        panelRound3Layout.setHorizontalGroup(
-            panelRound3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelRound3Layout.createSequentialGroup()
-                .addGap(40, 40, 40)
-                .addComponent(IniPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(40, 40, 40))
-        );
-        panelRound3Layout.setVerticalGroup(
-            panelRound3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelRound3Layout.createSequentialGroup()
-                .addGap(40, 40, 40)
-                .addComponent(IniPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 666, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(14, Short.MAX_VALUE))
-        );
+        panelRound3.add(IniPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 40, -1, 666));
 
-        javax.swing.GroupLayout panelRound1Layout = new javax.swing.GroupLayout(panelRound1);
-        panelRound1.setLayout(panelRound1Layout);
-        panelRound1Layout.setHorizontalGroup(
-            panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelRound1Layout.createSequentialGroup()
-                .addGap(40, 40, 40)
-                .addComponent(panelRound3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(40, 40, 40))
-        );
-        panelRound1Layout.setVerticalGroup(
-            panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelRound1Layout.createSequentialGroup()
-                .addGap(40, 40, 40)
-                .addComponent(panelRound3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(40, 40, 40))
-        );
+        panelRound1.add(panelRound3, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 40, 1360, -1));
 
-        javax.swing.GroupLayout panelRound2Layout = new javax.swing.GroupLayout(panelRound2);
-        panelRound2.setLayout(panelRound2Layout);
-        panelRound2Layout.setHorizontalGroup(
-            panelRound2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelRound2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(panelRound1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(94, Short.MAX_VALUE))
-        );
-        panelRound2Layout.setVerticalGroup(
-            panelRound2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRound2Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(panelRound1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(31, 31, 31))
-        );
-
-        Panel.add(panelRound2);
-        panelRound2.setBounds(0, 0, 1500, 870);
+        panelRound2.add(panelRound1, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 39, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addComponent(Panel, javax.swing.GroupLayout.DEFAULT_SIZE, 1669, Short.MAX_VALUE)
-                .addContainerGap())
+            .addComponent(panelRound2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(Panel, javax.swing.GroupLayout.DEFAULT_SIZE, 900, Short.MAX_VALUE)
+            .addComponent(panelRound2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
@@ -136,7 +97,6 @@ public class CustAccess extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel IniPanel;
     private javax.swing.JButton Kembali;
-    private javax.swing.JPanel Panel;
     private komponen.PanelRound panelRound1;
     private komponen.PanelRound panelRound2;
     private komponen.PanelRound panelRound3;

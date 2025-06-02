@@ -361,7 +361,7 @@
     </Component>
     <Container class="komponen.PanelRound" name="dasarChart">
       <Properties>
-        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor" postCode="dasarChart.setRoundBottomLeft(100);&#xa;dasarChart.setRoundTopLeft(100);">
           <Color blue="ff" green="cc" red="33" type="rgb"/>
         </Property>
         <Property name="solid" type="boolean" value="true"/>

@@ -73,7 +73,7 @@ public class Dashboard extends JFrame {
     
     public Dashboard() {
         initComponents();
-        
+        panelnyaPanel.setGradient(new Color(0x2cbac6), Color.white);
         panelProfil.add(labelProfil);
         panelubah.add(new PanelDashboard(), BorderLayout.CENTER);
         bulatan.setBackground(Color.WHITE);

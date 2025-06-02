@@ -32,6 +32,9 @@ public class Dataprodukproduk extends komponen.PanelRound {
         setRoundBottomRight(100);
         setRoundTopLeft(100);
         setRoundTopRight(100);
+        setGradient(new Color(0x2cbac6), Color.white);
+        Panelprodukbahan.setGradient(new Color(0x2cbac6), Color.white);
+        DataProduk.setGradient(new Color(0x2cbac6), Color.white);
 
         loadProduk();
     }

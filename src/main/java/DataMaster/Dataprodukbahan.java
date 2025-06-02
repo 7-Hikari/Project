@@ -20,12 +20,7 @@ public class Dataprodukbahan extends komponen.PanelRound {
     public Dataprodukbahan() {
         initComponents();
         
-        panelData.setGradientDirection(PanelRound.Direction.VERTICAL);
-        setGradientDirection(PanelRound.Direction.VERTICAL);
-        setGradient(new Color(0x2CC4C9), new Color(0x22EBC6));
-        panelRound1.setGradientDirection(PanelRound.Direction.VERTICAL);
-        panelRound1.setGradient(new Color(0x2CC4C9), new Color(0x22EBC6));
-        TitleForm.setGradient(new Color(0,153,255), new Color(0,153,255));
+        setGradient(new Color(0x2cbac6), Color.white);
         
         setSize(1200, 620);
         Get.setVisible(false);
@@ -80,11 +75,13 @@ public class Dataprodukbahan extends komponen.PanelRound {
         Get = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(204, 204, 204));
+        setGradientDirection(komponen.PanelRound.Direction.VERTICAL);
         setMaximumSize(new java.awt.Dimension(1237, 494));
         setMinimumSize(new java.awt.Dimension(1237, 494));
         setPreferredSize(new java.awt.Dimension(1237, 494));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        panelRound1.setGradientDirection(komponen.PanelRound.Direction.VERTICAL);
         panelRound1.setMaximumSize(new java.awt.Dimension(1237, 410));
         panelRound1.setMinimumSize(new java.awt.Dimension(1237, 410));
         panelRound1.setPreferredSize(new java.awt.Dimension(1237, 410));

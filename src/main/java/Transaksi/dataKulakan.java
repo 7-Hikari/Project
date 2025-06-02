@@ -24,7 +24,7 @@ public class dataKulakan extends komponen.PanelRound {
     public dataKulakan() {
         initComponents();
         
-        setGradient(new Color(0x2CBAC6), new Color(0x48A3EE));
+        setGradient(new Color(0x2CBAC6), Color.white);
         
         tk = (DefaultTableModel) TabelKonversi.getModel();
         tp = (DefaultTableModel) TabelPembelian.getModel();
