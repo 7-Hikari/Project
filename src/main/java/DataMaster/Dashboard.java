@@ -326,7 +326,7 @@ public class Dashboard extends JFrame {
         Toko.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Papoy.png"))); // NOI18N
         getContentPane().add(Toko, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 20, 160, 130));
 
-        panelProfil.setBackground(new java.awt.Color(51, 204, 255));
+        panelProfil.setBackground(new java.awt.Color(44, 186, 198));
         panelProfil.setLingkar(110);
         panelProfil.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
