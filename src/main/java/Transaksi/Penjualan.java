@@ -226,6 +226,10 @@ public class Penjualan extends komponen.PanelRound {
         setGradientDirection(komponen.PanelRound.Direction.VERTICAL);
         setMaximumSize(new java.awt.Dimension(1100, 650));
         setPreferredSize(new java.awt.Dimension(1100, 650));
+        setRoundBottomLeft(100);
+        setRoundBottomRight(100);
+        setRoundTopLeft(100);
+        setRoundTopRight(100);
         setSolid(false);
         setLayout(new java.awt.BorderLayout());
 

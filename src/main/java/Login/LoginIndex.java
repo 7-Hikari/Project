@@ -1,15 +1,25 @@
 package Login;
 
+import javax.swing.SwingUtilities;
+
 public class LoginIndex extends javax.swing.JFrame {
 
     public LoginIndex() {
         initComponents();
-        
-        new javax.swing.Timer(2500, e -> {
-        new Login().setVisible(true);
-        dispose();
-    }).start();
-}
+
+        new Thread(() -> {
+            try {
+                Thread.sleep(1500);
+            } catch (InterruptedException ex) {
+                ex.printStackTrace();
+            }
+
+            SwingUtilities.invokeLater(() -> {
+                new Login().setVisible(true);
+                dispose(); // tutup splash
+            });
+        }).start();
+    }
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -104,7 +114,7 @@ public class LoginIndex extends javax.swing.JFrame {
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(LoginIndex.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-        
+
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new LoginIndex().setVisible(true);

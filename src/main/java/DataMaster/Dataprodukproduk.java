@@ -171,7 +171,9 @@ public class Dataprodukproduk extends komponen.PanelRound {
         PaNavBol.setPreferredSize(new java.awt.Dimension(1250, 63));
         PaNavBol.setLayout(new java.awt.BorderLayout());
 
-        Produk.setBackground(new Color(0x2CC4C9));
+        Produk.setBackground(new java.awt.Color(44, 196, 201));
+        Produk.setFont(new java.awt.Font("Fira Sans", 1, 30)); // NOI18N
+        Produk.setForeground(new java.awt.Color(0, 0, 0));
         Produk.setText("Produk");
         Produk.setMinimumSize(new java.awt.Dimension(600, 28));
         Produk.setPreferredSize(new java.awt.Dimension(600, 45));
@@ -182,8 +184,9 @@ public class Dataprodukproduk extends komponen.PanelRound {
         });
         PaNavBol.add(Produk, java.awt.BorderLayout.WEST);
 
-        Bahan.setBackground(new Color(0x2CC4C9)
-        );
+        Bahan.setBackground(new java.awt.Color(44, 196, 201));
+        Bahan.setFont(new java.awt.Font("Fira Sans", 1, 30)); // NOI18N
+        Bahan.setForeground(new java.awt.Color(0, 0, 0));
         Bahan.setText("Bahan");
         Bahan.setMinimumSize(new java.awt.Dimension(600, 28));
         Bahan.setPreferredSize(new java.awt.Dimension(600, 28));

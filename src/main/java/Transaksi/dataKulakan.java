@@ -143,7 +143,7 @@ public class dataKulakan extends komponen.PanelRound {
         Total.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         Total.setText("Rp0,00");
 
-        Simpan.setBackground(new java.awt.Color(0, 102, 204));
+        Simpan.setBackground(new java.awt.Color(0, 204, 255));
         Simpan.setFont(new java.awt.Font("Times New Roman", 1, 16)); // NOI18N
         Simpan.setForeground(new java.awt.Color(0, 0, 0));
         Simpan.setText("Simpan");
@@ -153,7 +153,7 @@ public class dataKulakan extends komponen.PanelRound {
             }
         });
 
-        Konversi.setBackground(new java.awt.Color(0, 102, 204));
+        Konversi.setBackground(new java.awt.Color(0, 204, 255));
         Konversi.setFont(new java.awt.Font("Times New Roman", 1, 16)); // NOI18N
         Konversi.setForeground(new java.awt.Color(0, 0, 0));
         Konversi.setText("Konversi");
@@ -188,7 +188,7 @@ public class dataKulakan extends komponen.PanelRound {
         });
         TabelKonversi.setCellFont(new java.awt.Font("Fira Sans Medium", 1, 11)); // NOI18N
         TabelKonversi.setFont(new java.awt.Font("Fira Sans SemiBold", 0, 13)); // NOI18N
-        TabelKonversi.setHeaderBackgroundColor(new java.awt.Color(0, 153, 255));
+        TabelKonversi.setHeaderBackgroundColor(new java.awt.Color(55, 164, 173));
         TabelKonversi.setHeaderFont(new java.awt.Font("Microsoft YaHei UI", 1, 12)); // NOI18N
         jScrollPane2.setViewportView(TabelKonversi);
         if (TabelKonversi.getColumnModel().getColumnCount() > 0) {
@@ -231,7 +231,7 @@ public class dataKulakan extends komponen.PanelRound {
         });
         TabelPembelian.setCellFont(new java.awt.Font("Fira Sans Medium", 1, 11)); // NOI18N
         TabelPembelian.setFont(new java.awt.Font("Fira Sans SemiBold", 1, 13)); // NOI18N
-        TabelPembelian.setHeaderBackgroundColor(new java.awt.Color(0, 153, 255));
+        TabelPembelian.setHeaderBackgroundColor(new java.awt.Color(55, 164, 173));
         TabelPembelian.setName(""); // NOI18N
         TabelPembelian.setShowGrid(true);
         jScrollPane5.setViewportView(TabelPembelian);
@@ -261,7 +261,7 @@ public class dataKulakan extends komponen.PanelRound {
 
         skrolProd.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 
-        pProd.setBackground(new java.awt.Color(138, 231, 255));
+        pProd.setBackground(new java.awt.Color(255, 255, 255));
         pProd.setGradientDirection(komponen.PanelRound.Direction.VERTICAL);
         pProd.setSolid(true);
         pProd.setLayout(new java.awt.GridLayout(0, 2, 1, 2));
@@ -271,7 +271,7 @@ public class dataKulakan extends komponen.PanelRound {
 
         skrolKons.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 
-        pKons.setBackground(new java.awt.Color(138, 231, 255));
+        pKons.setBackground(new java.awt.Color(255, 255, 255));
         pKons.setSolid(true);
         pKons.setLayout(new java.awt.GridLayout(0, 2, 1, 2));
         skrolKons.setViewportView(pKons);
@@ -280,7 +280,7 @@ public class dataKulakan extends komponen.PanelRound {
 
         skrolNkons.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 
-        pNKons.setBackground(new java.awt.Color(138, 231, 255));
+        pNKons.setBackground(new java.awt.Color(255, 255, 255));
         pNKons.setGradientDirection(komponen.PanelRound.Direction.DIAGONAL);
         pNKons.setSolid(true);
         pNKons.setLayout(new java.awt.GridLayout(0, 2, 1, 2));
@@ -319,7 +319,7 @@ public class dataKulakan extends komponen.PanelRound {
 
         Hapus.setBackground(new java.awt.Color(255, 0, 0));
         Hapus.setFont(new java.awt.Font("Times New Roman", 1, 16)); // NOI18N
-        Hapus.setForeground(new java.awt.Color(0, 0, 0));
+        Hapus.setForeground(new java.awt.Color(255, 255, 255));
         Hapus.setText("Hapus");
         Hapus.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
